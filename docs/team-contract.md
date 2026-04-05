@@ -171,7 +171,7 @@ fix(cart): resolve null pointer when cart is empty
 docs(api): update endpoint documentation for /products
 test(user): add unit tests for password hashing utility
 refactor(database): extract connection logic into separate module
-
+```
 
 ---
 
