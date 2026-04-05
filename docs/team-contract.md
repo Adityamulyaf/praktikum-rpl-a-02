@@ -174,3 +174,79 @@ refactor(database): extract connection logic into separate module
 
 
 ---
+
+## 8. Standar Kualitas & Definition of Done (DoD)
+
+
+Sebuah task dianggap **Done** jika memenuhi **semua** kriteria berikut:
+
+
+- [ ] Kode telah di-review dan disetujui oleh minimal **1 anggota** lain via Pull Request.
+- [ ] Unit test ditulis dan semua test **lolos (pass)**.
+- [ ] Tidak ada breaking changes pada fitur yang sudah ada (regression test lolos).
+- [ ] Kode sudah di-merge ke branch `dev`.
+- [ ] Dokumentasi teknis terkait sudah diperbarui di Notion.
+- [ ] Task di sprint board sudah dipindahkan ke kolom **Done**.
+- [ ] QA minggu berjalan telah memberikan **sign-off**.
+
+
+---
+
+
+## 9. Mekanisme Eskalasi
+
+
+### 9.1 Konflik Teknis (Perbedaan Pendapat Implementasi)
+1. Diskusikan di thread GitHub PR atau WhatsApp Group — beri batas waktu **24 jam**.
+2. Jika tidak ada kesepakatan, Project Manager mengambil keputusan final.
+3. Jika Project Manager terlibat dalam konflik, keputusan diambil melalui **voting** (suara terbanyak).
+
+
+### 9.2 Anggota Tidak Memenuhi Tanggung Jawab
+1. **Peringatan lisan** dari Project Manager (via WhatsApp/meeting).
+2. Jika berlanjut dalam sprint yang sama: **peringatan tertulis** di Notion, dicatat dalam sprint summary.
+3. Jika berlanjut ke sprint berikutnya: **eskalasi ke asisten/dosen** pembimbing.
+
+
+### 9.3 Anggota Tidak Aktif / Ghosting
+- Jika anggota tidak memberikan kabar selama **lebih dari 3 hari kerja berturut-turut** tanpa alasan yang jelas, Project Manager langsung melaporkan ke asisten/dosen pembimbing.
+
+
+### 9.4 Kontak Eskalasi Eksternal
+| Pihak | Kontak |
+|---|---|
+| Asisten Praktikum | *Rifqi Makarim, Ravelin Lutfhan Syach Putra* |
+| Dosen Pengampu | *Haryono Setiadi, S.T., M.Eng.* |
+
+
+---
+
+
+## 10. Konsekuensi Pelanggaran
+
+
+| Pelanggaran | Konsekuensi |
+|---|---|
+| Absen meeting tanpa izin (1–2x) | Peringatan lisan dari PM |
+| Absen meeting tanpa izin (>2x dalam 1 sprint) | Eskalasi |
+| Tidak menyelesaikan task tanpa alasan | Beban task tidak ditransfer otomatis |
+| Melanggar branching rule (push ke main/staging langsung) | Wajib memperbaiki sendiri |
+| Tidak melakukan code review dalam 1 hari kerja | Diingatkan PM; jika berulang, dicatat di sprint summary |
+
+
+---
+
+
+## 11. Perubahan Kontrak
+
+
+- Setiap perubahan kontrak harus diusulkan secara tertulis di WhatsApp Group atau GitHub Project.
+- Perubahan dianggap sah jika disetujui oleh **minimal 3 dari 4 anggota**.
+- Kontrak yang diperbarui diberi versi baru (misal: v1.0 → v1.1) dan dicatat tanggal perubahannya.
+
+
+---
+
+*Dokumen ini berlaku sejak tanggal efektif dan dapat diperbarui sesuai prosedur pada Bagian 11.*
+
+
