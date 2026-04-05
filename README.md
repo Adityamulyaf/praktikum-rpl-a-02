@@ -1,4 +1,22 @@
-# praktikum-rpl-a-02
+# HaloMBG
+
+## 1. Identitas Tim
+
+| Nama Lengkap | NIM | Email |
+|---|---|---|
+| Firizqi Aditya Mulya | L0124016 | adityamulyaf@gmail.com |
+<!-- | Fairuz Shiba Alkhirza | L0124014 | fairuzziba@gmail.com |
+| Yashif Victoriawan | L0124124 | yashif.vkt@gmail.com |
+| Nurman Aqil Wicakcono | L0124139 | nurmanaqil.25@gmail.com | -->
+
+<!-- tinggal uncomment aja ini masing-masing wkwkwk, terus ntar dipush bikin branch baru,
+langkahnya:
+git checkout -b feature/add-[nama]-info.
+git add .
+git commit -m "Add [nama] to team members"
+git push origin feature/add-[nama]-info -->
+
+## 2. Deskripsi
 
 Halo MBG
 
