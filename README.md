@@ -6,7 +6,7 @@
 |---|---|---|
 | Firizqi Aditya Mulya | L0124016 | adityamulyaf@gmail.com |
 | Yashif Victoriawan | L0124124 | yashif.vkt@gmail.com |
-<!-- | Fairuz Shiba Alkhirza | L0124014 | fairuzziba@gmail.com | -->>
+| Fairuz Shiba Alkhirza | L0124014 | fairuzziba@gmail.com |
 | Nurman Aqil Wicakcono | L0124139 | nurmanaqil.25@gmail.com | 
 
 <!-- tinggal uncomment aja ini masing-masing wkwkwk, terus ntar dipush bikin branch baru,
