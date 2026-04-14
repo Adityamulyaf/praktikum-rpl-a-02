@@ -1,0 +1,7 @@
+# Problem Statement - HaloMBG
+
+Program Makan Bergizi Gratis (MBG) yang dijalankan oleh pemerintah Indonesia melibatkan ribuan Satuan Pelayanan Pemenuhan Gizi (SPPG) atau Dapur MBG yang tersebar di seluruh kabupaten/kota. Namun, hingga saat ini belum tersedia platform terpusat yang memungkinkan publik, termasuk siswa, orang tua, guru, dan masyarakat umum, untuk memantau secara transparan profil dapur, menu harian, kandungan nutrisi, serta status distribusi makanan. Akibatnya, informasi terkait MBG tersebar tidak merata, sulit diverifikasi, dan rentan terhadap penyimpangan yang tidak terdeteksi.
+
+Di sisi lain, berbagai permasalahan operasional telah muncul di lapangan. Kandungan nutrisi yang dipublikasikan oleh dapur MBG kerap tidak akurat karena keterbatasan tenaga ahli gizi serta tidak adanya mekanisme verifikasi silang antara klaim nutrisi dan makanan yang benar-benar disajikan. Selain itu, menu yang diumumkan tidak selalu sesuai dengan yang diterima oleh siswa di sekolah, dan penerima manfaat belum memiliki wadah resmi yang aman untuk menyampaikan ulasan maupun keluhan.
+
+**HaloMBG** hadir sebagai solusi monitoring berbasis web yang mengintegrasikan transparansi data, validasi nutrisi berbasis kecerdasan buatan (AI) melalui analisis foto dan teks, serta partisipasi komunitas. Platform ini bertujuan untuk memastikan program MBG berjalan sesuai standar, meningkatkan akuntabilitas, dan memberikan akses informasi yang terbuka bagi publik.
