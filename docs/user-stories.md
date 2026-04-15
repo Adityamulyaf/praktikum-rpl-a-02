@@ -39,7 +39,7 @@
 ### US-04 — Mencari Dapur Berdasarkan Wilayah atau Sekolah
 **Sebagai** Orang Tua, **saya ingin** mencari dapur MBG yang melayani sekolah anak saya cukup dengan memasukkan nama sekolah atau kabupaten, **agar** saya langsung menemukan informasi yang relevan tanpa harus menelusuri seluruh daftar dapur.
 
-**Acceptance Criteria:** * **Given** saya berada di halaman utama HaloMBG, **When** saya mengetikkan nama sekolah atau kabupaten di kolom pencarian dan menekan enter, **Then** sistem menampilkan dapur MBG yang terkait beserta profil singkat dan link ke halaman detailnya.
+**Acceptance Criteria:**  **Given** saya berada di halaman utama HaloMBG, **When** saya mengetikkan nama sekolah atau kabupaten di kolom pencarian dan menekan enter, **Then** sistem menampilkan dapur MBG yang terkait beserta profil singkat dan link ke halaman detailnya.
 
 ### US-05 — Menginput Menu Harian
 **Sebagai** Pihak SPPG, **saya ingin** menginput menu makanan harian beserta klaim kandungan nutrisinya (kalori, protein, karbohidrat, lemak), **agar** publik dapat memantau apa yang akan atau telah disajikan kepada penerima MBG.
