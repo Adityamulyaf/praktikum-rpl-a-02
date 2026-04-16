@@ -10,7 +10,7 @@
 | Nurman Aqil Wicakcono | L0124139 | nurmanaqil.25@gmail.com | 
 
 
-## 2. Deskripsi
+<!-- ## 2. Deskripsi
 
 Halo MBG
 
@@ -64,4 +64,4 @@ Terima kasih telah menggunakan aplikasi Monitoring MBG! Kami berharap aplikasi i
 - Blog: [Blog Anda]
 - Medium: [Medium Anda]
 - Dev.to: [Dev.to Anda]
-- Stack Overflow: [Stack Overflow Anda]
+- Stack Overflow: [Stack Overflow Anda] -->
