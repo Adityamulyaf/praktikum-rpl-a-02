@@ -1,6 +1,6 @@
 # HaloMBG
 
-## 1. Identitas Tim
+## Identitas Tim
 
 | Nama Lengkap | NIM | Email |
 |---|---|---|
