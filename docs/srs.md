@@ -1,5 +1,4 @@
-# Software Requirements Specification (SRS)
-# HaloMBG — Platform Monitoring Program Makan Bergizi Gratis
+# Software Requirements Specification (SRS) — HaloMBG
 ---
  
 ## Daftar Isi
@@ -40,7 +39,7 @@
  
 ### 1.1 Tujuan Dokumen
  
-Software Requirements Specification (SRS) ini disusun untuk memberikan gambaran yang jelas mengenai kebutuhan teknis dan fungsional dalam pengembangan platform **HaloMBG** — sistem monitoring berbasis web untuk Program Makan Bergizi Gratis (MBG).
+Software Requirements Specification (SRS) ini disusun untuk memberikan gambaran yang jelas mengenai kebutuhan teknis dan fungsional dalam pengembangan platform **HaloMBG**: sistem monitoring berbasis web untuk Program Makan Bergizi Gratis (MBG).
  
 Tujuan utama dokumen ini:
  
@@ -471,9 +470,19 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
 - **Infrastruktur hosting** (VPS/cloud) dengan dukungan HTTPS dan kapasitas penyimpanan file memadai harus tersedia sebelum deployment.
 - **Layanan WhatsApp Business API** (atau alternatif seperti Fonnte/WA Gateway) harus disetup dan diuji sebelum fitur notifikasi dapat diimplementasikan.
 - **Database sekolah dan wilayah** kabupaten/kota yang akurat dan komprehensif diperlukan sebelum fitur pencarian dapat diuji sepenuhnya.
+
 ### 5.3 Keterbatasan Teknis
  
 - Validasi nutrisi AI bersifat **indikatif**, bukan pengganti penilaian ahli gizi. Badge "Tervalidasi AI" tidak menjamin keakuratan absolut kandungan gizi.
 - Analisis sentimen ulasan bersifat otomatis dan dapat menghasilkan klasifikasi tidak akurat pada **teks ambigu, sarkasme, atau bahasa daerah**.
 - Fitur foto bukti distribusi memerlukan koneksi yang cukup untuk upload. Pada koneksi lambat, ukuran maksimum foto 5 MB mungkin menyebabkan waktu upload yang lama.
+
+### 5.4 Di Luar Ruang Lingkup (Out of Scope)
+
+- Integrasi dengan sistem data pemerintah (Dapodik, SIAK, Kemendikbud) tidak termasuk dalam scope MVP.
+- Manajemen anggaran, biaya operasional, dan pengadaan bahan baku dapur MBG tidak dikelola dalam platform ini.
+- Aplikasi mobile native (Android/iOS) tidak termasuk dalam scope, platform berbasis web responsive.
+- Notifikasi melalui email dan SMS tidak termasuk dalam fase ini, saat ini menggunakan WhatsApp sebagai kanal tunggal.
+- Laporan analitik tingkat lanjut (BI/data warehouse) tidak termasuk dalam scope MVP.
+
 
