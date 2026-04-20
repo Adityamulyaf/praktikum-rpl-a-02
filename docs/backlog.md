@@ -172,27 +172,10 @@ Siswa mengirimkan ulasan harian disertai foto makanan yang diterima. Ulasan lang
 
 ---
 
-### BL-09 — Sistem Notifikasi
-
-| | |
-|---|---|
-| **Story terkait** | US-09, US-10 |
-| **Estimasi** | S (Small) |
-| **Dependensi** | BL-08 |
-
-Mekanisme notifikasi untuk mendukung alur komunikasi antar role. Diperlukan agar guru mengetahui adanya ulasan baru dari siswa, dan agar siswa mendapat konfirmasi ketika ulasannya dihapus oleh guru. Tanpa notifikasi, moderasi konten tidak efektif karena tidak ada sinyal antar pihak.
-
-**Kriteria Selesai:**
-
-- Guru menerima notifikasi ketika siswa di sekolahnya mengirimkan ulasan baru.
-- Siswa menerima notifikasi beserta alasan jika ulasannya dihapus oleh guru.
-- Notifikasi dapat dilihat melalui panel notifikasi di dalam aplikasi.
-
----
 
 ## 🟡 Could-have
 
-### BL-10 — Moderasi Post-Publish Ulasan oleh Guru
+### BL-09 — Moderasi Post-Publish Ulasan oleh Guru
 
 | | |
 |---|---|
@@ -207,6 +190,24 @@ Guru menandai (flag) ulasan yang bermasalah untuk ditinjau admin, atau langsung 
 - Guru dapat melakukan flag atau hapus ulasan beserta alasannya dari panel moderasi.
 - Ulasan yang di-flag menampilkan label peringatan sementara hingga putusan dari admin.
 - Siswa menerima notifikasi jika ulasannya dihapus beserta alasannya.
+
+---
+
+### BL-10 — Sistem Notifikasi
+
+| | |
+|---|---|
+| **Story terkait** | US-09, US-10 |
+| **Estimasi** | S (Small) |
+| **Dependensi** | BL-08 |
+
+Mekanisme notifikasi untuk mendukung alur komunikasi antar role. Diperlukan agar guru mengetahui adanya ulasan baru dari siswa, dan agar siswa mendapat konfirmasi ketika ulasannya dihapus oleh guru. Tanpa notifikasi, moderasi konten tidak efektif karena tidak ada sinyal antar pihak.
+
+**Kriteria Selesai:**
+
+- Guru menerima notifikasi ketika siswa di sekolahnya mengirimkan ulasan baru.
+- Siswa menerima notifikasi beserta alasan jika ulasannya dihapus oleh guru.
+- Notifikasi dapat dilihat melalui panel notifikasi di dalam aplikasi.
 
 ---
 
