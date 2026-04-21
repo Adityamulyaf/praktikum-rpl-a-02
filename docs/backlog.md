@@ -11,11 +11,13 @@
 | [BL-05](#bl-05--validasi-nutrisi-berbasis-ai-foto--teks) | Validasi Nutrisi Berbasis AI (Foto + Teks) | 🔴 Must-have | L | BL-04 |
 | [BL-06](#bl-06--panel-admin-master-data-sppg--sekolah) | Panel Admin: Master Data SPPG & Sekolah  | 🔴 Must-have | M | BL-01 |
 | [BL-07](#bl-07--status-distribusi-harian-dan-bukti-foto) | Status Distribusi Harian dan Bukti Foto | 🟠 Should-have | M | BL-01, BL-02 |
-| [BL-08](#bl-08--ulasan-dan-foto-dari-siswa) | Ulasan dan Foto dari Siswa | 🟠 Should-have | M | BL-01, BL-04 |
-| [BL-09](#bl-09--sistem-notifikasi) | Sistem Notifikasi  | 🟠 Should-have | S | BL-08 |
-| [BL-10](#bl-10--moderasi-post-publish-ulasan-oleh-guru) | Moderasi Post-Publish Ulasan oleh Guru | 🟡 Could-have | S | BL-08 |
-| [BL-11](#bl-11--ringkasan-evaluasi-dapur-berbasis-ai-publik) | Ringkasan Evaluasi Dapur Berbasis AI (Publik) | 🟡 Could-have | M | BL-08, BL-10 |
-| [BL-12](#bl-12--dashboard-evaluasi-internal-sppg) | Dashboard Evaluasi Internal SPPG  | 🟡 Could-have | S | BL-11 |
+| [BL-08](#bl-08--notifikasi-keterlambatan-distribusi) | Notifikasi Keterlambatan Distribusi | 🟠 Should-have | S | BL-07 |
+| [BL-09](#bl-09--ulasan-dan-foto-dari-siswa) | Ulasan dan Foto dari Siswa | 🟠 Should-have | M | BL-01, BL-04 |
+| [BL-10](#bl-10--moderasi-post-publish-ulasan-oleh-guru) | Moderasi Post-Publish Ulasan oleh Guru | 🟡 Could-have | S | BL-09 |
+| [BL-11](#bl-11--sistem-notifikasi) | Sistem Notifikasi | 🟡 Could-have | S | BL-09 |
+| [BL-12](#bl-12--notifikasi-ulasan-kritis-dan-tindak-lanjut-sppg) | Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG | 🟡 Could-have | M | BL-09 |
+| [BL-13](#bl-13--ringkasan-evaluasi-dapur-berbasis-ai-publik) | Ringkasan Evaluasi Dapur Berbasis AI (Publik) | 🟡 Could-have | M | BL-09, BL-10 |
+| [BL-14](#bl-14--dashboard-evaluasi-internal-sppg) | Dashboard Evaluasi Internal SPPG  | 🟡 Could-have | S | BL-13 |
 
 
 ---
@@ -26,7 +28,7 @@
 
 | | |
 |---|---|
-| **Story terkait** | Semua US |
+| **Story terkait** | US-01 |
 | **Estimasi** | M (Medium) |
 | **Dependensi** | - |
 
@@ -45,7 +47,7 @@ Fondasi seluruh platform. Sistem login harus dibangun pertama karena semua fitur
 
 | | |
 |---|---|
-| **Story terkait** | US-01, US-02 |
+| **Story terkait** | US-02, US-03 |
 | **Estimasi** | L (Large) |
 | **Dependensi** | BL-01 |
 
@@ -62,7 +64,7 @@ Halaman profil publik untuk setiap dapur MBG yang mencakup nama dapur, wilayah, 
 
 | | |
 |---|---|
-| **Story terkait** | US-10 |
+| **Story terkait** | US-04 |
 | **Estimasi** | S (Small) |
 | **Dependensi** | BL-02 |
 
@@ -80,7 +82,7 @@ Pengguna dapat mencari dapur MBG menggunakan nama sekolah atau kabupaten/kota da
 
 | | |
 |---|---|
-| **Story terkait** | US-03 |
+| **Story terkait** | US-05 |
 | **Estimasi** | M (Medium) |
 | **Dependensi** | BL-01, BL-02 |
 
@@ -98,16 +100,17 @@ SPPG menginput menu makanan harian per dapur lengkap dengan komponen makanan dan
 
 | | |
 |---|---|
-| **Story terkait** | US-04 |
+| **Story terkait** | US-06 |
 | **Estimasi** | L (Large) |
 | **Dependensi** | BL-04 |
 
-Saat SPPG menginput menu, mereka wajib mengunggah foto makanan beserta klaim nutrisi. Sistem AI menganalisis foto tersebut dan membandingkannya dengan klaim nutrisi yang diinput, lalu memberikan peringatan spesifik jika ada ketidaksesuaian. Jika lolos validasi, menu mendapat label "Nutrisi Tervalidasi AI" di halaman publik.
+Saat SPPG menginput menu, mereka wajib mengunggah foto makanan beserta klaim nutrisi. Sistem AI menganalisis foto tersebut dan memberikan **peringatan ketidakwajaran** jika klaim nutrisi yang diinput tidak sebanding dengan porsi atau jenis makanan yang terlihat secara visual, bukan sebagai perbandingan dengan data hasil lab. Jika tidak ditemukan ketidakwajaran yang signifikan, menu mendapat label "Nutrisi Tervalidasi AI" di halaman publik.
 
 **Kriteria Selesai:**
 
 - Upload foto wajib dilakukan bersamaan dengan input klaim nutrisi.
-- AI memberikan peringatan spesifik (menyebut aspek mana yang tidak wajar) berdasarkan analisis visual foto.
+- AI memberikan peringatan ketidakwajaran yang spesifik berdasarkan analisis visual foto (bukan hasil analisis laboratorium).
+- Peringatan menyebut aspek visual mana yang dianggap tidak sebanding dengan klaim (misalnya porsi terlihat kecil namun klaim kalori sangat tinggi).
 - SPPG harus mengonfirmasi atau merevisi sebelum data dipublikasikan.
 - Menu yang lolos validasi menampilkan badge "Tervalidasi AI" di halaman publik.
 - Riwayat peringatan dan hasil validasi AI tersimpan untuk keperluan audit.
@@ -154,11 +157,30 @@ SPPG memperbarui status distribusi ke setiap sekolah (siap diantar / sudah diant
 
 ---
 
-### BL-08 — Ulasan dan Foto dari Siswa
+### BL-08 — Notifikasi Keterlambatan Distribusi
 
 | | |
 |---|---|
-| **Story terkait** | US-05 |
+| **Story terkait** | US-14 |
+| **Estimasi** | S (Small) |
+| **Dependensi** | BL-07 |
+
+Sistem secara otomatis mengirimkan peringatan kepada Admin dan Guru apabila status distribusi suatu sekolah masih "Belum Diantar" pada pukul 11.00 WIB. Fitur ini krusial karena memungkinkan pihak terkait segera menindaklanjuti potensi kegagalan distribusi sebelum jam makan siang, sekaligus menjadi bahan evaluasi ketepatan waktu distribusi SPPG.
+
+**Kriteria Selesai:**
+
+- Sistem memicu pemeriksaan otomatis pada pukul 11.00 WIB setiap hari.
+- Notifikasi WhatsApp terkirim kepada Admin pusat dan Guru di sekolah terdampak, disertai nama sekolah dan nama dapur.
+- Daftar sekolah yang terlambat tampil di dashboard Admin dan Guru sebagai bahan tindak lanjut.
+- Notifikasi yang gagal terkirim (nomor tidak valid) dicatat dalam log sistem.
+
+---
+
+### BL-09 — Ulasan dan Foto dari Siswa
+
+| | |
+|---|---|
+| **Story terkait** | US-09 |
 | **Estimasi** | M (Medium) |
 | **Dependensi** | BL-01, BL-04 |
 
@@ -172,16 +194,15 @@ Siswa mengirimkan ulasan harian disertai foto makanan yang diterima. Ulasan lang
 
 ---
 
-
 ## 🟡 Could-have
 
-### BL-09 — Moderasi Post-Publish Ulasan oleh Guru
+### BL-10 — Moderasi Post-Publish Ulasan oleh Guru
 
 | | |
 |---|---|
-| **Story terkait** | US-06 |
+| **Story terkait** | US-10 |
 | **Estimasi** | S (Small) |
-| **Dependensi** | BL-08 |
+| **Dependensi** | BL-09 |
 
 Guru menandai (flag) ulasan yang bermasalah untuk ditinjau admin, atau langsung menghapus konten yang melanggar pedoman komunitas. Didevelop setelah fitur ulasan berjalan dan volume konten mulai memerlukan moderasi.
 
@@ -193,13 +214,13 @@ Guru menandai (flag) ulasan yang bermasalah untuk ditinjau admin, atau langsung 
 
 ---
 
-### BL-10 — Sistem Notifikasi
+### BL-11 — Sistem Notifikasi
 
 | | |
 |---|---|
 | **Story terkait** | US-09, US-10 |
 | **Estimasi** | S (Small) |
-| **Dependensi** | BL-08 |
+| **Dependensi** | BL-09 |
 
 Mekanisme notifikasi untuk mendukung alur komunikasi antar role. Diperlukan agar guru mengetahui adanya ulasan baru dari siswa, dan agar siswa mendapat konfirmasi ketika ulasannya dihapus oleh guru. Tanpa notifikasi, moderasi konten tidak efektif karena tidak ada sinyal antar pihak.
 
@@ -211,13 +232,33 @@ Mekanisme notifikasi untuk mendukung alur komunikasi antar role. Diperlukan agar
 
 ---
 
-### BL-11 — Ringkasan Evaluasi Dapur Berbasis AI (Publik)
+### BL-12 — Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG
+
+| | |
+|---|---|
+| **Story terkait** | US-15 |
+| **Estimasi** | M (Medium) |
+| **Dependensi** | BL-09 |
+
+Sistem mengirimkan notifikasi real-time ke SPPG ketika AI mendeteksi ulasan siswa dengan sentimen sangat negatif atau kata kunci kritis (contoh: "basi", "bau"). SPPG kemudian dapat memperbarui status tindak lanjut atas ulasan tersebut agar investigasi terdokumentasi.
+
+**Kriteria Selesai:**
+
+- Notifikasi real-time terkirim ke dashboard SPPG saat AI mendeteksi ulasan kritis.
+- Ulasan kritis masuk ke daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
+- SPPG dapat memperbarui status tindak lanjut: **Belum Diproses** - **Dalam Proses Tindak Lanjut** - **Selesai**.
+- Setiap perubahan status dapat disertai catatan penanganan dari SPPG.
+- Riwayat tindak lanjut tersimpan untuk keperluan audit dan evaluasi internal.
+
+---
+
+### BL-13 — Ringkasan Evaluasi Dapur Berbasis AI (Publik)
 
 | | |
 |---|---|
 | **Story terkait** | US-11 |
 | **Estimasi** | M (Medium) |
-| **Dependensi** | BL-08, BL-10 |
+| **Dependensi** | BL-09, BL-10 |
 
 Sistem menghasilkan ringkasan analisis sentimen harian per dapur (positif/netral/negatif) menggunakan AI untuk tampilan publik. Didevelop setelah moderasi berjalan agar data ulasan yang dianalisis sudah terverifikasi kualitasnya.
 
@@ -229,13 +270,13 @@ Sistem menghasilkan ringkasan analisis sentimen harian per dapur (positif/netral
 
 ---
 
-### BL-12 — Dashboard Evaluasi Internal SPPG
+### BL-14 — Dashboard Evaluasi Internal SPPG
 
 | | |
 |---|---|
 | **Story terkait** | US-12 |
 | **Estimasi** | S (Small) |
-| **Dependensi** | BL-11 |
+| **Dependensi** | BL-13 |
 
 Tampilan evaluasi khusus untuk SPPG di dalam dashboard internal, dengan detail yang lebih terperinci dibanding ringkasan publik. SPPG memerlukan breakdown per sekolah dan rekap historis mingguan sebagai bahan evaluasi dan perbaikan layanan.
 
@@ -247,4 +288,3 @@ Tampilan evaluasi khusus untuk SPPG di dalam dashboard internal, dengan detail y
 - Tampilan ini hanya dapat diakses oleh SPPG yang login, tidak tampil di halaman publik.
 
 ---
-

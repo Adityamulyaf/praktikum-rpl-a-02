@@ -46,16 +46,18 @@ Tujuan utama dokumen ini:
 - Menjadi **panduan utama** bagi tim pengembang (Frontend & Backend) dalam mengimplementasikan fitur.
 - Menjadi **acuan pengujian sistem** (testing) untuk memastikan fitur yang dibangun sesuai dengan perencanaan.
 - Berfungsi sebagai **kesepakatan tertulis** antar anggota tim mengenai batasan dan ruang lingkup proyek.
+
 ### 1.2 Ruang Lingkup
  
 HaloMBG adalah platform web yang memungkinkan:
  
 - **Pemantau publik** (orang tua, masyarakat, pemerintah) mengakses informasi profil dapur MBG, menu harian, kandungan nutrisi, dan status distribusi secara transparan tanpa perlu login.
 - **SPPG** (Satuan Pelayanan Pemenuhan Gizi) mengelola profil dapur, menginput menu harian beserta foto, dan memperbarui status distribusi.
-- **Sistem AI** memvalidasi kesesuaian antara klaim nutrisi yang diinput SPPG dengan foto makanan yang diunggah.
+- **Sistem AI** memvalidasi kewajaran antara klaim nutrisi yang diinput SPPG dengan foto makanan yang diunggah secara visual.
 - **Siswa** memberikan ulasan harian disertai foto sebagai bentuk partisipasi komunitas.
 - **Guru** memoderasi konten ulasan yang tidak pantas.
 - **Administrator** mengelola master data SPPG dan sekolah.
+
 **Platform ini tidak mencakup:** sistem pemesanan bahan baku, pengelolaan anggaran dapur, penggajian, atau integrasi dengan sistem pemerintah lainnya di luar lingkup program MBG.
  
 ### 1.3 Definisi dan Akronim
@@ -64,10 +66,10 @@ HaloMBG adalah platform web yang memungkinkan:
 |---|---|
 | **SRS** | Software Requirements Specification |
 | **MBG** | Makan Bergizi Gratis |
-| **SPPG** | Satuan Pelayanan Pemenuhan Gizi — unit dapur resmi yang memproduksi dan mendistribusikan makanan MBG |
+| **SPPG** | Satuan Pelayanan Pemenuhan Gizi, unit dapur resmi yang memproduksi dan mendistribusikan makanan MBG |
 | **FR** | Functional Requirement (kebutuhan fungsional sistem) |
 | **NFR** | Non-Functional Requirement (kebutuhan non-fungsional sistem) |
-| **AI** | Artificial Intelligence — sistem kecerdasan buatan untuk validasi nutrisi dan analisis sentimen |
+| **AI** | Artificial Intelligence, sistem kecerdasan buatan untuk validasi nutrisi dan analisis sentimen |
 | **Dashboard** | Halaman utama yang menampilkan ringkasan data dalam bentuk grafik atau tabel |
 | **Badge** | Label visual pada menu yang telah lolos validasi AI |
 | **WhatsApp** | Aplikasi pesan instan yang digunakan sebagai kanal notifikasi dalam sistem ini |
@@ -95,11 +97,13 @@ HaloMBG merupakan sistem web baru yang berdiri sendiri (*standalone*), tidak men
 |---|---|
 | **Direktori & Profil Dapur** | Halaman publik yang menampilkan daftar dan detail setiap dapur SPPG beserta sekolah yang dilayani |
 | **Monitoring Menu Harian** | Tampilan publik menu makanan yang diinput SPPG per hari, dilengkapi informasi nutrisi dan status validasi AI |
-| **Validasi Nutrisi Berbasis AI** | Analisis otomatis kesesuaian foto makanan dengan klaim nutrisi yang diinput SPPG |
+| **Validasi Nutrisi Berbasis AI** | Analisis otomatis ketidakwajaran visual antara foto makanan dengan klaim nutrisi yang diinput SPPG |
 | **Tracking Status Distribusi** | Pembaruan dan tampilan real-time status pengiriman makanan ke setiap sekolah |
 | **Ulasan Komunitas** | Fasilitas bagi siswa untuk mengirim ulasan harian dengan foto, beserta mekanisme moderasi oleh guru |
 | **Evaluasi Berbasis AI** | Ringkasan sentimen ulasan harian per dapur untuk konsumsi publik dan internal SPPG |
 | **Manajemen Master Data** | Panel admin untuk mendaftarkan SPPG dan memetakan sekolah |
+| **Notifikasi Keterlambatan** | Peringatan otomatis kepada Admin dan Guru jika distribusi belum diperbarui hingga pukul 11.00 WIB |
+| **Tindak Lanjut Ulasan Kritis** | Panel SPPG untuk mencatat dan memperbarui status penanganan ulasan negatif ekstrem |
  
 ### 2.3 Karakteristik Pengguna
  
@@ -122,9 +126,9 @@ HaloMBG merupakan sistem web baru yang berdiri sendiri (*standalone*), tidak men
  
 ## 3. Kebutuhan Fungsional
  
-> Seluruh Functional Requirement (FR) di bawah diturunkan dari user stories yang telah disepakati pada P2.
-> - **Prioritas High** → berasal dari backlog Must-have (BL-01 s.d. BL-06)
-> - **Prioritas Medium** → berasal dari backlog Should-have (BL-07 s.d. BL-08)
+> Seluruh Functional Requirement (FR) di bawah diturunkan dari user stories yang telah disepakati.
+> - **Prioritas High**: berasal dari backlog Must-have (BL-01 s.d. BL-06)
+> - **Prioritas Medium**: berasal dari backlog Should-have (BL-07 s.d. BL-09)
  
 ---
  
@@ -226,17 +230,18 @@ Menu yang tersimpan ditampilkan otomatis di halaman monitoring menu publik pada 
  
 ### 3.5 Validasi Nutrisi Berbasis AI
  
-#### FR-08 — Analisis AI dan Peringatan Ketidaksesuaian Nutrisi
+#### FR-08 — Analisis AI dan Peringatan Ketidakwajaran Nutrisi
  
 | Atribut | Detail |
 |---|---|
 | **Prioritas** | 🔴 High |
 | **Referensi** | US-06 |
  
-**Deskripsi:** Sistem secara otomatis menganalisis konsistensi antara klaim nutrisi yang diinput SPPG dan foto makanan yang diunggah menggunakan AI. Jika AI mendeteksi ketidaksesuaian signifikan:
-- Sistem menampilkan peringatan spesifik yang menyebutkan aspek yang tidak wajar.
+**Deskripsi:** Sistem secara otomatis menganalisis kewajaran antara klaim nutrisi yang diinput SPPG dan foto makanan yang diunggah menggunakan AI. Analisis dilakukan secara **visual** — bukan berdasarkan data laboratorium — dengan menilai apakah klaim nutrisi tampak tidak sebanding dengan porsi, jenis, atau komposisi makanan yang terlihat dalam foto. Jika AI mendeteksi ketidakwajaran yang signifikan:
+- Sistem menampilkan **peringatan ketidakwajaran** yang spesifik, menyebutkan aspek visual mana yang dinilai tidak sebanding dengan klaim (misalnya: "Porsi yang terlihat di foto tampak kecil untuk klaim kalori sebesar X kkal").
 - SPPG diminta merevisi atau mengonfirmasi data sebelum dipublikasikan.
 - Riwayat peringatan dan hasil validasi tersimpan untuk keperluan audit.
+
 ---
  
 #### FR-09 — Badge Validasi AI pada Menu Publik
@@ -246,7 +251,7 @@ Menu yang tersimpan ditampilkan otomatis di halaman monitoring menu publik pada 
 | **Prioritas** | 🔴 High |
 | **Referensi** | US-06 |
  
-**Deskripsi:** Sistem menampilkan badge **"Tervalidasi AI"** pada menu yang lolos proses validasi tanpa ketidaksesuaian signifikan di halaman monitoring publik.
+**Deskripsi:** Sistem menampilkan badge **"Tervalidasi AI"** pada menu yang lolos proses validasi tanpa ketidakwajaran visual yang signifikan di halaman monitoring publik.
  
 ---
  
@@ -293,10 +298,21 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
 **Deskripsi:** Sistem memungkinkan SPPG yang telah login untuk memperbarui status distribusi makanan ke setiap sekolah dan mengunggah foto bukti pengiriman. Pembaruan langsung tampil secara **real-time** di halaman publik beserta timestamp.
  
 ---
+
+#### FR-13 — Notifikasi Keterlambatan Distribusi
+
+| Atribut | Detail |
+|---|---|
+| **Prioritas** | 🟡 Medium |
+| **Referensi** | US-14 |
+
+**Deskripsi:** Sistem secara otomatis memicu pemeriksaan status distribusi pada pukul **11.00 WIB** setiap hari. Apabila status distribusi suatu sekolah masih `Belum Diantar`, sistem mengirimkan notifikasi WhatsApp kepada Admin pusat dan Guru di sekolah terkait, disertai nama sekolah dan nama dapur yang bersangkutan. Daftar sekolah terlambat juga ditampilkan di dashboard Admin dan Guru sebagai bahan tindak lanjut. Kegagalan pengiriman notifikasi (misalnya nomor tidak valid) dicatat dalam log sistem.
+
+---
  
 ### 3.8 Ulasan dan Foto dari Siswa
  
-#### FR-13 — Pengiriman Ulasan Harian oleh Siswa
+#### FR-14 — Pengiriman Ulasan Harian oleh Siswa
  
 | Atribut | Detail |
 |---|---|
@@ -307,7 +323,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
  
 ---
  
-#### FR-14 — Notifikasi WhatsApp Ulasan Baru ke Guru
+#### FR-15 — Notifikasi WhatsApp Ulasan Baru ke Guru
  
 | Atribut | Detail |
 |---|---|
@@ -318,7 +334,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
  
 ---
  
-#### FR-15 — Moderasi Post-Publish Ulasan oleh Guru
+#### FR-16 — Moderasi Post-Publish Ulasan oleh Guru
  
 | Atribut | Detail |
 |---|---|
@@ -331,25 +347,30 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
  
 ### 3.9 Notifikasi Otomatis Sistem
  
-#### FR-16 — Notifikasi WhatsApp Keterlambatan Distribusi
- 
-| Atribut | Detail |
-|---|---|
-| **Prioritas** | 🟡 Medium |
-| **Referensi** | US-14 |
- 
-**Deskripsi:** Sistem secara otomatis mengirimkan pesan WhatsApp kepada Admin dan Guru di sekolah terkait apabila status distribusi suatu sekolah masih `Belum Diantar` pada pukul **11.00 WIB**.
- 
----
- 
-#### FR-17 — Notifikasi WhatsApp Ulasan Sangat Negatif ke SPPG
+#### FR-17 — Notifikasi WhatsApp Ulasan Kritis ke SPPG
  
 | Atribut | Detail |
 |---|---|
 | **Prioritas** | 🟡 Medium |
 | **Referensi** | US-15 |
  
-**Deskripsi:** Sistem mengirimkan notifikasi WhatsApp real-time ke akun SPPG apabila AI mendeteksi ulasan siswa dengan sentimen sangat negatif atau kata kunci kritis (contoh: *"basi"*, *"bau"*), agar SPPG dapat segera menindaklanjuti.
+**Deskripsi:** Sistem mengirimkan notifikasi real-time ke dashboard SPPG apabila AI mendeteksi ulasan siswa dengan sentimen sangat negatif atau kata kunci kritis (contoh: *"basi"*, *"bau"*). Ulasan tersebut masuk ke daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
+
+---
+
+#### FR-18 — Status Tindak Lanjut Ulasan Kritis oleh SPPG
+
+| Atribut | Detail |
+|---|---|
+| **Prioritas** | 🟡 Medium |
+| **Referensi** | US-15 |
+
+**Deskripsi:** Sistem menyediakan panel tindak lanjut bagi SPPG untuk memperbarui status penanganan ulasan kritis. Status yang tersedia:
+- **Belum Diproses** — status awal saat notifikasi masuk.
+- **Dalam Proses Tindak Lanjut** — SPPG sedang melakukan investigasi.
+- **Selesai** — penanganan telah dilakukan.
+
+Setiap perubahan status dapat disertai catatan penanganan dari SPPG. Riwayat seluruh perubahan status tersimpan untuk keperluan audit dan evaluasi internal.
  
 ---
  
@@ -388,7 +409,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
  
 **Deskripsi:** Seluruh kata sandi pengguna tidak boleh disimpan dalam bentuk plain text. Kata sandi wajib di-hash menggunakan algoritma **bcrypt** dengan cost factor minimum 10.
  
-**Metode Verifikasi:** Inspeksi kolom `password` di tabel `users` — nilai yang tersimpan harus berformat hash bcrypt (diawali `$2y$`), bukan teks yang dapat dibaca.
+**Metode Verifikasi:** Inspeksi kolom `password` di tabel `users`, nilai yang tersimpan harus berformat hash bcrypt (diawali `$2y$`), bukan teks yang dapat dibaca.
  
 ---
  
@@ -423,7 +444,7 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
  
 #### NFR-08 — Kemudahan Tugas Inti SPPG
  
-**Deskripsi:** Tugas inti SPPG — menginput menu harian beserta foto dan menyimpannya — harus dapat diselesaikan pengguna baru dalam waktu **< 5 menit** tanpa bantuan teknis, diukur pada skenario penggunaan pertama.
+**Deskripsi:** Tugas inti SPPG menginput menu harian beserta foto dan menyimpannya harus dapat diselesaikan pengguna baru dalam waktu **< 5 menit** tanpa bantuan teknis, diukur pada skenario penggunaan pertama.
  
 **Metode Verifikasi:** Usability testing dengan 3 pengguna SPPG baru; rata-rata waktu penyelesaian harus ≤ 5 menit.
  
@@ -458,11 +479,12 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
 | Asumsi | Detail |
 |---|---|
 | **Koneksi Internet** | Seluruh pengguna diasumsikan memiliki akses internet yang memadai (minimal 4G untuk fitur dengan upload foto). Sistem tidak dirancang untuk mode offline. |
-| **Ketersediaan API AI** | Kegagalan layanan AI tidak boleh menghentikan operasional inti sistem — input menu tetap bisa disimpan tanpa label validasi AI. |
+| **Ketersediaan API AI** | Kegagalan layanan AI tidak boleh menghentikan operasional inti sistem, input menu tetap bisa disimpan tanpa label validasi AI. |
 | **Data Sekolah** | Data nama dan wilayah sekolah akan disediakan oleh tim dalam bentuk dataset awal (CSV) untuk keperluan pengembangan dan pengujian. |
 | **Nomor WhatsApp** | Nomor telepon yang terdaftar pada akun SPPG dan Guru diasumsikan adalah nomor aktif WhatsApp. Jika nomor tidak valid, notifikasi dianggap gagal terkirim dan dicatat dalam log sistem. |
 | **Satu Siswa, Satu Sekolah** | Setiap akun siswa hanya terhubung dengan satu sekolah pada satu waktu. Perpindahan sekolah memerlukan pembaruan data oleh Admin. |
 | **Kualitas Foto** | Akurasi analisis AI bergantung pada kualitas foto yang diunggah. Sistem tidak dapat menjamin akurasi 100% pada foto yang buram, gelap, atau diambil dari sudut tidak representatif. |
+| **Batasan Analisis Nutrisi AI** | Analisis AI bersifat visual dan indikatif, sistem hanya menilai ketidakwajaran berdasarkan penampakan makanan di foto, bukan berdasarkan komposisi kimia atau data laboratorium. |
  
 ### 5.2 Dependensi Eksternal
  
@@ -473,7 +495,7 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
 
 ### 5.3 Keterbatasan Teknis
  
-- Validasi nutrisi AI bersifat **indikatif**, bukan pengganti penilaian ahli gizi. Badge "Tervalidasi AI" tidak menjamin keakuratan absolut kandungan gizi.
+- Validasi nutrisi AI bersifat **indikatif berbasis visual**, bukan pengganti penilaian ahli gizi. Badge "Tervalidasi AI" tidak menjamin keakuratan absolut kandungan gizi, hanya menandakan tidak ada ketidakwajaran visual yang terdeteksi.
 - Analisis sentimen ulasan bersifat otomatis dan dapat menghasilkan klasifikasi tidak akurat pada **teks ambigu, sarkasme, atau bahasa daerah**.
 - Fitur foto bukti distribusi memerlukan koneksi yang cukup untuk upload. Pada koneksi lambat, ukuran maksimum foto 5 MB mungkin menyebabkan waktu upload yang lama.
 
@@ -484,5 +506,3 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
 - Aplikasi mobile native (Android/iOS) tidak termasuk dalam scope, platform berbasis web responsive.
 - Notifikasi melalui email dan SMS tidak termasuk dalam fase ini, saat ini menggunakan WhatsApp sebagai kanal tunggal.
 - Laporan analitik tingkat lanjut (BI/data warehouse) tidak termasuk dalam scope MVP.
-
-

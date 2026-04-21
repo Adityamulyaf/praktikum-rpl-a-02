@@ -39,7 +39,8 @@
 ### US-04 — Mencari Dapur Berdasarkan Wilayah atau Sekolah
 **Sebagai** Orang Tua, **saya ingin** mencari dapur MBG yang melayani sekolah anak saya cukup dengan memasukkan nama sekolah atau kabupaten, **agar** saya langsung menemukan informasi yang relevan tanpa harus menelusuri seluruh daftar dapur.
 
-**Acceptance Criteria:**  **Given** saya berada di halaman utama HaloMBG, **When** saya mengetikkan nama sekolah atau kabupaten di kolom pencarian dan menekan enter, **Then** sistem menampilkan dapur MBG yang terkait beserta profil singkat dan link ke halaman detailnya.
+**Acceptance Criteria:**
+* **Given** saya berada di halaman utama HaloMBG, **When** saya mengetikkan nama sekolah atau kabupaten di kolom pencarian dan menekan enter, **Then** sistem menampilkan dapur MBG yang terkait beserta profil singkat dan link ke halaman detailnya.
 
 ### US-05 — Menginput Menu Harian
 **Sebagai** Pihak SPPG, **saya ingin** menginput menu makanan harian beserta klaim kandungan nutrisinya (kalori, protein, karbohidrat, lemak), **agar** publik dapat memantau apa yang akan atau telah disajikan kepada penerima MBG.
@@ -48,11 +49,11 @@
 * **Given** saya telah login dan membuka form input menu, **When** saya mengisi nama menu, komponen makanan, dan nilai nutrisi lalu menekan tombol simpan, **Then** menu tersebut tersimpan dan ditampilkan di halaman monitoring menu publik pada tanggal yang sesuai.
 
 ### US-06 — Validasi Nutrisi oleh AI
-**Sebagai** Pihak SPPG, **saya ingin** mendapatkan peringatan otomatis dari sistem AI jika kandungan nutrisi yang saya klaim tidak konsisten dengan foto makanan yang saya unggah, **agar** saya dapat memperbaiki data sebelum dipublikasikan dan menghindari informasi gizi yang menyesatkan.
+**Sebagai** Pihak SPPG, **saya ingin** mendapatkan peringatan otomatis dari sistem AI jika klaim kandungan nutrisi yang saya masukkan terlihat tidak wajar berdasarkan foto makanan yang saya unggah, **agar** saya dapat memperbaiki data sebelum dipublikasikan dan menghindari informasi gizi yang menyesatkan.
 
 **Acceptance Criteria:**
-* **Given** saya telah mengisi form menu dengan klaim nutrisi dan mengunggah foto makanan, **When** saya menekan tombol simpan dan AI menganalisis foto lalu mendeteksi ketidaksesuaian (misalnya kalori yang diklaim terlalu tinggi dibanding porsi yang terlihat di foto), **Then** sistem menampilkan peringatan spesifik yang menjelaskan aspek mana yang dinilai tidak wajar berdasarkan foto, dan saya diminta merevisi atau mengonfirmasi data sebelum publikasi.
-* **Given** saya mengunggah foto makanan dan AI tidak menemukan ketidaksesuaian signifikan, **When** proses analisis selesai, **Then** sistem menampilkan indikator "Nutrisi Tervalidasi AI" pada menu yang dipublikasikan.
+* **Given** saya telah mengisi form menu dengan klaim nutrisi dan mengunggah foto makanan, **When** saya menekan tombol simpan dan AI menganalisis foto lalu mendeteksi ketidakwajaran (misalnya klaim kalori yang sangat tinggi tidak sebanding dengan porsi atau jenis makanan yang terlihat di foto), **Then** sistem menampilkan peringatan spesifik yang menjelaskan aspek mana yang dinilai tidak wajar secara visual, bukan sebagai hasil analisis lab, dan saya diminta merevisi atau mengonfirmasi data sebelum publikasi.
+* **Given** saya mengunggah foto makanan dan AI tidak menemukan ketidakwajaran yang signifikan, **When** proses analisis selesai, **Then** sistem menampilkan indikator "Nutrisi Tervalidasi AI" pada menu yang dipublikasikan.
 
 ### US-07 — Memantau Status Distribusi MBG
 **Sebagai** Pemantau Publik, **saya ingin** melihat status distribusi MBG harian per dapur dan per sekolah (siap diantar/sudah diantar/belum diantar/batal), **agar** saya dapat memastikan penerima manfaat mendapatkan hak mereka setiap harinya.
@@ -98,14 +99,15 @@
 * **Given** saya telah login sebagai Admin, **When** saya menginput data dapur (SPPG) baru dan memilih daftar sekolah dari database, **Then** sistem menyimpan relasi tersebut dan memberikan akses login kepada pihak SPPG terkait.
 
 ### US-14 — Notifikasi Keterlambatan Distribusi
-**Sebagai** Administrator atau Guru, **saya ingin** menerima peringatan otomatis jika suatu SPPG belum memperbarui status distribusi hingga batas waktu yang ditentukan (misal pukul 11:00 pagi), **agar** saya dapat melakukan pengecekan langsung ke pihak dapur.
+**Sebagai** Administrator atau Guru, **saya ingin** menerima peringatan otomatis jika suatu SPPG belum memperbarui status distribusi hingga batas waktu yang ditentukan (pukul 11.00 WIB), **agar** saya dapat segera melakukan pengecekan langsung ke pihak dapur dan memastikan penerima manfaat tidak terdampak.
 
 **Acceptance Criteria:**
-* **Given** waktu sistem menunjukkan pukul 11:00 pagi, **When** ada sekolah yang status distribusinya masih "Belum Diantar", **Then** sistem secara otomatis mengirimkan notifikasi peringatan (WhatsApp/Email) kepada Admin pusat dan Guru di sekolah tersebut.
+* **Given** waktu sistem menunjukkan pukul 11.00 WIB, **When** ada sekolah yang status distribusinya masih "Belum Diantar", **Then** sistem secara otomatis mengirimkan notifikasi peringatan melalui WhatsApp kepada Admin pusat dan Guru di sekolah tersebut, disertai informasi nama sekolah dan nama dapur yang bersangkutan.
+* **Given** notifikasi keterlambatan telah terkirim, **When** Admin atau Guru membuka dashboard, **Then** daftar sekolah yang terlambat distribusinya ditampilkan secara khusus sebagai bahan tindak lanjut dan evaluasi.
 
 ### US-15 — Notifikasi Peringatan Ulasan Negatif/Kritis
-**Sebagai** Pihak SPPG, **saya ingin** menerima notifikasi instan jika ada siswa yang memberikan ulasan dengan sentimen sangat negatif (misal indikasi makanan tidak layak), **agar** saya dapat segera melakukan investigasi dan perbaikan kualitas pada hari yang sama.
+**Sebagai** Pihak SPPG, **saya ingin** menerima notifikasi instan jika ada siswa yang memberikan ulasan dengan sentimen sangat negatif (misalnya indikasi makanan tidak layak), serta dapat memperbarui status tindak lanjut atas ulasan tersebut, **agar** saya dapat segera melakukan investigasi dan perbaikan kualitas pada hari yang sama.
 
 **Acceptance Criteria:**
-* **Given** seorang siswa mengirimkan ulasan, **When** sistem analisis AI mendeteksi sentimen negatif yang ekstrem atau kata kunci kritis (misal: "basi", "bau"), **Then** sistem mengirimkan notifikasi real-time ke dashboard SPPG untuk segera ditindaklanjuti.
-
+* **Given** seorang siswa mengirimkan ulasan, **When** sistem analisis AI mendeteksi sentimen negatif yang ekstrem atau kata kunci kritis (misalnya: "basi", "bau"), **Then** sistem mengirimkan notifikasi real-time ke dashboard SPPG dan ulasan tersebut muncul di daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
+* **Given** SPPG menerima notifikasi ulasan kritis dan membuka detail ulasan tersebut, **When** SPPG memperbarui status tindak lanjut menjadi **Dalam Proses Tindak Lanjut** atau **Selesai** disertai catatan penanganan, **Then** sistem menyimpan perubahan status beserta catatan tersebut, dan status terbaru ditampilkan di panel tindak lanjut SPPG sebagai dokumentasi investigasi.
