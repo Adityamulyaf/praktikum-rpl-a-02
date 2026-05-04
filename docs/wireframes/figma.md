@@ -1,13 +1,13 @@
-# Wireframe Antarmuka HaloMBG
+# Wireframe Antarmuka - HaloMBG
 
 Dokumen ini berisi anotasi rancangan awal antarmuka (wireframe) *low-fidelity* untuk platform HaloMBG.
 
-## 🔗 Tautan Wireframe
+## Tautan Wireframe
 **[Klik di sini untuk melihat Wireframe Figma HaloMBG](https://www.figma.com/design/coxuNk3Q6XGzJuQqyP9XnI/HaloMBG2?node-id=30-88&t=OA4BmzJjaFL3V54n-1)**
 
 ---
 
-## 📝 Anotasi Halaman Utama
+## Anotasi Halaman Utama
 
 Berikut adalah deskripsi fungsi dari tiap elemen pada 3 halaman utama yang telah dirancang:
 
