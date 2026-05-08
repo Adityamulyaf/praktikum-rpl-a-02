@@ -7,7 +7,7 @@
 | Firizqi Aditya Mulya | L0124016 | adityamulyaf@gmail.com |
 | Yashif Victoriawan | L0124124 | yashif.vkt@gmail.com |
 | Fairuz Shiba Alkhirza | L0124014 | fairuzziba@gmail.com |
-| Nurman Aqil Wicakcono | L0124139 | nurmanaqil.25@gmail.com | 
+| Nurman Aqil Wicaksono | L0124139 | nurmanaqil.25@gmail.com | 
 
 
 <!-- ## 2. Deskripsi
