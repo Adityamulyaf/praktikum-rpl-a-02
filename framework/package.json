@@ -1,0 +1,10 @@
+{
+  "name": "laravel-react-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"cd backend && php artisan serve\" \"cd frontend && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
