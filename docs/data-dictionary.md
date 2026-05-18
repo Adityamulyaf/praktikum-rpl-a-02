@@ -327,6 +327,7 @@ Mencatat seluruh perubahan pada master data yang dilakukan oleh Admin sebagai je
 | `old_value` | JSONB | NULL | Nilai data sebelum perubahan dalam format JSON; NULL untuk aksi `create` |
 | `new_value` | JSONB | NULL | Nilai data setelah perubahan dalam format JSON; NULL untuk aksi `delete` |
 | `created_at` | TIMESTAMP | NOT NULL | Waktu perubahan dilakukan |
+| `delete_at`'| TIMESTAMP | NOT NULL | Waktu penghapusan dilakukan |
 
 ---
 
