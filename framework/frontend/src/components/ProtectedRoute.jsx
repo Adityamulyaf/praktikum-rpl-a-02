@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function ProtectedRoute({ allowedRoles }) {
-  const token = localStorage.getItem('access_token');
-  const role = localStorage.getItem('user_role');
+  const { token, role } = useAuth();
 
   if (!token) {
     return <Navigate to="/login" replace />;

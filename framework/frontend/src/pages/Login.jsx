@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
-  const [email, setEmail] = useState('admin@halombg.com'); // Default test seed
+  const [email, setEmail] = useState('admin@halombg.com');
   const [password, setPassword] = useState('password');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,13 +18,8 @@ export default function Login() {
 
     try {
       const response = await api.post('/login', { email, password });
-      
-      // Store the token and role attributes locally
-      localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('user_role', response.data.role);
-      localStorage.setItem('user_data', JSON.stringify(response.data.user));
+      login(response.data);
 
-      // Contextual routing redirection based on role
       if (response.data.role === 'admin') {
         navigate('/admin');
       } else {

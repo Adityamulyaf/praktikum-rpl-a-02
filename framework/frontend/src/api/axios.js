@@ -1,15 +1,13 @@
 import axios from 'axios';
 
-// This acts as the bridge connecting React to your Laravel Nginx webserver
 const api = axios.create({
-  baseURL: 'http://localhost/api', 
+  baseURL: 'http://localhost/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
 });
 
-// This interceptor automatically attaches your Sanctum token to future requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
@@ -17,5 +15,18 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('user_role');
+      localStorage.removeItem('user_data');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;
