@@ -35,7 +35,7 @@ class User extends Authenticatable
     // Explicitly use UUID v7
     public function newUniqueId(): string
     {
-        return (string) Str::uuid7(); // ← force UUID v7
+        return (string) Str::uuid7(); // force UUID v7
     }
 
     protected function casts(): array

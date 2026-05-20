@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Admin\SppgController;
+use App\Http\Controllers\Api\Admin\SchoolController;
+use App\Http\Controllers\Api\Admin\SppgSchoolController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -14,6 +17,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Admin only
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         // US-13: manage SPPG & schools
+        Route::apiResource('sppg', SppgController::class);
+        Route::apiResource('schools', SchoolController::class);
+        Route::put('sppg/{sppg}/schools/sync', [SppgSchoolController::class, 'sync']);
+        Route::post('sppg/{sppg}/schools/attach', [SppgSchoolController::class, 'attach']);
+        Route::delete('sppg/{sppg}/schools/detach', [SppgSchoolController::class, 'detach']);
     });
 
     // SPPG only
