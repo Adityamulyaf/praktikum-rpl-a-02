@@ -12,15 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creates a specific admin user so your curl login command works!
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@halombg.com',
-            'password' => bcrypt('password'), // Use a secure password in production!
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@halombg.com'],
+            [
+                'name'     => 'Admin User',
+                'password' => bcrypt('password'),
+                'role'     => 'admin',
+            ]
+        );
 
-        // Creates 10 other random users (teachers, students, etc.)
-        User::factory(10)->create();
+        if (User::count() < 5) {
+            User::factory(10)->create();
+        }
     }
 }
