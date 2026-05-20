@@ -2,31 +2,70 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role', 'is_active', 'phone_number'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens, HasUuids;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected $primaryKey = 'ssid';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public function uniqueIds(): array
+    {
+        return ['ssid'];
+    }
+
+    public function getKey()
+    {
+        return $this->ssid;
+    }
+
+    // Explicitly use UUID v7
+    public function newUniqueId(): string
+    {
+        return (string) Str::uuid7(); // ← force UUID v7
+    }
+
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
+    }
+
+    // Role helpers
+    public function isAdmin() { return $this->role === 'admin'; }
+    public function isSppg()  { return $this->role === 'sppg'; }
+    public function isSiswa() { return $this->role === 'siswa'; }
+    public function isGuru()  { return $this->role === 'guru'; }
+
+    // Relationships
+    public function sppgProfile()
+    {
+        return $this->hasOne(SppgProfile::class);
+    }
+
+    public function studentProfile()
+    {
+        return $this->hasOne(StudentProfile::class);
+    }
+
+    public function teacherProfile()
+    {
+        return $this->hasOne(TeacherProfile::class);
     }
 }
