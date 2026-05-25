@@ -3,21 +3,29 @@ import PasswordInput from './PasswordInput';
 
 const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') ?? 'http://localhost';
 
-export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
-  const [email, setEmail]               = useState('');
-  const [password, setPassword]         = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError]               = useState('');
-  const [loading, setLoading]           = useState(false);
+export default function RegisterForm({ onSubmit, onSwitch }) {
+  const [form, setForm] = useState({
+    name: '', email: '', password: '', password_confirmation: '',
+  });
+  const [showPw, setShowPw]         = useState(false);
+  const [showPwConf, setShowPwConf] = useState(false);
+  const [error, setError]           = useState('');
+  const [loading, setLoading]       = useState(false);
+
+  const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.password !== form.password_confirmation) {
+      setError('Konfirmasi kata sandi tidak cocok.');
+      return;
+    }
     setError('');
     setLoading(true);
     try {
-      await onSubmit({ email, password });
+      await onSubmit(form);
     } catch (err) {
-      setError(err.response?.data?.message || 'Autentikasi gagal. Periksa kembali email dan kata sandi Anda.');
+      setError(err.response?.data?.message || 'Pendaftaran gagal. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -26,21 +34,37 @@ export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
   return (
     <>
       <div className="lp-header">
-        <h2>Masuk ke HaloMBG</h2>
-        <p>Masukkan kredensial Anda untuk melanjutkan</p>
+        <h2>Buat Akun</h2>
+        <p>Daftarkan diri Anda untuk memulai</p>
       </div>
 
       <form onSubmit={handleSubmit}>
         <div className="lp-field">
-          <label className="lp-label" htmlFor="lp-email">Email</label>
+          <label className="lp-label" htmlFor="rg-name">Nama Lengkap</label>
           <div className="lp-input-wrap">
             <input
-              id="lp-email"
+              id="rg-name"
+              className="lp-input"
+              type="text"
+              placeholder="Nama Anda"
+              value={form.name}
+              onChange={set('name')}
+              required
+              autoComplete="name"
+            />
+          </div>
+        </div>
+
+        <div className="lp-field">
+          <label className="lp-label" htmlFor="rg-email">Email</label>
+          <div className="lp-input-wrap">
+            <input
+              id="rg-email"
               className="lp-input"
               type="email"
               placeholder="nama@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={form.email}
+              onChange={set('email')}
               required
               autoComplete="email"
             />
@@ -48,18 +72,28 @@ export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
         </div>
 
         <div className="lp-field">
-          <div className="lp-label-row">
-            <label className="lp-label" htmlFor="lp-password">Kata Sandi</label>
-            <button type="button" className="lp-forgot-btn" onClick={onForgot}>
-              Lupa sandi?
-            </button>
-          </div>
+          <label className="lp-label" htmlFor="rg-password">Kata Sandi</label>
           <PasswordInput
-            id="lp-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            showPassword={showPassword}
-            onToggle={() => setShowPassword((v) => !v)}
+            id="rg-password"
+            value={form.password}
+            onChange={set('password')}
+            showPassword={showPw}
+            onToggle={() => setShowPw((v) => !v)}
+            placeholder="Minimal 8 karakter"
+            autoComplete="new-password"
+          />
+        </div>
+
+        <div className="lp-field">
+          <label className="lp-label" htmlFor="rg-pwconf">Konfirmasi Kata Sandi</label>
+          <PasswordInput
+            id="rg-pwconf"
+            value={form.password_confirmation}
+            onChange={set('password_confirmation')}
+            showPassword={showPwConf}
+            onToggle={() => setShowPwConf((v) => !v)}
+            placeholder="Ulangi kata sandi"
+            autoComplete="new-password"
           />
         </div>
 
@@ -69,7 +103,7 @@ export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
           {loading ? (
             <><span className="lp-spinner" />Memproses...</>
           ) : (
-            <>Masuk <ArrowRightIcon /></>
+            <>Daftar <ArrowRightIcon /></>
           )}
         </button>
       </form>
@@ -82,12 +116,12 @@ export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
         onClick={() => { window.location.href = `${API_BASE}/auth/google`; }}
       >
         <GoogleIcon />
-        Masuk dengan Google
+        Daftar dengan Google
       </button>
 
       <p className="lp-switch">
-        Belum punya akun?{' '}
-        <button type="button" className="lp-switch-btn" onClick={onSwitch}>Daftar</button>
+        Sudah punya akun?{' '}
+        <button type="button" className="lp-switch-btn" onClick={onSwitch}>Masuk</button>
       </p>
     </>
   );

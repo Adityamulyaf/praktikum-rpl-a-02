@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
-import HeroPanel from './HeroPanel';
 import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import ForgotPasswordForm from './ForgotPasswordForm';
 import './Login.css';
 
 const ROLE_PATHS = {
@@ -16,6 +17,7 @@ const ROLE_PATHS = {
 export default function Login() {
   const navigate = useNavigate();
   const { login, token, role } = useAuth();
+  const [view, setView] = useState('login');
 
   useEffect(() => {
     const root = document.getElementById('root');
@@ -35,16 +37,44 @@ export default function Login() {
     navigate(ROLE_PATHS[response.data.role] ?? '/dashboard', { replace: true });
   };
 
+  const handleRegister = async (data) => {
+    const response = await api.post('/register', data);
+    login(response.data);
+    navigate(ROLE_PATHS[response.data.role] ?? '/dashboard', { replace: true });
+  };
+
+  const handleForgot = async ({ email }) => {
+    await api.post('/forgot-password', { email });
+  };
+
   return (
     <div className="login-root">
-      <HeroPanel />
-      <div className="lp-form-panel">
-        <div className="lp-form-inner">
-          <LoginForm onSubmit={handleLogin} />
-          <p className="lp-footer">
-            &copy; 2026 HaloMBG;
-          </p>
+      <div className="lp-center">
+        <div className="lp-brand">HaloMBG</div>
+        <div className="lp-card">
+          <div className="lp-card-body">
+            {view === 'login' && (
+              <LoginForm
+                onSubmit={handleLogin}
+                onForgot={() => setView('forgot')}
+                onSwitch={() => setView('register')}
+              />
+            )}
+            {view === 'register' && (
+              <RegisterForm
+                onSubmit={handleRegister}
+                onSwitch={() => setView('login')}
+              />
+            )}
+            {view === 'forgot' && (
+              <ForgotPasswordForm
+                onSubmit={handleForgot}
+                onBack={() => setView('login')}
+              />
+            )}
+          </div>
         </div>
+        <p className="lp-footer">&copy; 2026 HaloMBG</p>
       </div>
     </div>
   );
