@@ -34,6 +34,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy existing application directory permissions
 COPY . /var/www
+RUN composer install --no-dev --optimize-autoloader
+
 COPY docker-entrypoint.sh /usr/local/bin/laravel-entrypoint
 RUN chmod +x /usr/local/bin/laravel-entrypoint
 RUN chown -R www-data:www-data /var/www
