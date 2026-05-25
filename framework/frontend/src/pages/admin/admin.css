@@ -162,6 +162,15 @@
   flex-shrink: 0;
 }
 
+/* form harus jadi flex item agar .adm-modal-body bisa scroll */
+.adm-modal form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 /* ── FORM ────────────────────────────────────────────────── */
 
 .adm-field-group { margin-bottom: var(--space-md); }
