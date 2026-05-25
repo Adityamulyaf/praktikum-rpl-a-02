@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getSppgs, deleteSppg } from '../../api/admin';
+import { getSppgs, deleteSppg, activateSppg } from '../../api/admin';
 import SppgFormModal from './SppgFormModal';
 import SppgSchoolModal from './SppgSchoolModal';
 import './admin.css';
@@ -39,6 +39,16 @@ export default function SppgTable() {
       load();
     } catch {
       alert('Gagal menonaktifkan SPPG. Silakan coba lagi.');
+    }
+  };
+
+  const handleActivate = async (sppg) => {
+    if (!confirm(`Aktifkan kembali SPPG "${sppg.kitchen_name}"?`)) return;
+    try {
+      await activateSppg(sppg.id);
+      load();
+    } catch {
+      alert('Gagal mengaktifkan SPPG. Silakan coba lagi.');
     }
   };
 
@@ -82,9 +92,13 @@ export default function SppgTable() {
                     <div className="adm-actions">
                       <button className="adm-btn" onClick={() => openEdit(sppg)}>Edit</button>
                       <button className="adm-btn" onClick={() => openSchoolModal(sppg)}>Kelola Sekolah</button>
-                      {sppg.user?.is_active && (
+                      {sppg.user?.is_active ? (
                         <button className="adm-btn danger" onClick={() => handleDeactivate(sppg)}>
                           Nonaktifkan
+                        </button>
+                      ) : (
+                        <button className="adm-btn success" onClick={() => handleActivate(sppg)}>
+                          Aktifkan
                         </button>
                       )}
                     </div>

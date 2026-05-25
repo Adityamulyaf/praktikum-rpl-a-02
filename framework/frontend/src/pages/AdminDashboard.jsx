@@ -11,7 +11,8 @@ const MENU_ITEMS = [
 ];
 
 export default function AdminDashboard() {
-  const [activeMenu, setActiveMenu] = useState('sppg');
+  const [activeMenu, setActiveMenu]   = useState('sppg');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -26,16 +27,34 @@ export default function AdminDashboard() {
     navigate('/login');
   };
 
+  const handleNav = (key) => {
+    setActiveMenu(key);
+    setSidebarOpen(false);
+  };
+
   return (
     <div className="ad-root">
-      <aside className="ad-sidebar">
+      {/* mobile top bar */}
+      <header className="ad-topbar">
+        <button className="ad-hamburger" onClick={() => setSidebarOpen(true)} aria-label="Buka menu">
+          <span /><span /><span />
+        </button>
+        <span className="ad-topbar-brand">HaloMBG</span>
+      </header>
+
+      {/* overlay — tutup sidebar saat klik di luar */}
+      {sidebarOpen && (
+        <div className="ad-overlay" onClick={() => setSidebarOpen(false)} />
+      )}
+
+      <aside className={`ad-sidebar${sidebarOpen ? ' open' : ''}`}>
         <div className="ad-brand">HaloMBG</div>
         <nav className="ad-nav">
           {MENU_ITEMS.map(({ key, label }) => (
             <button
               key={key}
               className={`ad-nav-item${activeMenu === key ? ' active' : ''}`}
-              onClick={() => setActiveMenu(key)}
+              onClick={() => handleNav(key)}
             >
               {label}
             </button>
@@ -46,6 +65,7 @@ export default function AdminDashboard() {
           <button className="ad-logout" onClick={handleLogout}>Keluar</button>
         </div>
       </aside>
+
       <main className="ad-content">
         {activeMenu === 'sppg'    && <SppgTable />}
         {activeMenu === 'sekolah' && <SchoolTable />}
