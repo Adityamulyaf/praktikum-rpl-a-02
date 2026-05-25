@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         // US-13: manage SPPG & schools
         Route::apiResource('sppg', SppgController::class);
+        Route::get('schools/provinces', [SchoolController::class, 'provinces']);
         Route::apiResource('schools', SchoolController::class);
         Route::put('sppg/{sppg}/schools/sync', [SppgSchoolController::class, 'sync']);
         Route::post('sppg/{sppg}/schools/attach', [SppgSchoolController::class, 'attach']);

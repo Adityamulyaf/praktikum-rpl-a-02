@@ -1,18 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PasswordInput from './PasswordInput';
-import { registerSiswa, getPublicSchools } from '../api/auth';
+import SchoolSearch from './SchoolSearch';
+import { registerSiswa } from '../api/auth';
 
 export default function SiswaRegisterForm({ onSuccess, onBack }) {
   const [form, setForm]             = useState({ name: '', email: '', password: '', password_confirmation: '', school_id: '', nisn: '' });
-  const [schools, setSchools]       = useState([]);
   const [showPw, setShowPw]         = useState(false);
   const [showPwConf, setShowPwConf] = useState(false);
   const [error, setError]           = useState('');
   const [loading, setLoading]       = useState(false);
-
-  useEffect(() => {
-    getPublicSchools().then(({ data }) => setSchools(data)).catch(() => {});
-  }, []);
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
@@ -56,12 +52,12 @@ export default function SiswaRegisterForm({ onSuccess, onBack }) {
 
         <div className="lp-field">
           <label className="lp-label" htmlFor="sv-school">Sekolah</label>
-          <select id="sv-school" className="lp-input" value={form.school_id} onChange={set('school_id')} required>
-            <option value="">-- Pilih sekolah Anda --</option>
-            {schools.map((s) => (
-              <option key={s.id} value={s.id}>{s.name} — {s.district}</option>
-            ))}
-          </select>
+          <SchoolSearch
+            id="sv-school"
+            value={form.school_id}
+            onChange={(id) => setForm((f) => ({ ...f, school_id: id }))}
+            required
+          />
         </div>
 
         <div className="lp-field">

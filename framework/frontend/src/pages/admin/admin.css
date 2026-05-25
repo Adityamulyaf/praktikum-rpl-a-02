@@ -237,6 +237,58 @@
   margin-bottom: var(--space-md);
 }
 
+/* ── FILTER BAR ──────────────────────────────────────────── */
+
+.adm-filters {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.adm-filters .adm-search {
+  flex: 1;
+  min-width: 180px;
+  margin-bottom: 0;
+}
+
+.adm-filter-select {
+  padding: 8px 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 150ms;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238E8D88' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.adm-filter-select:focus { border-color: var(--color-primary); }
+
+/* ── PAGINATION ───────────────────────────────────────────── */
+
+.adm-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.adm-page-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
 /* ── SCHOOL MODAL ────────────────────────────────────────── */
 
 .adm-search {

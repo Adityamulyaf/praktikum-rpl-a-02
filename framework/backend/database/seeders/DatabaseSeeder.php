@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(SchoolSeeder::class);
+
         User::updateOrCreate(
             ['email' => 'admin@halombg.com'],
             [
