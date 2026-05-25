@@ -12,12 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
+        User::updateOrCreate(
             ['email' => 'admin@halombg.com'],
             [
-                'name'     => 'Admin User',
-                'password' => bcrypt('password'),
-                'role'     => 'admin',
+                'name'      => 'Admin User',
+                'password'  => 'password',
+                'role'      => 'admin',
+                'is_active' => true,
             ]
         );
 
