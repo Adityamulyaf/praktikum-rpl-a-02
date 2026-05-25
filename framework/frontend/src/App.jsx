@@ -10,14 +10,24 @@ export default function App() {
         {/* Public Application Paths */}
         <Route path="/login" element={<Login />} />
 
-        {/* Protected System Admin Scopes */}
+        {/* Admin */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/admin" element={<AdminDashboard />} />
         </Route>
 
-        {/* General Authenticated Fallback */}
-        <Route element={<ProtectedRoute allowedRoles={['admin', 'guru', 'siswa', 'sppg']} />}>
-          <Route path="/dashboard" element={<div style={{ padding: '2rem' }}>General Dashboard</div>} />
+        {/* SPPG */}
+        <Route element={<ProtectedRoute allowedRoles={['sppg']} />}>
+          <Route path="/sppg" element={<div style={{ padding: '2rem' }}>SPPG Dashboard</div>} />
+        </Route>
+
+        {/* Siswa */}
+        <Route element={<ProtectedRoute allowedRoles={['siswa']} />}>
+          <Route path="/siswa" element={<div style={{ padding: '2rem' }}>Siswa Dashboard</div>} />
+        </Route>
+
+        {/* Guru */}
+        <Route element={<ProtectedRoute allowedRoles={['guru']} />}>
+          <Route path="/guru" element={<div style={{ padding: '2rem' }}>Guru Dashboard</div>} />
         </Route>
 
         {/* Catchalls */}

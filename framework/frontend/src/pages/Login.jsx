@@ -6,9 +6,16 @@ import HeroPanel from './HeroPanel';
 import LoginForm from './LoginForm';
 import './Login.css';
 
+const ROLE_PATHS = {
+  admin: '/admin',
+  sppg:  '/sppg',
+  siswa: '/siswa',
+  guru:  '/guru',
+};
+
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, token, role } = useAuth();
 
   useEffect(() => {
     const root = document.getElementById('root');
@@ -16,10 +23,16 @@ export default function Login() {
     return () => root.classList.remove('login-page');
   }, []);
 
+  useEffect(() => {
+    if (token && role) {
+      navigate(ROLE_PATHS[role] ?? '/dashboard', { replace: true });
+    }
+  }, [token, role, navigate]);
+
   const handleLogin = async ({ email, password }) => {
     const response = await api.post('/login', { email, password });
     login(response.data);
-    navigate(response.data.role === 'admin' ? '/admin' : '/dashboard');
+    navigate(ROLE_PATHS[response.data.role] ?? '/dashboard', { replace: true });
   };
 
   return (
