@@ -1,0 +1,104 @@
+.ad-root {
+  display: flex;
+  min-height: 100svh;
+  width: 100%;
+  text-align: left;
+}
+
+.ad-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface-1);
+  border-right: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) 0;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  box-sizing: border-box;
+}
+
+.ad-brand {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary);
+  padding: 0 var(--space-lg) var(--space-lg);
+  border-bottom: 1px solid var(--border-default);
+  margin-bottom: var(--space-md);
+}
+
+.ad-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--space-sm);
+  flex: 1;
+}
+
+.ad-nav-item {
+  width: 100%;
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+}
+
+.ad-nav-item:hover {
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+
+.ad-nav-item.active {
+  background: var(--surface-3);
+  color: var(--color-primary);
+}
+
+.ad-sidebar-footer {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ad-user-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ad-logout {
+  background: none;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 6px var(--space-md);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+.ad-logout:hover {
+  border-color: var(--status-error);
+  color: var(--status-error);
+}
+
+.ad-content {
+  flex: 1;
+  padding: var(--space-xl);
+  min-width: 0;
+  background: var(--surface-2);
+}
