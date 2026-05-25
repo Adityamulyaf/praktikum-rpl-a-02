@@ -16,7 +16,7 @@
 .adm-table-wrap {
   background: var(--surface-1);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -54,7 +54,7 @@
 .adm-badge {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 500;
 }
@@ -65,6 +65,8 @@
 /* ── BUTTONS ─────────────────────────────────────────────── */
 
 .adm-actions { display: flex; gap: var(--space-sm); }
+.adm-actions .adm-btn.danger,
+.adm-actions .adm-btn.success { min-width: 108px; text-align: center; }
 
 .adm-btn {
   padding: 5px 12px;
@@ -82,8 +84,8 @@
 .adm-btn:hover              { background: var(--surface-2); }
 .adm-btn.primary            { background: var(--color-primary); color: var(--text-inverse); border-color: var(--color-primary); }
 .adm-btn.primary:hover      { background: #0a2a5c; }
-.adm-btn.danger             { color: var(--status-error); }
-.adm-btn.danger:hover       { background: #FFEBEE; border-color: var(--status-error); }
+.adm-btn.danger             { background: var(--status-error); color: #ffffff; border-color: var(--status-error); }
+.adm-btn.danger:hover       { background: #a81f1f; border-color: #a81f1f; }
 .adm-btn.success            { color: var(--status-success); }
 .adm-btn.success:hover      { background: #E8F5E9; border-color: var(--status-success); }
 .adm-btn:disabled           { opacity: 0.5; cursor: not-allowed; }
@@ -118,7 +120,7 @@
   overflow: hidden;
 }
 
-.adm-modal.wide { max-width: 480px; }
+.adm-modal.wide { max-width: 520px; }
 
 .adm-modal-header {
   display: flex;

@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
+import RegisterSelectForm from './RegisterSelectForm';
+import SiswaRegisterForm from './SiswaRegisterForm';
+import GuruRegisterForm from './GuruRegisterForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import './Login.css';
 
@@ -37,10 +39,9 @@ export default function Login() {
     navigate(ROLE_PATHS[response.data.role] ?? '/dashboard', { replace: true });
   };
 
-  const handleRegister = async (data) => {
-    const response = await api.post('/register', data);
-    login(response.data);
-    navigate(ROLE_PATHS[response.data.role] ?? '/dashboard', { replace: true });
+  const handleRegistered = (data) => {
+    login(data);
+    navigate(ROLE_PATHS[data.role] ?? '/dashboard', { replace: true });
   };
 
   const handleForgot = async ({ email }) => {
@@ -57,13 +58,25 @@ export default function Login() {
               <LoginForm
                 onSubmit={handleLogin}
                 onForgot={() => setView('forgot')}
-                onSwitch={() => setView('register')}
+                onSwitch={() => setView('register-select')}
               />
             )}
-            {view === 'register' && (
-              <RegisterForm
-                onSubmit={handleRegister}
-                onSwitch={() => setView('login')}
+            {view === 'register-select' && (
+              <RegisterSelectForm
+                onSelect={(role) => setView(`register-${role}`)}
+                onBack={() => setView('login')}
+              />
+            )}
+            {view === 'register-siswa' && (
+              <SiswaRegisterForm
+                onSuccess={handleRegistered}
+                onBack={() => setView('register-select')}
+              />
+            )}
+            {view === 'register-guru' && (
+              <GuruRegisterForm
+                onSuccess={handleRegistered}
+                onBack={() => setView('register-select')}
               />
             )}
             {view === 'forgot' && (

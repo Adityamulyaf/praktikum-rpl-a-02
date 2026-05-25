@@ -57,9 +57,11 @@
 }
 
 .ad-nav-item.active {
-  background: rgba(255, 255, 255, 0.15);
+  background: none;
   color: #ffffff;
   font-weight: 600;
+  border-left: 3px solid var(--color-secondary);
+  padding-left: calc(var(--space-md) - 3px);
 }
 
 .ad-sidebar-footer {

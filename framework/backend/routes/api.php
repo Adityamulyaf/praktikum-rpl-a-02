@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\PublicController;
 use App\Http\Controllers\Api\Admin\SppgController;
 use App\Http\Controllers\Api\Admin\SchoolController;
 use App\Http\Controllers\Api\Admin\SppgSchoolController;
@@ -8,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register/siswa', [RegisterController::class, 'registerSiswa']);
+Route::post('/register/guru',  [RegisterController::class, 'registerGuru']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -42,5 +46,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('public')->group(function () {
-  
+    Route::get('/schools', [PublicController::class, 'schools']);
 });
