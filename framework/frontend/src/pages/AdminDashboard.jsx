@@ -1,75 +1,35 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import DashboardLayout from '../components/DashboardLayout';
+import PublicLandingContent from '../features/PublicLandingContent';
 import SppgTable from './admin/SppgTable';
 import SchoolTable from './admin/SchoolTable';
-import './AdminDashboard.css';
 
-const MENU_ITEMS = [
-  { key: 'sppg',    label: 'SPPG' },
-  { key: 'sekolah', label: 'Sekolah' },
+/* ── Icons ─────────────────────────────────────────────────── */
+const IconHome   = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
+const IconSppg   = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
+const IconSchool = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>;
+
+const MENU_GROUPS = [
+  {
+    label: null,
+    items: [
+      { key: 'beranda', label: 'Beranda', icon: <IconHome /> },
+      { key: 'sppg',    label: 'SPPG',    icon: <IconSppg /> },
+      { key: 'sekolah', label: 'Sekolah', icon: <IconSchool /> },
+    ],
+  },
 ];
 
 export default function AdminDashboard() {
-  const [activeMenu, setActiveMenu]   = useState('sppg');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const root = document.getElementById('root');
-    root.classList.add('admin-page');
-    return () => root.classList.remove('admin-page');
-  }, []);
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login');
-  };
-
-  const handleNav = (key) => {
-    setActiveMenu(key);
-    setSidebarOpen(false);
-  };
-
   return (
-    <div className="ad-root">
-      {/* mobile top bar */}
-      <header className="ad-topbar">
-        <button className="ad-hamburger" onClick={() => setSidebarOpen(true)} aria-label="Buka menu">
-          <span /><span /><span />
-        </button>
-        <span className="ad-topbar-brand">HaloMBG</span>
-      </header>
-
-      {/* overlay — tutup sidebar saat klik di luar */}
-      {sidebarOpen && (
-        <div className="ad-overlay" onClick={() => setSidebarOpen(false)} />
-      )}
-
-      <aside className={`ad-sidebar${sidebarOpen ? ' open' : ''}`}>
-        <div className="ad-brand">HaloMBG</div>
-        <nav className="ad-nav">
-          {MENU_ITEMS.map(({ key, label }) => (
-            <button
-              key={key}
-              className={`ad-nav-item${activeMenu === key ? ' active' : ''}`}
-              onClick={() => handleNav(key)}
-            >
-              {label}
-            </button>
-          ))}
-        </nav>
-        <div className="ad-sidebar-footer">
-          <span className="ad-user-name">{user?.name}</span>
-          <button className="ad-logout" onClick={handleLogout}>Keluar</button>
-        </div>
-      </aside>
-
-      <main className="ad-content">
-        {activeMenu === 'sppg'    && <SppgTable />}
-        {activeMenu === 'sekolah' && <SchoolTable />}
-      </main>
-    </div>
+    <DashboardLayout menuGroups={MENU_GROUPS} pageClass="admin-page">
+      {(active) => {
+        switch (active) {
+          case 'beranda': return <PublicLandingContent />;
+          case 'sppg':    return <SppgTable />;
+          case 'sekolah': return <SchoolTable />;
+          default:        return null;
+        }
+      }}
+    </DashboardLayout>
   );
 }

@@ -4,15 +4,16 @@ import { useAuth } from '../context/AuthContext';
 import './DashboardLayout.css';
 
 /**
- * Shared dashboard shell untuk semua role (SPPG, Siswa, Guru).
+ * Shared dashboard shell untuk semua role.
  *
  * Props:
- *   menuItems  – array of { key: string, label: string, icon: ReactNode }
+ *   menuGroups – array of { label?: string, items: { key, label, icon }[] }
  *   children   – render prop: (activeMenu: string) => ReactNode
  *   pageClass  – optional string ditambahkan ke #root element
  */
-export default function DashboardLayout({ menuItems, children, pageClass }) {
-  const [activeMenu, setActiveMenu] = useState(menuItems[0]?.key ?? '');
+export default function DashboardLayout({ menuGroups, children, pageClass }) {
+  const firstKey = menuGroups?.[0]?.items?.[0]?.key ?? '';
+  const [activeMenu, setActiveMenu] = useState(firstKey);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function DashboardLayout({ menuItems, children, pageClass }) {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login');
+    navigate('/');
   };
 
   const handleNav = (key) => {
@@ -34,18 +35,24 @@ export default function DashboardLayout({ menuItems, children, pageClass }) {
     setSidebarOpen(false);
   };
 
+  const isHome = activeMenu === firstKey;
+
   return (
     <div className="dl-root">
-      {/* Mobile top bar */}
+      {/* Top bar — always visible */}
       <header className="dl-topbar">
         <button
           className="dl-hamburger"
-          onClick={() => setSidebarOpen(true)}
-          aria-label="Buka menu"
+          onClick={() => setSidebarOpen((o) => !o)}
+          aria-label="Toggle menu"
         >
           <span /><span /><span />
         </button>
         <span className="dl-topbar-brand">HaloMBG</span>
+        <div className="dl-topbar-right">
+          <span className="dl-topbar-username">{user?.name}</span>
+          <button className="dl-topbar-logout" onClick={handleLogout}>Keluar</button>
+        </div>
       </header>
 
       {/* Overlay */}
@@ -53,19 +60,30 @@ export default function DashboardLayout({ menuItems, children, pageClass }) {
         <div className="dl-overlay" onClick={() => setSidebarOpen(false)} />
       )}
 
-      {/* Sidebar */}
+      {/* Drawer sidebar */}
       <aside className={`dl-sidebar${sidebarOpen ? ' open' : ''}`}>
-        <div className="dl-brand">HaloMBG</div>
+        <div className="dl-sidebar-head">
+          <span className="dl-brand">Menu</span>
+          <button className="dl-sidebar-close" onClick={() => setSidebarOpen(false)} aria-label="Tutup menu">✕</button>
+        </div>
         <nav className="dl-nav">
-          {menuItems.map(({ key, label, icon }) => (
-            <button
-              key={key}
-              className={`dl-nav-item${activeMenu === key ? ' active' : ''}`}
-              onClick={() => handleNav(key)}
-            >
-              {icon}
-              {label}
-            </button>
+          {menuGroups.map((group, gi) => (
+            <div key={gi}>
+              {gi > 0 && <div className="dl-nav-divider" />}
+              {group.label && (
+                <span className="dl-nav-group-label">{group.label}</span>
+              )}
+              {group.items.map(({ key, label, icon }) => (
+                <button
+                  key={key}
+                  className={`dl-nav-item${activeMenu === key ? ' active' : ''}`}
+                  onClick={() => handleNav(key)}
+                >
+                  {icon}
+                  {label}
+                </button>
+              ))}
+            </div>
           ))}
         </nav>
         <div className="dl-sidebar-footer">
@@ -78,7 +96,7 @@ export default function DashboardLayout({ menuItems, children, pageClass }) {
       </aside>
 
       {/* Main content */}
-      <main className="dl-content">
+      <main className={`dl-content${isHome ? ' dl-content-home' : ''}`}>
         {children(activeMenu)}
       </main>
     </div>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
+import PublicLanding from './pages/PublicLanding';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import SppgDashboard from './pages/SppgDashboard';
@@ -11,6 +12,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* Public */}
+        <Route path="/" element={<PublicLanding />} />
         <Route path="/login" element={<Login />} />
 
         {/* Admin */}
@@ -35,7 +37,7 @@ export default function App() {
 
         {/* Catchalls */}
         <Route path="/unauthorized" element={<div style={{ padding: '2rem', color: 'red' }}>403 - Access Denied</div>} />
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

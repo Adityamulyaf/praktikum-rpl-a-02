@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import LoginForm from './LoginForm';
@@ -18,8 +18,9 @@ const ROLE_PATHS = {
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, token, role } = useAuth();
-  const [view, setView] = useState('login');
+  const [view, setView] = useState(location.state?.view ?? 'login');
 
   useEffect(() => {
     const root = document.getElementById('root');
