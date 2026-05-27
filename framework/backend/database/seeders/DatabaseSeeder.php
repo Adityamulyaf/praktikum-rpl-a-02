@@ -14,15 +14,24 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(SchoolSeeder::class);
 
-        User::updateOrCreate(
-            ['email' => 'admin@halombg.com'],
-            [
-                'name'      => 'Admin User',
-                'password'  => 'password',
-                'role'      => 'admin',
-                'is_active' => true,
-            ]
-        );
+        $testUsers = [
+            ['email' => 'admin@halombg.com',  'name' => 'Test Admin',  'role' => 'admin'],
+            ['email' => 'sppg@halombg.com',   'name' => 'Test SPPG',   'role' => 'sppg'],
+            ['email' => 'guru@halombg.com',   'name' => 'Test Guru',   'role' => 'guru'],
+            ['email' => 'siswa@halombg.com',  'name' => 'Test Siswa',  'role' => 'siswa'],
+        ];
+
+        foreach ($testUsers as $data) {
+            User::updateOrCreate(
+                ['email' => $data['email']],
+                [
+                    'name'      => $data['name'],
+                    'password'  => 'password',
+                    'role'      => $data['role'],
+                    'is_active' => true,
+                ]
+            );
+        }
 
         if (User::count() < 5) {
             User::factory(10)->create();
