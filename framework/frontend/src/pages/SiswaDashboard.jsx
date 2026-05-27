@@ -1,4 +1,3 @@
-import { useAuth } from '../context/AuthContext';
 import DashboardLayout from '../components/DashboardLayout';
 import PublicLandingContent from '../features/PublicLandingContent';
 
@@ -37,9 +36,9 @@ function ComingSoon({ title, description }) {
 export default function SiswaDashboard() {
   return (
     <DashboardLayout menuGroups={MENU_GROUPS} pageClass="siswa-page">
-      {(active) => {
+      {(active, onNavigate) => {
         switch (active) {
-          case 'beranda': return <PublicLandingContent />;
+          case 'beranda': return <PublicLandingContent onNavigate={onNavigate} />;
           case 'ulasan':  return <ComingSoon title="Kirim Ulasan" description="Berikan ulasan harian tentang makanan MBG yang kamu terima hari ini, lengkap dengan foto sebagai bukti." />;
           case 'riwayat': return <ComingSoon title="Riwayat Ulasan" description="Lihat semua ulasan yang pernah kamu kirimkan beserta statusnya." />;
           default:        return null;

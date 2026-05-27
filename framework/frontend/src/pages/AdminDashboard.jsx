@@ -21,10 +21,10 @@ const MENU_GROUPS = [
 
 export default function AdminDashboard() {
   return (
-    <DashboardLayout menuGroups={MENU_GROUPS} pageClass="admin-page">
-      {(active) => {
+    <DashboardLayout menuGroups={MENU_GROUPS} pageClass="admin-page" hasSidebar>
+      {(active, onNavigate) => {
         switch (active) {
-          case 'beranda': return <PublicLandingContent />;
+          case 'beranda': return <PublicLandingContent onNavigate={onNavigate} />;
           case 'sppg':    return <SppgTable />;
           case 'sekolah': return <SchoolTable />;
           default:        return null;

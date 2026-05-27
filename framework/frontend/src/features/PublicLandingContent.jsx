@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { searchPublicSchools } from '../api/auth';
+import PersonalStrip from '../components/PersonalStrip';
 import '../pages/PublicLanding.css';
 
 /* Icons: 32px outlined, no colored backgrounds per DESIGN.md §8.1 */
@@ -64,7 +65,7 @@ const STATS = [
   { num: '150+', label: 'Dapur SPPG' },
 ];
 
-export default function PublicLandingContent() {
+export default function PublicLandingContent({ onNavigate }) {
   const [query, setQuery]       = useState('');
   const [results, setResults]   = useState([]);
   const [loading, setLoading]   = useState(false);
@@ -162,7 +163,19 @@ export default function PublicLandingContent() {
           </div>
 
         </div>
+
+        {/* Scroll hint — fills empty space, signals content below */}
+        <div className="plc-hero-scroll" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+
       </section>
+
+      {/* Personal strip — only shown when logged in (onNavigate provided) */}
+      {onNavigate && <PersonalStrip onNavigate={onNavigate} />}
 
       {/* ── FEATURES — cards per DESIGN.md §5.2 ──────────────── */}
       <section className="plc-features">

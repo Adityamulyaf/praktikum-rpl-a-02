@@ -40,9 +40,9 @@ function ComingSoon({ title, description }) {
 export default function SppgDashboard() {
   return (
     <DashboardLayout menuGroups={MENU_GROUPS} pageClass="sppg-page">
-      {(active) => {
+      {(active, onNavigate) => {
         switch (active) {
-          case 'beranda':    return <PublicLandingContent />;
+          case 'beranda':    return <PublicLandingContent onNavigate={onNavigate} />;
           case 'menu':       return <ComingSoon title="Menu Harian" description="Input menu makanan harian beserta klaim kandungan nutrisi dan foto." />;
           case 'distribusi': return <ComingSoon title="Status Distribusi" description="Perbarui status pengiriman ke setiap sekolah dan unggah foto bukti distribusi." />;
           case 'profil':     return <ComingSoon title="Profil Dapur" description="Kelola informasi profil dapur — deskripsi, contact person, dan kapasitas produksi." />;

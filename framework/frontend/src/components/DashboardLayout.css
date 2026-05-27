@@ -64,208 +64,92 @@
   color: var(--text-inverse);
 }
 
-/* ── HAMBURGER ────────────────────────────────────────────── */
-.dl-hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 32px;
-  height: 32px;
+/* ── BACK BUTTON ──────────────────────────────────────────── */
+/* Muncul di topbar kiri saat user berada di halaman fitur (!isHome) */
+.dl-back-btn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
-  flex-shrink: 0;
-}
-
-.dl-hamburger span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background: var(--color-primary);
-  border-radius: 2px;
-}
-
-/* ── OVERLAY ──────────────────────────────────────────────── */
-.dl-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 99;
-}
-
-/* ── DRAWER SIDEBAR ───────────────────────────────────────── */
-.dl-sidebar {
-  position: fixed;
-  top: 52px;
-  left: 0;
-  width: 240px;
-  height: calc(100svh - 52px);
-  background: var(--color-primary);
-  transform: translateX(-100%);
-  transition: transform 250ms ease;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
-  overflow-y: auto;
-}
-
-.dl-sidebar.open {
-  transform: translateX(0);
-}
-
-.dl-sidebar-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-md) var(--space-lg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
-}
-
-.dl-brand {
+  font-family: var(--font-sans);
   font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.dl-sidebar-close {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary);
   padding: 4px 8px;
   border-radius: var(--radius-sm);
-  transition: color 150ms, background 150ms;
+  transition: background 150ms;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.dl-sidebar-close:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+.dl-back-btn:hover {
+  background: var(--surface-2);
 }
 
-/* ── NAV ──────────────────────────────────────────────────── */
-.dl-nav {
+/* ── SIDEBAR LAYOUT (admin) ───────────────────────────────── */
+/* dl-body wraps sidebar + content saat hasSidebar && !isHome  */
+.dl-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dl-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface-1);
+  border-right: 1px solid var(--border-default);
+  padding: var(--space-md) var(--space-sm);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.dl-nav-group {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: var(--space-sm) var(--space-sm);
-  flex: 1;
-  padding-top: var(--space-md);
-}
-
-.dl-nav-item {
-  width: 100%;
-  text-align: left;
-  padding: var(--space-sm) var(--space-md);
-  border: none;
-  border-radius: var(--radius-md);
-  background: none;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  transition: background 150ms, color 150ms;
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.dl-nav-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-}
-
-.dl-nav-item.active {
-  background: none;
-  color: #ffffff;
-  font-weight: 600;
-  border-left: 3px solid var(--color-secondary);
-  padding-left: calc(var(--space-md) - 3px);
-}
-
-.dl-nav-item svg {
-  flex-shrink: 0;
-  opacity: 0.7;
-}
-
-.dl-nav-item.active svg,
-.dl-nav-item:hover svg {
-  opacity: 1;
-}
-
-/* ── NAV GROUPS ───────────────────────────────────────────── */
-.dl-nav-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: var(--space-sm) var(--space-sm);
 }
 
 .dl-nav-group-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-tertiary);
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: var(--space-sm) var(--space-md) 2px;
+  letter-spacing: 0.5px;
+  padding: var(--space-xs) var(--space-sm);
   display: block;
 }
 
-/* ── SIDEBAR FOOTER ───────────────────────────────────────── */
-.dl-sidebar-footer {
-  padding: var(--space-md) var(--space-lg);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.dl-nav-item {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: var(--space-sm);
-  flex-shrink: 0;
-}
-
-.dl-user-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.dl-user-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dl-user-role {
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.dl-logout {
+  width: 100%;
+  padding: 8px var(--space-sm);
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   border-radius: var(--radius-md);
-  padding: 6px var(--space-md);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  transition: all 150ms;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: background 150ms, color 150ms;
+  text-align: left;
+  white-space: nowrap;
 }
 
-.dl-logout:hover {
-  border-color: #ff8a80;
-  color: #ff8a80;
+.dl-nav-item:hover {
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+
+.dl-nav-item--active {
+  background: var(--surface-2);
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 /* ── CONTENT ──────────────────────────────────────────────── */
@@ -274,12 +158,14 @@
   padding: var(--space-xl);
   background: var(--surface-2);
   min-width: 0;
+  overflow-y: auto;
 }
 
 /* Home mode: no padding, landingpage fills full width */
 .dl-content.dl-content-home {
   padding: 0;
   background: var(--surface-1);
+  overflow-y: visible;
 }
 
 /* ── PLACEHOLDER CARD ─────────────────────────────────────── */

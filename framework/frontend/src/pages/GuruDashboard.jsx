@@ -36,9 +36,9 @@ function ComingSoon({ title, description }) {
 export default function GuruDashboard() {
   return (
     <DashboardLayout menuGroups={MENU_GROUPS} pageClass="guru-page">
-      {(active) => {
+      {(active, onNavigate) => {
         switch (active) {
-          case 'beranda': return <PublicLandingContent />;
+          case 'beranda': return <PublicLandingContent onNavigate={onNavigate} />;
           case 'ulasan':  return <ComingSoon title="Ulasan Siswa" description="Pantau dan moderasi ulasan yang dikirim siswa di sekolah Anda." />;
           case 'notif':   return <ComingSoon title="Notifikasi" description="Pemberitahuan saat ada ulasan baru dari siswa yang perlu diperhatikan." />;
           default:        return null;

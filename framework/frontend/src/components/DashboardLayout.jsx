@@ -11,10 +11,9 @@ import './DashboardLayout.css';
  *   children   – render prop: (activeMenu: string) => ReactNode
  *   pageClass  – optional string ditambahkan ke #root element
  */
-export default function DashboardLayout({ menuGroups, children, pageClass }) {
+export default function DashboardLayout({ menuGroups, children, pageClass, hasSidebar = false }) {
   const firstKey = menuGroups?.[0]?.items?.[0]?.key ?? '';
   const [activeMenu, setActiveMenu] = useState(firstKey);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -30,24 +29,22 @@ export default function DashboardLayout({ menuGroups, children, pageClass }) {
     navigate('/');
   };
 
-  const handleNav = (key) => {
-    setActiveMenu(key);
-    setSidebarOpen(false);
-  };
-
   const isHome = activeMenu === firstKey;
+  const showSidebar = hasSidebar && !isHome;
 
   return (
     <div className="dl-root">
       {/* Top bar — always visible */}
       <header className="dl-topbar">
-        <button
-          className="dl-hamburger"
-          onClick={() => setSidebarOpen((o) => !o)}
-          aria-label="Toggle menu"
-        >
-          <span /><span /><span />
-        </button>
+        {!isHome && !hasSidebar && (
+          <button
+            className="dl-back-btn"
+            aria-label="Kembali ke Beranda"
+            onClick={() => setActiveMenu(firstKey)}
+          >
+            ← Beranda
+          </button>
+        )}
         <span className="dl-topbar-brand">HaloMBG</span>
         <div className="dl-topbar-right">
           <span className="dl-topbar-username">{user?.name}</span>
@@ -55,50 +52,40 @@ export default function DashboardLayout({ menuGroups, children, pageClass }) {
         </div>
       </header>
 
-      {/* Overlay */}
-      {sidebarOpen && (
-        <div className="dl-overlay" onClick={() => setSidebarOpen(false)} />
+      {/* Sidebar layout (admin) — hanya saat hasSidebar && !isHome */}
+      {showSidebar ? (
+        <div className="dl-body">
+          <aside className="dl-sidebar">
+            {menuGroups.map((group, gi) => (
+              <div key={gi} className="dl-nav-group">
+                {group.label && (
+                  <span className="dl-nav-group-label">{group.label}</span>
+                )}
+                {group.items.map(({ key, label, icon }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    className={`dl-nav-item${activeMenu === key ? ' dl-nav-item--active' : ''}`}
+                    onClick={() => setActiveMenu(key)}
+                  >
+                    {icon}
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
+            ))}
+          </aside>
+
+          <main className="dl-content">
+            {children(activeMenu, setActiveMenu)}
+          </main>
+        </div>
+      ) : (
+        /* Non-sidebar layout — back button di topbar, atau isHome full-width */
+        <main className={`dl-content${isHome ? ' dl-content-home' : ''}`}>
+          {children(activeMenu, setActiveMenu)}
+        </main>
       )}
-
-      {/* Drawer sidebar */}
-      <aside className={`dl-sidebar${sidebarOpen ? ' open' : ''}`}>
-        <div className="dl-sidebar-head">
-          <span className="dl-brand">Menu</span>
-          <button className="dl-sidebar-close" onClick={() => setSidebarOpen(false)} aria-label="Tutup menu">✕</button>
-        </div>
-        <nav className="dl-nav">
-          {menuGroups.map((group, gi) => (
-            <div key={gi}>
-              {gi > 0 && <div className="dl-nav-divider" />}
-              {group.label && (
-                <span className="dl-nav-group-label">{group.label}</span>
-              )}
-              {group.items.map(({ key, label, icon }) => (
-                <button
-                  key={key}
-                  className={`dl-nav-item${activeMenu === key ? ' active' : ''}`}
-                  onClick={() => handleNav(key)}
-                >
-                  {icon}
-                  {label}
-                </button>
-              ))}
-            </div>
-          ))}
-        </nav>
-        <div className="dl-sidebar-footer">
-          <div className="dl-user-info">
-            <span className="dl-user-name">{user?.name}</span>
-            <span className="dl-user-role">{user?.role}</span>
-          </div>
-          <button className="dl-logout" onClick={handleLogout}>Keluar</button>
-        </div>
-      </aside>
-
-      {/* Main content */}
-      <main className={`dl-content${isHome ? ' dl-content-home' : ''}`}>
-        {children(activeMenu)}
-      </main>
     </div>
   );
 }
