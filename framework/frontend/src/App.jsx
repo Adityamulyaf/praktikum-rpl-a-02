@@ -2,12 +2,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import SppgDashboard from './pages/SppgDashboard';
+import SiswaDashboard from './pages/SiswaDashboard';
+import GuruDashboard from './pages/GuruDashboard';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Application Paths */}
+        {/* Public */}
         <Route path="/login" element={<Login />} />
 
         {/* Admin */}
@@ -17,17 +20,17 @@ export default function App() {
 
         {/* SPPG */}
         <Route element={<ProtectedRoute allowedRoles={['sppg']} />}>
-          <Route path="/sppg" element={<div style={{ padding: '2rem' }}>SPPG Dashboard</div>} />
+          <Route path="/sppg" element={<SppgDashboard />} />
         </Route>
 
         {/* Siswa */}
         <Route element={<ProtectedRoute allowedRoles={['siswa']} />}>
-          <Route path="/siswa" element={<div style={{ padding: '2rem' }}>Siswa Dashboard</div>} />
+          <Route path="/siswa" element={<SiswaDashboard />} />
         </Route>
 
         {/* Guru */}
         <Route element={<ProtectedRoute allowedRoles={['guru']} />}>
-          <Route path="/guru" element={<div style={{ padding: '2rem' }}>Guru Dashboard</div>} />
+          <Route path="/guru" element={<GuruDashboard />} />
         </Route>
 
         {/* Catchalls */}
