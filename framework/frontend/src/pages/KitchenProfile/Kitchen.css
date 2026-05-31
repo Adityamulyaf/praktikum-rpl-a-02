@@ -1,0 +1,272 @@
+.kp-root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-family: inherit;
+}
+
+/* State screens */
+.kp-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #6b7280;
+}
+.kp-state--error { color: #dc2626; }
+.kp-state-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+.kp-state h2 { font-size: 18px; font-weight: 500; color: #111827; margin: 0 0 0.5rem; }
+.kp-state p { font-size: 14px; margin: 0; }
+
+/* Header */
+.kp-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0ee;
+}
+
+.kp-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #f5f4f0;
+  border: 1px solid #e8e6df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #9ca3af;
+}
+
+.kp-header-info { flex: 1; min-width: 0; }
+
+.kp-header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.kp-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.kp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.kp-badge--active { background: #dcfce7; color: #15803d; }
+.kp-badge--inactive { background: #fee2e2; color: #dc2626; }
+
+.kp-meta {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.kp-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #6b7280;
+}
+.kp-meta-item svg { opacity: 0.7; flex-shrink: 0; }
+
+.kp-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  background: #1a1f36;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.kp-edit-btn:hover { background: #2d3561; }
+
+/* Tabs */
+.kp-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #f0f0ee;
+  margin-bottom: 1.75rem;
+}
+
+.kp-tab {
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.kp-tab:hover { color: #374151; }
+.kp-tab--active {
+  color: #111827;
+  border-bottom-color: #1a1f36;
+}
+
+/* Grid */
+.kp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Cards */
+.kp-card {
+  background: #fff;
+  border: 1px solid #f0f0ee;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.kp-card--full {
+  grid-column: 1 / -1;
+}
+
+.kp-card-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 1rem;
+}
+.kp-card-title svg { opacity: 0.7; }
+
+/* Info rows */
+.kp-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f9f8f6;
+}
+.kp-info-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.kp-info-label {
+  font-size: 13px;
+  color: #9ca3af;
+  min-width: 100px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.kp-info-value {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 500;
+}
+.kp-info-link {
+  font-size: 14px;
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: none;
+}
+.kp-info-link:hover { text-decoration: underline; }
+
+/* Capacity */
+.kp-capacity-big {
+  font-size: 36px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1;
+  margin-top: 0.5rem;
+}
+.kp-capacity-unit {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Null / empty states */
+.kp-null {
+  font-size: 13px;
+  color: #d1d5db;
+  font-style: italic;
+}
+
+.kp-description {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0.5rem 0 0;
+}
+
+/* Schools */
+.kp-school-count {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 500;
+  background: #f5f4f0;
+  color: #6b7280;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.kp-schools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0;
+}
+
+.kp-school-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f9f8f6;
+  gap: 12px;
+}
+.kp-school-item:last-child { border-bottom: none; }
+
+.kp-school-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+}
+.kp-school-district {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.kp-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #d1d5db;
+  font-size: 14px;
+}
+
+/* Coming soon */
+.kp-coming-soon {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #9ca3af;
+  font-size: 14px;
+  border: 1px dashed #e8e6df;
+  border-radius: 12px;
+}

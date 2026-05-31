@@ -1,5 +1,6 @@
 import DashboardLayout from '../components/DashboardLayout';
 import PublicLandingContent from '../features/PublicLandingContent';
+import Kitchen from './KitchenProfile/Kitchen';
 
 /* ── Icons ─────────────────────────────────────────────── */
 const IconHome     = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
@@ -37,6 +38,10 @@ function ComingSoon({ title, description }) {
   );
 }
 
+function KitchenProfile() {
+  return <Kitchen />;
+}
+
 export default function SppgDashboard() {
   return (
     <DashboardLayout menuGroups={MENU_GROUPS} pageClass="sppg-page">
@@ -45,7 +50,7 @@ export default function SppgDashboard() {
           case 'beranda':    return <PublicLandingContent onNavigate={onNavigate} />;
           case 'menu':       return <ComingSoon title="Menu Harian" description="Input menu makanan harian beserta klaim kandungan nutrisi dan foto." />;
           case 'distribusi': return <ComingSoon title="Status Distribusi" description="Perbarui status pengiriman ke setiap sekolah dan unggah foto bukti distribusi." />;
-          case 'profil':     return <ComingSoon title="Profil Dapur" description="Kelola informasi profil dapur — deskripsi, contact person, dan kapasitas produksi." />;
+          case 'profil':     return <KitchenProfile onNavigate={onNavigate} />;
           case 'evaluasi':   return <ComingSoon title="Evaluasi Internal" description="Ringkasan sentimen ulasan dengan breakdown per sekolah dan rekap historis mingguan." />;
           default:           return null;
         }

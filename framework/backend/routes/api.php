@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\PublicController;
 use App\Http\Controllers\Api\Admin\SppgController;
 use App\Http\Controllers\Api\Admin\SchoolController;
 use App\Http\Controllers\Api\Admin\SppgSchoolController;
+use App\Http\Controllers\Api\Sppg\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -18,9 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 
-    // Admin only
-    Route::middleware('role:admin')->prefix('admin')->group(function () {
-        // US-13: manage SPPG & schools
+   Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::apiResource('sppg', SppgController::class);
         Route::get('schools/provinces', [SchoolController::class, 'provinces']);
         Route::apiResource('schools', SchoolController::class);
@@ -31,8 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // SPPG only
     Route::middleware('role:sppg')->prefix('sppg')->group(function () {
-        // US-05: input menu
-        // US-08: update distribusi
+        Route::get('/profile', [ProfileController::class, 'show']);
     });
 
     // Siswa only

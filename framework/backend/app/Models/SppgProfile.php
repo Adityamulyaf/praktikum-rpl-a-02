@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 ])]
 class SppgProfile extends Model
 {
+    protected $table = 'sppg_profiles'; 
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'ssid');
