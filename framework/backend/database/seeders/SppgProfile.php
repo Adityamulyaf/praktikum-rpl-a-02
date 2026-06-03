@@ -10,50 +10,91 @@ class SppgProfile extends Seeder
 {
     public function run(): void
     {
-        $sppgUsers = User::where('role', 'sppg')->get();
+        $sppgUsers = User::where('role', 'sppg')->get(['ssid']);
 
         if ($sppgUsers->isEmpty()) {
             $this->command->warn('Tidak ada SPPG user ditemukan.');
             return;
         }
 
+        $csvFile = database_path('seeders/data/sppg.csv');
+
+        if (!file_exists($csvFile)) {
+            $this->command->error("File CSV tidak ditemukan: {$csvFile}");
+            return;
+        }
+
+        // Delete existing SPPG profiles to avoid conflicts
+        SppgProfileModel::truncate();
+
+        $file = fopen($csvFile, 'r');
+        $header = null;
+        $userIndex = 0;
         $count = 0;
-        $kitchens = [
-            'Dapur Emas', 'Rumah Makan Sejahtera', 'Warung Mak Yah', 'Katering Lezat',
-            'Dapur Tradisional', 'Kafe Santai', 'Restoran Keluarga', 'Hidangan Nusantara',
-            'Toko Kue Amanah', 'Bakery Premium', 'Warung Pinggir Jalan', 'Restoran Mewah',
-            'Kedai Kopi Mantap', 'Rumah Makan Rakyat', 'Dapur Ibu', 'Kantin Sehat'
-        ];
+        $profilesToCreate = [];
+        $batchSize = 100;
 
-        $districts = ['Jakarta Pusat', 'Jakarta Utara', 'Jakarta Barat', 'Jakarta Selatan', 'Jakarta Timur'];
-        $provinces = ['DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Sumatera Utara'];
+        while (($row = fgetcsv($file)) !== false) {
+            // Skip header row on first iteration
+            if ($header === null) {
+                $header = $row;
+                continue;
+            }
 
-        for ($i = 0; $i < 1000; $i++) {
-            $sppgUser = $sppgUsers[$i % $sppgUsers->count()];
-            $kitchenIndex = $i % count($kitchens);
+            // Skip duplicate headers that appear in the CSV (identified by first column being 'No')
+            if (isset($row[0]) && trim($row[0]) === 'No') {
+                continue;
+            }
 
-            SppgProfileModel::updateOrCreate(
-                ['user_id' => $sppgUser->ssid],
-                [
-                    'kitchen_name'          => $kitchens[$kitchenIndex] . ' ' . ($i + 1),
-                    'address'               => 'Jl. Test No. ' . ($i + 1),
-                    'district'              => $districts[$i % count($districts)],
-                    'province'              => $provinces[$i % count($provinces)],
-                    'contact_person_name'   => 'Contact ' . ($i + 1),
-                    'contact_phone'         => '08' . str_pad($i + 1, 10, '0', STR_PAD_LEFT),
-                    'contact_email'         => 'sppg' . ($i + 1) . '@halombg.com',
-                    'description'           => 'SPPG Profile #' . ($i + 1),
-                    'production_capacity'   => 1000 + ($i * 10),
-                    'is_active'             => true,
-                ]
-            );
+            // Skip empty rows
+            if (empty(array_filter($row))) {
+                continue;
+            }
+
+            // Check if this is a valid data row by ensuring the first column has a number
+            $rowNum = trim($row[0] ?? '');
+            if (!is_numeric($rowNum) || $rowNum === '') {
+                continue;
+            }
+
+            $data = array_combine($header, $row);
+
+            // Get unique SPPG user for this CSV row
+            $sppgUser = $sppgUsers[$userIndex % $sppgUsers->count()];
+            $userIndex++;
+
+            $profilesToCreate[] = [
+                'user_id'               => $sppgUser->ssid,
+                'kitchen_name'          => trim($data['Nama SPPG'] ?? 'SPPG #' . $rowNum),
+                'address'               => trim($data['Alamat SPPG'] ?? 'Alamat tidak tersedia'),
+                'district'              => trim($data['Kab./Kota SPPG'] ?? 'District tidak tersedia'),
+                'province'              => trim($data['Provinsi SPPG'] ?? 'Province tidak tersedia'),
+                'contact_person_name'   => 'Contact ' . $rowNum,
+                'contact_phone'         => '08' . str_pad($rowNum, 10, '0', STR_PAD_LEFT),
+                'contact_email'         => 'sppg' . $rowNum . '@halombg.com',
+                'description'           => trim($data['Nama SPPG'] ?? 'SPPG Profile #' . $rowNum),
+                'production_capacity'   => 1000 + ($rowNum * 10),
+                'is_active'             => true,
+                'created_at'            => now(),
+                'updated_at'            => now(),
+            ];
 
             $count++;
-            if ($count % 100 === 0) {
+
+            // Insert in batches for performance
+            if (count($profilesToCreate) >= $batchSize) {
+                SppgProfileModel::insert($profilesToCreate);
                 $this->command->info("Telah membuat {$count} SPPG profiles...");
+                $profilesToCreate = [];
             }
         }
 
-        $this->command->info("Berhasil membuat {$count} SPPG profiles.");
+        // Insert remaining records
+        if (!empty($profilesToCreate)) {
+            SppgProfileModel::insert($profilesToCreate);
+        }
+
+        fclose($file);
+        $this->command->info("Berhasil membuat {$count} SPPG profiles dari CSV.");
     }
 }

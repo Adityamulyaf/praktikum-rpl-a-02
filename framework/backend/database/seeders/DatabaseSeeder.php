@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Database\Seeders\SppgProfile;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,19 +35,25 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // Create additional SPPG users for seeding 1000 profiles
+        // Create 500 SPPG users to match CSV data using batch insert
         $sppgCount = User::where('role', 'sppg')->count();
-        if ($sppgCount < 10) {
-            for ($i = 2; $i <= 10; $i++) {
-                User::updateOrCreate(
-                    ['email' => 'sppg' . $i . '@halombg.com'],
-                    [
-                        'name'      => 'Test SPPG ' . $i,
-                        'password'  => 'password',
-                        'role'      => 'sppg',
-                        'is_active' => true,
-                    ]
-                );
+        if ($sppgCount < 500) {
+            $usersToCreate = [];
+            for ($i = 2; $i <= 500; $i++) {
+                $usersToCreate[] = [
+                    'ssid'       => Str::uuid()->toString(),
+                    'email'      => 'sppg' . $i . '@halombg.com',
+                    'name'       => 'SPPG User ' . $i,
+                    'password'   => 'password',
+                    'role'       => 'sppg',
+                    'is_active'  => true,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+            // Insert in chunks to avoid query size limits
+            foreach (array_chunk($usersToCreate, 100) as $chunk) {
+                User::insertOrIgnore($chunk);
             }
         }
 
