@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\SppgProfile;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -33,8 +34,26 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        // Create additional SPPG users for seeding 1000 profiles
+        $sppgCount = User::where('role', 'sppg')->count();
+        if ($sppgCount < 10) {
+            for ($i = 2; $i <= 10; $i++) {
+                User::updateOrCreate(
+                    ['email' => 'sppg' . $i . '@halombg.com'],
+                    [
+                        'name'      => 'Test SPPG ' . $i,
+                        'password'  => 'password',
+                        'role'      => 'sppg',
+                        'is_active' => true,
+                    ]
+                );
+            }
+        }
+
         if (User::count() < 5) {
             User::factory(10)->create();
         }
+
+        $this->call(SppgProfile::class);
     }
 }

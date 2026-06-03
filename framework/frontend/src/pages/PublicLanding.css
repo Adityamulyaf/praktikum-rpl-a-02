@@ -6,523 +6,546 @@
 
 /* ── FULL PAGE NAV (PublicLanding.jsx only) ───────────────── */
 .pl-root {
-  min-height: 100svh;
-  background: var(--surface-1);
-  font-family: var(--font-sans);
+    min-height: 100svh;
+    background: var(--surface-1);
+    font-family: var(--font-sans);
 }
 
 .pl-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-  padding: 0 var(--space-2xl);
-  background: var(--surface-1);
-  border-bottom: 1px solid var(--border-default);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 var(--space-2xl);
+    background: var(--surface-1);
+    border-bottom: 1px solid var(--border-default);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .pl-nav-brand {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary);
 }
 
 .pl-nav-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
 }
 
 /* Secondary button — transparent, navy border */
 .pl-nav-register {
-  display: inline-flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 var(--space-md);
-  background: transparent;
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-md);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 150ms, color 150ms;
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 var(--space-md);
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background 150ms,
+        color 150ms;
 }
 
 .pl-nav-register:hover {
-  background: var(--color-primary);
-  color: var(--text-inverse);
+    background: var(--color-primary);
+    color: var(--text-inverse);
 }
 
 /* Primary button */
 .pl-nav-login {
-  display: inline-flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 var(--space-md);
-  background: var(--color-primary);
-  color: var(--text-inverse);
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  transition: opacity 150ms;
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 var(--space-md);
+    background: var(--color-primary);
+    color: var(--text-inverse);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 150ms;
 }
 
 .pl-nav-login:hover {
-  opacity: 0.88;
+    opacity: 0.88;
 }
 
 /* ── CONTENT ROOT ─────────────────────────────────────────── */
 .plc-root {
-  width: 100%;
-  font-family: var(--font-sans);
+    width: 100%;
+    font-family: var(--font-sans);
 }
 
 /* ── HERO ─────────────────────────────────────────────────── */
 /* Solid navy only — no gradients per DESIGN.md §4.5, §9.2 */
 .plc-hero {
-  background: var(--color-primary);
-  padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
-  text-align: center;
-  /* Fill viewport so green section stays below the fold */
-  min-height: calc(85svh - 56px);
-  display: flex;
-  flex-direction: column;
+    background: var(--color-primary);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+    text-align: center;
+    /* Fill viewport so green section stays below the fold */
+    min-height: calc(85svh - 56px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Content fills available space, shifted slightly above center
    (padding-bottom adds extra space below → visual center moves up) */
 .plc-hero-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: var(--space-3xl);
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: var(--space-3xl);
 }
 
 /* Scroll hint at bottom of hero — makes the full-height feel intentional */
 .plc-hero-scroll {
-  display: flex;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.35);
-  flex-shrink: 0;
-  padding-bottom: var(--space-sm);
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+    padding-bottom: var(--space-sm);
 }
 
 /* Overline — white at 50% opacity, NOT colored per §4.4 */
 .plc-hero-overline {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: block;
-  margin-bottom: var(--space-md);
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: var(--space-md);
 }
 
 /* Display — 32px per type scale §3.2, -0.3px per §3.3 */
 .plc-hero-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--text-inverse);
-  line-height: 40px;
-  letter-spacing: -0.3px;
-  margin: 0 0 var(--space-md);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-inverse);
+    line-height: 40px;
+    letter-spacing: -0.3px;
+    margin: 0 0 var(--space-md);
 }
 
 .plc-hero-sub {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 26px;
-  margin: 0 auto var(--space-xl);
-  max-width: 480px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 26px;
+    margin: 0 auto var(--space-xl);
+    max-width: 480px;
 }
 
 /* ── HERO SEARCH ──────────────────────────────────────────── */
 .plc-search-wrap {
-  position: relative;
-  max-width: 520px;
-  width: 100%;
-  margin: 0 auto var(--space-2xl);
+    position: relative;
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto var(--space-2xl);
 }
 
 .plc-search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-tertiary);
-  pointer-events: none;
-  display: flex;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    pointer-events: none;
+    display: flex;
 }
 
 /* Input: white bg, 6px radius per §5.5, §5.1 */
 .plc-search-input {
-  width: 100%;
-  height: 44px;
-  padding: 0 44px;
-  background: var(--surface-1);
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-primary);
-  box-sizing: border-box;
-  transition: border-color 150ms;
+    width: 100%;
+    height: 44px;
+    padding: 0 44px;
+    background: var(--surface-1);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text-primary);
+    box-sizing: border-box;
+    transition: border-color 150ms;
 }
 
 .plc-search-input::placeholder {
-  color: var(--text-tertiary);
+    color: var(--text-tertiary);
 }
 
 .plc-search-input:focus {
-  outline: 2px solid rgba(7, 30, 73, 0.15);
-  outline-offset: 1px;
-  border-color: var(--color-primary);
+    outline: 2px solid rgba(7, 30, 73, 0.15);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
 }
 
 .plc-search-spinner {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--border-default);
-  border-top-color: var(--color-primary);
-  border-radius: 50%;
-  animation: plc-spin 0.6s linear infinite;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-default);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: plc-spin 0.6s linear infinite;
 }
 
 @keyframes plc-spin {
-  to { transform: translateY(-50%) rotate(360deg); }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 /* Search dropdown */
 .plc-search-results {
-  position: absolute;
-  top: calc(100% + var(--space-xs));
-  left: 0;
-  right: 0;
-  background: var(--surface-1);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  z-index: 10;
-  text-align: left;
-  box-shadow: var(--shadow-modal);
+    position: absolute;
+    top: calc(100% + var(--space-xs));
+    left: 0;
+    right: 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    z-index: 10;
+    text-align: left;
+    box-shadow: var(--shadow-modal);
 }
 
 .plc-search-count {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid var(--border-default);
-  background: var(--surface-2);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-default);
+    background: var(--surface-2);
 }
 
 .plc-school-item {
-  padding: 12px var(--space-md);
-  border-bottom: 1px solid var(--border-default);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-md);
-  transition: background 150ms;
+    padding: 12px var(--space-md);
+    border-bottom: 1px solid var(--border-default);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    transition: background 150ms;
 }
 
 .plc-school-item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .plc-school-item:hover {
-  background: var(--surface-2);
+    background: var(--surface-2);
 }
 
 .plc-school-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 .plc-school-loc {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 16px;
-  margin-top: 2px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 16px;
+    margin-top: 2px;
 }
 
 /* Badge: 4px radius, NOT pill-shaped per §5.6 */
 .plc-school-badge {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-tertiary);
-  background: var(--surface-3);
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: var(--surface-3);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .plc-search-empty {
-  padding: var(--space-lg) var(--space-md);
-  font-size: 14px;
-  color: var(--text-secondary);
-  text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
 }
 
 /* ── HERO STATS ───────────────────────────────────────────── */
 .plc-stats {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: var(--space-2xl);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-2xl);
 }
 
 .plc-stat-item {
-  text-align: center;
+    text-align: center;
 }
 
 /* h1 equivalent size, no letter-spacing change per §3.3 */
 .plc-stat-num {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-inverse);
-  line-height: 32px;
-  display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-inverse);
+    line-height: 32px;
+    display: block;
 }
 
 .plc-stat-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 16px;
-  display: block;
-  margin-top: var(--space-xs);
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 16px;
+    display: block;
+    margin-top: var(--space-xs);
 }
 
 /* ── FEATURES SECTION ─────────────────────────────────────── */
 .plc-features {
-  background: var(--surface-1);
-  padding: var(--space-3xl) var(--space-2xl);
+    background: var(--surface-1);
+    padding: var(--space-3xl) var(--space-2xl);
 }
 
 .plc-features-inner {
-  max-width: 1000px;
-  margin: 0 auto;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 /* Overline label per §3.2 */
 .plc-section-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: block;
-  margin-bottom: var(--space-sm);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: var(--space-sm);
 }
 
 /* h1 size per type scale */
 .plc-features-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 32px;
-  margin: 0 0 var(--space-sm);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 32px;
+    margin: 0 0 var(--space-sm);
 }
 
 .plc-features-sub {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 22px;
-  margin: 0 0 var(--space-xl);
-  max-width: 480px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 22px;
+    margin: 0 0 var(--space-xl);
+    max-width: 480px;
 }
 
 .plc-features-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
 }
 
 /* Cards on surface-1 use surface-2 fill per §5.2 */
 /* Border added because adjacent cards in a grid need separation */
 .plc-feature-card {
-  background: var(--surface-2);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  border: 1px solid var(--border-default);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+    background: var(--surface-2);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border-default);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
 }
 
 /* Icons: 32px outlined, text-primary, NO colored circles per §8.1 */
 .plc-feature-icon {
-  color: var(--text-primary);
-  display: flex;
-  margin-bottom: var(--space-xs);
+    color: var(--text-primary);
+    display: flex;
+    margin-bottom: var(--space-xs);
 }
 
 /* h3 per type scale */
 .plc-feature-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 24px;
-  margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 24px;
+    margin: 0;
 }
 
 /* body-sm per type scale */
 .plc-feature-desc {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 20px;
-  margin: 0;
-  flex: 1;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 20px;
+    margin: 0;
+    flex: 1;
+}
+
+/* Clickable card variant (Profil Dapur) */
+.plc-feature-card--link {
+    cursor: pointer;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+.plc-feature-card--link:hover {
+    border-color: var(--border-strong, #d1d5db);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.plc-feature-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: auto;
 }
 
 /* Badge: 4px radius, surface-3 neutral per §5.6 */
 .plc-feature-badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--surface-3);
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  align-self: flex-start;
-  margin-top: auto;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--surface-3);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    align-self: flex-start;
+    margin-top: auto;
 }
 
 /* ── FOOTER ───────────────────────────────────────────────── */
 /* surface-2 bg — warm, not competing with the navy hero */
 .plc-footer {
-  background: var(--surface-2);
-  border-top: 1px solid var(--border-default);
-  padding: var(--space-xl) var(--space-2xl);
+    background: var(--surface-2);
+    border-top: 1px solid var(--border-default);
+    padding: var(--space-xl) var(--space-2xl);
 }
 
 .plc-footer-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-xl);
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
 }
 
 .plc-footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
 }
 
 .plc-footer-brand {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-  display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
 }
 
 .plc-footer-tagline {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin: 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
 .plc-footer-right {
-  text-align: right;
-  flex-shrink: 0;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 .plc-footer-links {
-  display: flex;
-  gap: var(--space-lg);
-  justify-content: flex-end;
-  margin-bottom: var(--space-xs);
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: flex-end;
+    margin-bottom: var(--space-xs);
 }
 
 .plc-footer-links span {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
 }
 
 .plc-footer-copy {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-tertiary);
-  margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin: 0;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .plc-features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .plc-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 640px) {
-  .plc-hero {
-    padding: var(--space-2xl) var(--space-md);
-  }
+    .plc-hero {
+        padding: var(--space-2xl) var(--space-md);
+    }
 
-  .plc-hero-title {
-    font-size: 24px;
-    line-height: 32px;
-  }
+    .plc-hero-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
 
-  .plc-stats {
-    gap: var(--space-xl);
-  }
+    .plc-stats {
+        gap: var(--space-xl);
+    }
 
-  .plc-features {
-    padding: var(--space-2xl) var(--space-md);
-  }
+    .plc-features {
+        padding: var(--space-2xl) var(--space-md);
+    }
 
-  .plc-features-title {
-    font-size: 20px;
-    line-height: 28px;
-  }
+    .plc-features-title {
+        font-size: 20px;
+        line-height: 28px;
+    }
 
-  .plc-features-grid {
-    grid-template-columns: 1fr;
-  }
+    .plc-features-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .plc-footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .plc-footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .plc-footer-right {
-    text-align: left;
-  }
+    .plc-footer-right {
+        text-align: left;
+    }
 
-  .plc-footer-links {
-    justify-content: flex-start;
-  }
+    .plc-footer-links {
+        justify-content: flex-start;
+    }
 
-  .pl-nav {
-    padding: 0 var(--space-md);
-  }
+    .pl-nav {
+        padding: 0 var(--space-md);
+    }
 }
