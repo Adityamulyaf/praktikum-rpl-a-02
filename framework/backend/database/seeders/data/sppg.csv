@@ -1,0 +1,550 @@
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+1,JAWA TENGAH,KEBUMEN,BUAYAN,ADIWARNO,"Jl. Karangbolong,Adiwarno, Kec. Buayan, Kabupaten Kebumen, Jawa Tengah, Rangkah, Buayan, Kab. Kebumen, Jawa Tengah",SPPG Kebumen Buayan Rangkah
+2,KALIMANTAN SELATAN,TANAH LAUT,TAMBANG ULANG,SUNGAI PINANG,Jl. Kebun Karet H. Abidin Rt 002 Rw 001 Desa Sungai Pinang Kec. Tambang Ulang Kab. Tanah Laut,SPPG Tanah Laut Tambang Ulang Sungai Pinang
+3,KEPULAUAN RIAU,KOTA BATAM,SAGULUNG,TEMBESI,"Jl Letjen Suprapto, Daerah Mall Top 100 Tembesi (Depan Rusunawa)",SPPG Kota Batam Sagulung Tembesi 1
+4,JAWA TENGAH,KEBUMEN,PREMBUN,TUNGGALROSO,Desa Tunggalroso Kecamatan Prembun Kabupaten Kebumen Jawa Tengah,SPPG Kebumen Prembun Tunggalroso
+5,JAWA BARAT,CIANJUR,CIJATI,CIBODAS,"Jl. Pangeran Antasari, No. 82, Cibodas, Kec. Cijati, Kab. Cianjur, Jawa Barat",SPPG Cianjur Cijati Cibodas 3
+6,JAWA BARAT,CIANJUR,SUKALUYU,SINDANGRAJA,Jl. Raya Cibogo Bandung Jonggol sindangraja sukaluyu cianjur Jawa Barat,SPPG Cianjur Sukaluyu Sindangraja
+7,NUSA TENGGARA TIMUR,KOTA KUPANG,MAULAFA,MAULAFA,"Jln. Fetor feonay, Rt 16/ Rw 06,Kel. Maulafa,Kec. Maulafa,Kota Kupang,NTT",SPPG Kota Kupang Maulafa Maulafa
+8,SUMATERA UTARA,SIMALUNGUN,GUNUNG MALIGAS,KARANG SARI,"Jl. Purwo Huta Tiga, Karang Sari, Kec. Gunung Maligas, Kab. Simalungun, Sumatera Utara",SPPG Simalungun Gunung Maligas Karang Sari
+9,JAWA BARAT,SUKABUMI,CIBADAK,PAMURUYAN,"Jl. Pamuruyan Leuweung Datar, Desa Pamuruyan, Kec. Cibadak, Kab. Sukabumi, Jawa Barat",SPPG Sukabumi Cibadak Pamuruyan 3
+10,SULAWESI TENGGARA,MUNA BARAT,TIWORO UTARA,TONDASI,"Jl. Poros Tondasi, Desa Tondasi, Kecamatan Tiworo Utara, Kabupaten Muna Barat, Sulawesi Tenggara",SPPG Muna Barat Tiworo Utara Tondasi
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+11,SUMATERA UTARA,KOTA MEDAN,MEDAN AREA,TEGAL SARI III,"Jl. Bromo, Gang Sederhana, No. 14 A , Tegal Sari III, Kec. Medan Area, Kota Medan, Sumatera Utara",SPPG Kota Medan Medan Area Tegal Sari Iii
+12,JAWA TENGAH,KOTA SURAKARTA,BANJARSARI,KADIPIRO,"Jl. Kerinci No 20, Banjarsari, Kec. Banjarsari, Kota Surakarta, Jawa Tengah",SPPG Kota Surakarta Banjarsari Kadipiro 3
+13,SULAWESI UTARA,KEPULAUAN SANGIHE,TAHUNA TIMUR,TAPUANG,"Jl. Tapuang Muka, Tapuang, Kecamatan Tahuna, Kabupaten Kepulauan Sangihe, Sulawesi Utara",SPPG Kepulauan Sangihe Tahuna Timur Tapuang
+14,DAERAH ISTIMEWA YOGYAKARTA,KULON PROGO,GALUR,PANDOWAN,"Padukuhan I RT 07 RW 04 Pandowan, Galur , Kulon Progo , Yogyakarta",SPPG Kulon Progo Galur Pandowan
+15,RIAU,KAMPAR,KAMPAR KIRI HILIR,SUNGAI PAGAR,"Jl. Sungai Pagar Mentulik Km.2,5 Desa Sungai Pagar, Kecamatan Kampar Kiri Hilir, Kabupaten Kampar, Riau",SPPG Kampar Kampar Kiri Hilir Sungai Pagar 2
+16,JAWA TENGAH,KLATEN,KLATEN TENGAH,KLATEN,"Jl. Pramuka, Pondok, Klaten, Kec. Klaten Tengah, Kabupaten Klaten, Jawa Tengah 57411",SPPG Klaten Klaten Tengah Klaten 2
+17,JAWA TIMUR,MALANG,NGANTANG,SUMBERAGUNG,"Jl. Raya Sumberagung Rt 008 Rw 002, Kebonsari, Sumberagung, Kecamatan Ngantang, Kabupaten Malang, Jawa Timur",SPPG Malang Ngantang Sumberagung 2
+18,JAWA BARAT,GARUT,CISOMPET,CISOMPET,"Kampung Lumbung, Rt 02 Rw 01, Cisompet, Kecamatan Cisompet, Kabupaten Garut, Jawa Barat",SPPG Garut Cisompet Cisompet 3
+19,KEPULAUAN RIAU,KOTA BATAM,LUBUK BAJA,BALOI INDAH,"Komplek Taman Kota Mas, Baloi Indah, Kec. Lubuk Baja, Kota Batam, Kepulauan Riau",SPPG Kota Batam Lubuk Baja Baloi Indah 3
+20,SUMATERA SELATAN,OGAN KOMERING ILIR,LEMPUING JAYA,MUKTISARI,"Desa Mukti Sari Bambu Kuning, RT 09 RW 03, Kecamatan Lempuing Jaya, Kabupaten Ogan Komering Ilir, Provinsi Sumatera Selatan",SPPG OKI Lempuing Jaya Muktisari
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+21,KEPULAUAN RIAU,KOTA BATAM,BATAM KOTA,SUNGAI PANAS,"Jl. Raja H. Fisabilillah, Sungai Panas. Kota Batam",SPPG Kota Batam Batam Kota Sungai Panas 2
+22,ACEH,ACEH UTARA,MEURAH MULIA,BEURINGEN,"Jalan Putroe Beutong, Gampong Beuringen, Kecamatan Meurah Mulia, Kabupaten Aceh Utara, Aceh 24372",SPPG Aceh Utara Meurah Mulia Gampong Teungoh
+23,JAWA TIMUR,SIDOARJO,WARU,PEPELEGI,"Jl. Joyoboyo No.66, Legi, Pepelegi, Waru, Kab. Sidoarjo, Jawa Timur",SPPG Sidoarjo Waru Pepelegi
+24,JAWA TIMUR,GRESIK,DRIYOREJO,DRIYOREJO,"Jl. Kh Abdurohim 01 Desa Driyorejo, Kec. Driyorejo, Kab. Gresik, Jawa Timur",SPPG Gresik Driyorejo Driyorejo 2
+25,JAWA TENGAH,CILACAP,ADIPALA,DOPLANG,"Jl. Kartini Desa Doplang, Kecamatan Adipala, Kabupaten Cilacap, Jawa Tengah",SPPG Cilacap Adipala Doplang 3
+26,JAWA TIMUR,KOTA PASURUAN,PANGGUNGREJO,PEKUNCEN,"Jl. Pahlawan No.29, Pekuncen, Kec. Panggungrejo, Kota Pasuruan, Jawa Timur",SPPG Kota Pasuruan Panggungrejo Pekuncen 3
+27,KALIMANTAN SELATAN,BALANGAN,LAMPIHONG,TAMPANG,Desa Tampang Kecamatan Lampihong Kabupaten Balangan Kalimantan Selatan,SPPG Balangan Lampihong Tampang
+28,KALIMANTAN SELATAN,BANJAR,SIMPANG EMPAT,CABI,"Jl. A. Yani 15 Km 65 Rt 01, Desa Cabi, Kec. Simpang Empat, Kab. Banjar, Kalimantan Selatan",SPPG Banjar Simpang Empat Cabi
+29,JAWA TIMUR,SAMPANG,KARANGPENANG,TLAMBAH,"Dsn Tlambah Tengah, Ds Tlambah kec. Karang Penang Kab.Samag Jawa timur",SPPG Sampang Karangpenang Tlambah 4
+30,LAMPUNG,LAMPUNG TENGAH,TERBANGGI BESAR,NAMBAH DADI,"Dusun Nambah Harum, Nambah Dadi, Kecamatan Terbanggi Besar, Kabupaten Lampung Tengah, Lampung",SPPG Lampung Tengah Terbanggi Besar Nambah Dadi
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+31,JAWA BARAT,INDRAMAYU,TUKDANA,KERTICALA,"Blok Puskesmas RT 013 RW 003, Desa Kerticala, Kecamatan Tukdana, Kabupaten Indramayu, Provinsi Jawa Barat",SPPG Indramayu Tukdana Kerticala
+32,JAWA BARAT,BOGOR,TAJURHALANG,TAJURHALANG,"Jl. Jatayu, Kampung Karet No.3 Rt 001 Rw 011, Desa Tajur Halang, Kecamatan Tajur Halang, Kabupaten Bogor, Jawa Barat",SPPG Bogor Tajurhalang Tajurhalang 5
+33,JAWA TIMUR,SAMPANG,KETAPANG,KETAPANG TIMUR,"Jl. Raya Torowan, Ketapang Timur, Kec. Ketapang, Kab. Sampang, Jawa Timur",SPPG Sampang Ketapang Ketapang Timur 2
+34,DKI JAKARTA,KOTA ADM. JAKARTA UTARA,CILINCING,ROROTAN,"Jl. Sungai Kendal No 120 Rt 001 Rw 08 Kel. Rorotan, Kec. Cilincing, Kota Adm. Jakarta Utara, Dki Jakarta",SPPG Jakut Cilincing Rorotan 8
+35,LAMPUNG,KOTA METRO,METRO UTARA,PURWOSARI,"Jl. Walet No.67, RT 021 RW 03, Kel. Purwosari, Kec. Metro Utara, Kota Metro, Lampung",SPPG Kota Metro Metro Utara Purwosari 4
+36,JAWA BARAT,SUKABUMI,PALABUHANRATU,JAYANTI,"Kampung Jayanti Rt 001 Rw 004, Desa Jayanti, Kecamatan Palabuhanratu Kabupaten Sukabumi, Provinsi Jawa Barat",SPPG Sukabumi Palabuhanratu Jayanti
+37,SULAWESI TENGGARA,KOTA KENDARI,MANDONGA,KORUMBA,"Jl. Made Sabara, Kelurahan Korumba, Kecamatan Mandonga, Kota Kendari, Sulawesi Tenggara",SPPG Kota Kendari Mandonga Korumba
+38,JAWA TENGAH,KARANGANYAR,GONDANGREJO,JATIKUWUNG,"Jl. Azzaria Raya, Gondangrejo, Jatikuwung, Kec. Gondangrejo, Kabupaten Karanganyar, Jawa Tengah",SPPG Karanganyar Gondangrejo Jatikuwung
+39,BANTEN,KOTA SERANG,TAKTAKAN,SEPANG,"Jl. 45 Kigede Link Kubang Cowe Rt.04 Rw.02 Kel. Sepang Kec. Taktakan Kota Serang, Banten",SPPG Kota Serang Taktakan Sepang
+40,JAWA TIMUR,LAMONGAN,LAMONGAN,SUKOMULYO,"JL. Mastrip 81, Sumbermulyo RT002 RW002 Sukomulyo, Lamongan, Jatim",SPPG Lamongan Lamongan Sukomulyo
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+41,JAWA TIMUR,BLITAR,NGLEGOK,NGLEGOK,"Jl. Penataran Rt/Rw 01/05 Desa/Kelurahan Kedawung Kec. Nglegok Kab Blitar, Jawa Timur",SPPG Blitar Nglegok Kedawung
+42,LAMPUNG,PRINGSEWU,SUKOHARJO,PANDAN SARI,"Pandan Sari, Rt 003 Rw 002, Pandansari, Kec. Sukoharjo, Kab. Pringsewu, Lampung",SPPG Pringsewu Sukoharjo Pandan Sari
+43,JAWA BARAT,BOGOR,CIBINONG,CIRIUNG,"Jl. Rawa Benteur 2, Lingkungan 01 Citatah Dalam, Rt 02/02 No 11 Kel. Ciriung, Kec. Cibinong, Kab. Bogor, Jawa Barat",SPPG Bogor Cibinong Ciriung
+44,JAWA TENGAH,PATI,MARGOYOSO,CEBOLEK KIDUL,Jl. Tayu-Juwana Rt.02 Rw.06 Cebolek Kidul Margoyoso Pati,SPPG Pati Margoyoso Cebolek Kidul 1
+45,LAMPUNG,PESAWARAN,GEDONG TATAAN,NEGERI SAKTI,"Jl. Way Ratai Dusun Negeri Tua Rt 004 Rw 002 Desa Negeri Sakti Kec. Gedong Tataan Kab. Pesawaran, Lampung",SPPG Pesawaran Gedong Tataan Negeri Sakti
+46,JAWA TENGAH,WONOSOBO,WONOSOBO,PAGERKUKUH,"Jlegong Rt. 002/Rw. 006, Desa Pagerkukuh, Kec. Wonosobo, Kab. Wonosobo, Jawa Tengah",SPPG Wonosobo Wonosobo Pagerkukuh
+47,JAWA TENGAH,BANYUMAS,PURWOKERTO SELATAN,KARANGPUCUNG,"Jl. Pembina IV Rt 05 Rw 06 Kelurahan Karangpucung, Kec. Purwokerto Selatan, Kab. Banyumas, Jawa Tengah",SPPG Banyumas Purwokerto Selatan Karangpucung
+48,JAWA BARAT,SUKABUMI,CIKIDANG,NANGKAKONENG,"Kampung Nangka Koneng Rt 01 Rw 01, Desa Nangkakoneng, Kec. Cikidang, Kab. Sukabumi, Jawa Barat",SPPG Sukabumi Cikidang Nangkakoneng
+49,NUSA TENGGARA TIMUR,NAGEKEO,AESESA,MBAY I,"Ameaba, Rt. 015 Rw. 000, Kel. Mbay I, Kecamatan Aesesa, Kab. Nagekeo Nusa Tenggara Timur",SPPG Nagekeo Aesesa Mbay I
+50,JAWA TIMUR,MADIUN,GEGER,SUMBEREJO,"Jl. Sultan Agung, Karanganyar, Sumberejo, Kec. Geger, Kabupaten Madiun, Jawa Timur 63171",SPPG Madiun Geger Sumberejo
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+51,JAWA TENGAH,KENDAL,KALIWUNGU,MOROREJO,"RT 5 RW 6, Dusun Padolengan, Desa Mororejo, Kec. Kaliwungu, Kab. Kendal, Jawa Tengah",SPPG Kendal Kaliwungu Mororejo 3
+52,JAWA BARAT,KOTA BOGOR,BOGOR UTARA,TEGAL GUNDIL,"Jl. Bangbarung Raya Achmad Sobana, No. 106, Tegal Gundil, Kecamatan Bogor Utara, Kota Bogor, Jawa Barat",SPPG Kota Bogor Bogor Utara Tegal Gundil 8
+53,JAWA TIMUR,MALANG,SUMBERPUCUNG,KARANGKATES,"Jl. Jendral Basuki Ahmad, Desa Karangkates, Kabupaten Malang, Jawa Timur, Karangkates, Sumberpucung, Kab. Malang, Jawa Timur",SPPG Malang Sumberpucung Karangkates
+54,JAWA BARAT,SUKABUMI,PARUNGKUDA,BOJONGKOKOSAN,"Kampung Pasir Baliung 4.B Rt.03 Rw.04 Desa Bojongkokosan, Kec. Parungkuda, Kab. Sukabumi, Jawa Barat",SPPG Sukabumi Parungkuda Bojongkokosan 4
+55,SUMATERA BARAT,PESISIR SELATAN,BAYANG,KOTO BERAPAK,"Jl. Pasar Baru Asam Kumbang, Koto Berapak",SPPG Pesisir Selatan Bayang Kota Berapak
+56,JAWA BARAT,CIREBON,CILEDUG,JATISEENG KIDUL,"Jl. Pangeran Walangsungsang, No.51, Jatiseeng Kidul, Kec. Ciledug, Kab. Cirebon, Jawa Barat",SPPG Cirebon Ciledug Jatiseeng Kidul 2
+57,KALIMANTAN BARAT,KOTA PONTIANAK,PONTIANAK UTARA,SIANTAN HILIR,"Jalan Teluk Sahang, Kelurahan Siantan Hilir, Kecamatan Pontianak Utara, Kota Pontianak, Provinsi Kalimantan Barat",SPPG Kota Pontianak Pontianak Utara Siantan Hilir 3
+58,JAWA BARAT,BANDUNG,BANJARAN,KIANGROKE,"Jl. Pahlawan No. 27 Rt 001 Rw 013, Desa Kiangroke, Kec. Banjaran, Kab. Bandung, Jawa Barat",SPPG Bandung Banjaran Kiangroke 4
+59,JAWA TENGAH,KOTA SEMARANG,GAYAMSARI,PANDEAN LAMPER,"Jl. Kelinci Raya Rt 001 Rw 001, Pandean Lamper, Kec. Gayamsari, Kota Semarang, Jawa Tengah",SPPG Kota Semarang Gayamsari Pandean Lamper
+60,KALIMANTAN BARAT,KETAPANG,SANDAI,MUARA JEKAK,"Jl. Aur Kuning Sandai Desa Muara Jekak, Kec. Sandai, Kab. Ketapang, Kalimantan Barat",SPPG Ketapang Sandai Muara Jekak
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+61,JAWA BARAT,SUMEDANG,SUMEDANG SELATAN,KOTA KULON,"Jl. Pangeran Santri No.43, Kota Kulon, Kecamatan Sumedang Selatan, Kabupaten Sumedang, Jawa Barat",SPPG Sumedang Sumedang Selatan Kota Kulon 4
+62,JAWA TENGAH,TEGAL,PAGERBARANG,MULYOHARJO,"Jl. Raya Balapulang Jatibarang Desa Mulyoharjo Rt. 01 Rw. 02 Kec. Pagerbarang, Kab. Tegal, Jawa Tengah",SPPG Tegal Pagerbarang Mulyoharjo
+63,JAWA TIMUR,PACITAN,PACITAN,SIRNOBOYO,RT 03 RW 01 Dusun Ngemplak Desa Sirnoboyo Kec Pacitan Kab Pacitan Jawa Timur Kode Pos 63518,SPPG Pacitan Pacitan Sirnoboyo
+64,BANTEN,PANDEGLANG,PANIMBANG,MEKARJAYA,"Kampung Ciseukeut Barat Rt. 01 Rw. 05 Desa Mekarsari, Kec. Panimbang, Kab. Pandeglang, Banten",SPPG Pandeglang Panimbang Mekarjaya 2
+65,NUSA TENGGARA BARAT,LOMBOK TENGAH,BATUKLIANG,BUJAK,"Dusun Bujak Permai, Desa Bujak Kec. Batukliang, Kab. Lombok Tengah, Nusa Tenggara Barat",SPPG Lombok Tengah Batukliang Bujak 2
+66,BENGKULU,LEBONG,LEBONG SELATAN,KUTAI DONOK,"Kutai Donok, Kec. Lebong Selatan, Kab. Lebong, Bengkulu",SPPG Lebong Lebong Selatan Kutai Donok
+67,DAERAH ISTIMEWA YOGYAKARTA,GUNUNGKIDUL,WONOSARI,BALEHARJO,"Jl. Baron, Purwosari, Baleharjo, Kecamatan Wonosari, Kabupaten Gunungkidul, Daerah Istimewa Yogyakarta",SPPG Gunungkidul Wonosari Baleharjo 3
+68,JAWA BARAT,KOTA BEKASI,BEKASI BARAT,JAKASAMPURNA,"Jl. Patriot Rt 005 Rw 006 B Jakasampurna, Kecamatan Bekasi Barat, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Bekasi Barat Jakasampurna 6
+69,LAMPUNG,WAY KANAN,BARADATU,TAMAN ASRI,"Jl. Sadewa No 51 Kel. Taman Asri , Baradatu, Way Kanan",SPPG Way Kanan Baradatu Taman Asri
+70,ACEH,PIDIE JAYA,BANDAR BARU,PARU KEUDE,"Desa Paru Keude, Kec. Bandar Baru, Kab. Pidie Jaya, Aceh",SPPG Pidie Jaya Bandar Baru Paru Keude 5
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+71,JAWA TIMUR,JEMBER,SUMBERSARI,KRANJINGAN,"Jl. Yos Sudarso No.121, Langsepan, Kranjingan, Kec. Sumbersari, Kab. Jember, Jawa Timur",SPPG Jember Sumbersari Kranjingan 2
+72,JAWA TIMUR,LAMONGAN,PACIRAN,PACIRAN,"Jl. Sendang Desa Paciran Kecamatan Paciran Kabupaten Lamongan 62264 Jawa Timur, Paciran, Paciran, Kabupaten Lamongan, Jawa Timur",SPPG Lamongan Paciran Paciran
+73,JAWA BARAT,BANDUNG BARAT,SINDANGKERTA,WANGUNSARI,"Kampung Babakan Mulya Rt.05 Rw.08, Wangunsari, Kec. Sindangkerta, Kab. Bandung Barat, Jawa Barat",SPPG Bandung Barat Sindangkerta Wangunsari
+74,SUMATERA SELATAN,OGAN KOMERING ULU TIMUR,BUAY PEMUKA PELIUNG,PEMETUNG BESUKI,"Jl. Lintas Kota Baru, Desa Pemetung Besuki, Kecamatan Buay Pemuka Peliung, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan",SPPG OKUT Buay Pemuka Peliung Pemetung Besuki
+75,ACEH,ACEH TENGAH,BINTANG,GELE PULO,"Kampung Gele Pulo, Kecamatan Bintang, Kabupaten Aceh Tengah, Provinsi Aceh",SPPG Aceh Tengah Bintang Gele Pulo
+76,JAWA BARAT,MAJALENGKA,SINDANGWANGI,SINDANGWANGI,"Blok Kaliwon, Desa Sindangwangi, Kec. Sindangwangi. Kab. Majalengka, Jawa Barat",SPPG Majalengka Sindangwangi Sindangwangi
+77,JAWA TIMUR,SIDOARJO,KREMBUNG,MOJORUNTUT,"Jabon Mojoruntut Rt 18 Rw 09 Kec Krembung Kab Sidoarjo, Krembung, Kab. Sidoarjo, Jawa Timur",SPPG Sidoarjo Krembung Mojoruntut
+78,JAWA TENGAH,BREBES,BREBES,GANDASULI,"Jl. Wr. Supratman Gandasuli Brebes, Gandasuli, Kecamatan Brebes, Kabupaten Brebes, Jawa Tengah",SPPG Brebes Brebes Gandasuli
+79,JAWA BARAT,BANDUNG,BANJARAN,CIAPUS,"Kampung Panenjoan Rt02/13 Desa Ciapus, Kec. Banjaran, Kab. Bandung Jawa Barat",SPPG Bandung Banjaran Ciapus 3
+80,NUSA TENGGARA TIMUR,KUPANG,TAKARI,TAKARI,"Jl. Oesao Bokong, Takari, Kecamatan Takari, Kabupaten Kupang, Nusa Tenggara Timur",SPPG Kupang Takari Takari
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+81,PAPUA BARAT,MANOKWARI,MANOKWARI BARAT,AMBAN,"Jln. Angkasa Mulyono, Amban, Manokwari, Papua Barat",SPPG Manokwari Manokwari Barat Amban
+82,SUMATERA SELATAN,KOTA LUBUK LINGGAU,LUBUK LINGGAU UTARA I,DURIAN RAMPAK,"Jl. Lintas Sumatera, Durian Rampak, Kec. Lubuk Linggau Utara I, Kota Lubuk Linggau, Sumatera Selatan",SPPG Kota Lubuk Linggau Lubuk Linggau Utara I Durian Rampak
+83,JAWA BARAT,BOGOR,CIBINONG,CIRIMEKAR,"Jl. Raya Jakarta Bogor No.42, Kampung Parung Jambu, Cirimekar, Kec. Cibinong, Kab. Bogor, Jawa Barat",SPPG Bogor Cibinong Cirimekar
+84,JAWA TENGAH,PATI,WEDARIJAKSA,TAWANGHARJO,"Desa Tawangharjo Rt 4 Rw 2, Kecamatan Wedarijaksa, Kabupaten Pati, Jawa Tengah",SPPG Pati Wedarijaksa Tawangharjo
+85,BALI,GIANYAR,SUKAWATI,SINGAPADU,"Jl. Puseh Natih, Br. Negari, Desa Singapadu Tengah, Kec. Sukawati, Kab. Gianyar, Bali",SPPG Gianyar Sukawati Singapadu
+86,JAWA TIMUR,JOMBANG,JOMBANG,SAMBONGDUKUH,"Dusun Sambongsantren, Desa Sambongdukuh, Kec. Jombang, Kab. Jombang, Jawa Timur",SPPG Jombang Jombang Sambongdukuh 4
+87,JAWA BARAT,KOTA CIMAHI,CIMAHI SELATAN,CIBEBER,"Jl. Kerkof No.214, Cibeber, Kec. Cimahi Selatan, Kota Cimahi, Jawa Barat",SPPG Kota Cimahi Cimahi Selatan Cibeber 6
+88,JAWA BARAT,KOTA DEPOK,CINERE,GANDUL,"Jl. Raya Gandul No. 21, Rt. 4 Rw. 1, Gandul, Kec. Cinere, Kota Depok, Jawa Barat",SPPG Kota Depok Cinere Gandul 2
+89,JAWA BARAT,PURWAKARTA,CAMPAKA,CIJUNTI,"Kampung Tanjung Garut Rt 003/ 001, Desa Cijunti, Kecamatan Campaka, Kabupaten Purwakarta, Jawa Barat",SPPG Purwakarta Campaka Cijunti
+90,SULAWESI BARAT,MAMUJU,KALUKKU,SONDOANG,"Jl. Poros Kalumpang, Sondoang, Kalukku, Kabupaten Mamuju, Sulawesi Barat",SPPG Mamuju Kalukku Sondoang
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+91,JAWA BARAT,BANDUNG,MAJALAYA,BIRU,"Kampung Cisapi, Rt 02 Rw 09, Biru, Kec. Majalaya, Kab. Bandung, Jawa Barat",SPPG Bandung Majalaya Biru 7
+92,JAWA TENGAH,PEKALONGAN,TALUN,DONOWANGUN,"Jl. Donowangun Bangun Kidul, Desa Donowangun, Kec. Talun, Kab. Pekalongan, Jawa Tengah",SPPG Pekalongan Talun Donowangun
+93,JAWA TENGAH,CILACAP,KARANGPUCUNG,SURUSUNDA,"Desa Surusunda, Kecamatan Karangpucung, Kabupaten Cilacap, Jawa Tengah",SPPG Cilacap Karangpucung Surusunda
+94,SUMATERA UTARA,KARO,MUNTE,KINEPPEN,"Kineppen, Kecamatan Munte, Kabupaten Karo, Sumatera Utara",SPPG Karo Munte Kineppen
+95,KALIMANTAN TENGAH,KOTA PALANGKA RAYA,JEKAN RAYA,MENTENG,Jl. Temanggung Tillung XII No.03 Kota Palangka Raya,SPPG Kota Palangka Raya Jekan Raya Menteng 2
+96,JAWA BARAT,CIREBON,ARJAWINANGUN,ARJAWINANGUN,Kebon pring desa Arjawinangun kecamatan Arjawinangun,SPPG Cirebon Arjawinangun Arjawinangun 2
+97,JAWA TENGAH,KOTA SALATIGA,ARGOMULYO,CEBONGAN,"Dukuh Cebongan Kel. Cebongan, Kec. Argomulyo, Kota Salatiga, Jawa Tengah",SPPG Kota Salatiga Argomulyo Cebongan
+98,JAWA TENGAH,KEBUMEN,KEBUMEN,MURTIREJO,"Karang Malang Desa Murtirejo Kec. Kebumen Kab. Kebumen, Jawa Tengah",SPPG Kebumen Kebumen Murtirejo
+99,JAWA TENGAH,JEPARA,TAHUNAN,NGABUL,"Dukuh Jeruk Gulung, Rt 04 Rw 07 Desa Ngabul, Kec. Tahunan, Kab. Jepara, Jawa Tengah",SPPG Jepara Tahunan Ngabul 3
+100,LAMPUNG,LAMPUNG TIMUR,SUKADANA,SUKADANA ILIR,"Jl. Ki Mas Lk. 3, Desa Sukadana Ilir, Kec. Sukadana, Kab. Lampung Timur, Prov. Lampung",SPPG Lampung Timur Sukadana Sukadana Ilir
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+101,SUMATERA UTARA,SERDANG BEDAGAI,TELUK MENGKUDU,SIALANG BUAH,"Jl. Pantai Indah Sialang Buah, Desa Sialang Buah, Kec. Teluk Mengkudu, Kab. Serdang Bedagai, Sumatera Utara",SPPG Serdang Bedagai Teluk Mengkudu Sialang Buah
+102,JAMBI,MUARO JAMBI,JAMBI LUAR KOTA,MUARO PIJOAN,"Jl. Jambi Muaro Bulian, Simpang Taman Setiti, Desa Muaro Pijoan, Kecamatan Jambi Luar Kota, Kabupaten Muaro Jambi, Jambi",SPPG Muaro Jambi Jambi Luar Kota Muaro Pijoan
+103,JAWA TENGAH,PATI,GEMBONG,WONOSEKAR,"Wonosekar, Kecamatan Gembong, Kabupaten Pati, Jawa Tengah",SPPG Pati Gembong Wonosekar
+104,JAWA BARAT,PURWAKARTA,PASAWAHAN,PASAWAHAN,"Kp. Bungurjaya RT08/04 Ds. Pasawahan Kec. Pasawahan Kab. Purwakarta, Jawa Barat",SPPG Purwakarta Pasawahan Pasawahan 2
+105,JAWA BARAT,GARUT,SUKAWENING,MARIPARI,"Maripari, Kecamatan Sukawening, Kabupaten Garut, Jawa Barat",SPPG Garut Sukawening Maripari 2
+106,SUMATERA SELATAN,KOTA PALEMBANG,KALIDONI,KALIDONI,"Jl. K.H. Wahab Saidy Rt. 037 Rw. 007, Kalidoni, Kec. Kalidoni, Kota Palembang, Sumatera Selatan",SPPG Kota Palembang Kalidoni Kalidoni 6
+107,JAWA BARAT,SUBANG,CIPEUNDEUY,CIPEUNDEUY,"Kp. Cipeundeuy RT/RW 13/04, CIPEUNDEUY, CIPEUNDEUY, KAB. SUBANG, JAWA BARAT",SPPG Subang Cipeundeuy Cipeundeuy
+108,JAWA BARAT,BOGOR,JASINGA,JASINGA,"Kampung Babakan No 50 Rt 03 Rw 04, Jasinga, Kec. Jasinga, Kab. Bogor, Jawa Barat",SPPG Bogor Jasinga Jasinga
+109,JAWA TENGAH,WONOGIRI,BATURETNO,SARADAN,"Dusun Gedawung Rt.004 Rw.009 Desa Saradan Kecamatan Baturetno Kabupaten Wonogiri, Jawa Tengah",SPPG Wonogiri Baturetno Saradan
+110,JAWA TENGAH,GROBOGAN,TOROH,DEPOK,"Depok, Kecamatan Toroh, Kabupaten Grobogan, Jawa Tengah",SPPG Grobogan Toroh Depok 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+111,JAWA TIMUR,MOJOKERTO,PUNGGING,TUNGGALPAGER,"Jl. Raya Brawijaya No. 229 Rt. 002 Rw. 001 Dusun Wongiri Desa Tunggalpager, Kecamatan Pungging, Kabupaten Mojokerto, Jawa Timur",SPPG Mojokerto Pungging Tunggalpager 2
+112,DAERAH ISTIMEWA YOGYAKARTA,KULON PROGO,NANGGULAN,DONOMULYO,"Lengkong, Donomulyo, Kec. Nanggulan, Kab. Kulon Progo, Daerah Istimewa Yogyakarta",SPPG Kulon Progo Nanggulan Donomulyo
+113,JAWA BARAT,KOTA BEKASI,BANTARGEBANG,BANTARGEBANG,"Kampung Bantar Gebang Jl. Pangkalan 1B No. 14 03/05, Bantargebang, Kec. Bantargebang, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Bantargebang Bantargebang 2
+114,JAWA TIMUR,PAMEKASAN,WARU,SUMBER WARU,"Dusun Gulu`An, Sumber Waru, Kec. Waru, Kab. Pamekasan, Jawa Timur",SPPG Pamekasan Waru Sumber Waru
+115,JAWA TIMUR,BONDOWOSO,BONDOWOSO,KADEMANGAN,"Kelurahan Kademangan, Kecamatan Bondowoso, Kabupaten Bondowoso, Jawa Timur",SPPG Bondowoso Bondowoso Kademangan 2
+116,BANTEN,SERANG,KRAMATWATU,KRAMATWATU,"Desa Kramatwatu, Kecamatan Kramatwatu, Kabupaten Serang, Banten",SPPG Serang Kramatwatu Kramatwatu 2
+117,JAWA TENGAH,PEMALANG,PEMALANG,MULYOHARJO,"Mulyoharjo, Kecamatan Pemalang, Kabupaten Pemalang, Jawa Tengah",SPPG Pemalang Pemalang Mulyoharjo
+118,JAWA TENGAH,PATI,MARGOREJO,MUKTIHARJO,"Jl. Soewondo Kel. Muktiharjo, Kec. Margorejo, Kab. Pati, Jawa Tengah",SPPG Pati Margorejo Muktiharjo 4
+119,DKI JAKARTA,KOTA ADM. JAKARTA SELATAN,KEBAYORAN LAMA,CIPULIR,"Jl. Ciledug Raya No.17 Rt 4 Rw 5, Kel. Cipulir, Kecamatan Kecamatan Kebayoran Lama, Kota Adm. Jakarta Selatan, Dki Jakarta",SPPG Jaksel Kebayoran Lama Cipulir 4
+120,SUMATERA BARAT,KOTA PADANG,PADANG TIMUR,KUBU DALAM PARAK KARAKAH,"Jl. Kubu Dalam No.12, Rt. 003 Rw. 001, Kel. Kubu Dalam Parak Karakah, Kec. Padang Timur, Kota Madya Padang,Sumatra Barat",SPPG Kota Padang Padang Timur Kubu Dalam Parak Karakah 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+121,JAWA TIMUR,MALANG,KEPANJEN,JATIREJOYOSO,"Jl. Masjid Dusun Mergosingo, Jatirejoyoso, Kepanjen, Kab. Malang, Jawa Timur",SPPG Malang Kepanjen Jatirejoyoso
+122,JAWA BARAT,CIANJUR,CIJATI,PARAKANTUGU,Kampung Tugu Rt 003 Rw 002,SPPG Cianjur Cijati Parakantugu 2
+123,SUMATERA UTARA,KOTA MEDAN,MEDAN KOTA,TELADAN TIMUR,"Jl. Pelajar No. 19/Jalan Aman 1 No.41 Teladan Timur, Kecamatan Medan Kota, Kota Medan, Sumatera Utara",SPPG Kota Medan Medan Kota Teladan Timur 3
+124,JAWA TENGAH,BOYOLALI,BOYOLALI,SISWODIPURAN,"Jl. Jambu No. 5 Rt 02 Rw 08, Siswodipuran, Kecamatan Boyolali, Kabupaten Boyolali, Jawa Tengah",SPPG Boyolali Boyolali Siswodipuran 4
+125,BENGKULU,KOTA BENGKULU,KAMPUNG MELAYU,KANDANG MAS,"Batalyon B Pelopor Jl. Setia Negara 6 Rt 28 Rw 04 Kel. Kandang Mas Kec. Kampung Melayu Kota Bengkulu, Kandang Mas, Kampung Melayu, Kota Bengkulu, Bengkulu",SPPG Mabes Polri 3
+126,JAWA BARAT,BOGOR,CILEUNGSI,CILEUNGSI KIDUL,"Jl.Raya Cileungsi Jonggol Km 1, Cileungsi, Bogor, Cileungsi Kidul, Kec. Cileungsi, Kab. Bogor, Jawa Barat",SPPG Bogor Cileungsi Cileungsi Kidul
+127,JAWA TENGAH,BANYUMAS,KALIBAGOR,KALIORI,"Desa Kaliori Rt 004 Rw 007 Kec.Kalibagor Kab. Banyumas, Kaliori, Kec. Kalibagor, Kab. Banyumas, Jawa Tengah",SPPG Banyumas Kalibagor Kaliori
+128,JAWA TIMUR,JOMBANG,JOMBANG,JOMBATAN,"Jl. Kh Dewantara No.54 Rt 002 Rw 001, Jombatan, Kec. Jombang, Kab. Jombang, Jawa Timur",SPPG Jombang Jombang Jombatan 6
+129,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,JATINEGARA,CIPINANG CEMPEDAK,"Jl. Cipinang Cempedak II No. 37, Cipinang Cempedak, Kec. Jatinegara, Kota Adm. Jakarta Timur, Dki Jakarta",SPPG Jaktim Jatinegara Cipinang Cempedak 4
+130,NUSA TENGGARA TIMUR,KOTA KUPANG,MAULAFA,OEPURA,"Jl. Fetor Foenay RT 09 RW 04, OEPURA, MAULAFA, KOTA KUPANG, NUSA TENGGARA TIMUR",SPPG Kota Kupang Maulafa Oepura
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+131,JAWA TENGAH,BLORA,TODANAN,COKROWATI,"Dukuh Cokrowati Rt 002 Rw 002 Kel. Cokrowati, Kecamatan Todanan, Kabupaten Blora, Jawa Tengah",SPPG Blora Todanan Cokrowati 2
+132,DKI JAKARTA,KOTA ADM. JAKARTA UTARA,TANJUNG PRIOK,WARAKAS,"Jl. Warakas III Gang 5 No.21, Rt. 7 Rw. 3, Warakas, Kec. Tanjung Priok, Kota Adm. Jakarta Utara, Dki Jakarta",SPPG Jakut Tanjung Priok Warakas 4
+133,JAWA BARAT,KUNINGAN,JAPARA,RAJADANU,"Jalan Raya Rajadanu-Sindangbarang, RT 003 RW 001, Desa Rajadanu, Kecamatan Japara, Kabupaten Kuningan, Jawa Barat",SPPG Kuningan Japara Rajadanu
+134,JAWA TIMUR,SAMPANG,SOKOBANAH,SOKOBANAH DAYA,"Dusun Lembung, Desa Sokobanah Daya, Kecamatan Sokobanah, Kabupaten Sampang, Jawa Timur",SPPG Sampang Sokobanah Sokobanah Daya 3
+135,KALIMANTAN TIMUR,KUTAI KARTANEGARA,SANGA SANGA,SANGA-SANGA DALAM,"Sanga-Sanga Dalam, Kec. Sanga Sanga, Kab. Kutai Kartanegara, Kalimantan Timur",SPPG Kutai Kartanegara Sanga Sanga Sanga-sanga Dalam 3
+136,JAWA TENGAH,BANYUMAS,KEMRANJEN,KECILA,Jl. Nasional III No.1 Pasewan Rt.06 Rw 02 Kecila Kemranjen Banyumas Jawa Tengah,SPPG Banyumas Kemranjen Kecila 2
+137,JAWA TIMUR,LAMONGAN,KEDUNGPRING,SUKOMALO,"Mojoroto, Desa Sukomalo, Kec. Kedungpreng, Kab. Lamongan, Jawa Timur",SPPG Lamongan Kedungpring Sukomalo
+138,JAWA BARAT,CIREBON,CILEDUG,CILEDUG KULON,"Blok Pon Rt.002. Rw.002 Desa/Kelurahan Ciledug Kulon, Kecamatan Ciledug, Kabupaten Cirebon Jawa Barat",SPPG Cirebon Ciledug Ciledug Kulon 2
+139,JAWA BARAT,BEKASI,BABELAN,BAHAGIA,"Jl. Ujung Harapan No.30, Rt.008, Rw.005, Kel. Bahagia, Kec. Babelan, Kab. Bekasi, Jawa Barat 17350",SPPG Bekasi Babelan Bahagia 1
+140,JAWA BARAT,KOTA DEPOK,SUKMAJAYA,BAKTIJAYA,"Jl. Sakub Rt 05 Rw 25, Bakti Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat",SPPG Kota Depok Sukmajaya Baktijaya 5
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+141,JAWA TIMUR,MADIUN,MEJAYAN,KRAJAN,"Jl Panjaitan No. 72, Krajan, Mejayan, Kabupaten Madiun, Jawa Timur",SPPG Madiun Mejayan Krajan
+142,BANTEN,TANGERANG,SEPATAN,KARET,"Jl. H. A Djuminta Kp. Teriti Rt. 001 Rw. 004 Desa Karet, Kec. Sepatan, Kab. Tangerang, Banten",SPPG Tangerang Sepatan Karet
+143,SUMATERA UTARA,KOTA BINJAI,BINJAI KOTA,KARTINI,"Jl. Sultan Hasanudin, Kartini, Kec. Binjai Kota, Kota Binjai, Sumatera Utara",SPPG Kota Binjai Binjai Kota Kartini 2
+144,KALIMANTAN BARAT,KUBU RAYA,SUNGAI KAKAP,PUNGGUR BESAR,"Jl. Pelita 3, Punggur Besar, Kec. Sungai Kakap, Kab. Kubu Raya, Kalimantan Barat",SPPG Kubu Raya Sungai Kakap Punggur Besar 2
+145,JAWA BARAT,KOTA DEPOK,PANCORAN MAS,MAMPANG,"Jl. Damai 1, Kelurahan Mampang, Kecamatan Pancoran Mas, Kota Depok, Jawa Barat",SPPG Kota Depok Pancoran Mas Mampang 1
+146,NUSA TENGGARA BARAT,LOMBOK TENGAH,PRAYA,AIK MUAL,"Batu Tambun, Desa Aik Mual, Kec. Praya, Kab. Lombok Tengah, Nusa Tenggara Barat",SPPG Lombok Tengah Praya Aik Mual 2
+147,JAWA TENGAH,KOTA PEKALONGAN,PEKALONGAN TIMUR,KALI BAROS,"Jalan Dr. Sutomo No. 40, Kelurahan Kali Baros, Kecamatan Pekalongan Timur, Kota Pekalongan, Provinsi Jawa Tengah, 51128",SPPG Kota Pekalongan Pekalongan Timur Kali Baros 1
+148,JAWA TENGAH,TEGAL,SURADADI,GEMBONGDADI,"Jl. Raya Balamoa Kedungjati Rt 07 Rw 4 Desa Gembongdadi, Kec. Suradadi, Kab. Tegal, Jawa Tengah",SPPG Tegal Suradadi Gembongdadi
+149,JAWA TIMUR,BOJONEGORO,KANOR,TEMU,"Dusun Singkel Rt 004 Rw 006, Desa Temu, Kecamatan Kanor, Kab. Bojonegoro, Jawa Timur",SPPG Bojonegoro Kanor Temu
+150,SULAWESI SELATAN,JENEPONTO,ARUNGKEKE,PALAJAU,"Bontoloe, Palajau, Kec. Arungkeke, Kab. Jeneponto, Sulawesi Selatan",SPPG Jeneponto Arungkeke Palajau
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+151,MALUKU UTARA,KOTA TERNATE,KOTA TERNATE SELATAN,JATI,"RT 013 - RW 007. Kelurahan Jati, Kecamatan Ternate Selatan, Kota Ternate, Provinsi Maluku Utara, 97716",SPPG Kota Ternate Kata Ternate Selatan Jati
+152,KEPULAUAN RIAU,LINGGA,LINGGA,DAIK,"Jl. Baru Rt 001 Rw 004 Kampung Bugis, Kel. Daik, Kec. Lingga, Kab. Lingga, Kepulauan Riau",SPPG Lingga Lingga Daik 2
+153,NUSA TENGGARA TIMUR,SIKKA,KANGAE,WATULIWUNG,"Wairhubing Rt 015 Rw 005 Desa Watuliwung, Kec. Kangae, Kab. Sikka, Nusa Tenggara Timur",SPPG Sikka Kangae Watuliwung 2
+154,NUSA TENGGARA BARAT,BIMA,PALIBELO,PANDA,"Jl. Lintas Palibelo, Panda, Kec. Palibelo, Kab. Bima, Nusa Tenggara Barat",SPPG Bima Palibelo Panda
+155,SUMATERA SELATAN,LAHAT,MERAPI BARAT,TELATANG,Desa Telatang Kecamatan Merapi Barat Kabupaten Lahat,SPPG Lahat Merapi Barat Telatang
+156,JAWA BARAT,SUKABUMI,KALIBUNDER,KALIBUNDER,Kp. Kalibunder RT 001 RW 001 Desa. Kalibunder Kec. Kalibunder Kab. Sukabumi,SPPG Sukabumi Kalibunder Kalibunder
+157,JAWA TIMUR,PAMEKASAN,LARANGAN,MONTOK,"Jl. Raya Pamekasan Sumenep No.96, Kaduara Barat, Montok, Kec. Larangan, Kab. Pamekasan, Jawa Timur",SPPG Pamekasan Larangan Montok 2
+158,JAWA TENGAH,PEKALONGAN,WIRADESA,GUMAWANG,"Desa Gumawang, Kecamatan Wiradesa, Kabupaten Pekalongan, Jawa Tengah",SPPG Pekalongan Wiradesa Gumawang 2
+159,DAERAH ISTIMEWA YOGYAKARTA,KOTA YOGYAKARTA,NGAMPILAN,NOTOPRAJAN,Jl. Munir No 267,SPPG Kota Yogyakarta Ngampilan Notoprajan
+160,DAERAH ISTIMEWA YOGYAKARTA,KOTA YOGYAKARTA,KOTAGEDE,PURBAYAN,"jl. Purbayan No.37 RT 55 RW 13, Purbayan, Kotagede, Kota Yogyakarta",SPPG Kota Yogyakarta Kotagede Purbayan 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+161,JAWA BARAT,KOTA BEKASI,PONDOKGEDE,JATIWARINGIN,"Jl. Setia 1 G RT 005 RW 004 No 71, Jatiwaringin, Kec. Pondokgede, Kota Bekasi, Jawa Barat 17411",SPPG Kota Bekasi Pondokgede Jatiwaringin 4
+162,SUMATERA SELATAN,KOTA PALEMBANG,ILIR TIMUR SATU,LIMA-BELAS ILIR,"Jl. Lakitan 15 Ilir, Kecamatan Ilir Timur 1, Kota Palembang, Sumatera Selatan",SPPG Kota Palembang Ilir Timur Satu Lima-belas Ilir
+163,JAWA TENGAH,TEGAL,JATINEGARA,CERIH,"Jl. Dukuh Birman Kelurahan Cerih Kecematan Jatinegara Kabupaten Tegal, Jawa Tengah",SPPG Tegal Jatinegara Cerih 2
+164,JAWA BARAT,KOTA DEPOK,TAPOS,TAPOS,"Jl. Raya Tapos, Tapos, Kecamatan Tapos, Kota Depok, Jawa Barat",SPPG Kota Depok Tapos Tapos 7
+165,JAWA TIMUR,NGANJUK,REJOSO,SUKOREJO,"Jl. Halim Perdana Kusuma, Rt.004 Rw.001, Sukorejo, Kec. Rejoso, Kab. Nganjuk, Jawa Timur",SPPG Nganjuk Rejoso Sukorejo 2
+166,SUMATERA BARAT,PADANG PARIAMAN,BATANG GASAN,MALAI V SUKU,"Sungai Sarik, Malai V Suku, Kec. Batang Gasan, Kab. Padang Pariaman, Sumatera Barat",SPPG Padang Pariaman Batang Gasan Malai V Suku
+167,SULAWESI SELATAN,KOTA PAREPARE,BACUKIKI BARAT,BUMI HARAPAN,"Jl. Hikmah Kel Bumi Harapan, Kec. Bacukiki Barat, Kota Pare pare, Prov Sulawesi Selatan, BUMI HARAPAN, BACUKIKI BARAT, KOTA PARE PARE, SULAWESI SELATAN",SPPG Kota Parepare Bacukiki Barat Bumi Harapan
+168,JAWA TENGAH,PEMALANG,WARUNGPRING,CIBUYUR,"Desa Cibuyur, Kecamatan Warungpring, Kabupaten Pemalang, Jawa Tengah",SPPG Pemalang Warungpring Cibuyur 2
+169,RIAU,ROKAN HULU,PENDALIAN IV KOTO,AIR PANAS,"Desa Air Panas, Kec. Pendalian IV Koto, Kab. Rokan Hulu, Riau",SPPG Rokan Hulu Pendalian Iv Koto Air Panas
+170,BANTEN,TANGERANG,KELAPA DUA,BOJONG NANGKA,"Jl. Kampung Dukuh Pinang Gawir, Bojong Nangka, Kec. Kelapa Dua, Kab. Tangerang, Banten",SPPG Tangerang Kelapa Dua Bojong Nangka 7
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+171,JAWA TIMUR,BONDOWOSO,CURAHDAMI,PONCOGATI,"Jl. Diponegoro Rt 09 Rw 02 , Poncogati, Kec. Curahdami, Kab. Bondowoso, Jawa Timur",SPPG Bondowoso Curahdami Poncogati
+172,JAWA TENGAH,KEBUMEN,PONCOWARNO,PONCOWARNO,"Jalan Raya Pencil km 5 Dukuh Mudal RT 02 RW 02,Desa Poncowarno, Kecamatan Poncowarno, Kebumen, Jawa Tengah",SPPG Kebumen Poncowarno Poncowarno
+173,JAWA TENGAH,SUKOHARJO,SUKOHARJO,BEGAJAH,"Jalakan Rt 02 Rw 03 Begajah, Kecamatan Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah",SPPG Sukoharjo Sukoharjo Begajah
+174,NUSA TENGGARA BARAT,LOMBOK UTARA,TANJUNG,SAMA GUNA,"Jalan Pekatan, Dusun Langgem Sari, Desa Sama Guna, Kecamatan Tanjung, Kabupaten Lombok Utara, Nusa Tenggara Barat",SPPG Lombok Utara Tanjung Sama Guna
+175,JAWA BARAT,BOGOR,CIGOMBONG,CISALADA,"Kampung Cisalada Rt 02 / Rw 10, Desa. Cisalada, Kec. Cigombong, Kabupaten Bogor, Jawa Barat",SPPG Bogor Cigombong Cisalada
+176,PAPUA PEGUNUNGAN,JAYAWIJAYA,HUBIKIAK,HETUMA,"Jl. Hom Hom Pikhe, Kampung Hetuma, Kec. Distrik Hubikiak, Kab. Jayawijaya, Papua Pegunungan",SPPG Jayawijaya Hubikiak Hetuma
+177,LAMPUNG,LAMPUNG SELATAN,JATI AGUNG,JATI MULYO,"Jati Mulyo, Kec. Jati Agung, Kab, Lampung Selatan, Prov-Lampung",SPPG Lampung Selatan Jati Agung Jati Mulyo 2
+178,JAWA TENGAH,BOYOLALI,CEPOGO,JELOK,"Jl. Boyolali Magelang, Dusun 3, Jelok, Cepogo, Kabupaten Boyolali, Jawa Tengah",SPPG Boyolali Cepogo Jelok
+179,BENGKULU,LEBONG,URAM JAYA,EMBONG I,"Embong I, Kec. Uram Jaya, Kab. Lebong, Bengkulu",SPPG Lebong Uram Jaya Embong I
+180,JAWA BARAT,KOTA BANDUNG,CIDADAP,HEGARMANAH,"Jl. Ciumbuleuit No.83, Hegarmanah, Kecamatan Cidadap, Kota Bandung, Jawa Barat",SPPG Kota Bandung Cidadap Hegarmanah 3
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+181,JAWA TIMUR,KEDIRI,WATES,WATES,"Jl. Asri, Dusun Bondo, Desa Wates, Kec. Wates, Kab. Kediri, Jawa Timur",SPPG Kediri Wates Wates
+182,JAWA TIMUR,SITUBONDO,ASEMBAGUS,ASEMBAGUS,"Asembagus, Kec. Asembagus, Kab. Situbondo, Jawa Timur",SPPG Situbondo Asembagus Asembagus
+183,SUMATERA UTARA,SIMALUNGUN,GUNUNG MALIGAS,KARANG SARI,"Jl. Siantar Serbelawan, Desa Karang Sari, Kec. Gunung Maligas, Kab. Simalungun",SPPG Simalungun Gunung Maligas Karang Sari 2
+184,JAWA BARAT,SUKABUMI,CIDAHU,PASIRDOTON,"Kampung Pasirdoton Rt 02 Rw 01 Desa Pasirdoton, Kecamatan Cidahu, Kabupaten Sukabumi, Jawa Barat",SPPG Sukabumi Cidahu Pasirdoton
+185,MALUKU UTARA,HALMAHERA UTARA,GALELA SELATAN,TOGAWABESI,"Desa Togawa Besi, Kecamatan Galela Selatan, Kabupaten Halmahera Utara, Maluku Utara",SPPG Halmahera Utara Galela Selatan Togawabesi
+186,LAMPUNG,TULANG BAWANG BARAT,LAMBU KIBANG,GUNUNG SARI,"Gunung Sari, Kecamatan Lambu Kibang, Kabupaten Tulang Bawang Barat, Lampung",SPPG Tulang Bawang Barat Lambu Kibang Gunung Sari
+187,KALIMANTAN TIMUR,KUTAI KARTANEGARA,TENGGARONG SEBERANG,KERTA BUANA,"Jalan Poros L4 No 31 B RT 26 Kel Kerta Bhuana , Kec Tenggarong Sebrang , Kabupaten Kutai Kartanegara , Kalimantan Timur , 75572",SPPG Kukar Tenggarong Seberang Kerta Buana
+188,JAWA TIMUR,PAMEKASAN,TLANAKAN,AMBAT,"Jl. Taman Sari No. 09, Ambat, Kec. Tlanakan, Kab. Pamekasan, Jawa Timur",SPPG Pamekasan Tlanakan Ambat 2
+189,JAWA TENGAH,BANYUMAS,KEMRANJEN,NUSAMANGIR,"Jl. Stasiun, Nusamangir RT 02 RW 01, Kemranjen, Banyumas , Jawa tengah",SPPG Banyumas Kemranjen Nusamangir
+190,ACEH,ACEH TAMIANG,MANYAK PAYED,TANJUNG NERACA,"Desa Tanjong Neraca, Kec. Manyak Payed, Kab. Aceh Tamiang, Aceh",SPPG Aceh Tamiang Manyak Payed Tanjung Neraca
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+191,JAMBI,TANJUNG JABUNG TIMUR,MUARA SABAK BARAT,NIBUNG PUTIH,"Jalan Jenderal Sudirman, RT 03, Kelurahan Nibung Putih, Kecamatan Muara Sabak Barat, Kabupaten Tanjung Jabung Timur, Provinsi Jambi",SPPG Tanjung Jabung Timur Muara Sabak Barat Nibung Putih
+192,JAWA BARAT,KOTA BANDUNG,SUMUR BANDUNG,KEBON PISANG,"Jl. Naripan No.28B, Kelurahan Kebon Pisang, Kecamatan Sumur Bandung, Kota Bandung, Jawa Barat",SPPG Kota Bandung Sumur Bandung Kebon Pisang
+193,JAWA BARAT,BANDUNG,MAJALAYA,BIRU,"Jl. Cangkuang Rt 03 Rw 05 Desa Biru, Kec. Majalaya, Kab. Bandung, Jawa Barat",SPPG Bandung Majalaya Biru 4
+194,BENGKULU,BENGKULU UTARA,KETAHUN,GIRI KENCANA,"Desa Giri Kencana Kec. Ketahun Bengkulu Utara, Kab. Bengkulu Utara, Bengkulu",SPPG Bengkulu Utara Ketahun Giri Kencana 1
+195,JAWA TIMUR,KOTA SURABAYA,BUBUTAN,TEMBOK DUKUH,"Jl. Demak Madya No. 11 A, Tembok Dukuh, Kec. Bubutan, Kota Surabaya, Jawa Timur",SPPG Kota Surabaya Bubutan Tembok Dukuh
+196,DKI JAKARTA,KOTA ADM. JAKARTA SELATAN,KEBAYORAN LAMA,GROGOL SELATAN,"Perum Permata Hijau II, Gang Nirwana, No. 8C 012/012 Kel. Grogol Selatan, Kec. Kebayoran Lama, Kota Adm. Jakarta Selatan, Dki Jakarta",SPPG Kota Adm. Jakarta Selatan Kebayoran Lama Grogol Selatan 2
+197,JAWA BARAT,KOTA BEKASI,RAWALUMBU,BOJONG RAWALUMBU,"Jl. Inpres/Kampung Rawa Roko, Rt. 04/Rw. 04, Kelurahan Bojong Rawalumbu, Kecamatan Rawalumbu, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Rawalumbu Bojong Rawalumbu 10
+198,JAWA TIMUR,PASURUAN,POHJENTREK,PARASREJO,"Dusun Panulupan Musholla, Rt.001/Rw.003, Parasrejo, Kec. Pohjentrek, Kab. Pasuruan, Jawa Timur",SPPG Pasuruan Pohjentrek Parasrejo
+199,BANTEN,LEBAK,CIKULUR,CIKULUR,"Kampung Baluk, Cikulur, Kec. Cikulur, Kab. Lebak, Banten",SPPG Lebak Cikulur Cikulur 3
+200,JAWA TENGAH,SRAGEN,KALIJAMBE,SAREN,"Dukuh Saren, Desa Saren, Kecamatan Kalijambe, Kabupaten Sragen, Jawa Tengah",SPPG Sragen Kalijambe Saren
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+201,JAWA TENGAH,PURWOREJO,KALIGESING,KALIGONO,"Jl. Ngaran RT.01/RW.08, Dusun Tumpangrejo, Desa Kaligono, Kec. Kaligesing, Kab. Purworejo, Jawa Tengah",SPPG Purworejo Kaligesing Kaligono
+202,JAWA BARAT,SUBANG,PAGADEN,SUKAMULYA,"Kampung Rancabogo RT 016 RW 004, Desa Sukamulya, Kecamatan Pagaden, Kabupaten Subang, Jawa Barat",SPPG Subang Pagaden Sukamulya 3
+203,PAPUA PEGUNUNGAN,LANNY JAYA,MAKKI,KEMIRI,"Yugumia, Kecamatan Makki, Kabupaten Lanny Jaya, Papua Pegunungan",SPPG Lanny Jaya Makki Kemiri
+204,PAPUA TENGAH,MIMIKA,WANIA,KAMORO JAYA,"Jl Irigasi, Gang Kelapa Gading",SPPG Mimika Wania Kamoro Jaya 1
+205,NUSA TENGGARA TIMUR,MALAKA,WELIMAN,TAABA,"Jl. Ahmad Yani, Taaba, Rt/Rw 007/004, Desa Taaba, Kecamatan Weliman, Kabupaten Malaka, Nusa Tenggara Timur",SPPG Malaka Weliman Taaba
+206,SULAWESI TENGGARA,KONAWE,UNAAHA,AROMBU,"Jl. Anoa No. 333, Kel. Arombu , Kec. Unaaha,, Arombu, Unaaha, Kab. Konawe, Sulawesi Tenggara",SPPG Konawe Unaaha Arombu
+207,JAWA TIMUR,LAMONGAN,MODO,KEDUNGREJO,"Dusun Karangpilang Rt 004 Rw 001, Desa Kedungrejo, Kecamatan Modo, Kabupaten Lamongan, Jawa Timur",SPPG Lamongan Modo Kedungrejo
+208,JAWA TENGAH,BREBES,SONGGOM,SONGGOM,"Jl. Pejagan - Bumiayu, Lapangan Tembak Kodim, Songgom, Kec. Songgom, Kab. Brebes",SPPG Brebes Songgom Songgom
+209,JAWA BARAT,KOTA TASIKMALAYA,CIPEDES,NAGARASARI,"Kampung Cikalang Girang No.115 Kel. Nagarasari, Kec. Cipedes, Kota Tasikmalaya, Jawa Barat",SPPG Kota Tasikmalaya Cipedes Nagarasari 6
+210,SUMATERA SELATAN,OGAN KOMERING ULU SELATAN,SIMPANG,SINAR MULYO,"Desa Sinar Mulyo, Kecamatan Simpang, Kabupaten Ogan Komering Ulu Selatan, Provinsi Sumatera Selatan",SPPG Ogan Komering Ulu Selatan Simpang Sinar Mulyo
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+211,JAWA TIMUR,MALANG,WAJAK,SUKOLILO,"Sukolilo Napel Rt. 03 Rw. 01, Kecamatan Wajak, Kabupaten Malang, Jawa Timur",SPPG Malang Wajak Sukolilo 3
+212,ACEH,ACEH BESAR,INDRAPURI,SINYEU,Jl. Banda Aceh Medan Desa Sinyeu Kec. Indrapuri Kab. Aceh Besar Provinsi Aceh,SPPG Aceh Besar Indrapuri Sinyeu
+213,JAWA BARAT,INDRAMAYU,TERISI,CIKAWUNG,"Jl. Raya Cikawung-Cikamurang Rt/Rw 018/005 Desa Cikawung Kec. Terisi Kab. Indramayu, Jawa Barat",SPPG Indramayu Terisi Cikawung
+214,SUMATERA UTARA,DAIRI,PARBULUAN,PARBULUAN III,"Huta Betlehem Sinaga Parbuluan III, Kecamatan Parbuluan, Kabupaten Dairi, Sumatera Utara",SPPG Dairi Parbuluan Parbuluan III
+215,BALI,TABANAN,KEDIRI,ABIAN TUWUNG,"Banjar Koripan Kaja, Kecamatan Kediri, Kabupaten Tabanan, Bali",SPPG Tabanan Kediri Abian Tuwung
+216,JAWA TIMUR,MAGETAN,PANEKAN,TURI,"Area Persawahan, Desa Turi, Kecamatan Panekan, Kabupaten Magetan, Jawa Timur",SPPG Magetan Panekan Turi
+217,JAWA TENGAH,BLORA,BLORA,ANDONGREJO,"Desa Sndongrejo, Rt. 01 Rw. 05, Kec. Blora, Kab. Blora, Jawa Tengah",SPPG Blora Blora Andongrejo 2
+218,JAWA BARAT,SUMEDANG,RANCAKALONG,NAGARAWANGI,"Dusun Cileutik Rt 04 Rw 02, Desa Nagarawangi, Kecamatan Rancakalong, Kabupaten Sumedang, Jawa Barat.",SPPG Sumedang Rancakalong Nagarawangi 2
+219,DKI JAKARTA,KOTA ADM. JAKARTA SELATAN,PASAR MINGGU,RAGUNAN,"Jl. Harsono RM No.54 8, RT.8/RW.4, 12160",SPPG Jaksel Pasar Minggu Ragunan 1
+220,JAWA BARAT,BOGOR,BABAKAN MADANG,CITARINGGUL,"Jl. Raya Babakan Madang, Citaringgul, Kecamatan Babakan Madang, Kabupaten Bogor, Jawa Barat",SPPG Bogor Babakan Madang Citaringgul
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+221,JAWA BARAT,KARAWANG,TELAGASARI,PASIRTALAGA,Dusun Pasirtalaga II RTRW 012,SPPG Karawang Telagasari Pasirtalaga
+222,JAWA TIMUR,MOJOKERTO,PURI,KEBONAGUNG,"Sumber Sroyo, Kebonagung, Kecamatan Puri, Kabupaten Mojokerto, Jawa Timur",SPPG Mojokerto Puri Kebonagung
+223,SUMATERA UTARA,ASAHAN,KOTA KISARAN BARAT,SEI RENGGAS,"Jl. Kancil, Sei Renggas, Kec. Kota Kisaran Barat, Kab. Asahan, Sumatera Utara",SPPG Asahan Kota Kisaran Barat Sei Renggas 3
+224,JAWA BARAT,KOTA TASIKMALAYA,CIHIDEUNG,CILEMBANG,"Kel. Cilembang Kec. Cihideung, Kota Tasikmalaya, Jawa Barat",SPPG Kota Tasikmalaya Cihideung Cilembang 4
+225,SUMATERA UTARA,PADANG LAWAS UTARA,PADANG BOLAK,HUTALOMBANG,"Jl. Hutaimbaru Gunung Tua, Hutalombang, Kec. Padang Bolak, Kab. Padang Lawas Utara, Sumatera Utara",SPPG Padang Lawas Utara Padang Bolak Hutalombang 2
+226,JAWA BARAT,SUKABUMI,CIDAHU,CIDAHU,"Jl. Raya Cidahu, Cidahu, Kec. Cidahu, Kab. Sukabumi, Jawa Barat",SPPG Sukabumi Cidahu Cidahu 3
+227,JAMBI,MUARO JAMBI,MESTONG,TEMPINO,"Jalan Raya Palembang Jambi Kilometer 28 Nomor 35, Desa Tempino, Kecamatan Mestong, Kabupaten Muaro Jambi, Provinsi Jambi",SPPG Muaro Jambi Mestong Tempino
+228,JAWA TENGAH,PURBALINGGA,BOBOTSARI,MAJAPURA,"Jl. Sersan Sayun, Dusun 1 Majapura, Kec. Bobotsari, Kab. Purbalingga, Jawa Tengah",SPPG Purbalingga Bobotsari Majapura
+229,JAWA BARAT,BEKASI,SETU,CIKARAGEMAN,"Kampung Sadang, Desa Cikarageman, Rt 02 Rw 01 Kecamatan Setu, Kabupaten Bekasi, Jawa Barat",SPPG Bekasi Setu Cikarageman 2
+230,JAWA TIMUR,KEDIRI,NGASEM,TUGUREJO,"Jl. Sumatera Jaya, Desa Tugurejo, Dusun Jeruk Rt 04 Rw 04, Kecamatan Ngasem, Kabupaten Kediri, Jawa Timur",SPPG Kediri Ngasem Tugurejo
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+231,JAWA BARAT,CIREBON,DUKUPUNTANG,SINDANGJAWA,"Jl. Nyi Ageng Serang Rt 001 Rw 002 Desa Sindangjawa Kecamatan Dukupuntang Kabupaten Cirebon, Jawa Barat",SPPG Cirebon Dukupuntang Sindangjawa
+232,KALIMANTAN TENGAH,BARITO SELATAN,DUSUN SELATAN,HILIR SEPER,Jl. Tugu Nomor 14 Buntok Kec. Dusun Selatan Kab. Barito Selatan Kalimantan Tengah,SPPG Barito Selatan Dusun Selatan Hilir Seper 2
+233,JAWA TENGAH,KLATEN,KLATEN UTARA,GERGUNUNG,"Jl. Ki Ageng Panjawi, Pondok, Gergunung, Kecamatan Klaten Utara, Kabupaten Klaten, Jawa Tengah",SPPG Klaten Klaten Utara Gergunung 2
+234,BANTEN,KOTA TANGERANG SELATAN,CIPUTAT TIMUR,CIREUNDEU,"Jl. Gunung Indah VII No.29, Cireundeu, Kec. Ciputat Timur, Kota Tangerang Selatan, Banten",SPPG Kota Tangsel Ciputat Timur Cireundeu 2
+235,JAWA TIMUR,PASURUAN,POHJENTREK,WARUNGDOWO,"Jl. Raya Warungdowo Barat No 8, Warungdowo, Kec. Pohjentrek, Kab. Pasuruan, Jawa Timur",SPPG Pasuruan Pohjentrek Warungdowo
+236,BANTEN,TANGERANG,PANONGAN,MEKAR BAKTI,"Jl. Citra Raya Utama Timur B, Mekar Bakti, Kec. Panongan, Kabupaten Tangerang, Banten 15710, Mekar Bakti, Panongan, Kab. Tangerang, Banten",SPPG Tangerang Panongan Mekar Bakti 1
+237,NUSA TENGGARA BARAT,LOMBOK BARAT,GERUNG,GERUNG UTARA,"Jl. Raya Lembar Gerung, Gerung Utara, Kec. Gerung, Kab. Lombok Barat, Nusa Tenggara Barat",SPPG Lombok Barat Gerung Gerung Utara 2
+238,JAWA BARAT,CIREBON,GEGESIK,GEGESIK KIDUL,"Jalan Raya Gegesik No. 20, Desa Gegesik Kidul, Kecamatan Gegesik, Kabupaten Cirebon, Jawa Barat.",SPPG Cirebon Gegesik Gegesik Kidul 2
+239,KALIMANTAN SELATAN,HULU SUNGAI TENGAH,BATANG ALAI SELATAN,WAWAI GARDU,"Jl. Kesatria, Wawai Gardu, Wawai Gardu, Kec. Batang Alai Selatan, Kab. Hulu Sungai Tengah, Kalimantan Selatan",SPPG Hulu Sungai Tengah Batang Alai Selatan Wawai Gardu
+240,KEPULAUAN BANGKA BELITUNG,KOTA PANGKAL PINANG,GIRIMAYA,SRIWIJAYA,"JL. BERLIAN VI, RT/RW. 006/003, Kel. Sriwijaya, Kec. Girimaya, Kota. Pangkalpinang, Prov. Kepulauan Bangka Belitung, 33143",SPPG Kota Pangkal Pinang Girimaya Sriwijaya
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+241,JAWA BARAT,KOTA BOGOR,BOGOR SELATAN,KERTAMAYA,"Jl. Bojong Margasri Rt.02/Rw.06, Kertamaya, Kecamatan Bogor Selatan, Kota Bogor, Jawa Barat",SPPG Kota Bogor Bogor Selatan Kertamaya
+242,JAWA TENGAH,BANJARNEGARA,SUSUKAN,KEDAWUNG,"Desa Kedawung Rt 1 Rw 4 Kecamatan Susukan Kabupaten Banjarnegara, Jawa Tengah",SPPG Banjarnegara Susukan Kedawung
+243,JAWA BARAT,KOTA DEPOK,CILODONG,SUKAMAJU,"Jl. Kampung Sidamukti, Kel. Sukamaju, Kec. Cilodong, Kota Depok, Jawa Barat",SPPG Kota Depok Cilodong Sukamaju 9
+244,DAERAH ISTIMEWA YOGYAKARTA,SLEMAN,PAKEM,HARJOBINANGUN,"Jl. Boyong Km. 1 No.5, Trojayan, Harjobinangun, Kec. Pakem, Kab. Sleman, Daerah Istimewa Yogyakarta",SPPG Sleman Pakem Harjobinangun 3
+245,JAWA BARAT,BANDUNG BARAT,LEMBANG,GUDANGKAHURIPAN,"Jl. Bukanagara II No.3, Kayuambon, Kecamatan Lembang, Kabupaten Bandung Barat, Jawa Barat",SPPG Bandung Barat Lembang Gudangkahuripan
+246,JAWA TIMUR,PASURUAN,TUTUR,WONOSARI,"Jl. Raya Mesagi Wonosari, Kecamatan Tutur, Kabupaten Pasuruan, Jawa Timur",SPPG Pasuruan Tutur Wonosari
+247,JAWA BARAT,KOTA CIREBON,KESAMBI,DRAJAT,"Jl. Kesambi No 121B Kelurahan Drajat Kecamatan Kesambi, Kota Cirebon, Jawa Barat",SPPG Kota Cirebon Kesambi Drajat 2
+248,ACEH,KOTA SABANG,SUKAKARYA,KUTA BARAT,"Jurong kebun merica, Gampong Kuta Barat, Kecamatan Sukakarya Kota Sabang, Provinsi Aceh",SPPG Kota Sabang Sukakarya Kuta Barat
+249,JAWA TENGAH,PURBALINGGA,PENGADEGAN,KARANGJOHO,"Desa Karangjoho RT 009 RW 003, Kecamatan Pengadegan, Kabupaten Purbalingga, Jawa Tengah",SPPG Purbalingga Pengadegan Karangjoho
+250,BALI,GIANYAR,GIANYAR,BAKBAKAN,"Banjar Kangingan, Bakbakan, Kec. Gianyar, Kab. Gianyar, Bali",SPPG Gianyar Gianyar Bakbakan 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+251,JAMBI,KOTA JAMBI,JELUTUNG,HANDIL JAYA,"Jalan Agus Salim, Kelurahan Handil Jaya, Kecamatan Jelutung, Kota Jambi, Jambi",SPPG Kota Jambi Jelutung Handil Jaya 2
+252,JAWA BARAT,BANDUNG,ARJASARI,LEBAKWANGI,"Jl. Anday Rt.002 Rw. 002 Desa Lebakwangi Kec. Arjasari, Kab. Bandung, Jawa Barat",SPPG Bandung Arjasari Lebakwangi 2
+253,SULAWESI SELATAN,MAROS,MARUSU,MA'RUMPA,Jalan Ruko Marumpa Nomor 21/22,SPPG Maros Marusu Ma`rumpa 4
+254,BANTEN,LEBAK,RANGKASBITUNG,CIJORO LEBAK,"⁠Kampung Salahaur Rt 06. Rw 10. Kelurahan Cijoro Lebak, Kecamatan Rangkasbitung, Kabupaten Lebak, Banten",SPPG Lebak Rangkasbitung Cijoro Lebak 4
+255,LAMPUNG,LAMPUNG BARAT,WAY TENONG,PAJAR BULAN,"Jl. Lintas Liwa Kelurahan Pajar Bulan, Kecataman Way Tenong, Kabupaten Lampung Barat, Lampung",SPPG Lampung Barat Way Tenong Pajar Bulan 2
+256,JAWA TENGAH,CILACAP,GANDRUNGMANGU,WRINGINHARJO,"Jalan Raya Karangpucung - Sidareja, Wringinharjo, Kecamatan Gandrungmangu Kabupaten Cilacap, Provinsi Jawa Tengah",SPPG Cilacap Gandrungmangu Wringinharjo
+257,NUSA TENGGARA TIMUR,MANGGARAI,CIBAL,NENU,"Teruk, Rt 002 Rw 001, Desa Nenu, Kec. Cibal, Kab. Manggarai, Nusa Tenggara Timur",SPPG Manggarai Cibal Nenu
+258,JAWA BARAT,BANDUNG,KATAPANG,BANYUSARI,"Ranca Kembang, Banyusari, Kec. Katapang, Kab. Bandung, Jawa Barat",SPPG Bandung Katapang Banyusari 4
+259,JAWA TIMUR,TUBAN,SEMANDING,GEDONGOMBO,"Lingkungan Widengan Rt.005 Rw.010 Kel. Gedongombo Kec. Semanding Kab. Tuban, Jawa Timur",SPPG Tuban Semanding Gedongombo 6
+260,NUSA TENGGARA BARAT,LOMBOK TIMUR,MASBAGIK,PAOKMOTONG,"Jl. Jurusan Paok Motong Padmara, Paokmotong, Kec. Masbagik, Kab. Lombok Timur, Nusa Tenggara Barat",SPPG Lombok Timur Masbagik Paokmotong 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+261,NUSA TENGGARA BARAT,DOMPU,WOJA,KANDAI II,"Jalan Ompu Beko Kode POS 84218, KANDAI II, WOJA, KAB. DOMPU, NUSA TENGGARA BARAT",SPPG Dompu Woja Kandai II
+262,NUSA TENGGARA TIMUR,NAGEKEO,BOAWAE,RAJA TIMUR,"Raja Timur, Kec. Boawae, Kab. Nagekeo, Nusa Tenggara Timur",SPPG Nagekeo Boawae Raja Timur
+263,BALI,KARANGASEM,KARANGASEM,SUBAGAN,"Jl. Nenas No 10, Subagan, Kec. Karangasem, Kab. Karangasem, Bali",SPPG Karangasem Karangasem Subagan 3
+264,JAWA TENGAH,BANYUMAS,KEMRANJEN,PAGERALANG,"Jalan Raya Buntu Timur Km 01, Kemranjen - Banyumas, Pageralang, Kecamatan Kemranjen, Kabupaten Banyumas, Jawa Tengah",SPPG Banyumas Kemranjen Pageralang
+265,JAWA BARAT,BOGOR,TAMANSARI,TAMANSARI,"Jl. Raya Kapten Yusuf, Kp Pasireurih RT002 RW010 Desa Tamansari, Kec. Tamansari Kab. Bogor",SPPG Bogor Tamansari Tamansari 4
+266,SUMATERA UTARA,DELI SERDANG,PERCUT SEI TUAN,SAENTIS,"Dusun XIV Abioso, Desa Saentis, Kec. Percut Sei Tuan, Kab. Deli Serdang, Sumatera Utara",SPPG Deli Serdang Percut Sei Tuan Saentis
+267,JAWA BARAT,BOGOR,CISEENG,PUTAT NUTUG,"Jl. H. Miing Desa No. 2 Rt 04 Rw 02 Putat Nutug, Kec. Ciseeng Kab. Bogor, Jawa Barat",SPPG Bogor Ciseeng Putat Nutug 2
+268,JAWA BARAT,KOTA BOGOR,BOGOR UTARA,TEGAL GUNDIL,VILLA CITRA III BLOK E No.8 BANTARJATI,SPPG Kota Bogor Bogor Utara tegal Gundil 1
+269,JAWA BARAT,KOTA DEPOK,LIMO,GROGOL,"Jl. Mampang Indah I Kampung Rawakalong No.96, Rt. 003 Rw. 007, Grogol, Kecamatan Limo, Kota Depok, Jawa Barat",SPPG Kota Depok Limo Grogol 2
+270,JAWA TIMUR,BANGKALAN,GEGER,CAMPOR,"Jl. Kmp Pasar Lajuh 001/002, Campor 1, Campor, Kec. Geger, Kab. Bangkalan, Jawa Timur",SPPG Bangkalan Geger Campor 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+271,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,CIPAYUNG,SETU,"Jl. Pagelarang, No. 6, Rt. 3 Rw. 1, Setu, Kec. Cipayung, Kota Adm. Jakarta Timur, Dki Jakarta",SPPG Jaktim Cipayung Setu 6
+272,LAMPUNG,KOTA BANDAR LAMPUNG,TANJUNG SENANG,LABUHAN DALAM,"Jalan Sandi Hasan Nomor 99 RT/LK 04/II , Kelurahan Labuhan Dalam, Kecamatan Tanjung Senang, Kota Bandar Lampung, Provinsi Lampung",SPPG Kota Bandar Lampung Tanjung Senang Labuhan Dalam
+273,KALIMANTAN TIMUR,PASER,TANAH GROGOT,JONE,Jl. Merawen RT 01,SPPG Paser Tanah Grogot Jone
+274,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,CAKUNG,PENGGILINGAN,"Jl. Raya Penggilingan 13-18 RT006 RW006 , PENGGILINGAN, CAKUNG, KOTA ADM. JAKARTA TIMUR, DKI JAKARTA",SPPG Jaktim Cakung Penggilingan 4
+275,JAWA BARAT,KOTA BEKASI,JATIASIH,JATIKRAMAT,"Jl. Jatikramat Indah II No. 1 Rt 04, Rw. 11, Jatikramat Bulak, Kecamatan Jatiasih, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Jatiasih Jatikramat 3
+276,NUSA TENGGARA BARAT,LOMBOK TENGAH,JONGGAT,PERINA,"Desa Perina, Kecamatan Jonggat, Kabupaten Lombok Tengah, Provinsi Nusa Tenggara Barat.",SPPG Lombok Tengah Jonggat Perina
+277,JAWA BARAT,KOTA BEKASI,JATIASIH,JATIKRAMAT,"Jl. Dr. Ratna No.70, RT 003/RW 002, Kelurahan Jatikramat, Kecamatan Jatiasih, Kota Bekasi, Provinsi Jawa Barat",SPPG Kota Bekasi Jatiasih Jatikramat 2
+278,JAWA BARAT,CIAMIS,CIAMIS,MALEBER,"Jl. R. E. Martadinata No.99, Maleber, Kec. Ciamis, Kab. Ciamis, Jawa Barat",SPPG Ciamis Ciamis Maleber
+279,JAWA BARAT,KOTA SUKABUMI,WARUDOYONG,WARUDOYONG,"Jl. Pelabuhan 2 No.134, Rt 01 Rw 05, Kel Warudoyong Kec Warudoyong, Kota Sukabumi",SPPG Kota Sukabumi Warudoyong Warudoyong 2
+280,SUMATERA SELATAN,OGAN KOMERING ULU TIMUR,SEMENDAWAI BARAT,TANJUNG KUKUH,"Jalan Lintas Betung-Petanggan, Ancak, Desa Tanjung Kukuh, Kecamatan Semendawai Barat, Kabupaten Ogan Komering Ulu Timur, Provinsi Sumatera Selatan",SPPG OKUT Semendawai Barat Tanjung Kukuh 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+281,SULAWESI TENGAH,SIGI,DOLO SELATAN,WALATANA,"Jl. Poros Palu Bangga, Desa Walatana, Kecamatan Dolo Selatan, Kabupaten Sigi, Sulawesi Tengah",SPPG Sigi Dolo Selatan Walatana 4
+282,JAWA TIMUR,LUMAJANG,YOSOWILANGUN,KRAI,"Dusun Sentono, Desa Krai, Kecamatan Yosowilangun, Kabupaten Lumajang, Jawa Timur",SPPG Lumajang Yosowilangun Krai 2
+283,JAWA TENGAH,KUDUS,KOTA KUDUS,SINGOCANDI,"Desa Singocandi Kecamatan Kota Kabupaten Kudus, Jawa Tengah",SPPG Kudus Kota Kudus Singocandi 3
+284,BANTEN,KOTA TANGERANG SELATAN,PAMULANG,KEDAUNG,"Jl. H. Taip No.9, Kedaung, Kec. Pamulang, Kota Tangerang Selatan, Banten 15415",SPPG Kota Tangsel Pamulang Kedaung 1
+285,JAWA BARAT,BANDUNG,CICALENGKA,NARAWITA,"Kp. cisereuh RT002/Rw002, Desa. Narawita, Kec. Cicalengka, Kab. Bandung, Jawa Barat",SPPG Bandung Cicalengka Narawita 2
+286,JAWA TIMUR,GRESIK,WRINGINANOM,WATESTANJUNG,"Ngampon Rt.011 Rw.003, Watestanjung, Kec. Wringinanom, Kab. Gresik, Jawa Timur",SPPG Gresik Wringinanom Watestanjung 2
+287,JAWA BARAT,KOTA SUKABUMI,LEMBURSITU,SITUMEKAR,Jl.Kibitay Kp.Bangsanaya Rt.03/07,SPPG Kota Sukabumi Lembursitu Situmekar 2
+288,JAWA TIMUR,PASURUAN,BANGIL,KALIANYAR,"Jl. Kakap, Satak, Kalianyar, Kec. Bangil, Kab. Pasuruan, Jawa Timur",SPPG Pasuruan Bangil Kalianyar
+289,DKI JAKARTA,KOTA ADM. JAKARTA UTARA,TANJUNG PRIOK,SUNTER JAYA,"Jl. Sunter Mas Barat I, Blok H9 No. 3. Rt/Rw. 02/08, Kel. Sunter Jaya, Kec. Tanjung Priok, Kota Adm. Jakarta Utara, Dki Jakarta",SPPG Jakut Tanjung Priok Sunter Jaya 2
+290,JAWA TENGAH,PEKALONGAN,KARANGANYAR,KARANGSARI,"Mlatensatu, Karangsari, Kec. Karanganyar, Kab. Pekalongan, Jawa Tengah",SPPG Pekalongan Karanganyar Karangsari
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+291,JAWA BARAT,KARAWANG,KOTA BARU,PUCUNG,"Jalan Mashudi RT.001/RW.004, Desa Pucung, Kecamatan Kotabaru, Kabupaten Karawang, Jawa Barat",SPPG Karawang Kota Baru Pucung 1
+292,NUSA TENGGARA BARAT,LOMBOK TENGAH,PRINGGARATA,BAGU,Jln Haji Badaruddin Dusun Bagu Barat Desa Bagu,SPPG Lombok Tengah Pringgarata Bagu
+293,JAWA TENGAH,DEMAK,KEBONAGUNG,MIJEN,"Jl. Gubug Purwodadi Desa Mijen, Kec. Kebonagung Kabupaten Demak Jawa Tengah",SPPG Demak Mijen Mijen 2
+294,JAWA BARAT,BANDUNG BARAT,NGAMPRAH,CILAME,"Desa Cilame, Kec. Ngamprah, Kab. Bandung Barat, Jawa Barat",SPPG Bandung Barat Ngamprah Cilame 5
+295,JAWA BARAT,KOTA BANDUNG,MANDALAJATI,PASIR IMPUN,"Jl. Arcamanik No. 41A, Pasir Impun, Kec. Mandalajati, Kota Bandung, Jawa Barat",SPPG Kota Bandung Mandalajati Pasir Impun 3
+296,BENGKULU,KOTA BENGKULU,SELEBAR,PAGAR DEWA,"Jalan R.E. Martadinata No. 6, RT 043 RW 008, Kelurahan Pagar Dewa, Kecamatan Selebar, Kota Bengkulu, Provinsi Bengkulu",SPPG Kota Bengkulu Selebar Pagar Dewa
+297,JAWA TENGAH,MAGELANG,BOROBUDUR,KARANGANYAR,"Ngadiwinatan 1, Karanganyar, Kecamatan Borobudur, Kabupaten Magelang, Jawa Tengah",SPPG Magelang Borobudur Karanganyar
+298,LAMPUNG,KOTA BANDAR LAMPUNG,SUKABUMI,SUKABUMI,"Jl. Tirtayasa Pojok Gang Mentru, Sukabumi, Kec. Sukabumi, Kota Bandar Lampung, Lampung",SPPG Kota Bandar Lampung Sukabumi Sukabumi 7
+299,JAWA TIMUR,BLITAR,WONODADI,KUNIR,"Desa Kunir, Rt. 01 Rw. 07, Kecamatan Wonodadi, Kabupaten Blitar, Jawa Timur",SPPG Blitar Wonodadi Kunir 3
+300,SULAWESI SELATAN,BANTAENG,BISSAPPU,BONTO JAI,"Jl. Poros Bantaeng-Jeneponto, KM 7",SPPG Bantaeng Bissappu Bonto Jai
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+301,SUMATERA UTARA,DELI SERDANG,PANTAI LABU,KELAMBIR,"Jl. Besar Kelambir Dusun 2, Kelambir, Kec. Pantai Labu, Kab. Deli Serdang, Sumatera Utara",SPPG Deli Serdang Pantai Labu Kelambir
+302,JAWA BARAT,KOTA BEKASI,BANTARGEBANG,BANTARGEBANG,"Jl. Danau Toba Raya B 8 Blok B 8 No.19, Rt. 002 Rw. 005, Bantargebang, Kec. Bantargebang, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Bantargebang Bantargebang 4
+303,JAWA TENGAH,PEMALANG,PEMALANG,KEBONDALEM,Jl. Brantas Kebondalem Kec. Pemalang Kab. Pemalang Jawa Tengah,SPPG Pemalang Pemalang Kebondalem 3
+304,JAWA TIMUR,MALANG,BANTUR,BANTUR,"Jl. Raya Bantur No 1014, Bantur, Kec. Bantur, Kab. Malang, Jawa Timur",SPPG Malang Bantur Bantur
+305,JAWA BARAT,BANDUNG,MAJALAYA,MAJAKERTA,"Jl. Panyadap Rt.02 Rw.014, Desa Majakerja, Kecamatan Majalaya, Kabupaten Bandung, Jawa Barat",SPPG Bandung Majalaya Majakerta
+306,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,MATRAMAN,KEBON MANGGIS,"Jl. Slamet Riyadi 4 No 15, Kebon Manggis, Matraman, Kota Adm. Jakarta Timur, Dki Jakarta",SPPG Jaktim Matraman Kebon Manggis 2
+307,JAWA BARAT,GARUT,BL. LIMBANGAN,CIGAGADE,"Kampung Babakan Jeruk Rt.001/Rw.002 Desa Cigagade, Kecamatan Limbangan, Kabupaten Garut, Provinsi Jawa Barat",SPPG Garut Bl. Limbangan Cigagade 2
+308,NUSA TENGGARA BARAT,LOMBOK TIMUR,PRINGGASELA,REMPUNG,Jl. Raya Sukamulia Rempung Desa Rempung Kecamatan Pringgasela Kabupaten Lombok Timur Provinsi Nusa Tenggara Barat,SPPG Lombok Timur Pringgasela Rempung
+309,JAWA BARAT,KOTA BANDUNG,CIDADAP,HEGARMANAH,"Jl. Hegarbudi No 80/66, Rt 02 Rw 08, Kel. Hegarmanah, Kec. Cidadap, Kota Bandung, Jawa Barat",SPPG Kota Bandung Cidadap Hegarmanah 5
+310,JAWA TIMUR,JOMBANG,JOMBANG,PULOLOR,"Gentengan, Gang IV No.35 B, Pulolor, Kec. Jombang, Kab. Jombang, Jawa Timur",SPPG Jombang Jombang Pulolor 3
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+311,BENGKULU,BENGKULU SELATAN,KOTA MANNA,PASAR BARU,Jl. Gama I Kelurahan Pasar Baru Kecamatan Kota Manna Kabupaten Bengkulu Selatan,SPPG Bengkulu Selatan Kota Manna Pasar Baru
+312,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,MAKASAR,MAKASAR,"Jl. Kerja Bakti No. 17, Rt. 01 Rw. 04, Makasar, Kec. Makasar, Kota Adm. Jakarta Timur, Dki Jakarta",SPPG Kota Adm. Jakarta Timur Makasar Makasar 2
+313,JAWA TENGAH,DEMAK,SAYUNG,PURWOSARI,"Purwosari, Kecamatan Sayung, Kabupaten Demak, Jawa Tengah",SPPG Demak Sayung Purwosari
+314,JAWA BARAT,KOTA DEPOK,SAWANGAN,PASIR PUTIH,"Jl. Raya Pasir Putih No. 17, Rt 004 Rw 004, Kel. Pasir Putih, Kec. Sawangan, Kota Depok, Jawa Barat",SPPG Kota Depok Sawangan Pasir Putih 5
+315,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,PULOGADUNG,JATINEGARA KAUM,"Jl.Bekasi Timur Raya KM 17 No 83,Jatinegara Kaum, Pulogadung, Jakarta Timur, DKI Jakarta 13250",SPPG Jaktim Pulogadung Jatinegara Kaum 2
+316,JAWA BARAT,SUBANG,SUBANG,DANGDEUR,"Blok. Cicadas Rw 20, Dangdeur, Kec. Subang, Kab. Subang, Jawa Barat",SPPG Subang Subang Dangdeur 4
+317,JAWA TENGAH,SEMARANG,UNGARAN BARAT,BANDARJO,"Jalan Marwa 2, Perum Griya Sakinah, RT 012/RW 006, Desa Bandarjo, Kecamatan Ungaran Barat, Kabupaten Semarang, Provinsi Jawa Tengah",SPPG Semarang Ungaran Barat Bandarjo
+318,JAWA TIMUR,KOTA MALANG,KLOJEN,KASIN,"Jl. Pulau Sayang No 20A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur",SPPG Kota Malang Klojen Kasin 3
+319,JAWA BARAT,KOTA SUKABUMI,WARUDOYONG,BENTENG,Jl. Babakan sirna No.3 Kota Sukabumi Kelurahan Benteng Kecamatan Warudoyong Kota Sukabumi,SPPG Kota Sukabumi Warudoyong Benteng
+320,SUMATERA UTARA,LANGKAT,STABAT,ARA CONDONG,"Jl. Stabat Secanggang, Ara Condong, Kec. Stabat, Kab. Langkat, Sumatera Utara",SPPG Langkat Stabat Ara Condong 3
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+321,JAWA BARAT,TASIKMALAYA,BOJONGASIH,GIRIJAYA,"Jl. Bojongasih, Girijaya, Kec. Bojongasih, Kab. Tasikmalaya, Jawa Barat",SPPG Tasikmalaya Bojongasih Girijaya
+322,JAWA BARAT,CIANJUR,PACET,GADOG,Jl. Gadog 1 Desa Gadog Kec. Pacet Kab. Cianjur Jawa Barat,SPPG Cianjur Pacet Gadog
+323,BANTEN,PANDEGLANG,PANIMBANG,PANIMBANGJAYA,"Jl. Raya Tanjung Lesung Km. 19, Kampung Bandengan, Rt. 004 Rw. 006, Desa Panimbangjaya, Kec. Panimbang, Kab. Pandeglang, Banten",SPPG Pandeglang Panimbang Panimbangjaya 5
+324,JAWA TIMUR,NGAWI,GENENG,KLITIK,"Dusun. Dungredjo RT 05 RW 04, Desa. Klitik, Kecamatan Geneng, Kabupaten Ngawi, Provinsi Jawa Timur",SPPG Ngawi Geneng Klitik 2
+325,JAWA TENGAH,BREBES,TANJUNG,KEMURANG KULON,"Jl. Jalak No. 09, Desa Kemurang Kulon Rt 05 Rw 02, Kemurang Kulon, Tanjung, Kab. Brebes, Jawa Tengah",SPPG Brebes Tanjung Kemurang Kulon 3
+326,JAWA TIMUR,SIDOARJO,SUKODONO,MASANGANKULON,"Jl. Griya Bhayangkara Rt 017 Rw 006, Masangankulon, Kec. Sukodono, Kab. Sidoarjo, Jawa Timur",SPPG Sidoarjo Sukodono Masangankulon
+327,BANTEN,KOTA CILEGON,JOMBANG,JOMBANG WETAN,"Jl. Raya Kranggot, Dapur 2 Kelurahan Jombang Wetan, Kecamatan Jombang, Kota Cilegon, Banten",SPPG Kota Cilegon Jombang Jombang Wetan 6
+328,DKI JAKARTA,KOTA ADM. JAKARTA BARAT,KEBON JERUK,SUKABUMI UTARA,"Jl. Salam III No. 3 Rt005 Rw006, Kel. Sukabumi Utara, Kec. Kebon Jeruk, Kota Adm. Jakarta Barat, Dki Jakarta",SPPG Jakbar Kebon Jeruk Sukabumi Utara 4
+329,BALI,GIANYAR,SUKAWATI,BATUBULAN,"Jl. Raya Batubulan No.11, Batubulan, Kec. Sukawati, Kab. Gianyar, Bali",SPPG Gianyar Sukawati Batubulan 3
+330,NUSA TENGGARA TIMUR,SIKKA,ALOK BARAT,WAILITI,Wairbor RT 021 RW 003,SPPG Sikka Alok Barat Wailiti
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+331,JAWA BARAT,BOGOR,PAMIJAHAN,GUNUNGMENYAN,"Jl. Gunung Menyan Sebrang, Rt 002 Rt 007, Desa Gunungmenyan, Kec. Pamijahan, Kab. Bogor, Jawa Barat",SPPG Bogor Pamijahan Gunungmenyan 2
+332,JAWA BARAT,CIANJUR,WARUNGKONDANG,SUKAWANGI,"Kampung Cipaku Rt. 04 Rw. 05, Sukawangi, Kec. Warungkondang, Kab. Cianjur, Jawa Barat",SPPG Cianjur Warungkondang Sukawangi 2
+333,KALIMANTAN TENGAH,SERUYAN,DANAU SELULUK,RUNGAU RAYA,"Jl. Jendral Sudirman Km 115 Sampit P. Bun, Desa Rungau Raya, Kec. Danau Seluluk, Kab. Seruyan, Kalimantan Tengah",SPPG Seruyan Danau Seluluk Rungau Raya
+334,SUMATERA UTARA,KOTA MEDAN,MEDAN BARU,DARAT,"Jl. Abdullah Lubis Atas No. 9, Kel. Darat, Kec. Medan Baru, Kota Medan, Sumatera Utara",SPPG Kota Medan Medan Baru Darat
+335,JAWA TENGAH,KENDAL,PATEAN,CURUGSEWU,"Nenggolo, Curugsewu, Kecamatan Patean, Kabupaten Kendal, Jawa Tengah",SPPG Kendal Patean Curugsewu
+336,JAWA BARAT,KOTA BEKASI,BEKASI SELATAN,JAKAMULYA,"Jl. Cikunir Raya No.90 Rt.003 Rw 003, Jakamulya Kecamatan Bekasi Selatan, Kota Bekasi - Jawa Barat, Jakamulya, Bekasi Selatan, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Bekasi Selatan Jakamulya 1
+337,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,CIRACAS,KELAPA DUA WETAN,"Jl. Asem, KO Taman Dhika Ciracas, RT. 07 RW. 04, Kelurahan Kelapa Dua Wetan, Kecamatan Ciracas, Jakarta Timur",SPPG Jaktim Ciracas Kelapa Dua Wetan 2
+338,JAWA TIMUR,TUBAN,TUBAN,SUKOLILO,"Perumahan Griya Cemoro Sewu Blok B, Kelurahan Sukolilo, Kecamatan Tuban, Kabupaten Tuban, Jawa Timur",SPPG Tuban Tuban Sukolilo 1
+339,JAWA BARAT,KOTA DEPOK,BOJONGSARI,CURUG,"Jl. Taman Firdaus 86 Rt 05/ Rw09, Curug, Kecamatan Bojongsari, Kota Depok, Jawa Barat",SPPG Kota Depok Bojongsari Curug
+340,LAMPUNG,KOTA BANDAR LAMPUNG,TANJUNGKARANG BARAT,GEDONG AIR,"Jl. Sisingamangaraja Gang Kelinci Kelurahan Gedong Air Kecamatan Tanjung Karang Barat, Kota Bandar Lampung, Lampung",SPPG Kota Bandar Lampung Tanjungkarang Barat Gedong Air 3
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+341,JAWA BARAT,GARUT,PAKENJENG,PANYINDANGAN,"Blok Sanghiang Lawang, Desa Panyindangan, Kecamatan Pakenjeng, Kabupaten Garut, Jawa Barat",SPPG Garut Pakenjeng Panyindangan
+342,JAWA BARAT,KOTA CIMAHI,CIMAHI UTARA,CIPAGERAN,"Jl. Kolonel Masturi No 2, Cipageran, Kecamatan Cimahi Utara, Kota Cimahi, Jawa Barat",SPPG Kota Cimahi Cimahi Utara Cipageran 3
+343,LAMPUNG,PRINGSEWU,AMBARAWA,MARGODADI,"Rt. 003 Rw 001 Kel. Margodadi, Kec. Ambarawa Kabupaten Pringsewu, Lampung",SPPG Pringsewu Ambarawa Margodadi 2
+344,KEPULAUAN RIAU,KOTA BATAM,SAGULUNG,SUNGAI LANGKAI,"Ruko Buana Point 11, 12, 12A Desa/Kelurahan Sungai Langkai, Kecamatan Sagulung, Kota Batam, Provinsi Kepulauan Riau",SPPG Kota Batam Sagulung Sungai Langkai 3
+345,JAWA TENGAH,BATANG,WARUNGASEM,SIDOREJO,"Sidorejo, Kecamatan Warungasem, Kabupaten Batang, Jawa Tengah",SPPG Batang Warungasem Sidorejo 2
+346,BANTEN,PANDEGLANG,CIMANUK,CIMANUK,"Kampung Cigunung. Desa Cimanuk, Kecamatan Cimanuk, Kabupaten Pandeglang, Banten",SPPG Pandeglang Cimanuk Cimanuk 2
+347,JAWA TENGAH,BREBES,KETANGGUNGAN,JEMASIH,"Jl. Sawah Lega, Desa Jemasih, Kec. Ketanggungan, Kab. Brebes, Jawa Tengah",SPPG Brebes Ketanggungan Jemasih
+348,JAWA TIMUR,PROBOLINGGO,BANYUANYAR,BANYUANYAR TENGAH,"Dusun Timbangan Rt.007 Rw.003, Banyuanyar Tengah, Kec. Banyuanyar, Kab. Probolinggo, Jawa Timur",SPPG Probolinggo Banyuanyar Banyuanyar Tengah
+349,JAWA TENGAH,TEMANGGUNG,KEDU,CANDIMULYO,"Candimulyo, Kecamatan Kedu, Kabupaten Temanggung, Jawa Tengah",SPPG Temanggung Kedu Candimulyo 3
+350,BENGKULU,KOTA BENGKULU,SUNGAI SERUT,SEMARANG,"Jl. Irian No. 20, RT. 002, RW. 001, Kelurahan Semarang, Kecamatan Sungai Serut, Kota Bengkulu, Bengkulu",SPPG Kota Bengkulu Sungai Serut Semarang
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+351,SUMATERA SELATAN,KOTA PALEMBANG,ILIR TIMUR DUA,TIGA ILIR,"Jl. Bambang Utoyo, Ruko Bugis No 5G-5H, 3 Ilir, Kec. Ilir Timur II, Kota Palembang, Sumatera Selatan",SPPG Kota Palembang Ilir Timur Dua Tiga Ilir 1
+352,BANTEN,KOTA TANGERANG,CIPONDOH,PETIR,Jl. KH AHMAD DAHLAN. PERUMAHAN GRIYA PERMATA BLOK B1 NO 9A.. PETIR. CIPONDOH. KOTA TANGERANG BANTEN,SPPG Kota Tengerang Cipondoh Petir
+353,JAMBI,KOTA JAMBI,JAMBI TIMUR,KASANG,Jl. Dokter Setia Budi No. 72,SPPG Kota Jambi Jambi Timur Kasang 2
+354,DKI JAKARTA,KOTA ADM. JAKARTA BARAT,CENGKARENG,KAPUK,"Jl. Ptb Raya Cengkareng Indah, No. 17 A 9, Rt. 4 Rw. 9, Kapuk, Kec. Cengkareng, Kota Adm. Jakarta Barat, Dki Jakarta",SPPG Kota Adm. Jakarta Barat Cengkareng Kapuk
+355,DKI JAKARTA,KOTA ADM. JAKARTA TIMUR,PASAR REBO,GEDONG,"Jl. Raya Tengah Gg Remaja No.18 II RT006/RW 003, Kel.Gedong, Kec.Pasar Rebo, Jakarta Timur",SPPG Jaktim Pasar Rebo Gedong 2
+356,JAWA BARAT,CIAMIS,CIPAKU,BANGBAYANG,"Dusun Desa Rt 002 Rw 005, Desa Bangbayang, Kecamatan Cipaku, Kabupaten Ciamis, Jawa Barat",SPPG Ciamis Cipaku Bangbayang
+357,ACEH,ACEH UTARA,PAYA BAKONG,TUMPOK MESJID,"Gp. Tumpok Mesjid, Tumpok Mesjid, Kec. Paya Bakong, Kab. Aceh Utara, Aceh",SPPG Aceh Utara Paya Bakong Tumpok Mesjid
+358,JAWA BARAT,KOTA BOGOR,TANAH SAREAL,CIBADAK,"Jl. Baru Yasmin Ring Road Rt/Rw. 005/004, Kel. Cibadak, Kecamatan Tanah Sareal, Kota Bogor, Jawa Barat",SPPG Kota Bogor Tanah Sareal Cibadak 2
+359,KALIMANTAN TENGAH,SUKAMARA,SUKAMARA,NATAI SEDAWAK,"Jl. Tjilik Riwut Km. 5, Natai Sedawak, Kec. Sukamara, Kab. Sukamara, Kalimantan Tengah",SPPG Sukamara Sukamara Natai Sedawak
+360,JAWA TIMUR,KOTA SURABAYA,SAWAHAN,SAWAHAN,"Jl. Arjuno No 65, Kel. Sawahan, Kec. Sawahan, Kota Surabaya, Jawa Timur",SPPG Kota Surabaya Sawahan Sawahan 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+361,JAWA TENGAH,BANJARNEGARA,PURWANEGARA,MERDEN,"Buaran, Merden, Kec. Purwanegara, Kab. Banjarnegara, Jawa Tengah",SPPG Banjarnegara Purwanegara Merden 3
+362,JAWA TENGAH,BREBES,PAGUYANGAN,PAGOJENGAN,"Jl. Lingkar, Pagojengan, Kec. Paguyangan, Kab. Brebes, Jawa Tengah",SPPG Brebes Paguyangan Pagojengan
+363,JAWA BARAT,GARUT,MALANGBONG,KUTANAGARA,"Jl. Pangkalan Sekarwangi, Desa Mekarasih Kecamatan Malangbong",SPPG Garut Malangbong Kutanagara
+364,JAWA TENGAH,TEMANGGUNG,KANDANGAN,KANDANGAN,"Dusun Kejiwan Rt 03 Rw 08, Desa Kandangan, Kec. Kandangan, Kab. Temanggung, Jawa Tengah",SPPG Temanggung Kandangan Kandangan 2
+365,KALIMANTAN SELATAN,TANAH LAUT,PANYIPATAN,BATU MULYA,"RT 03 RW 04 Desa Batu Mulya, Kec. Panyipatan, Kab. Tanah Laut, Kalimantan Selatan",SPPG Tanah Laut Panyipatan Batu Mulya
+366,SULAWESI TENGAH,TOJO UNA UNA,RATOLINDO,UENTANAGA ATAS,"Jl. Sis Aljufri No 123, Uentanaga Atas Kec. Ratolido Kab. Tojo Una-Una, Sulawesi Tengah",SPPG Tojo Una Una Ratolindo Uentanaga Atas 2
+367,DAERAH ISTIMEWA YOGYAKARTA,SLEMAN,PRAMBANAN,SUMBERHARJO,"Gang Harjuna 25, Dinginan, Sumberharjo, Kec. Prambanan, Kab. Sleman, Daerah Istimewa Yogyakarta",SPPG Sleman Prambanan Sumberharjo 2
+368,NUSA TENGGARA BARAT,KOTA MATARAM,AMPENAN,AMPENAN SELATAN,"Jl. Penghulu Agung, Gang Kura2 Nomor 3D, Ampenan Selatan, Kec. Ampenan, Kota Mataram, Nusa Tenggara Barat",SPPG Kota Mataram Ampenan Ampenan Selatan
+369,SUMATERA UTARA,DELI SERDANG,SUNGGAL,LALANG,"Jalan Tanjung Permai Nomor 8A, Kampung Lalang, Kecamatan Sunggal, Kabupaten Deli Serdang, Sumatera Utara",SPPG Deli Serdang Sunggal Lalang
+370,BANTEN,KOTA TANGERANG SELATAN,CIPUTAT TIMUR,PONDOK RANJI,"Jl. Rusa 5A, Pondok Ranji, Kecamatan Ciputat Timur, Kota Tangerang Selatan, Banten",SPPG Kota Tangsel Ciputat Timur Pondok Ranji 1
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+371,JAWA TENGAH,GROBOGAN,PENAWANGAN,PENGKOL,"Jl. Raya Penawangan Sedadi, Kelurahan Pengkol, Kecamatan Penawangan, Kabupaten Grobogan Jawa Tengah",SPPG Grobogan Penawangan Pengkol
+372,JAMBI,BATANGHARI,MUARA TEMBESI,PASAR MUARA TEMBESI,"Jalan Simpang III No. 30, RT 005 RW 002, Kelurahan Pasar Muara Tembesi, Kecamatan Muara Tembesi, Kabupaten Batanghari, Provinsi Jambi",SPPG Batanghari Muara Tembesi Pasar Muara Tembesi
+373,JAWA TENGAH,REMBANG,REMBANG,KEDUNGREJO,"Jl. Blora Km 4,5, Kedungrejo, Kec. Rembang, Kab. Rembang, Jawa Tengah",SPPG Rembang Rembang Kedungrejo
+374,JAWA TENGAH,TEMANGGUNG,KALORAN,KEBLUKAN,"Jl. Raya Kaloran Km 06,Gembolan Desa Keblukan, Kec. Kaloran Kab.Temanggung Jawa Tengah",SPPG Temanggung Kaloran Keblukan
+375,JAWA BARAT,PANGANDARAN,PADAHERANG,PASIRGEULIS,"Dusun Grewing Rt 09 Rw 04, Pasirgeulis, Kecamatan Padaherang, Kabupaten Pangandaran, Jawa Barat",SPPG Pangandaran Padaherang Pasirgeulis
+376,JAWA TENGAH,SUKOHARJO,WERU,KARANGWUNI,"Dukuh Kahuman Rt. 001 Rw. 002, Desa Karangwuni, Kec. Weru, Kab. Sukoharjo, Jawa Tengah",SPPG Sukoharjo Weru Karangwuni
+377,JAWA TENGAH,PATI,TRANGKIL,PASUCEN,"Desa Pasucen, Kecamatan Trangkil, Kabupaten Pati, Jawa Tengah",SPPG Pati Trangkil Pasucen 2
+378,JAWA TENGAH,KUDUS,MEJOBO,JEPANG,"jalan suryo kusumo no 99, Desa Jepang Rt 04 Rw 06 Kecamatan Mejobo, Kabupaten Kudus",SPPG Kudus Mejobo Jepang
+379,JAWA TIMUR,BOJONEGORO,SUMBEREJO,PEKUWON,"Jl. Raya Puk Sumberrejo Rt. 002 Rw. 001 Desa Pekuwon Kec. Sumberrejo Kab. Bojonegoro, Jawa Timur",SPPG Bojonegoro Sumberejo Pekuwon
+380,ACEH,ACEH TENGGARA,BABUSSALAM,PULONAS,"Desa Pulonas, Kecamatan Babussalam, Kabupaten Aceh Tenggara, Aceh",SPPG Aceh Tenggara Babussalam Pulonas 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+381,PAPUA TENGAH,MIMIKA,MIMIKA TIMUR,MUARE,"Jalan Raya Mapurujaya, Desa Muare/Wania, Distrik Mimika Timur, Kabupaten Mimika, Provinsi Papua Tengah",SPPG Mimika Mimika Timur Muare
+382,DKI JAKARTA,KOTA ADM. JAKARTA BARAT,KEMBANGAN,JOGLO,"Jl. Basoka Raya Blok I No.10, Joglo, Kec. Kembangan, Kota Adm. Jakarta Barat, Dki Jakarta",SPPG Jakbar Kembangan Joglo 1
+383,SULAWESI TENGGARA,KOTA KENDARI,BARUGA,BARUGA,"Jl. Bumi Praja, Baruga, Kecamatan Baruga, Kota Kendari, Sulawesi Tenggara",SPPG Kota Kendari Baruga Baruga
+384,RIAU,SIAK,KANDIS,SIMPANG BELUTU,"Jl. Sultan Syarif Qasim Simpang Belutu, Kec. Kandis, Kab. Siak, Riau",SPPG Siak Kandis Simpang Belutu
+385,SULAWESI SELATAN,KOTA MAKASSAR,MANGGALA,BITOWA,"Btn Antang Jaya Blok E/5B, Bitowa, Kec. Manggala, Kota Makassar, Sulawesi Selatan",SPPG Kota Makassar Manggala Bitowa 2
+386,BANTEN,KOTA TANGERANG,PINANG,PINANG,"Jl. Pinang Kunciran, Pinang, Kecamatan Pinang, Kota Tangerang, Banten",SPPG Kota Tangerang Pinang Pinang 3
+387,JAWA TENGAH,TEGAL,ADIWERNA,KALIWADAS,"Jl. Raya Kaliwadas Nomor 2, Kaliwadas, Kec. Adiwerna, Kab. Tegal, Jawa Tengah",SPPG Tegal Adiwerna Kaliwadas 4
+388,DAERAH ISTIMEWA YOGYAKARTA,BANTUL,PANDAK,TRIHARJO,"Bulak Siyangan, Kel. Triharjo, Kec. Pandak, Kab. Bantul, Prov. Daerah Istimewa Yogyakarta",SPPG Bantul Pandak Triharjo
+389,NUSA TENGGARA BARAT,DOMPU,WOJA,MATUA,"Jl. Ompu Buncu Desa Matua Kecamatan Woja Kabupaten Dompu, MATUA, WOJA, KAB. DOMPU, NUSA TENGGARA BARAT",SPPG Dompu Woja Matua
+390,BANTEN,LEBAK,KALANGANYAR,CIKATAPIS,"Kp. Keong Desa Cikatapis Rt 01 Rw 03, Cikatapis, Kalanganyar, Kab. Lebak, Banten",SPPG Lebak Kalanganyar Cikatapis
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+391,SULAWESI UTARA,BOLAANG MONGONDOW UTARA,KAIDIPANG,BOROKO,"Jl. Trans Sulawesi, Boroko, Kec. Kaidipang, Kab. Bolaang Mongondow Utara, Sulawesi Utara",SPPG Bolaang Mongondow Utara Kaidipang Boroko
+392,JAWA TIMUR,TUBAN,BANCAR,SUKOLILO,"Jl. Raya Bulu, Jatirogo Karanganyar, Sukolilo, Kec. Bancar, Kab. Tuban, Jawa Timur",SPPG Tuban Bancar Sukolilo
+393,JAWA BARAT,BOGOR,CIBUNGBULANG,SITU ILIR,"Kampung Babakan Rt 001 Rw 002, Situ Ilir, Kecamatan Cibungbulang, Kabupaten Bogor, Jawa Barat",SPPG Bogor Cibungbulang Situ Ilir
+394,JAWA TIMUR,KEDIRI,KANDANGAN,KLAMPISAN,"Jalan Pare Kandangan, Desa Klampisan, Kecamatan Kandangan, Kabupaten Kediri, Provinsi Jawa Timur",SPPG Kediri Kandangan Klampisan
+395,JAWA BARAT,KUNINGAN,CIGUGUR,CIPARI,"Lingkungan Kondang RT. 009 RW. 003, Cipari, Kecamatan Cigugur, Kabupaten Kuningan, Jawa Barat",SPPG Kuningan Cigugur Cipari 2
+396,LAMPUNG,LAMPUNG TIMUR,LABUHAN MARINGGAI,KARYA TANI,"Jl. Lintas Timur, Karya Tani, Kec. Labuhan Maringgai, Kab. Lampung Timur, Lampung",SPPG Lampung Timur Labuhan Maringgai Karya Tani
+397,KALIMANTAN SELATAN,KOTA BANJARMASIN,BANJARMASIN SELATAN,TANJUNG PAGAR,Jl. Lingkardalam selatan,SPPG Kota Banjarmasin Banjarmasin Selatan Tanjung Pagar
+398,SUMATERA SELATAN,BANYUASIN,BANYUASIN I,MARIANA ILIR,"Jl. Sepakat Rt 10 Rw 02, Mariana Ilir, Kec. Banyuasin I, Kab. Banyuasin, Sumatera Selatan",SPPG Banyuasin Banyuasin I Mariana Ilir 2
+399,JAWA TENGAH,BREBES,SIRAMPOG,MANGGIS,"Jl. Manggis Sanganjaya, Manggis, Kec. Sirampog, Kab. Brebes, Jawa Tengah",SPPG Brebes Sirampog Manggis
+400,JAWA TENGAH,KOTA SEMARANG,GUNUNGPATI,MANGUNSARI,"JL. JAMBU SARI RT 08 RW 04, KELURAHAN MANGUNSARI, KECAMATAN GUNUNGPATI, KOTA SEMARANG, JAWA TENGAH",SPPG Kota Semarang Gunungpati Mangunsari
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+401,JAWA BARAT,PANGANDARAN,LANGKAPLANCAR,JADIMULYA,"Jl. Raya Jadimulya Dusun Sidikmulya Rt02 Rw 07 Jadimulya Kecamatan Langkap Lancar Kabupaten Pangandaran, Jawa Barat",SPPG Pangandaran Langkaplancar Jadimulya
+402,JAWA TIMUR,KOTA MALANG,KEDUNGKANDANG,SAWOJAJAR,"Jl. Danau Laut Tawar, RT. 05, RW. 05, Kelurahan Sawojajar, Kecamatan Kedungkandang, Kota Malang, Jawa Timur",SPPG Kota Malang Kedungkandang Sawojajar 5
+403,JAWA BARAT,BANDUNG,PACET,MEKARSARI,"Jl. Nunuk Rancagede Rt03 Rw03 Desa Mekarsari, Kec. Pacet, Kab. Bandung, Jawa Barat",SPPG Bandung Pacet Mekarsari 2
+404,JAWA TIMUR,BANGKALAN,KAMAL,KAMAL,"Jl. Raya Tellang, Kamal, Kec. Kamal, Kab. Bangkalan, Jawa Timur",SPPG Bangkalan Kamal Kamal 2
+405,JAWA TENGAH,PURWOREJO,BANYUURIP,KLEDUNGKRADENAN,"Jl. Tentara Pelajar, Rw. 02, Kledungkradenan, Kec. Banyuurip, Kab. Purworejo, Jawa Tengah",SPPG Purworejo Banyuurip Kledungkradenan 2
+406,LAMPUNG,PESAWARAN,PADANG CERMIN,BANJARAN,"Padang Cermin, Kecamatan Padang Cermin, Kabupaten Pesawaran, Lampung",SPPG Pesawaran Padang Cermin Banjaran
+407,JAWA BARAT,KOTA CIREBON,KESAMBI,KESAMBI,"Jalan Kesambi Baru, Nomor 29 C, Kelurahan Kesambi, Kecamatan Kesambi, Kota Cirebon, Provinsi Jawa Barat",SPPG Kota Cirebon Kesambi Kesambi
+408,JAWA TENGAH,CILACAP,CILACAP UTARA,KEBONMANIS,"JL. Laban No.13 RT 01 RW 07, Kel. Kebonmanis, Kec. Cilacap Utara, Kab. Cilacap, Prov. Jawa Tengah",SPPG Cilacap Cilacap Utara Kebonmanis
+409,KALIMANTAN TIMUR,KOTA SAMARINDA,SAMARINDA UTARA,SEMPAJA BARAT,"Jl. AW. Syahrani 4, No. 5, RT. 002",SPPG Kota Samarinda Samarinda Utara Sempaja Barat
+410,JAWA TIMUR,JEMBER,TANGGUL,MANGGISAN,"Jl. Argopuro No 7, Manggisan, Kec. Tanggul, Kab. Jember, Jawa Timur",SPPG Jember Tanggul Manggisan 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+411,JAWA TENGAH,WONOSOBO,WONOSOBO,KEJIWAN,"Sedugligan, Kejiwan, Kec. Wonosobo, Kab. Wonosobo, Jawa Tengah",SPPG Wonosobo Wonosobo Kejiwan 2
+412,JAWA TIMUR,MAGETAN,PLAOSAN,PLAOSAN,"Jl. Raya Sarangan No.103, Kec. Plaosan, Kab. Magetan, Jawa Timur",SPPG Magetan Plaosan Plaosan
+413,SULAWESI TENGAH,TOLI TOLI,BAOLAN,BARU,"Jl. Gadarmun Hangkiho, Baru, Baolan, Kab. Toli Toli, Sulawesi Tengah",SPPG Toli Toli Baolan Baru 3
+414,JAWA TIMUR,MALANG,SUMBERMANJING WETAN,DRUJU,"Jl. Raya Druju Rt14/Rw03, Druju, Kec. Sumbermanjing Wetan, Kab. Malang, Jawa Timur",SPPG Malang Sumbermanjing Wetan Druju 2
+415,SULAWESI SELATAN,GOWA,BONTONOMPO SELATAN,BONTORAMBA,"Jl. Poros Takalar, Bontoramba Kec. Bontonompo Selatan Kab. Gowa, Bontoramba, Sulawesi Selatan",SPPG Gowa Bontonompo Selatan Bontoramba
+416,SUMATERA BARAT,KOTA PADANG,LUBUK BEGALUNG,PARAK LAWEH PULAU AIA NAN XX,"Komplek Indovilla Pondok Citra, Parak Laweh Pulau Aia Nan XX, Kec. Lubuk Begalung, Kota Padang, Sumatera Barat",SPPG Kota Padang Lubuk Begalung Parak Laweh Pulau Aia Nan Xx 4
+417,SUMATERA UTARA,SERDANG BEDAGAI,TELUK MENGKUDU,BOGAK BESAR,"Desa Bogak Besar, Kec. Teluk Mengkudu, Kab. Serdang Bedagai, Sumatera Utara",SPPG Serdang Bedagai Teluk Mengkudu Bogak Besar
+418,SUMATERA BARAT,KOTA PADANG PANJANG,PADANG PANJANG BARAT,BUKIT SURUNGAN,"Jl. Prof Hamka 12 Bukit Surungan, Kec. Padang Panjang Barat, Kota Padang Panjang, Sumatera Barat",SPPG Kota Padang Panjang Padang Panjang Barat Bukit Surungan
+419,NUSA TENGGARA BARAT,LOMBOK TIMUR,TERARA,JENGGIK,"Rempeng Buku, Desa Jenggik, Kec. Terara, Kab. Lombok Timur, Nusa Tenggara Batar",SPPG Lombok Timur Terara Jenggik
+420,JAWA BARAT,SUKABUMI,CURUGKEMBAR,CURUGKEMBAR,"Kampung Cimanggu Rt 003 Rw 001 Desa Curugkembar, Kec. Curugkembar, Kab. Sukabumi, Jawa Barat",SPPG Sukabumi Curugkembar Curugkembar 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+421,SUMATERA SELATAN,KOTA PALEMBANG,SUKARAMI,SUKABANGUN,"Jl. Tambun 1263, Suka Bangun, Kec. Sukarami, Kota Palembang, Sumatera Selatan",SPPG Kota Palembang Sukarami Sukabangun 3
+422,JAWA TENGAH,PEMALANG,PULOSARI,PULOSARI,"Desa Pulosari, Kecamatan Pulosari, Kabupaten Pemalang, Jawa Tengah",SPPG Pemalang Pulosari Pulosari 2
+423,JAWA TENGAH,PEKALONGAN,PANINGGARAN,KRANDEGAN,"Desa Krandegan, Dukuh Jurang Kulon, Kec. Paninggaran, Kab. Pekalongan, Jawa Tengah",SPPG Pekalongan Paninggaran Krandegan
+424,JAWA TENGAH,BANYUMAS,RAWALO,SANGGREMAN,"Desa Sanggreman Kecamatan Rawalo Kabupaten Banyumas, Jawa Tengah",SPPG Banyumas Rawalo Sanggreman
+425,JAWA BARAT,KOTA BEKASI,JATISAMPURNA,JATIRADEN,"Jl. Elang VIII, Kelurahan Jatiraden Kecamatan Jatisampurna, Kota Bekasi, Jawa Barat",SPPG Kota Bekasi Jatisampurna Jatiraden 1
+426,JAWA BARAT,INDRAMAYU,KANDANGHAUR,ILIR,"Jl. Raya Ilir Desa Ilir No 05 Kecamatan Kandanghaur, Kabupaten Indramayu, Jawa Barat",SPPG Indramayu Kandanghaur Ilir
+427,DKI JAKARTA,KOTA ADM. JAKARTA SELATAN,JAGAKARSA,TANJUNG BARAT,"Jl. Muara 2 No.12, Tanjung Barat, Kec. Jagakarsa, Kota Adm. Jakarta Selatan, Dki Jakarta",SPPG Jaksel Jagakarsa Tanjung Barat 7
+428,JAWA TIMUR,LAMONGAN,KALITENGAH,PUCANGTELU,"Jl. Raya Kendal Kemlagi, Pucangtelu, Kec. Kalitengah, Kab. Lamongan, Jawa Timur",SPPG Lamongan Kalitengah Pucangtelu
+429,BANTEN,LEBAK,MAJA,SANGIANG,"Kampung Cikuya, Sangiang, Maja, Kabupaten Lebak, Banten",SPPG Lebak Maja Sangiang 1
+430,JAWA TIMUR,JOMBANG,JOGOROTO,NGUMPUL,"Jl. Purnama, RT 004 RW 003, Ngumpul, Kec. Jogoroto, Kabupaten Jombang, Jawa Timur",SPPG Jombang Jogoroto Ngumpul
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+431,SUMATERA UTARA,DELI SERDANG,TANJUNG MORAWA,LIMAU MANIS,"Gang Jambu, Dusun 7, Desa Limau Manis, Kecamatan Tanjung Morawa, Kabupaten Deliserdang, Provinsi Sumatra Utara",SPPG Deli Serdang Tanjung Morawa Limau Manis
+432,JAWA TIMUR,KOTA PROBOLINGGO,KANIGARAN,KANIGARAN,"jl. sunan muria rt 05 rw 17 kel. kebonsari kulon, kec. kanigaran kota probolinggo",SPPG Kota Probolinggo Kanigaran Kanigaran 7
+433,NUSA TENGGARA BARAT,KOTA BIMA,MPUNDA,MANDE,"Jl. Tendean 3 Kel. Mande Kec. Mpunda Kota Bima , NTB",SPPG Kota Bima Mpunda Mande
+434,NUSA TENGGARA TIMUR,SIKKA,ALOK TIMUR,WAIOTI,"Jl. Jendral Sudirman No.49, Kelurahan Waioti, Kecamatan Alok Timur, Kabupaten Sikka, Nusa Tenggara Timur",SPPG Sikka Alok Timur Waioti
+435,SUMATERA UTARA,DELI SERDANG,PERCUT SEI TUAN,AMPLAS,"Jl. Selambo Raya Gang Taganing, Amplas, Percut Sei Tuan, Kabupaten Deli Serdang, Sumatera Utara",SPPG Deli Serdang Percut Sei Tuan Amplas
+436,JAWA TIMUR,KEDIRI,PLOSOKLATEN,PRANGGANG,"Prenggang Kec. Plosoklaten Kab. Kediri, Jawa Timur",SPPG Kediri Plosoklaten Pranggang
+437,JAWA TIMUR,TRENGGALEK,TRENGGALEK,KARANGSOKO,"Jalan Raya Tulungagung Trenggalek, RT 03 RW 01, Desa Karangsoko, Kecamatan Trenggalek, Kabupaten Trenggalek, Jawa Timur",SPPG Trenggalek Trenggalek Karangsoko
+438,JAWA BARAT,KOTA TASIKMALAYA,TAWANG,KAHURIPAN,"Kahuripan Kecamatan Tawang, Kota Tasikmalaya, Jawa Barat",SPPG Kota Tasikmalaya Tawang Kahuripan 5
+439,DKI JAKARTA,KOTA ADM. JAKARTA SELATAN,JAGAKARSA,CIGANJUR,"Bengkel Alam Prima Jaya, Rt 001 Rw 004, Ciganjur, Kec. Jagakarsa, Kota Adm. Jakarta Selatan, Dki Jakarta",SPPG Jaksel Jagakarsa Ciganjur 9
+440,JAWA TIMUR,JEMBER,TANGGUL,PATEMON,"Jl. Jerukan Desa Patemon, Patemon, Kec. Tanggul, Kab. Jember, Jawa Timur",SPPG Jember Tanggul Patemon
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+441,BANTEN,TANGERANG,MAUK,TANJUNG ANOM,"JL. Komplek Pendidikan Al Furqon,Desa Tanjung Anom, Kec. Mauk",SPPG Tangerang Mauk Tanjung Anom 3
+442,DKI JAKARTA,KOTA ADM. JAKARTA UTARA,CILINCING,KALIBARU,"Jl. Kali Baru Timur VI No.2, Rt. 3 Rw. 13, Kali Baru, Kec. Cilincing, Kota Adm. Jakarta Utara, Dki Jakarta",SPPG Jakut Cilincing Kalibaru 4
+443,RIAU,KAMPAR,KAMPAR KIRI TENGAH,SIMALINYANG,"Jl. Pekanbaru Desa Simalinyang, Kec. Kampar Kiri Tengah, Kab. Kampar, Riau",SPPG Kampar Kampar Kiri Tengah Simalinyang 2
+444,ACEH,ACEH SELATAN,MEUKEK,LHOK AMAN,"Jl. Nasional Tapaktuan Meulaboh Desa Lhok Aman Kec Meukek Kab Aceh Selatan, Lhok Aman, Meukek, Kab. Aceh Selatan, Aceh",SPPG Aceh Selatan Meukek Lhok Aman
+445,JAWA TIMUR,SAMPANG,KEDUNGDUNG,GUNUNGELEH,"Gunungeleh, Kecamatan Kedungdung, Kabupaten Sampang, Jawa Timur",SPPG Sampang Kedungdung Gunungeleh 2
+446,SUMATERA BARAT,SOLOK SELATAN,SANGIR,LUBUK GADANG,"Mako Polres Solok Selatan, Lubuk Gadang, Kecamatan Sangir, Kabupaten Solok Selatan, Sumatera Barat",SPPG Solok Selatan Sangir Lubuk Gadang 2
+447,JAWA TENGAH,JEPARA,NALUMSARI,DAREN,"Desa Daren Gang 4 Rt 01 Rw 01, Kec. Nalumsari, Kab. Jepara, Jawa Tengah",SPPG Jepara Nalumsari Daren 3
+448,SUMATERA SELATAN,OGAN ILIR,SUNGAI PINANG,SUNGAI PINANG II,"Jl. Lintas Timur No. 337, Sungai Pinang II, Kec. Sungai Pinang, Kab. Ogan Ilir, Sumatera Selatan",SPPG Ogan Ilir Sungai Pinang Sungai Pinang II
+449,JAWA BARAT,MAJALENGKA,SUKAHAJI,CIKALONG,"Blok Kemis, Desa Cikalong, Kecamatan Sukahaji, Kabupaten Majalengka, Jawa Barat",SPPG Majalengka Sukahaji Cikalong 2
+450,JAWA TIMUR,KOTA MALANG,LOWOKWARU,TULUSREJO,"Jl. Cengger Ayam No 42 Kel.Tulusrejo Kec. Lowokwaru Kota Malang, Jawa Timur",SPPG Kota Malang Lowokwaru Tulusrejo 2
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+451,SULAWESI SELATAN,JENEPONTO,TAMALATEA,TAMAN ROYA,"Jl. Poros Makassar Jeneponto, Taman Roya, Tamalatea, Kabupaten Jeneponto, Sulawesi Selatan",SPPG Jeneponto Tamalatea Taman Roya
+452,DAERAH ISTIMEWA YOGYAKARTA,SLEMAN,NGAGLIK,SARDONOHARJO,"Plumbon Sardonoharjo Ngaglik Sleman Daerah Istimewa Yogyakarta, Sardonoharjo, Ngaglik, Kab. Sleman, Daerah Istimewa Yogyakarta",SPPG Sleman Ngaglik Sardonoharjo 1
+453,ACEH,ACEH TENGAH,BEBESEN,TAN SARIL,"Tan Saril, Kecamatan Bebesen, Kabupaten Aceh Tengah, Aceh",SPPG Aceh Tengah Bebesen Tan Saril
+454,JAWA BARAT,SUKABUMI,NAGRAK,NAGRAK UTARA,"Kampung Sinagar Rt 02 Rw 02 Desa Nagrak Utara Kecamatan Nagarak, Kabupaten Sukabumi, Jawa Barat",SPPG Sukabumi Nagrak Nagrak Utara 2
+455,SULAWESI BARAT,MAJENE,ULUMANDA,SALUTAMBUNG,"Jl Poros Majene Mamuju, Desa Salutambung, Kec. Ulumanda, Kab. Majene, Sulawesi Barat",SPPG Majene Ulumanda Salutambung
+456,DKI JAKARTA,KOTA ADM. JAKARTA PUSAT,KEMAYORAN,KEMAYORAN,"Jl. Bungur Besar Raya No 57, Kemayoran, Kemayoran, Kota Adm. Jakarta Pusat, Dki Jakarta",SPPG Jakpus Kemayoran Kemayoran 2
+457,KALIMANTAN TENGAH,KATINGAN,KATINGAN KUALA,PAGATAN HILIR,"Kelurahan Katingan, Kecamatan Katingan Kuala, Kabupaten Katıngan, Kalimantan Tengah",SPPG Katingan Katingan Kuala Pagatan Hilir
+458,RIAU,INDRAGIRI HULU,BATANG CENAKU,PUNTI ANAI,"Jl. Lintas Selatan, Desa Kuala Kilan",SPPG Indragiri Hulu Batang Cenaku Punti Anai
+459,JAWA BARAT,TASIKMALAYA,TANJUNGJAYA,CILOLOHAN,"Kampung Cilolohan Kec. Tanjungjaya Kab. Tasikmalaya, Jawa Barat",SPPG Tasikmalaya Tanjungjaya Cilolohan 2
+460,NUSA TENGGARA BARAT,DOMPU,DOMPU,DORA TANGGA,"Jl. Lintas Kelurahan Dorotangga Rt. 08 Rw. 02, Dora Tangga, Kec. Dompu, Kab. Dompu, Nusa Tenggara Barat",SPPG Dompu Dompu Dora Tangga
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+461,SUMATERA UTARA,TOBA,SILAEN,HUTANAMORA,"Jl. D.I. Panjaitan, Hutanamora, Silaen, Kabupaten Toba, Sumatera Utara",SPPG Toba Silaen Hutanamora
+462,JAWA TIMUR,MOJOKERTO,PURI,TAMBAKAGUNG,Dusun Trenggumung Rt 004 Rw 002 Desa Tambakagung Kec. Puri Kab. Mojokerto 61363 Jawa Timur,SPPG Mojokerto Puri Tambakagung
+463,JAWA TENGAH,SRAGEN,SRAGEN,KEDUNGUPIT,"Jl Karangudi Pilangsari Tanjang RT 22 Kedungupit, Kec. Sragen, Kab. Sragen, Jawa Tengah",SPPG Sragen Sragen Kedungupit
+464,JAWA TENGAH,KOTA SALATIGA,SIDOREJO,BUGEL,"Desa Bugel, Kecamatan Sidorejo, Kota Salatiga, Jawa Tengah",SPPG Kota Salatiga Sidorejo Bugel 1
+465,SUMATERA UTARA,KOTA PEMATANGSIANTAR,SIANTAR BARAT,TIMBANG GALUNG,"Jl. H. Adam Malik, No. 97",SPPG Kota Pematangsiantar Siantar Barat Timbang Galung
+466,JAWA TIMUR,LAMONGAN,LAMONGAN,BANJARMENDALAN,"Jl. Panglima Sudirman, Banjar Anyar, Kelurahan Banjarmendalan, Kecamatan Lamongan, Kabupaten Lamongan, Jawa Timur",SPPG Lamongan Lamongan Banjarmendalan
+467,LAMPUNG,LAMPUNG TENGAH,BANGUN REJO,CIMARIAS,"Dusun 1 Cimarias Rt 002 Rw 001, Cimarias, Kec. Bangun Rejo, Kab. Lampung Tengah, Lampung",SPPG Lampung Tengah Bangun Rejo Cimarias
+468,JAWA BARAT,GARUT,KADUNGORA,KARANGMULYA,"Jl. Rancasalak, Kampung Sukasirna Rt 04/07, Desa Karangmulya, Kecamatan Kadungora, Kabupaten Garut, Jawa Barat",SPPG Garut Kadungora Karangmulya 4
+469,MALUKU UTARA,KOTA TERNATE,KOTA TERNATE TENGAH,TAKOMA,JALAN KOTABARU GANG KAYUBUA RT 001 KELURAHAN TAKOMA KECAMATAN TERNATE TENGAH KOTA TERNATE PROVINSI MALUKU UTARA (97714),SPPG Kota Ternate - Ternate Tengah
+470,JAWA TIMUR,SUMENEP,ARJASA,PANDEMAN,"Desa Pademan, Kecamatan Arjasa, Kabupaten Sumenep, Jawa Timur",SPPG Sumenep Arjasa Pandeman
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+471,SUMATERA SELATAN,KOTA PAGAR ALAM,PAGAR ALAM UTARA,BANGUN REJO,"Jalan Perintis, Perumnas GUPPI, BANGUN REJO, PAGAR ALAM UTARA, KOTA PAGAR ALAM, SUMATERA SELATAN",SPPG Kota Pagar Alam Pagar Alam Utara Bangun Rejo
+472,JAWA BARAT,GARUT,LELES,SALAMNUNGGAL,"Jl. Kiansantang No 39 Desa Salamnunggal, Kecamatan Leles, Kabupaten Garut, Jawa Barat",SPPG Garut Leles Salamnunggal
+473,JAWA TIMUR,SIDOARJO,SIDOARJO,LEMAHPUTRO,"Jl. Raya Taman Pinang Indah No.03 Blok A4, Kwadengan Barat, Lemahputro, Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur",SPPG Sidoarjo Sidoarjo Lemahputro 2
+474,JAWA TENGAH,DEMAK,WEDUNG,BUKO,"Dukuh Angin-Angin Rt 001 Rw 001 Desa Buko, Kecamatan Wedung, Kabupaten Demak, Jawa Tengah",SPPG Demak Wedung Buko
+475,BANTEN,TANGERANG,KRONJO,CIRUMPAK,"Desa Cirumpak, Kecamatan Kronjo, Kabupaten Tangerang, Banten",SPPG Tangerang Kronjo Cirumpak
+476,SUMATERA SELATAN,MUSI RAWAS,MUARA LAKITAN,ANYAR,"Anyar, Kec. Muara Lakitan, Kab. Musi Rawas, Sumatera Selatan",SPPG Musi Rawas Muara Lakitan Anyar
+477,JAWA BARAT,CIREBON,SURANENGGALA,SURANENGGALA,"Jl. Ki Gede Mayung Sambeng, Kec. Suranenggala, Kab. Cirebon, Jawa Barat",SPPG Cirebon Suranenggala Suranenggala 2
+478,SULAWESI TENGGARA,BUTON,LASALIMU,WAGARI,Jalan Gajah Mada,SPPG Buton Lasalimu Wagari
+479,RIAU,INDRAGIRI HULU,RENGAT BARAT,TALANG JERINJING,"Jl. Lintas Sumatera, Desa Talang Jerinjing, Kec. Rengat Barat, Kab. Indragiri Hulu, Riau",SPPG Indragiri Hulu Rengat Barat Talang Jerinjing
+480,JAWA TIMUR,SIDOARJO,SIDOARJO,CEMENGBAKALAN,"Cemengbakalan, Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur",SPPG Sidoarjo Sidoarjo Cemengbakalan 4
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+481,JAWA TIMUR,BANGKALAN,GALIS,BANYU BUNIH,Dsn Blundung Desa Banyubunih Kec Galis Kabupaten Bangkalan,SPPG Bangkalan Galis Banyu Bunih 2
+482,NUSA TENGGARA BARAT,LOMBOK TIMUR,SUWELA,PERIGI,"Jl. Raya Budaya Limbungan Rt 04 Desa Perigi, Kecamatan Suela Suwela Kabupaten Lombok Timur Nusa Tenggara Barat",SPPG Lombok Timur Suwela Perigi
+483,BANTEN,TANGERANG,KELAPA DUA,BENCONGAN,"Jl. Kecubung Bumi Karawaci Bengcongan, Kec. Kelapa Dua, Kab. Tangerang, Banten",SPPG Tangerang Kelapa Dua Bencongan 4
+484,BANTEN,PANDEGLANG,MUNJUL,PASANGGRAHAN,"Kampung Menteng Raya Rt 015 Rw 003, Pasanggrahan, Kec. Munjul, Kab. Pandeglang, Banten",SPPG Pandeglang Munjul Pasanggrahan
+485,JAWA BARAT,BANDUNG,CILEUNYI,CILEUNYI WETAN,"Jl. Kampung Pasar Sore No 12 Rt. 001 Rw. 005, Cileunyi Wetan, Kec. Cileunyi, Kab. Bandung, Jawa Barat",SPPG Bandung Cileunyi Cileunyi Wetan 7
+486,LAMPUNG,MESUJI,PANCA JAYA,MUKTI KARYA,Jl. Raden Intan Kelurahan Mukti Karya Kecamatan Panca Jaya Kabupaten Mesuji Provinsi Lampung,SPPG Mesuji Panca Jaya Mukti Karya
+487,SULAWESI SELATAN,SINJAI,SINJAI TIMUR,TONGKE-TONGKE,"BTN Lappa Mas 1, Blok E.49",SPPG Sinjai Sinjai Timur Tongke-tongke
+488,RIAU,ROKAN HILIR,BAGANSINEMBAH,BAGAN BATU KOTA,"Jl. Sisingamangaraja Desa Bagan Batu Kota, Kec. Bagan Sinembah, Kab. Rokan Hilir, Riau",SPPG Rokan Hilir Bagansinembah Bagan Batu Kota
+489,JAWA TENGAH,TEGAL,DUKUHWARU,BLUBUK,"Jl. Gunung Slamet Gang Juanda Rt 01 Rw 03 Desa Blubuk, Kec. Dukuhwaru, Kab. Tegal, Jawa Tengah",SPPG Tegal Dukuhwaru Blubuk
+490,RIAU,PELALAWAN,LANGGAM,LANGGAM,"Jl. Teknopolitan No.1 Desa Langgam, Kecamatan Langgam, Kabupaten Pelalawan, Riau",SPPG Pelalawan Langgam Langgam
+No,Provinsi SPPG,Kab./Kota SPPG,Kecamatan SPPG,Kelurahan/Desa SPPG,Alamat SPPG,Nama SPPG
+491,ACEH,PIDIE JAYA,TRIENGGADENG,SAGOE,"Jl. Lintas Banda Aceh Medan, Sagoe, Kec. Trienggadeng, Kab. Pidie Jaya, Aceh",SPPG Pidie Jaya Trienggadeng Sagoe
+492,ACEH,BIREUEN,PEULIMBANG,UTEUN SIKUMBONG,"Jl. Raya Medan Banda Aceh, Uteun Sikumbong, Kec. Peulimbang, Kab. Bireuen, Aceh",SPPG Bireuen Peulimbang Uteun Sikumbong
+493,SULAWESI SELATAN,BARRU,BARRU,COPPO,"jl.iskandar Unru (Belakang Kantor DPRD) Kel.Coppo, Kec.Barru Prov.Sulawesi Selatan",SPPG Barru Barru Coppo 2
+494,LAMPUNG,KOTA BANDAR LAMPUNG,RAJABASA,RAJABASA,"Jl. Abdul Muis No. 21, Gedong Meneng, Rajabasa, Kota Bandarlampung",SPPG Kota Bandar Lampung Rajabasa Rajabasa 2
+495,JAWA TENGAH,PATI,JAKEN,TRIKOYO,"Jl. Jakenan Pucakwangi, Trikoyo, Kec. Jaken, Kab. Pati, Jawa Tengah",SPPG Pati Jaken Trikoyo
+496,JAWA BARAT,KOTA DEPOK,PANCORAN MAS,MAMPANG,"Jl. Makam Bojong, Mampang RT 004 RW 003, Kec. Pancoran Mas, Kota Depok, Jawa Barat",SPPG Kota Depok Pancoran Mas Mampang 4
+497,ACEH,ACEH TIMUR,PEUDAWA,PAYA BILI SA,"Dusun Pemuda, Desa Paya Bili sa, Kec. Peudawa, Kab. Aceh Timur, Aceh",SPPG Aceh Timur Peudawa Paya Bili Sa
+498,LAMPUNG,LAMPUNG TENGAH,PADANG RATU,SENDANG AYU,"Sendang Ayu, Kec. Padang Ratu, Kab. Lampung Tengah, Lampung",SPPG Lampung Tengah Padang Ratu Sendang Ayu
+499,DKI JAKARTA,KOTA ADM. JAKARTA PUSAT,SAWAH BESAR,GUNUNG SAHARI UTARA,"Jl. Rajawali 14 No.12, Gunung Sahari Utara, Kec. Sawah Besar, Kota Adm. Jakarta Pusat, Dki Jakarta",SPPG Jakpus Sawah Besar Gunung Sahari Utara
+500,ACEH,ACEH TENGGARA,LAWE ALAS,PASIR NUNGGUL,Desa Pasir Nunggul Kec. Lawe Alas Kab. Aceh Tenggara Provinsi Aceh,SPPG Aceh Tenggara Lawe Alas Kute Batu Baru

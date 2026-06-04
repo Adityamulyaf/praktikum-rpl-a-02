@@ -1,31 +1,81 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import DashboardLayout from "../components/DashboardLayout";
+import PublicLandingContent from "../features/PublicLandingContent";
+import SppgTable from "./admin/SppgTable";
+import SchoolTable from "./admin/SchoolTable";
+
+/* ── Icons ─────────────────────────────────────────────────── */
+const IconHome = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
+  </svg>
+);
+const IconSppg = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M6 13.87A4 4 0 017.41 6a5.11 5.11 0 019.18 0A4 4 0 0118 13.87V21H6z" />
+    <line x1="6" y1="17" x2="18" y2="17" />
+  </svg>
+);
+const IconSchool = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+  </svg>
+);
+
+const MENU_GROUPS = [
+  {
+    label: null,
+    items: [
+      { key: "beranda", label: "Beranda", icon: <IconHome /> },
+      { key: "sppg", label: "SPPG", icon: <IconSppg /> },
+      { key: "sekolah", label: "Sekolah", icon: <IconSchool /> },
+    ],
+  },
+];
 
 export default function AdminDashboard() {
-  const navigate = useNavigate();
-  const { user, logout } = useAuth();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login');
-  };
-
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'center' }}>
-        <h1>Admin Control Panel</h1>
-        <button onClick={handleLogout} style={{ color: 'white', backgroundColor: 'red', border: 'none', padding: '0.5rem 1rem', cursor: 'pointer' }}>
-          Log Out
-        </button>
-      </div>
-      <hr />
-      <h3>User Session Meta Data:</h3>
-      <ul>
-        <li><strong>UUID (ssid):</strong> {user.ssid}</li>
-        <li><strong>Name:</strong> {user.name}</li>
-        <li><strong>Email:</strong> {user.email}</li>
-        <li><strong>Role Group:</strong> {user.role}</li>
-      </ul>
-    </div>
+    <DashboardLayout menuGroups={MENU_GROUPS} pageClass="admin-page" hasSidebar>
+      {(active, onNavigate) => {
+        switch (active) {
+          case "beranda":
+            return <PublicLandingContent onNavigate={onNavigate} />;
+          case "sppg":
+            return <SppgTable />;
+          case "sekolah":
+            return <SchoolTable />;
+          default:
+            return null;
+        }
+      }}
+    </DashboardLayout>
   );
 }
