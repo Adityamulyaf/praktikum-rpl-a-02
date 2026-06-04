@@ -1,0 +1,40 @@
+/* ── VALIDATION AI CARD ENTRY STYLES ────────────────────────── */
+
+.vai-card-entry {
+  background: var(--surface-1);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+}
+
+.vai-card-entry-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vai-card-entry-desc {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  line-height: 20px;
+  flex: 1;
+}
+
+.vai-card-entry-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+  margin-top: auto;
+  display: inline-block;
+  transition: opacity 150ms ease-out;
+}
+
+.vai-card-entry-link:hover {
+  opacity: 0.8;
+}

@@ -3,6 +3,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import ValidationAICard from './components/ValidationAICard';
 import ValidationAI from './pages/ValidationAI';
 
 export default function App() {
@@ -22,15 +23,7 @@ export default function App() {
                   Ini adalah pusat monitoring program Makan Bergizi Gratis (MBG) untuk sekolah Anda.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                  <div style={{ background: 'white', padding: '20px', borderRadius: '8px', border: '1px solid var(--border-default)' }}>
-                    <h3 style={{ margin: '0 0 12px', fontSize: '16px', fontWeight: '600' }}>Validasi Gizi AI</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '16px', lineHeight: '20px' }}>
-                      Pindai porsi makan siang bergizi siswa menggunakan teknologi AI kamera langsung.
-                    </p>
-                    <a href="/validasi-ai" style={{ color: 'var(--color-primary)', fontWeight: '600', textDecoration: 'none', fontSize: '13px' }}>
-                      Buka Fitur Pemindai &rarr;
-                    </a>
-                  </div>
+                  <ValidationAICard />
                   <div style={{ background: 'white', padding: '20px', borderRadius: '8px', border: '1px solid var(--border-default)' }}>
                     <h3 style={{ margin: '0 0 12px', fontSize: '16px', fontWeight: '600' }}>Ringkasan Program</h3>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '13px' }}>
@@ -55,7 +48,7 @@ export default function App() {
         </Route>
 
         {/* Catchalls */}
-        <Route path="/unauthorized" element={<div style={{ padding: '2rem', color: 'red' }}>403 - Access Denied</div>} />
+        <Route path="/unauthorized" element={<div style={{ padding: '2rem', color: 'var(--status-error)' }}>403 - Access Denied</div>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
