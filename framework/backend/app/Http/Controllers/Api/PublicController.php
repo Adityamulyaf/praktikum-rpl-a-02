@@ -17,7 +17,12 @@ class PublicController extends Controller
         }
 
         $schools = School::select('id', 'name', 'district', 'province')
-            ->where('name', 'ilike', '%' . $q . '%')
+            ->with(['sppgProfiles:id,kitchen_name,address,district,province'])
+            ->where(function ($query) use ($q) {
+                $query->where('name', 'ilike', '%' . $q . '%')
+                    ->orWhere('district', 'ilike', '%' . $q . '%')
+                    ->orWhere('province', 'ilike', '%' . $q . '%');
+            })
             ->orderBy('name')
             ->limit(20)
             ->get();

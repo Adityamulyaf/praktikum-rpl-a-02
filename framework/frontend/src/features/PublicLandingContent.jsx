@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { searchPublicSchools } from '../api/auth';
 import PersonalStrip from '../components/PersonalStrip';
 import '../pages/PublicLanding.css';
@@ -70,11 +70,21 @@ export default function PublicLandingContent({ onNavigate }) {
   const [results, setResults]   = useState([]);
   const [loading, setLoading]   = useState(false);
   const [searched, setSearched] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const searchRef = useRef(null);
   const debounceRef = useRef(null);
+
+  const getSppgNames = (school) => {
+    const names = school.sppg_profiles?.map((sppg) => sppg.kitchen_name).filter(Boolean) ?? [];
+    return names.length > 0 ? names.join(', ') : 'SPPG belum tersedia';
+  };
 
   const handleInput = (e) => {
     const q = e.target.value;
     setQuery(q);
+    setSelectedSchool(null);
+    setIsDropdownOpen(true);
     clearTimeout(debounceRef.current);
     if (q.length < 2) { setResults([]); setSearched(false); return; }
     debounceRef.current = setTimeout(async () => {
@@ -83,14 +93,39 @@ export default function PublicLandingContent({ onNavigate }) {
         const { data } = await searchPublicSchools(q);
         setResults(data);
         setSearched(true);
+        setIsDropdownOpen(true);
       } catch {
         setResults([]);
         setSearched(true);
+        setIsDropdownOpen(true);
       } finally {
         setLoading(false);
       }
     }, 300);
   };
+
+  const handleSelectSchool = (school) => {
+    setSelectedSchool(school);
+    setQuery(school.name);
+    setIsDropdownOpen(false);
+  };
+
+  const handleSearchFocus = () => {
+    if (query.length >= 2 && searched) {
+      setIsDropdownOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div className="plc-root">
@@ -111,7 +146,7 @@ export default function PublicLandingContent({ onNavigate }) {
           </p>
 
           {/* Search */}
-          <div className="plc-search-wrap">
+          <div className="plc-search-wrap" ref={searchRef}>
             <div className="plc-search-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -124,11 +159,12 @@ export default function PublicLandingContent({ onNavigate }) {
               placeholder="Cari nama sekolah atau kabupaten..."
               value={query}
               onChange={handleInput}
+              onFocus={handleSearchFocus}
               autoComplete="off"
             />
             {loading && <div className="plc-search-spinner" />}
 
-            {searched && (
+            {searched && isDropdownOpen && (
               <div className="plc-search-results">
                 {results.length === 0 ? (
                   <div className="plc-search-empty">
@@ -137,17 +173,40 @@ export default function PublicLandingContent({ onNavigate }) {
                 ) : (
                   <>
                     <div className="plc-search-count">{results.length} sekolah ditemukan</div>
-                    {results.slice(0, 8).map((s) => (
-                      <div key={s.id} className="plc-school-item">
-                        <div>
-                          <div className="plc-school-name">{s.name}</div>
-                          <div className="plc-school-loc">{s.district} · {s.province}</div>
-                        </div>
-                        <span className="plc-school-badge">SPPG: segera</span>
-                      </div>
-                    ))}
+                    <div className="plc-search-list">
+                      {results.map((s) => (
+                        <button
+                          key={s.id}
+                          type="button"
+                          className="plc-school-item"
+                          onClick={() => handleSelectSchool(s)}
+                        >
+                          <div>
+                            <div className="plc-school-name">{s.name}</div>
+                            <div className="plc-school-loc">{s.district} · {s.province}</div>
+                          </div>
+                          <span className="plc-school-badge">{getSppgNames(s)}</span>
+                        </button>
+                      ))}
+                    </div>
                   </>
                 )}
+              </div>
+            )}
+
+            {selectedSchool && (
+              <div className="plc-selected-school">
+                <div>
+                  <div className="plc-selected-label">Sekolah dipilih</div>
+                  <div className="plc-selected-name">{selectedSchool.name}</div>
+                  <div className="plc-selected-meta">
+                    {selectedSchool.district ?? 'Kabupaten tidak tersedia'} · {selectedSchool.province ?? 'Provinsi tidak tersedia'}
+                  </div>
+                </div>
+                <div className="plc-selected-sppg">
+                  <span>Dapur SPPG</span>
+                  <strong>{getSppgNames(selectedSchool)}</strong>
+                </div>
               </div>
             )}
           </div>

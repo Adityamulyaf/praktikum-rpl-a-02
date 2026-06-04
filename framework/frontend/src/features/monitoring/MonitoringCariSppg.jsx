@@ -8,6 +8,11 @@ export default function MonitoringCariSppg() {
   const [searched, setSearched] = useState(false);
   const debounceRef = useRef(null);
 
+  const getSppgNames = (school) => {
+    const names = school.sppg_profiles?.map((sppg) => sppg.kitchen_name).filter(Boolean) ?? [];
+    return names.length > 0 ? names.join(', ') : 'Belum tersedia';
+  };
+
   const handleInput = (e) => {
     const q = e.target.value;
     setQuery(q);
@@ -83,7 +88,7 @@ export default function MonitoringCariSppg() {
                     <td>{school.district ?? '—'}</td>
                     <td>{school.province ?? '—'}</td>
                     <td>
-                      <span className="mon-badge-pending">Segera tersedia</span>
+                      <span className="mon-badge-pending">{getSppgNames(school)}</span>
                     </td>
                   </tr>
                 ))}
