@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import api from '../../api/axios';
-import '../admin/admin.css';
+import api from '../../../api/axios';
+import '../../admin/admin.css';
 
 const EMPTY_FORM = {
   served_at: new Date().toISOString().split('T')[0],

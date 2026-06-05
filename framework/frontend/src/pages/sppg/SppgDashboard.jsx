@@ -1,8 +1,8 @@
-import DashboardLayout from "../components/DashboardLayout";
-import MenuHarian from "./SppgMenu/MenuHarian";
-import PublicLandingContent from "../features/PublicLandingContent";
-import Kitchen from "./KitchenProfile/Kitchen";
-import DistribusiHarian from "./SppgDistribusi/DistribusiHarian";
+import DashboardLayout from "../../components/DashboardLayout";
+import MenuHarian from "./menu/MenuHarian";
+import PublicLandingContent from "../../features/PublicLandingContent";
+import Kitchen from "./profile/Kitchen";
+import DistribusiHarian from "./distribusi/DistribusiHarian";
 
 /* ── Icons ─────────────────────────────────────────────── */
 const IconHome = () => (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import api from '../../api/axios';
-import '../admin/admin.css';
+import api from '../../../api/axios';
+import '../../admin/admin.css';
 
 export default function KirimUlasan() {
   const [content,   setContent]   = useState('');

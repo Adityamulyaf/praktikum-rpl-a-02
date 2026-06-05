@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../api/axios";
-import "./Kitchen.css";
+import "../sppg/profile/Kitchen.css";
 import "./LandingKitchen.css";
 
 /* ── Kitchen card (list view) ─────────────────────────────────── */

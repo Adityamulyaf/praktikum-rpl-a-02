@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { searchPublicSchools } from '../api/auth';
+import { searchPublicSchools } from '../../api/auth';
 
 export default function SchoolSearch({ id, value, onChange, required }) {
   const [query, setQuery]       = useState('');

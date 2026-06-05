@@ -1,7 +1,7 @@
-import DashboardLayout from "../components/DashboardLayout";
-import PublicLandingContent from "../features/PublicLandingContent";
-import SppgTable from "./admin/SppgTable";
-import SchoolTable from "./admin/SchoolTable";
+import DashboardLayout from "../../components/DashboardLayout";
+import PublicLandingContent from "../../features/PublicLandingContent";
+import SppgTable from "./SppgTable";
+import SchoolTable from "./SchoolTable";
 
 /* ── Icons ─────────────────────────────────────────────────── */
 const IconHome = () => (

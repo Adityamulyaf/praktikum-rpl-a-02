@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import api from '../api/axios';
-import { useAuth } from '../context/AuthContext';
+import api from '../../api/axios';
+import { useAuth } from '../../context/AuthContext';
 import LoginForm from './LoginForm';
 import RegisterSelectForm from './RegisterSelectForm';
 import SiswaRegisterForm from './SiswaRegisterForm';

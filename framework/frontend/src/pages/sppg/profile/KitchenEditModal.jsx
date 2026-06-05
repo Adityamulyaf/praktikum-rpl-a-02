@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import api from '../../api/axios';
-import '../admin/admin.css';
+import api from '../../../api/axios';
+import '../../admin/admin.css';
 
 export default function KitchenEditModal({ profile, onClose, onSaved }) {
   const [form, setForm] = useState({

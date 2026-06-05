@@ -1,7 +1,7 @@
-import DashboardLayout from "../components/DashboardLayout";
-import PublicLandingContent from "../features/PublicLandingContent";
-import KirimUlasan from "./SiswaUlasan/KirimUlasan";
-import RiwayatUlasan from "./SiswaUlasan/RiwayatUlasan";
+import DashboardLayout from "../../components/DashboardLayout";
+import PublicLandingContent from "../../features/PublicLandingContent";
+import KirimUlasan from "./ulasan/KirimUlasan";
+import RiwayatUlasan from "./ulasan/RiwayatUlasan";
 
 /* ── Icons ─────────────────────────────────────────────── */
 const IconHome = () => (

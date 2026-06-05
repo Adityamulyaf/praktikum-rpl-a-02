@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { searchPublicSchools } from "../api/auth";
 import PersonalStrip from "../components/PersonalStrip";
-import LandingKitchenProfile from "../pages/KitchenProfile/LandingKitchenProfile";
-import "../pages/PublicLanding.css";
+import LandingKitchenProfile from "../pages/landing/LandingKitchenProfile";
+import "../pages/landing/PublicLanding.css";
 
 /* Icons: 32px outlined, no colored backgrounds per DESIGN.md §8.1 */
 const FEATURES = [
