@@ -3,7 +3,6 @@ import MenuHarian from "./menu/MenuHarian";
 import PublicLandingContent from "../../features/PublicLandingContent";
 import Kitchen from "./profile/Kitchen";
 import DistribusiHarian from "./distribusi/DistribusiHarian";
-import ValidationAI from "../ValidationAI";
 
 const IconScan = () => (
   <svg
@@ -112,7 +111,6 @@ const MENU_GROUPS = [
     items: [
       { key: "beranda", label: "Beranda", icon: <IconHome /> },
       { key: "menu", label: "Menu Harian", icon: <IconMenu /> },
-      { key: "validasi", label: "Validasi AI", icon: <IconScan /> },
       { key: "distribusi", label: "Distribusi", icon: <IconTruck /> },
       { key: "profil", label: "Profil Dapur", icon: <IconBuilding /> },
       { key: "evaluasi", label: "Evaluasi", icon: <IconChart /> },
@@ -154,8 +152,6 @@ export default function SppgDashboard() {
             return <PublicLandingContent onNavigate={onNavigate} />;
           case "menu":
             return <MenuHarian />;
-          case "validasi":
-            return <ValidationAI />;
           case "distribusi":
             return <DistribusiHarian />;
           case "profil":

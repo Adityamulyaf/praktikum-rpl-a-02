@@ -8,7 +8,6 @@ const ROLE_ACTIONS = {
   ],
   sppg: [
     { key: 'menu',       label: 'Input Menu' },
-    { key: 'validasi',   label: 'Validasi AI' },
     { key: 'distribusi', label: 'Konfirmasi Distribusi' },
     { key: 'profil',     label: 'Profil Dapur' },
   ],

@@ -39,6 +39,7 @@ export default function ValidationAI() {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [isCameraSimulated, setIsCameraSimulated] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
   const [isValidating, setIsValidating] = useState(false);
   const [validationResult, setValidationResult] = useState(null);
   const [cameraStream, setCameraStream] = useState(null);
@@ -225,39 +226,57 @@ export default function ValidationAI() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target.result;
-        
-        // Create an Image object to load and draw onto the canvas to check pixels
-        const img = new Image();
-        img.onload = () => {
-          const canvas = canvasRef.current;
-          if (canvas) {
-            const context = canvas.getContext('2d');
-            canvas.width = img.width || 640;
-            canvas.height = img.height || 480;
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            
-            // Check pixels
-            const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const pixels = imgData.data;
-            let isBlack = true;
-            for (let i = 0; i < pixels.length; i += 40) {
-              if (pixels[i] > 35 || pixels[i+1] > 35 || pixels[i+2] > 35) {
-                isBlack = false;
-                break;
+      setCameraError(null);
+      setValidationResult(null);
+      
+      const isImage = file.type.startsWith('image/');
+      if (isImage) {
+        setUploadedFile(null);
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const dataUrl = event.target.result;
+          
+          // Create an Image object to load and draw onto the canvas to check pixels
+          const img = new Image();
+          img.onload = () => {
+            const canvas = canvasRef.current;
+            if (canvas) {
+              const context = canvas.getContext('2d');
+              canvas.width = img.width || 640;
+              canvas.height = img.height || 480;
+              context.drawImage(img, 0, 0, canvas.width, canvas.height);
+              
+              // Check pixels
+              const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+              const pixels = imgData.data;
+              let isBlack = true;
+              for (let i = 0; i < pixels.length; i += 40) {
+                if (pixels[i] > 35 || pixels[i+1] > 35 || pixels[i+2] > 35) {
+                  isBlack = false;
+                  break;
+                }
               }
+              
+              setCapturedImage(dataUrl);
+              handleCloseCamera();
+              runValidationSimulation(dataUrl, isBlack);
             }
-            
-            setCapturedImage(dataUrl);
-            handleCloseCamera();
-            runValidationSimulation(dataUrl, isBlack);
-          }
+          };
+          img.src = dataUrl;
         };
-        img.src = dataUrl;
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        // Handle non-image document file
+        setCapturedImage(null);
+        const fileData = {
+          name: file.name,
+          size: (file.size / 1024).toFixed(1) + ' KB',
+          type: file.type
+        };
+        setUploadedFile(fileData);
+        handleCloseCamera();
+        runValidationSimulation(null, false);
+      }
     }
   };
 
@@ -305,6 +324,7 @@ export default function ValidationAI() {
       id: Date.now(),
       time: 'Baru Saja',
       image: capturedImage,
+      file: uploadedFile,
       menuName: validationResult.foodTags.join(', '),
       calories: validationResult.calories,
       status: 'Tervalidasi'
@@ -314,6 +334,7 @@ export default function ValidationAI() {
 
     // Reset workflow
     setCapturedImage(null);
+    setUploadedFile(null);
     setValidationResult(null);
 
     alert('Hasil validasi AI berhasil disimpan ke log harian.');
@@ -322,6 +343,7 @@ export default function ValidationAI() {
   // Reset/Cancel current scan
   const handleReset = () => {
     setCapturedImage(null);
+    setUploadedFile(null);
     setValidationResult(null);
     setCameraError(null);
   };
@@ -404,8 +426,32 @@ export default function ValidationAI() {
               </>
             )}
 
+            {/* 3b. Non-image uploaded file preview */}
+            {!isCameraOpen && uploadedFile && (
+              <div className="vai-document-preview">
+                <div className="vai-document-icon-wrapper">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="vai-document-icon">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <div className="vai-document-info">
+                  <span className="vai-document-name">{uploadedFile.name}</span>
+                  <span className="vai-document-size">{uploadedFile.size}</span>
+                </div>
+                {isValidating && (
+                  <div className="vai-scanning-overlay">
+                    <div className="vai-scan-spinner" />
+                    <span style={{ fontWeight: 600, letterSpacing: '0.5px' }}>Menganalisis Berkas Menggunakan AI...</span>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* 4. Empty Camera Placeholder */}
-            {!isCameraOpen && !capturedImage && (
+            {!isCameraOpen && !capturedImage && !uploadedFile && (
               <div className="vai-camera-placeholder">
                 <span className="vai-placeholder-icon">
                   <ScanLargeIcon />
@@ -425,13 +471,13 @@ export default function ValidationAI() {
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}
-            accept="image/*"
+            accept="image/*,.pdf,.doc,.docx,.txt"
             className="vai-file-upload-input"
           />
 
           {/* Controls */}
           <div className="vai-controls">
-            {!isCameraOpen && !capturedImage && (
+            {!isCameraOpen && !capturedImage && !uploadedFile && (
               <>
                 <button className="vai-btn vai-btn-primary" onClick={handleOpenCamera}>
                   <CameraIcon />
@@ -443,7 +489,7 @@ export default function ValidationAI() {
                 </button>
                 <button className="vai-btn vai-btn-secondary" onClick={triggerFileInput}>
                   <UploadIcon />
-                  <span>Unggah Foto</span>
+                  <span>Unggah Berkas</span>
                 </button>
               </>
             )}
@@ -460,11 +506,11 @@ export default function ValidationAI() {
               </>
             )}
 
-            {!isCameraOpen && capturedImage && !isValidating && (
+            {!isCameraOpen && (capturedImage || uploadedFile) && !isValidating && (
               <>
-                <button className="vai-btn vai-btn-secondary" onClick={isCameraSimulated ? handleOpenSimulatedCamera : handleOpenCamera}>
+                <button className="vai-btn vai-btn-secondary" onClick={uploadedFile ? triggerFileInput : (isCameraSimulated ? handleOpenSimulatedCamera : handleOpenCamera)}>
                   <RefreshIcon />
-                  <span>Scan Ulang ({isCameraSimulated ? 'Simulasi' : 'Kamera'})</span>
+                  <span>Scan Ulang ({uploadedFile ? 'Berkas' : isCameraSimulated ? 'Simulasi' : 'Kamera'})</span>
                 </button>
                 <button className="vai-btn vai-btn-tertiary" onClick={handleReset}>
                   <span>Reset Tampilan</span>
@@ -657,6 +703,13 @@ export default function ValidationAI() {
                   <td>
                     {item.image ? (
                       <img src={item.image} alt="Log Thumb" className="vai-history-thumb" />
+                    ) : item.file ? (
+                      <div className="vai-history-thumb-placeholder" title={item.file.name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-primary)' }}>
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                      </div>
                     ) : (
                       <div className="vai-history-thumb-placeholder">
                         <SmallCameraIcon />
