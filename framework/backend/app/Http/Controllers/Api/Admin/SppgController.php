@@ -92,6 +92,10 @@ class SppgController extends Controller
             'description', 'production_capacity', 'is_active',
         ]));
 
+        if ($request->has('is_active')) {
+            $sppg->user->update(['is_active' => $request->boolean('is_active')]);
+        }
+
         return response()->json($sppg->load('user:ssid,name,email,phone_number,is_active'));
     }
 

@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 ])]
 class SppgProfile extends Model
 {
+    protected $table = 'sppg_profiles';
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'ssid');
@@ -20,5 +22,10 @@ class SppgProfile extends Model
     public function schools()
     {
         return $this->belongsToMany(School::class, 'sppg_schools', 'sppg_id', 'school_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'sppg_id');
     }
 }

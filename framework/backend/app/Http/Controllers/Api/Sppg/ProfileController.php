@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers\Api\Sppg;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
+class ProfileController extends Controller
+{
+    public function show(Request $request)
+    {
+        $sppg = $request->user()
+                    ->sppgProfile()
+                    ->with('schools')
+                    ->first();
+
+        if (!$sppg) {
+            return response()->json(['message' => 'Profil tidak ditemukan'], 404);
+        }
+
+        return response()->json([
+            'kitchen_name'        => $sppg->kitchen_name,
+            'is_active'           => $sppg->is_active,
+            'address'             => $sppg->address,
+            'district'            => $sppg->district,
+            'province'            => $sppg->province,
+            'contact_person_name' => $sppg->contact_person_name,
+            'contact_phone'       => $sppg->contact_phone,
+            'contact_email'       => $sppg->contact_email,
+            'production_capacity' => $sppg->production_capacity,
+            'description'         => $sppg->description,
+            'schools'             => $sppg->schools,
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $sppg = $request->user()->sppgProfile;
+
+        if (!$sppg) {
+            return response()->json(['message' => 'Profil tidak ditemukan'], 404);
+        }
+
+        $request->validate([
+            'kitchen_name'        => 'sometimes|string|max:255',
+            'address'             => 'sometimes|string',
+            'district'            => 'sometimes|string|max:100',
+            'province'            => 'sometimes|string|max:100',
+            'contact_person_name' => 'sometimes|string|max:255',
+            'contact_phone'       => 'sometimes|string|max:20',
+            'contact_email'       => 'nullable|email|max:255',
+            'description'         => 'nullable|string',
+            'production_capacity' => 'nullable|integer|min:1',
+        ]);
+
+        $sppg->update($request->only([
+            'kitchen_name', 'address', 'district', 'province',
+            'contact_person_name', 'contact_phone', 'contact_email',
+            'description', 'production_capacity',
+        ]));
+
+        return response()->json([
+            'kitchen_name'        => $sppg->kitchen_name,
+            'is_active'           => $sppg->is_active,
+            'address'             => $sppg->address,
+            'district'            => $sppg->district,
+            'province'            => $sppg->province,
+            'contact_person_name' => $sppg->contact_person_name,
+            'contact_phone'       => $sppg->contact_phone,
+            'contact_email'       => $sppg->contact_email,
+            'production_capacity' => $sppg->production_capacity,
+            'description'         => $sppg->description,
+            'schools'             => $sppg->schools,
+        ]);
+    }
+
+    public function reviews(Request $request)
+    {
+        $sppg = $request->user()->sppgProfile;
+        if (!$sppg) {
+            return response()->json(['message' => 'Profil tidak ditemukan'], 404);
+        }
+
+        $reviews = $sppg->reviews()
+            ->where('flag_status', '!=', 'deleted')
+            ->with(['user:ssid,name', 'school:id,name,district'])
+            ->orderBy('review_date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+
+        return response()->json($reviews);
+    }
+}

@@ -8,9 +8,28 @@ use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(School::all());
+        $query = School::query();
+
+        if ($request->filled('search')) {
+            $query->where('name', 'ilike', '%' . $request->search . '%');
+        }
+        if ($request->filled('province')) {
+            $query->where('province', $request->province);
+        }
+
+        return response()->json(
+            $query->orderBy('province')->orderBy('district')->orderBy('name')
+                ->paginate($request->get('per_page', 50))
+        );
+    }
+
+    public function provinces()
+    {
+        $provinces = School::select('province')->distinct()->orderBy('province')->pluck('province');
+
+        return response()->json($provinces);
     }
 
     public function store(Request $request)

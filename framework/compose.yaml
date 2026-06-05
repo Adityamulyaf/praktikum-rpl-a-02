@@ -44,7 +44,7 @@ services:
     container_name: nginx_server
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - ./backend:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/

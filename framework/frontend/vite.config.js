@@ -5,16 +5,21 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0',
     port: 5173,
-    cors: true, 
-    origin: 'http://localhost:5173', 
+    proxy: {
+      '/api': {
+        target: 'http://webserver:80',
+        changeOrigin: true,
+      }
+    }
   },
   build: {
     outDir: path.resolve(__dirname, '../backend/public/build'),
     emptyOutDir: true,
-    manifest: true, 
+    manifest: true,
     rollupOptions: {
-      input: path.resolve(__dirname, 'src/main.jsx'), 
+      input: path.resolve(__dirname, 'src/main.jsx'),
     },
   },
 });

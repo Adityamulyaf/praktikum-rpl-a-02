@@ -56,16 +56,16 @@ class User extends Authenticatable
     // Relationships
     public function sppgProfile()
     {
-        return $this->hasOne(SppgProfile::class);
+        return $this->hasOne(SppgProfile::class, 'user_id', 'ssid');
     }
 
     public function studentProfile()
     {
-        return $this->hasOne(StudentProfile::class);
+        return $this->hasOne(StudentProfile::class, 'user_id', 'ssid');
     }
 
     public function teacherProfile()
     {
-        return $this->hasOne(TeacherProfile::class);
+        return $this->hasOne(TeacherProfile::class, 'user_id', 'ssid');
     }
 }
