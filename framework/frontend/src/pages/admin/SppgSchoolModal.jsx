@@ -1,22 +1,38 @@
 import { useState, useEffect } from 'react';
-import { getSchools, syncSppgSchools } from '../../api/admin';
+import { getSchools, getSchoolProvinces, syncSppgSchools } from '../../api/admin';
 import './admin.css';
 
 export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
   const [allSchools, setAllSchools] = useState([]);
   const [assigned, setAssigned]     = useState(new Set());
+  const [provinces, setProvinces]   = useState([]);
+  const [province, setProvince]     = useState('');
   const [search, setSearch]         = useState('');
-  const [loading, setLoading]       = useState(true);
+  const [loading, setLoading]       = useState(false);
   const [saving, setSaving]         = useState(false);
   const [error, setError]           = useState('');
 
+  // load provinces + pre-set assigned schools on mount
   useEffect(() => {
-    getSchools().then(({ data }) => {
-      setAllSchools(data);
-      setAssigned(new Set((sppg.schools ?? []).map((s) => s.id)));
+    getSchoolProvinces().then(({ data }) => setProvinces(data));
+    setAssigned(new Set((sppg.schools ?? []).map((s) => s.id)));
+  }, [sppg]);
+
+  // load schools when province changes
+  useEffect(() => {
+    if (!province) {
+      setAllSchools([]);
+      return;
+    }
+    setLoading(true);
+    getSchools({ province, per_page: 9999 }).then(({ data }) => {
+      setAllSchools(Array.isArray(data) ? data : data.data ?? []);
+      setLoading(false);
+    }).catch(() => {
+      setError('Gagal memuat daftar sekolah.');
       setLoading(false);
     });
-  }, [sppg]);
+  }, [province]);
 
   const toggle = (id) =>
     setAssigned((prev) => {
@@ -39,7 +55,8 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
   };
 
   const filtered = allSchools.filter((s) =>
-    s.name.toLowerCase().includes(search.toLowerCase())
+    s.name.toLowerCase().includes(search.toLowerCase()) ||
+    s.district.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -51,17 +68,40 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
         </div>
         <div className="adm-modal-body">
           {error && <p className="adm-error-msg">{error}</p>}
-          <input
+
+          {/* Province selector */}
+          <select
             className="adm-search"
-            placeholder="Cari nama sekolah..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          {loading ? (
+            value={province}
+            onChange={(e) => { setProvince(e.target.value); setSearch(''); }}
+            style={{ marginBottom: '8px' }}
+          >
+            <option value="">-- Pilih Provinsi --</option>
+            {provinces.map((p) => (
+              <option key={p} value={p}>{p}</option>
+            ))}
+          </select>
+
+          {/* Search within province */}
+          {province && (
+            <input
+              className="adm-search"
+              placeholder="Cari nama sekolah atau kecamatan..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          )}
+
+          {/* School list */}
+          {!province ? (
+            <p className="adm-empty">Pilih provinsi untuk melihat daftar sekolah.</p>
+          ) : loading ? (
             <p className="adm-loading">Memuat data...</p>
           ) : (
             <div className="adm-school-list">
-              {filtered.length === 0 && <p className="adm-empty">Sekolah tidak ditemukan.</p>}
+              {filtered.length === 0 && (
+                <p className="adm-empty">Sekolah tidak ditemukan.</p>
+              )}
               {filtered.map((school) => (
                 <label key={school.id} className="adm-school-item">
                   <input
@@ -77,6 +117,9 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
           )}
         </div>
         <div className="adm-modal-footer">
+          <span className="adm-modal-count">
+            {assigned.size} sekolah dipilih
+          </span>
           <button className="adm-btn" onClick={onClose}>Batal</button>
           <button className="adm-btn primary" onClick={handleSave} disabled={saving}>
             {saving ? 'Menyimpan...' : 'Simpan'}

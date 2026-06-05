@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import PublicLanding from './pages/PublicLanding';
-import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard';
-import SppgDashboard from './pages/SppgDashboard';
-import SiswaDashboard from './pages/SiswaDashboard';
-import GuruDashboard from './pages/GuruDashboard';
+import PublicLanding from './pages/landing/PublicLanding';
+import Login from './pages/login/Login';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import SppgDashboard from './pages/sppg/SppgDashboard';
+import SiswaDashboard from './pages/siswa/SiswaDashboard';
+import GuruDashboard from './pages/guru/GuruDashboard';
 
 export default function App() {
   return (

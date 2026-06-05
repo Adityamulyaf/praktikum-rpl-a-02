@@ -21,7 +21,7 @@ class SchoolController extends Controller
 
         return response()->json(
             $query->orderBy('province')->orderBy('district')->orderBy('name')
-                  ->paginate(50)
+                ->paginate($request->get('per_page', 50))
         );
     }
 
