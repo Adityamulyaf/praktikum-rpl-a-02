@@ -171,6 +171,70 @@
     display: flex;
 }
 
+.plc-search-wrap:has(.plc-selected-school) {
+  min-height: 142px;
+}
+
+.plc-search-list {
+  max-height: min(320px, calc(100svh - 430px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.plc-selected-school {
+  margin-top: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  text-align: left;
+}
+
+.plc-selected-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.plc-selected-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.plc-selected-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 16px;
+  margin-top: 2px;
+}
+
+.plc-selected-sppg {
+  min-width: 140px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.plc-selected-sppg span,
+.plc-selected-sppg strong {
+  display: block;
+}
+
+.plc-selected-sppg strong {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
 /* Input: white bg, 6px radius per §5.5, §5.1 */
 .plc-search-input {
     width: 100%;

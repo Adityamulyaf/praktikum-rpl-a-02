@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import { searchPublicSchools } from "../api/auth";
-import PersonalStrip from "../components/PersonalStrip";
-import LandingKitchenProfile from "../pages/landing/LandingKitchenProfile";
-import "../pages/landing/PublicLanding.css";
+import { useEffect, useState, useRef } from 'react';
+import { searchPublicSchools } from '../api/auth';
+import PersonalStrip from '../components/PersonalStrip';
+import LandingKitchenProfile from '../pages/landing/LandingKitchenProfile';
+import '../pages/landing/PublicLanding.css';
 
 /* Icons: 32px outlined, no colored backgrounds per DESIGN.md §8.1 */
 const FEATURES = [
@@ -100,26 +100,59 @@ const STATS = [
 ];
 
 export default function PublicLandingContent({ onNavigate }) {
-    const [view, setView] = useState("landing"); // 'landing' | 'profil-dapur'
-    const [query, setQuery] = useState("");
+    const [view, setView] = useState("landing");
+
+    const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
+
+    const [selectedSchool, setSelectedSchool] = useState(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const searchRef = useRef(null);
     const debounceRef = useRef(null);
 
-    if (view === "profil-dapur") {
-        return <LandingKitchenProfile onBack={() => setView("landing")} />;
-    }
+    // ── EFFECT: Click Outside Dropdown ──
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    // ── EFFECT: Cleanup Debounce on Unmount ──
+    useEffect(() => {
+        return () => {
+            if (debounceRef.current) {
+                clearTimeout(debounceRef.current);
+            }
+        };
+    }, []);
+
+    // ── HANDLERS & ACTIONS ──
 
     const handleInput = (e) => {
         const q = e.target.value;
+
         setQuery(q);
+        setSelectedSchool(null);
+        setIsDropdownOpen(true);
+
         clearTimeout(debounceRef.current);
+
         if (q.length < 2) {
             setResults([]);
             setSearched(false);
             return;
         }
+
         debounceRef.current = setTimeout(async () => {
             setLoading(true);
             try {
@@ -134,6 +167,38 @@ export default function PublicLandingContent({ onNavigate }) {
             }
         }, 300);
     };
+
+    const handleSearchFocus = () => {
+        if (query.length >= 2 && searched) {
+            setIsDropdownOpen(true);
+        }
+    };
+
+    const handleSelectSchool = (school) => {
+        setSelectedSchool(school);
+        setQuery(school.name);
+        setIsDropdownOpen(false);
+    };
+
+    // ── LOGIC: getSppgNames (HEAD Branch Specific) ──
+    const getSppgNames = (school) => {
+        const names = school.sppg_profiles
+            ?.map((sppg) => sppg.kitchen_name)
+            .filter(Boolean) ?? [];
+
+        return names.length > 0
+            ? names.join(", ")
+            : "SPPG belum tersedia";
+    };
+
+    // ── VIEW SWITCH: LandingKitchenProfile ──
+    if (view === "profil-dapur") {
+        return (
+            <LandingKitchenProfile
+                onBack={() => setView("landing")}
+            />
+        );
+    }
 
     return (
         <div className="plc-root">
@@ -156,20 +221,11 @@ export default function PublicLandingContent({ onNavigate }) {
                     </p>
 
                     {/* Search */}
-                    <div className="plc-search-wrap">
+                    <div className="plc-search-wrap" ref={searchRef}>
                         <div className="plc-search-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="M21 21l-4.35-4.35" />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
                             </svg>
                         </div>
                         <input
@@ -178,43 +234,54 @@ export default function PublicLandingContent({ onNavigate }) {
                             placeholder="Cari nama sekolah atau kabupaten..."
                             value={query}
                             onChange={handleInput}
+                            onFocus={handleSearchFocus}
                             autoComplete="off"
                         />
                         {loading && <div className="plc-search-spinner" />}
 
-                        {searched && (
+                        {searched && isDropdownOpen && (
                             <div className="plc-search-results">
                                 {results.length === 0 ? (
                                     <div className="plc-search-empty">
-                                        Tidak ada sekolah ditemukan untuk
-                                        &ldquo;{query}&rdquo;
+                                        Tidak ada sekolah ditemukan untuk &ldquo;{query}&rdquo;
                                     </div>
                                 ) : (
                                     <>
-                                        <div className="plc-search-count">
-                                            {results.length} sekolah ditemukan
+                                        <div className="plc-search-count">{results.length} sekolah ditemukan</div>
+                                        <div className="plc-search-list">
+                                            {results.map((s) => (
+                                                <button
+                                                    key={s.id}
+                                                    type="button"
+                                                    className="plc-school-item"
+                                                    onClick={() => handleSelectSchool(s)}
+                                                >
+                                                    <div>
+                                                        <div className="plc-school-name">{s.name}</div>
+                                                        <div className="plc-school-loc">{s.district} · {s.province}</div>
+                                                    </div>
+                                                    <span className="plc-school-badge">{getSppgNames(s)}</span>
+                                                </button>
+                                            ))}
                                         </div>
-                                        {results.slice(0, 8).map((s) => (
-                                            <div
-                                                key={s.id}
-                                                className="plc-school-item"
-                                            >
-                                                <div>
-                                                    <div className="plc-school-name">
-                                                        {s.name}
-                                                    </div>
-                                                    <div className="plc-school-loc">
-                                                        {s.district} ·{" "}
-                                                        {s.province}
-                                                    </div>
-                                                </div>
-                                                <span className="plc-school-badge">
-                                                    SPPG: segera
-                                                </span>
-                                            </div>
-                                        ))}
                                     </>
                                 )}
+                            </div>
+                        )}
+
+                        {selectedSchool && (
+                            <div className="plc-selected-school">
+                                <div>
+                                    <div className="plc-selected-label">Sekolah dipilih</div>
+                                    <div className="plc-selected-name">{selectedSchool.name}</div>
+                                    <div className="plc-selected-meta">
+                                        {selectedSchool.district ?? 'Kabupaten tidak tersedia'} · {selectedSchool.province ?? 'Provinsi tidak tersedia'}
+                                    </div>
+                                </div>
+                                <div className="plc-selected-sppg">
+                                    <span>Dapur SPPG</span>
+                                    <strong>{getSppgNames(selectedSchool)}</strong>
+                                </div>
                             </div>
                         )}
                     </div>
