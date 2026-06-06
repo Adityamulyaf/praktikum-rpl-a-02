@@ -126,6 +126,7 @@ Whitespace is structural, not decorative. Use it to **group and separate**, neve
 | `body-sm` | 13px  | 400    | 20px        | Secondary descriptions, table cells    |
 | `caption` | 12px  | 500    | 16px        | Labels, timestamps, metadata           |
 | `overline`| 11px  | 600    | 16px        | Category labels, uppercase sparingly   |
+| `footer-display` | 80–120px | 700–800 | 1.0 | Footer brand wordmark only   |
 
 ### 3.3 Typography Rules
 
@@ -215,6 +216,7 @@ All text must meet **WCAG 2.1 AA** minimum contrast ratios:
 The primary navy (#071E49) is the **only** dark background allowed in the interface. It appears in:
 - Login panel (left side branding area)
 - Sidebar navigation
+- Footer (public-facing pages)
 - Notification toasts (error/critical only)
 
 **No gradients, no dark-to-light fades, no overlays.** Solid color only.
@@ -463,6 +465,56 @@ Empty states occur when: no data exists yet, search returns no results, or a sec
 - ✗ No decorative SVG scenes (mountains, clouds, plants)
 - ✗ No "Oops!" or cutesy language
 - ✗ No empty states that just say "Tidak ada data" with no context
+
+### 5.9 Footer
+
+The footer appears on **public-facing pages only** (landing page, kitchen profiles). Authenticated dashboard views do NOT have a footer.
+
+**Structure (top to bottom):**
+
+1. **CTA + Navigation row** — tagline on the left, link columns on the right
+2. **Brand display** — oversized "HaloMBG" wordmark as visual anchor
+3. **Bottom bar** — copyright text and legal links
+
+**Styling:**
+```css
+background: var(--color-primary);   /* #071E49 — solid navy, no gradient */
+color: var(--text-inverse);          /* White */
+padding: var(--space-3xl) var(--space-2xl) var(--space-lg);
+```
+
+**CTA tagline:**
+- Font: display size (32px) or larger, weight 700
+- Color: white
+- Max one line, no period
+
+**Navigation columns:**
+- 2–3 columns of links, 14px weight 400
+- Color: `rgba(255, 255, 255, 0.7)` default, `1.0` on hover
+- No underline by default, underline on hover
+- No icons
+
+**Brand display:**
+- Font size: 80–120px (responsive), weight 700–800
+- Color: white, opacity 1.0
+- Letter-spacing: tight (-1px to -2px)
+- Purely decorative — not wrapped in a heading tag (use `<span>` or `<div>`)
+- Overflow-clip allowed on smaller viewports
+
+**Bottom bar:**
+- Separated by `1px rgba(255, 255, 255, 0.1)` top border
+- Font: caption size (12px), weight 400
+- Color: `rgba(255, 255, 255, 0.45)`
+- Left: brand name or "© 2026 HaloMBG"
+- Right: legal links (Kebijakan Privasi, Syarat Layanan)
+
+**Rules:**
+- ✓ Footer is the only place where oversized decorative typography is allowed
+- ✓ Keep link count under 12 total across all columns
+- ✗ No social media icons (this is a civic platform, not a brand)
+- ✗ No newsletter signup form in footer
+- ✗ No background image, pattern, or gradient
+- ✗ No "back to top" button
 
 ---
 

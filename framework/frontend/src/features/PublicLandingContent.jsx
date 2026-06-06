@@ -399,25 +399,42 @@ export default function PublicLandingContent({ onNavigate }) {
                 </div>
             </section>
 
-            {/* ── FOOTER ────────────────────────────────────────────── */}
+            {/* ── FOOTER — per DESIGN.md §5.9 ───────────────────────── */}
             <footer className="plc-footer">
                 <div className="plc-footer-inner">
-                    <div className="plc-footer-left">
-                        <span className="plc-footer-brand">HaloMBG</span>
+                    {/* Row 1: CTA + Nav columns */}
+                    <div className="plc-footer-top">
                         <p className="plc-footer-tagline">
-                            Platform monitoring transparan untuk program Makan
-                            Bergizi Gratis Indonesia.
+                            Transparansi untuk masa depan gizi Indonesia
                         </p>
+                        <nav className="plc-footer-nav">
+                            <div className="plc-footer-nav-col">
+                                <span>Profil Dapur</span>
+                                <span>Menu Harian</span>
+                                <span>Status Distribusi</span>
+                                <span>Validasi Gizi AI</span>
+                            </div>
+                            <div className="plc-footer-nav-col">
+                                <span>Ulasan Siswa</span>
+                                <span>Monitoring</span>
+                                <span>Tentang MBG</span>
+                            </div>
+                        </nav>
                     </div>
-                    <div className="plc-footer-right">
-                        <div className="plc-footer-links">
-                            <span>Transparansi</span>
-                            <span>Akuntabilitas</span>
+
+                    {/* Row 2: Oversized brand wordmark */}
+                    <div className="plc-footer-brand-display" aria-hidden="true">
+                        HaloMBG
+                    </div>
+
+                    {/* Row 3: Bottom bar */}
+                    <div className="plc-footer-bottom">
+                        <p className="plc-footer-copy">© 2026 HaloMBG</p>
+                        <div className="plc-footer-legal">
+                            <span>Kebijakan Privasi</span>
+                            <span>Syarat Layanan</span>
                             <span>Open Data</span>
                         </div>
-                        <p className="plc-footer-copy">
-                            © 2026 HaloMBG. Dibuat untuk rakyat Indonesia.
-                        </p>
                     </div>
                 </div>
             </footer>
