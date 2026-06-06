@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import api from "../../../api/axios";
 import "./Kitchen.css";
 import KitchenEditModal from "./KitchenEditModal";
+import DistribusiHarian from "../distribusi/DistribusiHarian";
 
 function UlasanTab() {
   const [reviews, setReviews] = useState([]);
@@ -516,7 +517,13 @@ export default function Kitchen() {
         </div>
       )}
 
-      {(activeTab === "menu" || activeTab === "distribusi") && (
+      {activeTab === "distribusi" && (
+        <div style={{ padding: "0 0 1rem" }}>
+          <DistribusiHarian />
+        </div>
+      )}
+
+      {activeTab === "menu" && (
         <div className="kp-coming-soon">
           <p>Halaman ini sedang dalam pengembangan.</p>
         </div>
