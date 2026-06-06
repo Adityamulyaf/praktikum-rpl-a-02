@@ -18,7 +18,14 @@ if [ -f artisan ]; then
     php artisan key:generate --force --no-interaction >/dev/null 2>&1 || true
     php artisan config:clear --no-interaction >/dev/null 2>&1 || true
     php artisan migrate --force --no-interaction
-    php artisan db:seed --force --no-interaction
+    
+    # Only seed if the database is empty (no users exist)
+    if php -r 'require "vendor/autoload.php"; $app = require_once "bootstrap/app.php"; $app->make("Illuminate\Contracts\Console\Kernel")->bootstrap(); exit(\App\Models\User::exists() ? 0 : 1);'; then
+        echo "Database already seeded. Skipping seeding."
+    else
+        echo "Database is empty. Seeding database..."
+        php artisan db:seed --force --no-interaction
+    fi
 fi
 
 exec "$@"

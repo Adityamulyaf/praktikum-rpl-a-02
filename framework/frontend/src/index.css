@@ -76,7 +76,8 @@ body {
   box-sizing: border-box;
 }
 
-#root.login-page {
+#root.login-page,
+#root.dashboard-page {
   width: 100%;
   max-width: 100%;
   margin: 0;

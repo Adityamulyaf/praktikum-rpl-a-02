@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
+import DashboardLayout from './components/DashboardLayout';
 import PublicLanding from './pages/landing/PublicLanding';
 import Login from './pages/login/Login';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SppgDashboard from './pages/sppg/SppgDashboard';
 import SiswaDashboard from './pages/siswa/SiswaDashboard';
 import GuruDashboard from './pages/guru/GuruDashboard';
+import ValidationAI from './pages/ValidationAI';
 
 export default function App() {
   return (
@@ -33,6 +35,15 @@ export default function App() {
         {/* Guru */}
         <Route element={<ProtectedRoute allowedRoles={['guru']} />}>
           <Route path="/guru" element={<GuruDashboard />} />
+        </Route>
+
+        {/* Standalone Validation AI Route with Dashboard Shell wrapper for compatibility */}
+        <Route element={<ProtectedRoute allowedRoles={['admin', 'guru', 'siswa', 'sppg']} />}>
+          <Route path="/validasi-ai" element={
+            <DashboardLayout menuGroups={[]} pageClass="validation-page">
+              {() => <ValidationAI />}
+            </DashboardLayout>
+          } />
         </Route>
 
         {/* Catchalls */}

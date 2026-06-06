@@ -1,0 +1,40 @@
+/* ── PROGRAM SUMMARY CARD STYLES ────────────────────────── */
+
+.program-summary-card {
+  background: var(--surface-1);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+}
+
+.program-summary-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.program-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.program-summary-row:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.program-summary-label {
+  color: var(--text-secondary);
+}
+
+.program-summary-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.program-summary-value.success {
+  color: var(--status-success);
+}
