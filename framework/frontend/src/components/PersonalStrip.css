@@ -1,9 +1,7 @@
 /* ── PERSONAL STRIP — welcome card, full-viewport, below hero  */
 .ps-root {
-  /* Solid green + subtle navy dot grid for depth — no gradient per DESIGN.md §4.5 */
-  background-color: var(--color-secondary);
-  background-image: radial-gradient(circle, rgba(7, 30, 73, 0.13) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
+  background-color: var(--surface-2);
+  border-bottom: 1px solid var(--border-default);
   padding: var(--space-2xl) var(--space-md);
   flex-shrink: 0;
 }
@@ -19,12 +17,8 @@
   text-align: center;
 }
 
-/* Circular icon badge — semi-transparent navy tint over green */
+/* Outlined icon badge — no circle background per DESIGN.md §8.1 */
 .ps-illus {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: rgba(7, 30, 73, 0.10);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +37,7 @@
 .ps-greeting {
   font-size: 20px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--text-primary);
   line-height: 28px;
 }
 
@@ -51,8 +45,7 @@
 .ps-role {
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-primary);
-  opacity: 0.60;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.6px;
 }
@@ -65,7 +58,7 @@
   justify-content: center;
 }
 
-/* Primary fill button — navy on green per DESIGN.md §5.1 */
+/* Primary fill button — navy per DESIGN.md §5.1 */
 .ps-action-btn {
   background: var(--color-primary);
   border: none;
@@ -88,11 +81,6 @@
 @media (max-width: 480px) {
   .ps-root {
     padding: var(--space-xl) var(--space-md);
-  }
-
-  .ps-illus {
-    width: 64px;
-    height: 64px;
   }
 
   .ps-greeting {

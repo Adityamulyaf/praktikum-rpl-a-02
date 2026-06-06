@@ -1,6 +1,5 @@
-/* ── ROOT — full-page background illustration ───────────── */
+/* ── ROOT — solid primary navy background per DESIGN.md §4.5 ───────────── */
 
-/* fixed ke viewport supaya background tidak pernah rescale saat tinggi konten berubah */
 .login-root {
   position: fixed;
   inset: 0;
@@ -11,9 +10,7 @@
   box-sizing: border-box;
   font-family: var(--font-sans);
   font-size: 14px;
-  background:
-    linear-gradient(rgba(7, 30, 73, 0.62), rgba(7, 30, 73, 0.62)),
-    url('../../assets/mbg-ilustration.webp') center / cover no-repeat;
+  background: var(--color-primary);
 }
 
 /* ── CENTER WRAPPER ───────────────────────────────────── */
@@ -36,13 +33,12 @@
   letter-spacing: -0.1px;
 }
 
-/* ── CARD ─────────────────────────────────────────────── */
+/* ── CARD — no box shadow per DESIGN.md §5.2 ─────────────────────────── */
 
 .lp-card {
   width: 100%;
   background: var(--surface-1);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
   overflow: hidden;
   margin-bottom: var(--space-sm);
 }
@@ -181,7 +177,7 @@
   color: var(--status-error);
   margin-bottom: var(--space-md);
   padding: var(--space-sm) 12px;
-  background: #FFEBEE;
+  background: rgba(198, 40, 40, 0.08);
   border-radius: var(--radius-md);
   border-left: 3px solid var(--status-error);
 }
@@ -204,13 +200,13 @@
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 150ms;
+  transition: opacity 150ms;
   margin-top: var(--space-sm);
   box-sizing: border-box;
 }
 
-.lp-btn:hover:not(:disabled) { background: #0a2a5c; }
-.lp-btn:active:not(:disabled) { background: #051636; }
+.lp-btn:hover:not(:disabled) { opacity: 0.88; }
+.lp-btn:active:not(:disabled) { opacity: 0.8; }
 .lp-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .lp-spinner {
@@ -340,7 +336,7 @@
   .lp-field { margin-bottom: var(--space-sm); }
 }
 
-/* ── SCHOOL SEARCH TYPEAHEAD ─────────────────────────────── */
+/* ── SCHOOL SEARCH TYPEAHEAD — no box shadow per DESIGN.md §5.2 ──────── */
 
 .ss-wrap {
   position: relative;
@@ -354,7 +350,6 @@
   background: var(--surface-1);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   z-index: 50;
   list-style: none;
   margin: 0;
@@ -413,17 +408,17 @@
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: background 150ms;
+  transition: opacity 150ms;
   font-family: var(--font-sans);
   text-align: center;
 }
 
 .rg-role-card:hover {
-  background: #0a2a5c;
+  opacity: 0.88;
 }
 
 .rg-role-icon  { font-size: 28px; line-height: 1; }
-.rg-role-label { font-size: 15px; font-weight: 600; color: #ffffff; }
+.rg-role-label { font-size: 15px; font-weight: 600; color: var(--text-inverse); }
 .rg-role-desc  { font-size: 12px; color: rgba(255, 255, 255, 0.7); line-height: 16px; }
 
 /* style select agar seragam dengan input */

@@ -1,6 +1,6 @@
 import api from './axios';
 
-export const getSppgs  = ()          => api.get('/admin/sppg');
+export const getSppgs  = (params)    => api.get('/admin/sppg', { params });
 export const createSppg = (data)     => api.post('/admin/sppg', data);
 export const updateSppg = (id, data) => api.put(`/admin/sppg/${id}`, data);
 export const deleteSppg   = (id)       => api.delete(`/admin/sppg/${id}`);

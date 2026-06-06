@@ -187,7 +187,7 @@
   background: var(--surface-1);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -279,19 +279,18 @@
     }
 }
 
-/* Search dropdown */
 .plc-search-results {
     position: absolute;
     top: calc(100% + var(--space-xs));
     left: 0;
     right: 0;
     background: var(--surface-1);
-    border: 1px solid var(--border-default);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-lg);
     overflow: hidden;
     z-index: 10;
     text-align: left;
-    box-shadow: var(--shadow-modal);
+    box-shadow: none;
 }
 
 .plc-search-count {
@@ -472,13 +471,10 @@
 /* Clickable card variant (Profil Dapur) */
 .plc-feature-card--link {
     cursor: pointer;
-    transition:
-        border-color 0.15s,
-        box-shadow 0.15s;
+    transition: border-color 0.15s;
 }
 .plc-feature-card--link:hover {
     border-color: var(--border-strong, #d1d5db);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .plc-feature-cta {
