@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('protein')->nullable();      // grams
             $table->integer('carbs')->nullable();        // grams
             $table->integer('fat')->nullable();          // grams
+            $table->text('photo')->nullable();           // base64 data url or path of photo
+            $table->boolean('is_ai_validated')->default(false);
+            $table->text('ai_warning')->nullable();
             $table->timestamps();
         });
     }

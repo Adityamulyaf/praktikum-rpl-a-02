@@ -259,7 +259,29 @@ docker compose down -v
 docker compose up --build -d
 ```
 
-> Ini akan menghapus semua data database. Koordinasi dengan tim dulu sebelum melakukan ini.
+### API / Login Mengembalikan Error 404 atau `Request failed with status code 404`
+
+**Gejala:**
+Aplikasi web berjalan, tetapi setiap kali memanggil API (misalnya saat login atau menyimpan menu harian), sistem mengembalikan error `404 Not Found` atau `Request failed with status code 404`.
+
+**Penyebab:**
+Ini adalah kendala sinkronisasi volume (*bind-mount sync*) Docker yang sering terjadi di WSL2. Folder konfigurasi `./nginx/conf.d` terdeteksi kosong di dalam kontainer `nginx_server`, sehingga Nginx kembali menggunakan konfigurasi bawaan yang tidak memiliki aturan *reverse proxy* untuk `/api`.
+
+**Solusi:**
+1. Hentikan dan jalankan kembali kontainer Docker agar pemetaan volume diperbarui:
+   ```bash
+   docker compose down
+   docker compose up -d
+   ```
+2. Pastikan file konfigurasi berhasil terpasang di dalam kontainer dengan menjalankan:
+   ```bash
+   docker exec nginx_server ls -la /etc/nginx/conf.d
+   ```
+   *(Harus menampilkan file `default.conf`)*
+3. Muat ulang (*refresh*) halaman browser Anda (`F5` atau `Ctrl+F5`) agar browser memuat ulang JavaScript dan membuat koneksi baru.
+
+**Catatan Tambahan:**
+Jika Nginx sudah dikonfigurasi dengan benar tetapi error 404 pada `/api` masih terjadi di browser, pastikan volume mount untuk file `vite.config.js` di dalam file `compose.yaml` ditulis dengan benar (`/app/vite.config.js`, bukan `/app/vite.config.jss`). Kesalahan ketik (*typo*) tersebut menyebabkan kontainer Vite menggunakan konfigurasi bawaan tanpa *proxy* `/api`, sehingga semua panggilan API langsung diarahkan ke Vite dev server dan menghasilkan error 404.
 
 ---
 

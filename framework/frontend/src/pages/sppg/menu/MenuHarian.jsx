@@ -128,30 +128,54 @@ function MenuFormModal({ menu, onClose, onSaved }) {
           protein:    menu.protein    ?? '',
           carbs:      menu.carbs      ?? '',
           fat:        menu.fat        ?? '',
+          photo:      menu.photo      ?? null,
+          is_ai_validated: menu.is_ai_validated ?? false,
+          ai_warning: menu.ai_warning ?? null,
         }
-      : { ...EMPTY_FORM }
+      : {
+          ...EMPTY_FORM,
+          photo: null,
+          is_ai_validated: false,
+          ai_warning: null,
+        }
   );
   const [error,   setError]   = useState('');
   const [loading, setLoading] = useState(false);
 
-  // AI Scanner integration states
-  const [aiMode, setAiMode] = useState(false);
+  // AI Scanner & Photo states
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [isCameraSimulated, setIsCameraSimulated] = useState(false);
-  const [capturedImage, setCapturedImage] = useState(null);
+  const [capturedImage, setCapturedImage] = useState(isEdit ? menu.photo : null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isValidating, setIsValidating] = useState(false);
-  const [validationResult, setValidationResult] = useState(null);
   const [cameraStream, setCameraStream] = useState(null);
   const [cameraError, setCameraError] = useState(null);
+
+  // AI Validation results
+  const [detectedPreset, setDetectedPreset] = useState(() => {
+    if (isEdit && menu.calories) {
+      const match = PRESET_MENUS.find((p) => Math.abs(p.calories - menu.calories) <= 80);
+      return match || PRESET_MENUS[0];
+    }
+    return null;
+  });
+  const [validationRun, setValidationRun] = useState(isEdit ? true : false);
+  const [validationWarning, setValidationWarning] = useState(isEdit ? menu.ai_warning : null);
+  const [validationSuccess, setValidationSuccess] = useState(isEdit ? !!menu.is_ai_validated : false);
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  const handleInputChange = (key) => (e) => {
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+    // Reset validation when claims are modified
+    setValidationRun(false);
+    setValidationWarning(null);
+    setValidationSuccess(false);
+  };
 
-  // Cleanup camera streams on toggle/unmount
+  // Cleanup camera streams on unmount
   useEffect(() => {
     return () => {
       if (cameraStream) {
@@ -160,29 +184,16 @@ function MenuFormModal({ menu, onClose, onSaved }) {
     };
   }, [cameraStream]);
 
-  const toggleAiMode = () => {
-    if (aiMode) {
-      if (cameraStream) {
-        cameraStream.getTracks().forEach((track) => track.stop());
-        setCameraStream(null);
-      }
-      setIsCameraOpen(false);
-      setIsCameraSimulated(false);
-      setCapturedImage(null);
-      setUploadedFile(null);
-      setValidationResult(null);
-      setCameraError(null);
-    }
-    setAiMode(!aiMode);
-  };
-
   // Open WebRTC Camera Stream
   const handleOpenCamera = async () => {
     setCameraError(null);
     setCapturedImage(null);
     setUploadedFile(null);
-    setValidationResult(null);
+    setDetectedPreset(null);
     setIsCameraSimulated(false);
+    setValidationRun(false);
+    setValidationWarning(null);
+    setValidationSuccess(false);
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -205,9 +216,12 @@ function MenuFormModal({ menu, onClose, onSaved }) {
     setCameraError(null);
     setCapturedImage(null);
     setUploadedFile(null);
-    setValidationResult(null);
+    setDetectedPreset(null);
     setIsCameraOpen(true);
     setIsCameraSimulated(true);
+    setValidationRun(false);
+    setValidationWarning(null);
+    setValidationSuccess(false);
 
     if (cameraStream) {
       cameraStream.getTracks().forEach((track) => track.stop());
@@ -267,7 +281,6 @@ function MenuFormModal({ menu, onClose, onSaved }) {
         context.fillText('Sayur Buncis', 260, 315);
 
         const dataUrl = canvas.toDataURL('image/jpeg');
-        setCapturedImage(dataUrl);
         setIsCameraOpen(false);
         runValidationSimulation(dataUrl, false);
       }
@@ -299,7 +312,6 @@ function MenuFormModal({ menu, onClose, onSaved }) {
       }
 
       const dataUrl = canvas.toDataURL('image/jpeg');
-      setCapturedImage(dataUrl);
       handleCloseCamera();
       runValidationSimulation(dataUrl, isBlack);
     }
@@ -310,7 +322,9 @@ function MenuFormModal({ menu, onClose, onSaved }) {
     const file = e.target.files[0];
     if (file) {
       setCameraError(null);
-      setValidationResult(null);
+      setValidationRun(false);
+      setValidationWarning(null);
+      setValidationSuccess(false);
 
       const isImage = file.type.startsWith('image/');
       if (isImage) {
@@ -337,7 +351,6 @@ function MenuFormModal({ menu, onClose, onSaved }) {
                 }
               }
 
-              setCapturedImage(dataUrl);
               handleCloseCamera();
               runValidationSimulation(dataUrl, isBlack);
             }
@@ -366,61 +379,144 @@ function MenuFormModal({ menu, onClose, onSaved }) {
     }
   };
 
-  // Simulate AI nutrition scanning
+  // Assign photo and select visual preset
   const runValidationSimulation = (imageSrc, isBlack) => {
-    setIsValidating(true);
-    setValidationResult(null);
+    setCapturedImage(imageSrc);
+    setForm(f => ({ ...f, photo: imageSrc }));
 
-    setTimeout(() => {
-      let result;
-      if (isBlack) {
-        result = {
-          status: 'Tidak Terdeteksi',
-          foodTags: [],
-          calories: 0,
-          protein: 0,
-          carbs: 0,
-          fat: 0,
-          complianceText: 'Gagal memvalidasi - Tidak ada makanan terdeteksi.',
-          summary: 'AI tidak mendeteksi adanya objek makanan (tidak ada sesuatu di dalam tangkapan gambar).'
-        };
-      } else {
-        const randomIndex = Math.floor(Math.random() * PRESET_MENUS.length);
-        result = PRESET_MENUS[randomIndex];
-      }
-      setValidationResult(result);
-      setIsValidating(false);
+    let result;
+    if (isBlack) {
+      result = {
+        status: 'Tidak Terdeteksi',
+        foodTags: [],
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+        fat: 0,
+        summary: 'AI tidak mendeteksi adanya objek makanan (gambar kosong/hitam).'
+      };
+    } else {
+      const randomIndex = Math.floor(Math.random() * PRESET_MENUS.length);
+      result = PRESET_MENUS[randomIndex];
+    }
+    setDetectedPreset(result);
+  };
 
-      // Populate form inputs if detection is successful
-      if (result.status !== 'Tidak Terdeteksi') {
-        setForm((f) => ({
-          ...f,
-          menu_name: result.foodTags.join(', '),
-          components: result.summary,
-          calories: result.calories,
-          protein: result.protein,
-          carbs: result.carbs,
-          fat: result.fat,
-        }));
+  // Visual validation checking claims against photo
+  const runAiValidation = () => {
+    return new Promise((resolve) => {
+      if (!capturedImage) {
+        setCameraError('Foto makanan wajib diambil atau diunggah sebelum melakukan validasi AI.');
+        resolve(null);
+        return;
       }
-    }, 2500);
+      setCameraError(null);
+
+      if (form.calories === '' || form.protein === '' || form.carbs === '' || form.fat === '') {
+        setError('Mohon lengkapi semua nilai klaim kandungan nutrisi (Kalori, Protein, Karbohidrat, Lemak) terlebih dahulu.');
+        resolve(null);
+        return;
+      }
+      setError('');
+      setIsValidating(true);
+      setValidationWarning(null);
+      setValidationSuccess(false);
+
+      setTimeout(() => {
+        setIsValidating(false);
+        setValidationRun(true);
+
+        const caloriesInput = Number(form.calories);
+        const proteinInput = Number(form.protein);
+        const carbsInput = Number(form.carbs);
+        const fatInput = Number(form.fat);
+
+        let warning = null;
+
+        if (!detectedPreset || detectedPreset.status === 'Tidak Terdeteksi') {
+          warning = 'AI tidak mendeteksi adanya objek makanan dalam foto yang diunggah (gambar kosong/hitam).';
+        } else {
+          const preset = detectedPreset;
+
+          if (caloriesInput < preset.calories - 150 || caloriesInput > preset.calories + 150) {
+            warning = `Porsi yang terlihat di foto tampak ${caloriesInput < preset.calories ? 'terlalu sedikit' : 'kecil'} untuk klaim kalori sebesar ${caloriesInput} kkal (perkiraan visual AI: ~${preset.calories} kkal).`;
+          } else if (proteinInput < preset.protein - 8 || proteinInput > preset.protein + 8) {
+            warning = `Kandungan protein yang diinput (${proteinInput}g) tampak tidak sesuai dengan lauk hewani/nabati yang terlihat di foto (perkiraan visual AI: ~${preset.protein}g).`;
+          } else if (carbsInput < preset.carbs - 20 || carbsInput > preset.carbs + 20) {
+            warning = `Kandungan karbohidrat yang diinput (${carbsInput}g) tampak tidak sesuai dengan porsi nasi yang terlihat di foto (perkiraan visual AI: ~${preset.carbs}g).`;
+          } else if (fatInput < preset.fat - 8 || fatInput > preset.fat + 8) {
+            warning = `Kandungan lemak yang diinput (${fatInput}g) tampak tidak seimbang dengan komposisi yang terlihat di foto (perkiraan visual AI: ~${preset.fat}g).`;
+          }
+        }
+
+        if (warning) {
+          setValidationWarning(warning);
+          setForm(f => ({ ...f, is_ai_validated: false, ai_warning: warning }));
+          resolve({ success: false, warning });
+        } else {
+          setValidationSuccess(true);
+          setForm(f => ({ ...f, is_ai_validated: true, ai_warning: null }));
+          resolve({ success: true, warning: null });
+        }
+      }, 2000);
+    });
   };
 
   // Reset current scan
   const handleReset = () => {
     setCapturedImage(null);
     setUploadedFile(null);
-    setValidationResult(null);
+    setDetectedPreset(null);
     setCameraError(null);
+    setValidationRun(false);
+    setValidationWarning(null);
+    setValidationSuccess(false);
+    setForm(f => ({ ...f, photo: null, is_ai_validated: false, ai_warning: null }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Check if photo is present
+    if (!capturedImage) {
+      setError('Foto makanan wajib diambil atau diunggah.');
+      return;
+    }
+
+    let currentValidationRun = validationRun;
+    let currentWarning = validationWarning;
+    let currentSuccess = validationSuccess;
+
+    // Auto-validate if validation has not run yet
+    if (!currentValidationRun) {
+      const res = await runAiValidation();
+      if (!res) {
+        // Validation could not run (missing fields etc)
+        return;
+      }
+      currentValidationRun = true;
+      currentWarning = res.warning;
+      currentSuccess = res.success;
+    }
+
+    // If warning exists, prompt for confirmation
+    if (currentWarning) {
+      const confirmSave = window.confirm(
+        `Peringatan AI: "${currentWarning}"\n\nKlaim gizi tidak sebanding dengan visual makanan. Apakah Anda yakin ingin menyimpan dan mempublikasikan data ini? (Menu akan disimpan tanpa lencana "Tervalidasi AI")`
+      );
+      if (!confirmSave) {
+        return;
+      }
+    }
+
     setLoading(true);
     try {
       const payload = {
         ...form,
+        photo: capturedImage,
+        is_ai_validated: !currentWarning,
+        ai_warning: currentWarning,
         calories: form.calories !== '' && form.calories !== null ? Number(form.calories) : null,
         protein:  form.protein  !== '' && form.protein  !== null ? Number(form.protein)  : null,
         carbs:    form.carbs    !== '' && form.carbs    !== null ? Number(form.carbs)    : null,
@@ -454,7 +550,7 @@ function MenuFormModal({ menu, onClose, onSaved }) {
 
   return (
     <div className="adm-overlay" onClick={onClose}>
-      <div className={`adm-modal ${aiMode ? 'adm-modal-ai-active' : ''}`} onClick={(e) => e.stopPropagation()}>
+      <div className="adm-modal adm-modal-ai-active" onClick={(e) => e.stopPropagation()}>
         <div className="adm-modal-header">
           <h3>{isEdit ? 'Edit Menu' : 'Tambah Menu Harian'}</h3>
           <button className="adm-modal-close" onClick={onClose}>&times;</button>
@@ -462,270 +558,284 @@ function MenuFormModal({ menu, onClose, onSaved }) {
         <form onSubmit={handleSubmit}>
           <div className="adm-modal-body" style={{ padding: 0 }}>
             <div className="menu-form-split-container">
-              {/* Left Column: AI Scanner */}
-              {aiMode && (
-                <div className="menu-form-ai-panel">
-                  <h4 style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 var(--space-md) 0', textTransform: 'uppercase', letterSpacing: '0.4px', borderBottom: '1px solid var(--border-default)', paddingBottom: 'var(--space-sm)' }}>
-                    Pemindai AI Kelayakan Menu
-                  </h4>
+              {/* Left Column: AI Scanner & Photo */}
+              <div className="menu-form-ai-panel">
+                <h4 style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 var(--space-md) 0', textTransform: 'uppercase', letterSpacing: '0.4px', borderBottom: '1px solid var(--border-default)', paddingBottom: 'var(--space-sm)' }}>
+                  Foto Makanan (Wajib)
+                </h4>
 
-                  <div className="vai-viewport-container" style={{ aspectRatio: '1.5', marginBottom: 'var(--space-md)' }}>
-                    {/* Live Camera Feed */}
-                    {isCameraOpen && !isCameraSimulated && (
-                      <>
-                        <video ref={videoRef} autoPlay playsInline className="vai-video" />
-                        <div className="vai-scanner-frame" />
-                        <div className="vai-scanner-frame-bottom" />
-                        <div className="vai-scan-line" />
-                      </>
-                    )}
-
-                    {/* Simulated Camera Feed */}
-                    {isCameraOpen && isCameraSimulated && (
-                      <div className="vai-simulated-feed">
-                        <svg width="80" height="80" viewBox="0 0 100 100" fill="none" className="vai-simulated-food-svg">
-                          <circle cx="50" cy="50" r="45" fill="#E5E3DF" stroke="#C4C2BC" strokeWidth="2" />
-                          <circle cx="50" cy="50" r="35" fill="#FFFFFF" stroke="#E5E3DF" strokeWidth="1" />
-                          <circle cx="42" cy="42" r="14" fill="#F8F7F5" stroke="#E5E3DF" />
-                          <text x="42" y="44" fontSize="6" fontWeight="bold" fill="#5C5B57" textAnchor="middle">Nasi</text>
-                          <path d="M 52 35 C 60 30, 70 35, 72 45 C 74 52, 65 60, 55 58 C 50 56, 48 45, 52 35 Z" fill="#D1B06C" stroke="#B89650" />
-                          <text x="60" y="48" fontSize="6" fontWeight="bold" fill="#1A1A18" textAnchor="middle">Ayam</text>
-                          <circle cx="48" cy="65" r="10" fill="#E8F5E9" stroke="#92D05D" />
-                          <text x="48" y="67" fontSize="5" fontWeight="bold" fill="#2E7D32" textAnchor="middle">Sayur</text>
-                        </svg>
-                        <div className="vai-simulated-label" style={{ fontSize: '11px', marginTop: '8px' }}>SIMULASI KAMERA AKTIF</div>
-                        <div className="vai-scanner-frame" />
-                        <div className="vai-scanner-frame-bottom" />
-                        <div className="vai-scan-line" />
-                      </div>
-                    )}
-
-                    {/* Captured/Uploaded Preview */}
-                    {!isCameraOpen && capturedImage && (
-                      <>
-                        <img src={capturedImage} alt="Captured Meal" className="vai-captured-preview" />
-                        {isValidating && (
-                          <>
-                            <div className="vai-scanner-frame" />
-                            <div className="vai-scanner-frame-bottom" />
-                            <div className="vai-scan-line" />
-                            <div className="vai-scanning-overlay">
-                              <div className="vai-scan-spinner" />
-                              <span style={{ fontSize: '12px' }}>Menganalisis Makanan...</span>
-                            </div>
-                          </>
-                        )}
-                      </>
-                    )}
-
-                    {/* Document Preview */}
-                    {!isCameraOpen && uploadedFile && (
-                      <div className="vai-document-preview">
-                        <div className="vai-document-icon-wrapper" style={{ padding: '8px', marginBottom: '8px' }}>
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="vai-document-icon">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                          </svg>
-                        </div>
-                        <div className="vai-document-info">
-                          <span className="vai-document-name" style={{ fontSize: '13px' }}>{uploadedFile.name}</span>
-                          <span className="vai-document-size" style={{ fontSize: '11px' }}>{uploadedFile.size}</span>
-                        </div>
-                        {isValidating && (
-                          <div className="vai-scanning-overlay">
-                            <div className="vai-scan-spinner" />
-                            <span style={{ fontSize: '12px' }}>Menganalisis Berkas...</span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Placeholder */}
-                    {!isCameraOpen && !capturedImage && !uploadedFile && (
-                      <div className="vai-camera-placeholder" style={{ padding: 'var(--space-md)' }}>
-                        <span className="vai-placeholder-icon">
-                          <ScanLargeIcon />
-                        </span>
-                        <p className="vai-placeholder-text" style={{ fontSize: '12px', lineHeight: '16px' }}>
-                          Pindai gizi makanan secara otomatis dengan menggunakan kamera atau unggah dokumen berkas menu Anda.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Hidden inputs */}
-                  <canvas ref={canvasRef} style={{ display: 'none' }} />
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    accept="image/*,.pdf,.doc,.docx,.txt"
-                    className="vai-file-upload-input"
-                  />
-
-                  {/* Controls */}
-                  <div className="vai-controls" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: 'var(--space-md)' }}>
-                    {!isCameraOpen && !capturedImage && !uploadedFile && (
-                      <>
-                        <button type="button" className="adm-btn primary" onClick={handleOpenCamera} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                          <CameraIcon />
-                          <span>Kamera</span>
-                        </button>
-                        <button type="button" className="adm-btn" onClick={handleOpenSimulatedCamera} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                          <SimulateIcon />
-                          <span>Simulasi</span>
-                        </button>
-                        <button type="button" className="adm-btn" onClick={triggerFileInput} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                          <UploadIcon />
-                          <span>Unggah</span>
-                        </button>
-                      </>
-                    )}
-
-                    {isCameraOpen && (
-                      <>
-                        <button type="button" className="adm-btn primary" onClick={handleCapture} style={{ flex: '2', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                          <CaptureIcon />
-                          <span>Ambil Foto & Scan</span>
-                        </button>
-                        <button type="button" className="adm-btn" onClick={handleCloseCamera} style={{ flex: '1' }}>
-                          Batal
-                        </button>
-                      </>
-                    )}
-
-                    {!isCameraOpen && (capturedImage || uploadedFile) && !isValidating && (
-                      <>
-                        <button type="button" className="adm-btn primary" onClick={uploadedFile ? triggerFileInput : (isCameraSimulated ? handleOpenSimulatedCamera : handleOpenCamera)} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                          <RefreshIcon />
-                          <span>Rescan</span>
-                        </button>
-                        <button type="button" className="adm-btn" onClick={handleReset} style={{ flex: '1' }}>
-                          Reset
-                        </button>
-                      </>
-                    )}
-                  </div>
-
-                  {cameraError && (
-                    <p style={{ color: 'var(--status-error)', fontSize: '12px', margin: '0 0 12px 0' }}>
-                      {cameraError}
-                    </p>
+                <div className="vai-viewport-container" style={{ aspectRatio: '1.5', marginBottom: 'var(--space-md)' }}>
+                  {/* Live Camera Feed */}
+                  {isCameraOpen && !isCameraSimulated && (
+                    <>
+                      <video ref={videoRef} autoPlay playsInline className="vai-video" />
+                      <div className="vai-scanner-frame" />
+                      <div className="vai-scanner-frame-bottom" />
+                      <div className="vai-scan-line" />
+                    </>
                   )}
 
-                  {/* Validation assessment feedback */}
-                  {validationResult && (
-                    <div style={{ background: 'var(--surface-2)', padding: '12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-default)' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', width: '100%' }}>
-                        {validationResult.status === 'Tidak Terdeteksi' ? (
-                          <span className="vai-badge vai-badge-error" style={{ fontSize: '11px', height: '20px' }}>
-                            <CrossIcon />
-                            <span>Tidak Terdeteksi</span>
-                          </span>
-                        ) : (
-                          <span className="vai-badge vai-badge-success" style={{ fontSize: '11px', height: '20px' }}>
-                            <CheckIcon />
-                            <span>Tervalidasi (AI: 96%)</span>
-                          </span>
-                        )}
+                  {/* Simulated Camera Feed */}
+                  {isCameraOpen && isCameraSimulated && (
+                    <div className="vai-simulated-feed">
+                      <svg width="80" height="80" viewBox="0 0 100 100" fill="none" className="vai-simulated-food-svg">
+                        <circle cx="50" cy="50" r="45" fill="#E5E3DF" stroke="#C4C2BC" strokeWidth="2" />
+                        <circle cx="50" cy="50" r="35" fill="#FFFFFF" stroke="#E5E3DF" strokeWidth="1" />
+                        <circle cx="42" cy="42" r="14" fill="#F8F7F5" stroke="#E5E3DF" />
+                        <text x="42" y="44" fontSize="6" fontWeight="bold" fill="#5C5B57" textAnchor="middle">Nasi</text>
+                        <path d="M 52 35 C 60 30, 70 35, 72 45 C 74 52, 65 60, 55 58 C 50 56, 48 45, 52 35 Z" fill="#D1B06C" stroke="#B89650" />
+                        <text x="60" y="48" fontSize="6" fontWeight="bold" fill="#1A1A18" textAnchor="middle">Ayam</text>
+                        <circle cx="48" cy="65" r="10" fill="#E8F5E9" stroke="#92D05D" />
+                        <text x="48" y="67" fontSize="5" fontWeight="bold" fill="#2E7D32" textAnchor="middle">Sayur</text>
+                      </svg>
+                      <div className="vai-simulated-label" style={{ fontSize: '11px', marginTop: '8px' }}>SIMULASI KAMERA AKTIF</div>
+                      <div className="vai-scanner-frame" />
+                      <div className="vai-scanner-frame-bottom" />
+                      <div className="vai-scan-line" />
+                    </div>
+                  )}
+
+                  {/* Captured/Uploaded Preview */}
+                  {!isCameraOpen && capturedImage && (
+                    <>
+                      <img src={capturedImage} alt="Captured Meal" className="vai-captured-preview" />
+                      {isValidating && (
+                        <>
+                          <div className="vai-scanner-frame" />
+                          <div className="vai-scanner-frame-bottom" />
+                          <div className="vai-scan-line" />
+                          <div className="vai-scanning-overlay">
+                            <div className="vai-scan-spinner" />
+                            <span style={{ fontSize: '12px' }}>AI Memvalidasi Foto & Nutrisi...</span>
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+
+                  {/* Document Preview */}
+                  {!isCameraOpen && uploadedFile && (
+                    <div className="vai-document-preview">
+                      <div className="vai-document-icon-wrapper" style={{ padding: '8px', marginBottom: '8px' }}>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="vai-document-icon">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                        </svg>
                       </div>
-                      <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '0 0 8px 0', lineHeight: '16px' }}>
-                        {validationResult.summary}
-                      </p>
-                      {validationResult.status !== 'Tidak Terdeteksi' && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                          {validationResult.foodTags.map(tag => (
-                            <span key={tag} className="vai-food-tag" style={{ fontSize: '10px', padding: '2px 6px' }}>{tag}</span>
-                          ))}
+                      <div className="vai-document-info">
+                        <span className="vai-document-name" style={{ fontSize: '13px' }}>{uploadedFile.name}</span>
+                        <span className="vai-document-size" style={{ fontSize: '11px' }}>{uploadedFile.size}</span>
+                      </div>
+                      {isValidating && (
+                        <div className="vai-scanning-overlay">
+                          <div className="vai-scan-spinner" />
+                          <span style={{ fontSize: '12px' }}>AI Memvalidasi Berkas...</span>
                         </div>
                       )}
                     </div>
                   )}
+
+                  {/* Placeholder */}
+                  {!isCameraOpen && !capturedImage && !uploadedFile && (
+                    <div className="vai-camera-placeholder" style={{ padding: 'var(--space-md)' }}>
+                      <span className="vai-placeholder-icon">
+                        <ScanLargeIcon />
+                      </span>
+                      <p className="vai-placeholder-text" style={{ fontSize: '12px', lineHeight: '16px' }}>
+                        Foto makanan belum tersedia. Gunakan kamera langsung, kamera simulasi, atau unggah berkas foto menu makanan Anda.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
+
+                {/* Hidden inputs */}
+                <canvas ref={canvasRef} style={{ display: 'none' }} />
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="vai-file-upload-input"
+                />
+
+                {/* Controls */}
+                <div className="vai-controls" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: 'var(--space-md)' }}>
+                  {!isCameraOpen && !capturedImage && !uploadedFile && (
+                    <>
+                      <button type="button" className="adm-btn primary" onClick={handleOpenCamera} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        <CameraIcon />
+                        <span>Kamera</span>
+                      </button>
+                      <button type="button" className="adm-btn" onClick={handleOpenSimulatedCamera} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        <SimulateIcon />
+                        <span>Simulasi</span>
+                      </button>
+                      <button type="button" className="adm-btn" onClick={triggerFileInput} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        <UploadIcon />
+                        <span>Unggah</span>
+                      </button>
+                    </>
+                  )}
+
+                  {isCameraOpen && (
+                    <>
+                      <button type="button" className="adm-btn primary" onClick={handleCapture} style={{ flex: '2', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        <CaptureIcon />
+                        <span>Ambil Foto</span>
+                      </button>
+                      <button type="button" className="adm-btn" onClick={handleCloseCamera} style={{ flex: '1' }}>
+                        Batal
+                      </button>
+                    </>
+                  )}
+
+                  {!isCameraOpen && (capturedImage || uploadedFile) && !isValidating && (
+                    <>
+                      <button type="button" className="adm-btn primary" onClick={uploadedFile ? triggerFileInput : (isCameraSimulated ? handleOpenSimulatedCamera : handleOpenCamera)} style={{ flex: '1', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        <RefreshIcon />
+                        <span>Ambil Ulang</span>
+                      </button>
+                      <button type="button" className="adm-btn" onClick={handleReset} style={{ flex: '1' }}>
+                        Hapus Foto
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {cameraError && (
+                  <p style={{ color: 'var(--status-error)', fontSize: '12px', margin: '0 0 12px 0' }}>
+                    {cameraError}
+                  </p>
+                )}
+
+                {/* Validation results banner inside the modal left column */}
+                {validationRun && !isValidating && (
+                  <div style={{ marginTop: '12px' }}>
+                    {validationSuccess ? (
+                      <div style={{
+                        background: '#E8F5E9',
+                        color: 'var(--status-success)',
+                        padding: '12px',
+                        borderRadius: 'var(--radius-md)',
+                        border: '1px solid var(--status-success)',
+                        fontSize: '12px',
+                        lineHeight: '16px'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'bold', marginBottom: '4px' }}>
+                          <CheckIcon />
+                          <span>Lolos Validasi AI</span>
+                        </div>
+                        <p style={{ margin: 0 }}>Klaim kandungan nutrisi terbukti wajar sesuai dengan visual makanan.</p>
+                      </div>
+                    ) : validationWarning ? (
+                      <div style={{
+                        background: '#FFF3E0',
+                        color: '#E65100',
+                        padding: '12px',
+                        borderRadius: 'var(--radius-md)',
+                        border: '1px solid #FFB74D',
+                        fontSize: '12px',
+                        lineHeight: '16px'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'bold', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '14px' }}>⚠️</span>
+                          <span>Peringatan Ketidakwajaran AI</span>
+                        </div>
+                        <p style={{ margin: '0 0 8px 0' }}>{validationWarning}</p>
+                        <span style={{ fontSize: '11px', opacity: 0.85, fontWeight: 500 }}>
+                          Klaim gizi tidak seimbang secara visual. Anda dapat merevisi gizi atau tetap menyimpan dengan risiko tanpa lencana validasi.
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+              </div>
 
               {/* Right Column: Standard Form Inputs */}
               <div className="menu-form-inputs-panel">
-                {/* AI Toggle Button */}
-                <div style={{ marginBottom: '16px' }}>
-                  <button
-                    type="button"
-                    className={`adm-btn ${aiMode ? 'primary' : ''}`}
-                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '8px', fontSize: '13px', fontWeight: 600 }}
-                    onClick={toggleAiMode}
-                  >
-                    <SparklesIcon />
-                    <span>{aiMode ? 'Tutup Pemindai AI' : 'Isi Gizi Otomatis dengan AI ✦'}</span>
-                  </button>
-                </div>
-
-                {validationResult && validationResult.status !== 'Tidak Terdeteksi' && (
-                  <div style={{
-                    background: '#E8F5E9',
-                    color: 'var(--status-success)',
-                    padding: '8px 12px',
-                    borderRadius: 'var(--radius-md)',
-                    fontSize: '12px',
-                    fontWeight: 500,
-                    marginBottom: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}>
-                    <CheckIcon />
-                    <span>Nilai gizi & komposisi diisi otomatis oleh AI.</span>
-                  </div>
-                )}
-
                 {error && <p className="adm-error-msg">{error}</p>}
+                
                 <div className="adm-field">
                   <label className="adm-label" htmlFor="mh-date">Tanggal Sajian</label>
                   <input id="mh-date" className="adm-input" type="date"
-                    value={form.served_at} onChange={set('served_at')} required />
+                    value={form.served_at} onChange={handleInputChange('served_at')} required />
                 </div>
                 <div className="adm-field">
                   <label className="adm-label" htmlFor="mh-name">Nama Menu</label>
                   <input id="mh-name" className="adm-input" type="text"
                     placeholder="cth. Nasi, Ayam Goreng, Sayur Bayam"
-                    value={form.menu_name} onChange={set('menu_name')} required />
+                    value={form.menu_name} onChange={handleInputChange('menu_name')} required />
                 </div>
                 <div className="adm-field">
                   <label className="adm-label" htmlFor="mh-components">Komponen Makanan</label>
                   <textarea id="mh-components" className="adm-textarea"
                     placeholder="Uraikan komponen makanan secara detail..."
-                    value={form.components} onChange={set('components')} />
+                    value={form.components} onChange={handleInputChange('components')} />
                 </div>
-                <div className="adm-field-group">
-                  <h4>Klaim Kandungan Nutrisi</h4>
+                
+                <div className="adm-field-group" style={{ marginBottom: '16px' }}>
+                  <h4 style={{ margin: '0 0 8px 0', fontSize: '13px', color: 'var(--text-secondary)' }}>Klaim Kandungan Nutrisi</h4>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                    <div className="adm-field">
+                    <div className="adm-field" style={{ marginBottom: 0 }}>
                       <label className="adm-label" htmlFor="mh-calories">Kalori (kkal)</label>
                       <input id="mh-calories" className="adm-input" type="number" min="0"
-                        value={form.calories} onChange={set('calories')} />
+                        value={form.calories} onChange={handleInputChange('calories')} required />
                     </div>
-                    <div className="adm-field">
+                    <div className="adm-field" style={{ marginBottom: 0 }}>
                       <label className="adm-label" htmlFor="mh-protein">Protein (g)</label>
                       <input id="mh-protein" className="adm-input" type="number" min="0"
-                        value={form.protein} onChange={set('protein')} />
+                        value={form.protein} onChange={handleInputChange('protein')} required />
                     </div>
-                    <div className="adm-field">
+                    <div className="adm-field" style={{ marginBottom: 0 }}>
                       <label className="adm-label" htmlFor="mh-carbs">Karbohidrat (g)</label>
                       <input id="mh-carbs" className="adm-input" type="number" min="0"
-                        value={form.carbs} onChange={set('carbs')} />
+                        value={form.carbs} onChange={handleInputChange('carbs')} required />
                     </div>
-                    <div className="adm-field">
+                    <div className="adm-field" style={{ marginBottom: 0 }}>
                       <label className="adm-label" htmlFor="mh-fat">Lemak (g)</label>
                       <input id="mh-fat" className="adm-input" type="number" min="0"
-                        value={form.fat} onChange={set('fat')} />
+                        value={form.fat} onChange={handleInputChange('fat')} required />
                     </div>
                   </div>
+                </div>
+
+                {/* AI Validation trigger button */}
+                <div style={{ marginTop: '16px' }}>
+                  <button
+                    type="button"
+                    className={`adm-btn ${validationSuccess ? 'primary' : ''}`}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      padding: '10px',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      border: validationSuccess ? 'none' : '1px dashed var(--color-primary)',
+                      background: validationSuccess ? '#E8F5E9' : 'transparent',
+                      color: validationSuccess ? '#2E7D32' : 'var(--color-primary)'
+                    }}
+                    onClick={runAiValidation}
+                    disabled={isValidating || !capturedImage}
+                  >
+                    <SparklesIcon />
+                    <span>
+                      {isValidating
+                        ? 'Memproses Validasi AI...'
+                        : validationRun
+                          ? 'Ulangi Validasi Kelayakan AI ✦'
+                          : 'Validasi Kelayakan Menu dengan AI ✦'}
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
           <div className="adm-modal-footer">
             <button type="button" className="adm-btn" onClick={onClose}>Batal</button>
-            <button type="submit" className="adm-btn primary" disabled={loading}>
+            <button type="submit" className="adm-btn primary" disabled={loading || isValidating}>
               {loading ? 'Menyimpan...' : 'Simpan'}
             </button>
           </div>
@@ -792,12 +902,14 @@ export default function MenuHarian() {
             <thead>
               <tr>
                 <th>Tanggal</th>
+                <th>Foto</th>
                 <th>Nama Menu</th>
                 <th>Komponen</th>
                 <th>Kalori</th>
                 <th>Protein</th>
                 <th>Karbo</th>
                 <th>Lemak</th>
+                <th>Status Validasi AI</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -805,6 +917,13 @@ export default function MenuHarian() {
               {menus.map((menu) => (
                 <tr key={menu.id}>
                   <td style={{ whiteSpace: 'nowrap' }}>{menu.served_at}</td>
+                  <td>
+                    {menu.photo ? (
+                      <img src={menu.photo} alt="Foto Makanan" className="vai-history-thumb" />
+                    ) : (
+                      <div className="vai-history-thumb-placeholder">—</div>
+                    )}
+                  </td>
                   <td>{menu.menu_name}</td>
                   <td style={{ maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {menu.components || '—'}
@@ -813,6 +932,21 @@ export default function MenuHarian() {
                   <td>{fmt(menu.protein,  'g')}</td>
                   <td>{fmt(menu.carbs,    'g')}</td>
                   <td>{fmt(menu.fat,      'g')}</td>
+                  <td>
+                    {menu.is_ai_validated ? (
+                      <span className="vai-badge vai-badge-success" style={{ textTransform: 'none', fontSize: '11px', height: '20px', whiteSpace: 'nowrap' }}>
+                        Tervalidasi AI
+                      </span>
+                    ) : menu.ai_warning ? (
+                      <span className="vai-badge vai-badge-warning" title={menu.ai_warning} style={{ textTransform: 'none', fontSize: '11px', height: '20px', cursor: 'help', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        ⚠️ Ada Peringatan
+                      </span>
+                    ) : (
+                      <span className="vai-badge" style={{ background: '#e0e0e0', color: '#666', textTransform: 'none', fontSize: '11px', height: '20px', whiteSpace: 'nowrap' }}>
+                        Belum Divalidasi
+                      </span>
+                    )}
+                  </td>
                   <td>
                     <div className="adm-actions">
                       <button className="adm-btn" onClick={() => openEdit(menu)}>Edit</button>

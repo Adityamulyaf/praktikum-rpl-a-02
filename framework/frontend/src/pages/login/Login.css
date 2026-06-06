@@ -13,7 +13,7 @@
   font-size: 14px;
   background:
     linear-gradient(rgba(7, 30, 73, 0.62), rgba(7, 30, 73, 0.62)),
-    url('../assets/mbg-ilustration.webp') center / cover no-repeat;
+    url('../../assets/mbg-ilustration.webp') center / cover no-repeat;
 }
 
 /* ── CENTER WRAPPER ───────────────────────────────────── */
@@ -140,6 +140,7 @@
   box-sizing: border-box;
   transition: border-color 150ms;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .lp-input::-ms-reveal { display: none; }

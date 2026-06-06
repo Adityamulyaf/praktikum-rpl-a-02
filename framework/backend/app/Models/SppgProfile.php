@@ -28,4 +28,9 @@ class SppgProfile extends Model
     {
         return $this->hasMany(Review::class, 'sppg_id');
     }
+
+    public function dailyMenus()
+    {
+        return $this->hasMany(DailyMenu::class, 'sppg_id');
+    }
 }

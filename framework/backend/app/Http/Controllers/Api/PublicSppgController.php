@@ -22,7 +22,9 @@ class PublicSppgController extends Controller
     public function show($id)
     {
         $sppg = SppgProfile::where('is_active', true)
-            ->with('schools:id,name,district,province')
+            ->with(['schools:id,name,district,province', 'dailyMenus' => function ($q) {
+                $q->orderBy('served_at', 'desc');
+            }])
             ->findOrFail($id);
 
         return response()->json([
@@ -38,6 +40,7 @@ class PublicSppgController extends Controller
             'production_capacity' => $sppg->production_capacity,
             'description'         => $sppg->description,
             'schools'             => $sppg->schools,
+            'daily_menus'         => $sppg->dailyMenus,
         ]);
     }
 }

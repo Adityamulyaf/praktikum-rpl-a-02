@@ -30,24 +30,30 @@ class MenuController extends Controller
         }
 
         $request->validate([
-            'served_at'  => 'required|date',
-            'menu_name'  => 'required|string|max:255',
-            'components' => 'nullable|string',
-            'calories'   => 'nullable|integer|min:0',
-            'protein'    => 'nullable|integer|min:0',
-            'carbs'      => 'nullable|integer|min:0',
-            'fat'        => 'nullable|integer|min:0',
+            'served_at'       => 'required|date',
+            'menu_name'       => 'required|string|max:255',
+            'components'      => 'nullable|string',
+            'calories'        => 'nullable|integer|min:0',
+            'protein'         => 'nullable|integer|min:0',
+            'carbs'           => 'nullable|integer|min:0',
+            'fat'             => 'nullable|integer|min:0',
+            'photo'           => 'nullable|string',
+            'is_ai_validated' => 'nullable|boolean',
+            'ai_warning'      => 'nullable|string',
         ]);
 
         $menu = DailyMenu::create([
-            'sppg_id'    => $sppg->id,
-            'served_at'  => $request->served_at,
-            'menu_name'  => $request->menu_name,
-            'components' => $request->components,
-            'calories'   => $request->calories,
-            'protein'    => $request->protein,
-            'carbs'      => $request->carbs,
-            'fat'        => $request->fat,
+            'sppg_id'         => $sppg->id,
+            'served_at'       => $request->served_at,
+            'menu_name'       => $request->menu_name,
+            'components'      => $request->components,
+            'calories'        => $request->calories,
+            'protein'         => $request->protein,
+            'carbs'           => $request->carbs,
+            'fat'             => $request->fat,
+            'photo'           => $request->photo,
+            'is_ai_validated' => $request->boolean('is_ai_validated', false),
+            'ai_warning'      => $request->ai_warning,
         ]);
 
         return response()->json($menu, 201);
@@ -61,16 +67,22 @@ class MenuController extends Controller
         }
 
         $request->validate([
-            'served_at'  => 'sometimes|date',
-            'menu_name'  => 'sometimes|string|max:255',
-            'components' => 'nullable|string',
-            'calories'   => 'nullable|integer|min:0',
-            'protein'    => 'nullable|integer|min:0',
-            'carbs'      => 'nullable|integer|min:0',
-            'fat'        => 'nullable|integer|min:0',
+            'served_at'       => 'sometimes|date',
+            'menu_name'       => 'sometimes|string|max:255',
+            'components'      => 'nullable|string',
+            'calories'        => 'nullable|integer|min:0',
+            'protein'         => 'nullable|integer|min:0',
+            'carbs'           => 'nullable|integer|min:0',
+            'fat'             => 'nullable|integer|min:0',
+            'photo'           => 'nullable|string',
+            'is_ai_validated' => 'nullable|boolean',
+            'ai_warning'      => 'nullable|string',
         ]);
 
-        $menu->update($request->only(['served_at', 'menu_name', 'components', 'calories', 'protein', 'carbs', 'fat']));
+        $menu->update($request->only([
+            'served_at', 'menu_name', 'components', 'calories', 'protein', 'carbs', 'fat',
+            'photo', 'is_ai_validated', 'ai_warning'
+        ]));
 
         return response()->json($menu);
     }
