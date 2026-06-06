@@ -192,3 +192,50 @@
     color: #1a1f36;
     font-weight: 500;
 }
+
+.lkp-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.lkp-page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    color: #374151;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.lkp-page-btn:hover:not(:disabled) {
+    background: #16a34a;
+    color: white;
+    border-color: #16a34a;
+}
+
+.lkp-page-btn--active {
+    background: #16a34a;
+    color: white;
+    border-color: #16a34a;
+    font-weight: 600;
+}
+
+.lkp-page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.lkp-page-ellipsis {
+    padding: 0 4px;
+    color: #9ca3af;
+    line-height: 36px;
+}
