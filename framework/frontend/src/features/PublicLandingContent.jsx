@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { searchPublicSchools } from '../api/auth';
 import PersonalStrip from '../components/PersonalStrip';
 import LandingKitchenProfile from '../pages/landing/LandingKitchenProfile';
+import MonitoringStatusDistribusi from './monitoring/MonitoringStatusDistribusi';
 import '../pages/landing/PublicLanding.css';
 
 /* Icons: 32px outlined, no colored backgrounds per DESIGN.md §8.1 */
@@ -68,7 +69,7 @@ const FEATURES = [
         ),
         name: "Status Distribusi",
         desc: "Cek secara real-time apakah MBG sudah dikirim dan tiba di sekolah hari ini.",
-        badge: "Segera",
+        badge: null,
     },
     {
         key: "profil",
@@ -197,6 +198,23 @@ export default function PublicLandingContent({ onNavigate }) {
             <LandingKitchenProfile
                 onBack={() => setView("landing")}
             />
+        );
+    }
+
+    // ── VIEW SWITCH: MonitoringStatusDistribusi ──
+    if (view === "distribusi") {
+        return (
+            <div className="lkp-root">
+                <button className="lkp-back-btn" onClick={() => setView("landing")}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" strokeWidth="2"
+                        strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7" />
+                    </svg>
+                    Kembali
+                </button>
+                <MonitoringStatusDistribusi />
+            </div>
         );
     }
 
@@ -335,19 +353,25 @@ export default function PublicLandingContent({ onNavigate }) {
                         {FEATURES.map(({ key, icon, name, desc, badge }) => (
                             <div
                                 key={key}
-                                className={`plc-feature-card${key === "profil" ? " plc-feature-card--link" : ""}`}
+                                className={`plc-feature-card${key === "profil" || key === "distribusi" ? " plc-feature-card--link" : ""}`}
                                 onClick={
                                     key === "profil"
                                         ? () => setView("profil-dapur")
+                                        : key === "distribusi"
+                                        ? () => setView("distribusi")
                                         : undefined
                                 }
-                                role={key === "profil" ? "button" : undefined}
-                                tabIndex={key === "profil" ? 0 : undefined}
+                                role={key === "profil" || key === "distribusi" ? "button" : undefined}
+                                tabIndex={key === "profil" || key === "distribusi" ? 0 : undefined}
                                 onKeyDown={
                                     key === "profil"
                                         ? (e) =>
                                               e.key === "Enter" &&
                                               setView("profil-dapur")
+                                        : key === "distribusi"
+                                        ? (e) =>
+                                              e.key === "Enter" &&
+                                              setView("distribusi")
                                         : undefined
                                 }
                             >
@@ -362,6 +386,11 @@ export default function PublicLandingContent({ onNavigate }) {
                                 {key === "profil" && (
                                     <span className="plc-feature-cta">
                                         Lihat direktori →
+                                    </span>
+                                )}
+                                {key === "distribusi" && (
+                                    <span className="plc-feature-cta">
+                                        Pantau status →
                                     </span>
                                 )}
                             </div>
