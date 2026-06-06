@@ -11,22 +11,38 @@
     font-family: var(--font-sans);
 }
 
+/* Navbar: transparent over hero, solid on scroll */
 .pl-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 56px;
     padding: 0 var(--space-2xl);
-    background: var(--surface-1);
-    border-bottom: 1px solid var(--border-default);
-    position: sticky;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    position: fixed;
     top: 0;
-    z-index: 10;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition: background 300ms, border-color 300ms, backdrop-filter 300ms;
 }
 
+.pl-nav.pl-nav--solid {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-default);
+}
+
+/* Brand: white on transparent, navy on solid */
 .pl-nav-brand {
     font-size: 16px;
     font-weight: 700;
+    color: var(--text-inverse);
+    transition: color 300ms;
+}
+
+.pl-nav--solid .pl-nav-brand {
     color: var(--color-primary);
 }
 
@@ -36,27 +52,35 @@
     gap: var(--space-sm);
 }
 
-/* Secondary button — transparent, navy border */
+/* Secondary button — adapts to nav state */
 .pl-nav-register {
     display: inline-flex;
     align-items: center;
     height: 36px;
     padding: 0 var(--space-md);
     background: transparent;
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    color: var(--text-inverse);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: var(--radius-md);
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    transition:
-        background 150ms,
-        color 150ms;
+    transition: background 200ms, color 200ms, border-color 300ms;
 }
 
 .pl-nav-register:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-inverse);
+}
+
+.pl-nav--solid .pl-nav-register {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.pl-nav--solid .pl-nav-register:hover {
     background: var(--color-primary);
     color: var(--text-inverse);
 }
@@ -67,19 +91,29 @@
     align-items: center;
     height: 36px;
     padding: 0 var(--space-md);
-    background: var(--color-primary);
+    background: rgba(255, 255, 255, 0.15);
     color: var(--text-inverse);
-    border: 1px solid transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-md);
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    transition: opacity 150ms;
+    transition: background 200ms, color 200ms, border-color 300ms;
 }
 
 .pl-nav-login:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.pl-nav--solid .pl-nav-login {
+    background: var(--color-primary);
+    color: var(--text-inverse);
+    border-color: transparent;
+}
+
+.pl-nav--solid .pl-nav-login:hover {
     opacity: 0.88;
 }
 
@@ -93,12 +127,14 @@
 /* Solid navy only — no gradients per DESIGN.md §4.5, §9.2 */
 .plc-hero {
     background: var(--color-primary);
-    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+    padding: var(--space-3xl) var(--space-2xl) 0;
+    padding-top: calc(56px + var(--space-3xl));
     text-align: center;
-    /* Fill viewport so green section stays below the fold */
-    min-height: calc(85svh - 56px);
+    /* Fill viewport so features section stays below the fold */
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 /* Content fills available space, shifted slightly above center
@@ -134,13 +170,13 @@
     margin-bottom: var(--space-md);
 }
 
-/* Display — 32px per type scale §3.2, -0.3px per §3.3 */
+/* Display — 48px hero landing, bolder for impact */
 .plc-hero-title {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 48px;
+    font-weight: 800;
     color: var(--text-inverse);
-    line-height: 40px;
-    letter-spacing: -0.3px;
+    line-height: 56px;
+    letter-spacing: -1px;
     margin: 0 0 var(--space-md);
 }
 
@@ -366,13 +402,14 @@
     text-align: center;
 }
 
-/* h1 equivalent size, no letter-spacing change per §3.3 */
+/* h1 equivalent size — animated count-up */
 .plc-stat-num {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 28px;
+    font-weight: 800;
     color: var(--text-inverse);
-    line-height: 32px;
+    line-height: 36px;
     display: block;
+    font-variant-numeric: tabular-nums;
 }
 
 .plc-stat-label {
@@ -382,6 +419,22 @@
     line-height: 16px;
     display: block;
     margin-top: var(--space-xs);
+}
+
+/* ── HERO → FEATURES WAVE DIVIDER ────────────────────────── */
+.plc-wave-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.plc-wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 60px;
 }
 
 /* ── FEATURES SECTION ─────────────────────────────────────── */
@@ -468,13 +521,14 @@
     flex: 1;
 }
 
-/* Clickable card variant (Profil Dapur) */
+/* Clickable card variant — hover lift effect */
 .plc-feature-card--link {
     cursor: pointer;
-    transition: border-color 0.15s;
+    transition: transform 200ms, border-color 200ms;
 }
 .plc-feature-card--link:hover {
     border-color: var(--border-strong, #d1d5db);
+    transform: translateY(-3px);
 }
 
 .plc-feature-cta {
@@ -620,16 +674,22 @@
 
 @media (max-width: 640px) {
     .plc-hero {
-        padding: var(--space-2xl) var(--space-md);
+        padding: var(--space-2xl) var(--space-md) 0;
+        padding-top: calc(56px + var(--space-2xl));
     }
 
     .plc-hero-title {
-        font-size: 24px;
-        line-height: 32px;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: -0.5px;
     }
 
     .plc-stats {
         gap: var(--space-xl);
+    }
+
+    .plc-wave-divider svg {
+        height: 32px;
     }
 
     .plc-features {

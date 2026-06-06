@@ -5,6 +5,54 @@ import LandingKitchenProfile from '../pages/landing/LandingKitchenProfile';
 import MonitoringStatusDistribusi from './monitoring/MonitoringStatusDistribusi';
 import '../pages/landing/PublicLanding.css';
 
+/* ── COUNT-UP ANIMATION HOOK ───────────────────────────────── */
+function useCountUp(end, duration = 1600) {
+    const [count, setCount] = useState(0);
+    const [started, setStarted] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+            { threshold: 0.5 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!started) return;
+        const numericEnd = parseInt(end.replace(/\D/g, ''), 10);
+        if (isNaN(numericEnd) || numericEnd === 0) { setCount(numericEnd); return; }
+        let frame;
+        const start = performance.now();
+        const step = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.round(eased * numericEnd));
+            if (progress < 1) frame = requestAnimationFrame(step);
+        };
+        frame = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(frame);
+    }, [started, end, duration]);
+
+    const suffix = end.replace(/[0-9]/g, '');
+    return { ref, display: started ? `${count}${suffix}` : '0' };
+}
+
+function AnimatedStat({ num, label }) {
+    const { ref, display } = useCountUp(num);
+    return (
+        <div className="plc-stat-item" ref={ref}>
+            <span className="plc-stat-num">{display}</span>
+            <span className="plc-stat-label">{label}</span>
+        </div>
+    );
+}
+
 /* Icons: 32px outlined, no colored backgrounds per DESIGN.md §8.1 */
 const FEATURES = [
     {
@@ -228,9 +276,7 @@ export default function PublicLandingContent({ onNavigate }) {
                     </span>
 
                     <h1 className="plc-hero-title">
-                        Pantau Distribusi
-                        <br />
-                        Makan Bergizi Gratis
+                        Pantau. Pastikan.<br />Transparan.
                     </h1>
 
                     <p className="plc-hero-sub">
@@ -304,15 +350,10 @@ export default function PublicLandingContent({ onNavigate }) {
                         )}
                     </div>
 
-                    {/* Stats */}
+                    {/* Stats — animated count-up */}
                     <div className="plc-stats">
                         {STATS.map((s) => (
-                            <div key={s.label} className="plc-stat-item">
-                                <span className="plc-stat-num">{s.num}</span>
-                                <span className="plc-stat-label">
-                                    {s.label}
-                                </span>
-                            </div>
+                            <AnimatedStat key={s.label} num={s.num} label={s.label} />
                         ))}
                     </div>
                 </div>
@@ -330,6 +371,13 @@ export default function PublicLandingContent({ onNavigate }) {
                         strokeLinejoin="round"
                     >
                         <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </div>
+
+                {/* Wave divider: smooth curve transition to features */}
+                <div className="plc-wave-divider" aria-hidden="true">
+                    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,60 L0,20 Q360,0 720,20 Q1080,40 1440,20 L1440,60 Z" fill="var(--surface-1)" />
                     </svg>
                 </div>
             </section>
