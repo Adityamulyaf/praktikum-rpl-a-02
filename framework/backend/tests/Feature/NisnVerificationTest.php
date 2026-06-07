@@ -319,4 +319,100 @@ class NisnVerificationTest extends TestCase
                 'kitchen_name' => 'SPPG Kagi Kitchen',
             ]);
     }
+
+    public function test_student_cannot_submit_review_with_future_date()
+    {
+        $user = User::create([
+            'name' => 'Ahmad Pratama',
+            'email' => 'ahmad@example.com',
+            'password' => bcrypt('password123'),
+            'role' => 'siswa',
+            'is_active' => true,
+        ]);
+        StudentProfile::create([
+            'user_id' => $user->ssid,
+            'school_id' => $this->school->id,
+            'nisn' => '0080000101',
+        ]);
+
+        $sppgUser = User::create([
+            'name' => 'Test SPPG',
+            'email' => 'sppg@example.com',
+            'password' => bcrypt('password123'),
+            'role' => 'sppg',
+            'is_active' => true,
+        ]);
+        $sppgProfile = \App\Models\SppgProfile::create([
+            'user_id' => $sppgUser->ssid,
+            'kitchen_name' => 'SPPG Kagi Kitchen',
+            'address' => 'Kagi Address',
+            'district' => 'Kab. Tolikara',
+            'province' => 'Prov. Papua',
+            'contact_person_name' => 'Contact SPPG',
+            'contact_phone' => '0812345678',
+        ]);
+        $sppgProfile->schools()->attach($this->school->id);
+
+        $futureDate = now()->addDay()->toDateString();
+
+        $response = $this->actingAs($user)->postJson('/api/siswa/reviews', [
+            'content' => 'Makanannya lezat sekali dan bergizi!',
+            'review_date' => $futureDate,
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_student_cannot_submit_duplicate_active_reviews_on_same_date()
+    {
+        $user = User::create([
+            'name' => 'Ahmad Pratama',
+            'email' => 'ahmad@example.com',
+            'password' => bcrypt('password123'),
+            'role' => 'siswa',
+            'is_active' => true,
+        ]);
+        StudentProfile::create([
+            'user_id' => $user->ssid,
+            'school_id' => $this->school->id,
+            'nisn' => '0080000101',
+        ]);
+
+        $sppgUser = User::create([
+            'name' => 'Test SPPG',
+            'email' => 'sppg@example.com',
+            'password' => bcrypt('password123'),
+            'role' => 'sppg',
+            'is_active' => true,
+        ]);
+        $sppgProfile = \App\Models\SppgProfile::create([
+            'user_id' => $sppgUser->ssid,
+            'kitchen_name' => 'SPPG Kagi Kitchen',
+            'address' => 'Kagi Address',
+            'district' => 'Kab. Tolikara',
+            'province' => 'Prov. Papua',
+            'contact_person_name' => 'Contact SPPG',
+            'contact_phone' => '0812345678',
+        ]);
+        $sppgProfile->schools()->attach($this->school->id);
+
+        $today = now()->toDateString();
+
+        // 1. Submit first review
+        $response1 = $this->actingAs($user)->postJson('/api/siswa/reviews', [
+            'content' => 'Ulasan pertama hari ini!',
+            'review_date' => $today,
+        ]);
+        $response1->assertStatus(201);
+
+        // 2. Submit second review on same date
+        $response2 = $this->actingAs($user)->postJson('/api/siswa/reviews', [
+            'content' => 'Ulasan kedua hari ini!',
+            'review_date' => $today,
+        ]);
+        $response2->assertStatus(422)
+            ->assertJson([
+                'message' => 'Anda sudah mengirimkan ulasan untuk tanggal ini.'
+            ]);
+    }
 }

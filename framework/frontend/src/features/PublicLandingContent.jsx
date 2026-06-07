@@ -277,7 +277,7 @@ export default function PublicLandingContent({ onNavigate }) {
     };
 
     const handleScrollToSearch = () => {
-        searchRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         searchRef.current?.querySelector('input')?.focus();
     };
 

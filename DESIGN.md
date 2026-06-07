@@ -306,6 +306,7 @@ border: 1px solid var(--border-default);  /* #E5E3DF */
 - Bottom border: 1px `border-default`
 - Contains: breadcrumb (text only, no icons), search input, notification icon, user avatar
 - No shadows, no gradients
+- Scroll behavior: Can transition to a floating rounded layout with a subtle shadow and side margins on scroll to maximize vertical reading space.
 
 **Rules:**
 - ✓ Current page indicated in both sidebar (active state) and breadcrumb
@@ -616,13 +617,13 @@ Symmetry is a default, not a requirement. **Break the grid when the content call
 - Toast notification slide in from top-right
 - Loading spinner (simple rotation, no bouncing dots)
 - Skeleton loading for content areas (subtle pulse)
+- ✓ Number counting-up animations on landing page metrics
 
 ### 7.3 Forbidden Animations
 
 - ✗ Staggered card entrance animations
 - ✗ Parallax scrolling
 - ✗ Bouncing, elastic, or spring physics
-- ✗ Number counting-up animations on metrics
 - ✗ Confetti, particles, or celebration effects
 - ✗ Page transition slides or morphs
 - ✗ Hover effects that move or "lift" elements
@@ -681,7 +682,7 @@ These patterns are **explicitly forbidden** in HaloMBG. If you see them in a des
 | Cards inside cards inside cards | Creates visual matryoshka — confuses hierarchy |
 | Every section wrapped in a bordered card | Turns pages into a grid of boxes — kills natural content flow |
 | Border on every element | Creates cage-like feeling — the opposite of openness |
-| Giant rounded corners (12px+) on containers | Signals "friendly startup" — inappropriate for civic platform |
+| Giant rounded corners (12px+) on containers | Signals "friendly startup" — inappropriate for civic platform (except for the scroll-based floating rounded navigation topbar/navbar) |
 | Sidebar + top nav + breadcrumb + tab bar all visible | Navigation overload — pick a hierarchy |
 | Metric cards in a 4-column colored grid | Dashboard cliché — communicate data, don't decorate it |
 
@@ -690,7 +691,7 @@ These patterns are **explicitly forbidden** in HaloMBG. If you see them in a des
 | Pattern | Why It's Forbidden |
 |---------|-------------------|
 | Gradient backgrounds (any kind) | Faux-premium signal — solid colors communicate honesty |
-| Box-shadow on everything | Fake depth — use spacing and contrast for hierarchy |
+| Box-shadow on everything | Fake depth — use spacing and contrast for hierarchy (shadow allowed ONLY on modals and scroll-based floating rounded navigation topbar/navbar) |
 | Glassmorphism (frosted glass, backdrop-blur) | Trend-chasing — adds processing cost, no informational value |
 | 4+ accent colors competing on one screen | Visual noise — overwhelms the user |
 | Decorative SVG blobs or waves as section dividers | Empty decoration — adds nothing to comprehension |
@@ -703,7 +704,7 @@ These patterns are **explicitly forbidden** in HaloMBG. If you see them in a des
 | Pattern | Why It's Forbidden |
 |---------|-------------------|
 | Cards that "lift" with shadow on hover | Skeuomorphic trick — use subtle background change instead |
-| Animated number counters | Performative — just show the number |
+| Animated number counters | Performative — just show the number (allowed only for landing page statistics to highlight civic metrics) |
 | Skeleton screens that shimmer dramatically | Loading state should be quiet, not theatrical |
 | Tooltips on everything | If something needs a tooltip, the label is bad |
 | Smooth-scroll anchoring on every navigation | Disorienting — let the browser jump |

@@ -68,6 +68,16 @@ class MenuController extends Controller
             'ai_warning'      => 'nullable|string',
         ]);
 
+        $exists = DailyMenu::where('sppg_id', $sppgId)
+            ->where('served_at', $request->served_at)
+            ->exists();
+
+        if ($exists) {
+            return response()->json([
+                'message' => 'Menu harian untuk tanggal ini sudah dibuat.'
+            ], 422);
+        }
+
         $menu = DailyMenu::create([
             'sppg_id'         => $sppgId,
             'served_at'       => $request->served_at,
@@ -111,6 +121,19 @@ class MenuController extends Controller
             'is_ai_validated' => 'nullable|boolean',
             'ai_warning'      => 'nullable|string',
         ]);
+
+        if ($request->has('served_at')) {
+            $exists = DailyMenu::where('sppg_id', $menu->sppg_id)
+                ->where('served_at', $request->served_at)
+                ->where('id', '!=', $menu->id)
+                ->exists();
+
+            if ($exists) {
+                return response()->json([
+                    'message' => 'Menu harian untuk tanggal ini sudah dibuat.'
+                ], 422);
+            }
+        }
 
         $menu->update($request->only([
             'served_at', 'menu_name', 'components', 'calories', 'protein', 'carbs', 'fat',

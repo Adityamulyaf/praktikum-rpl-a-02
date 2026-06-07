@@ -73,7 +73,13 @@ export default function KirimUlasan() {
     return (
       <div style={{ maxWidth: '560px', margin: '0 auto', padding: '2rem 0' }}>
         <div className="adm-error-msg" style={{ padding: '2rem', textAlign: 'center', borderRadius: '12px', borderLeft: 'none', background: 'rgba(198, 40, 40, 0.05)', border: '1px solid var(--border-default)' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>⚠️</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--status-error)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </div>
           <h3 style={{ margin: '0 0 8px', color: 'var(--status-error)', fontWeight: 700 }}>Belum Dilayani Dapur SPPG</h3>
           <p style={{ opacity: 0.8, fontSize: '0.875rem', lineHeight: '1.5', margin: 0 }}>
             Sekolah Anda saat ini belum terhubung dengan dapur SPPG mana pun, sehingga Anda belum dapat mengirimkan ulasan harian.
@@ -87,7 +93,12 @@ export default function KirimUlasan() {
     return (
       <div style={{ maxWidth: '560px', margin: '0 auto', padding: '2rem 0' }}>
         <div style={{ textAlign: 'center', padding: '2rem', border: '1px solid var(--border, #e5e7eb)', borderRadius: '12px' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>✓</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--status-success)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </div>
           <h2 style={{ margin: '0 0 8px', fontWeight: 700 }}>Ulasan Terkirim!</h2>
           <p style={{ opacity: 0.7, marginBottom: '20px' }}>Ulasanmu sudah tampil di halaman publik.</p>
           <button className="adm-btn primary" onClick={() => setSuccess(false)}>
