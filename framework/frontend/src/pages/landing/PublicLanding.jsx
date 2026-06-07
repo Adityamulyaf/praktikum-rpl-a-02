@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import PublicLandingContent from '../../features/PublicLandingContent';
@@ -14,6 +14,7 @@ const ROLE_PATHS = {
 export default function PublicLanding() {
   const navigate = useNavigate();
   const { token, role } = useAuth();
+  const navRef = useRef(null);
 
   useEffect(() => {
     const root = document.getElementById('root');
@@ -27,10 +28,25 @@ export default function PublicLanding() {
     }
   }, [token, role, navigate]);
 
+  // Scroll-based navbar: full-width → floating rounded
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!navRef.current) return;
+      if (window.scrollY > 80) {
+        navRef.current.classList.add('pl-nav--scrolled');
+      } else {
+        navRef.current.classList.remove('pl-nav--scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // check initial state
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="pl-root">
-      {/* Nav */}
-      <nav className="pl-nav">
+      {/* Nav — transparent over hero, solid on scroll */}
+      <nav className="pl-nav" ref={navRef}>
         <span className="pl-nav-brand">HaloMBG</span>
         <div className="pl-nav-actions">
           <a className="pl-nav-register" onClick={() => navigate('/login', { state: { view: 'register-select' } })}>

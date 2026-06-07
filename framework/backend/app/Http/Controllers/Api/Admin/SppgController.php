@@ -11,10 +11,24 @@ use Illuminate\Validation\Rules\Password;
 
 class SppgController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sppgs = SppgProfile::with(['user:ssid,name,email,phone_number,is_active', 'schools:id,name,district'])
-            ->get();
+        $query = SppgProfile::with(['user:ssid,name,email,phone_number,is_active', 'schools:id,name,district']);
+
+        if ($request->filled('search')) {
+            $search = '%' . $request->search . '%';
+            $query->where(function ($q) use ($search) {
+                $q->where('kitchen_name', 'ilike', $search)
+                  ->orWhere('district', 'ilike', $search)
+                  ->orWhere('province', 'ilike', $search)
+                  ->orWhereHas('user', function ($qu) use ($search) {
+                      $qu->where('name', 'ilike', $search)
+                         ->orWhere('email', 'ilike', $search);
+                  });
+            });
+        }
+
+        $sppgs = $query->get();
 
         return response()->json($sppgs);
     }

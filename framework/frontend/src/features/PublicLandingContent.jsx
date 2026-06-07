@@ -2,7 +2,56 @@ import { useEffect, useState, useRef } from 'react';
 import { searchPublicSchools } from '../api/auth';
 import PersonalStrip from '../components/PersonalStrip';
 import LandingKitchenProfile from '../pages/landing/LandingKitchenProfile';
+import MonitoringStatusDistribusi from './monitoring/MonitoringStatusDistribusi';
 import '../pages/landing/PublicLanding.css';
+
+/* ── COUNT-UP ANIMATION HOOK ───────────────────────────────── */
+function useCountUp(end, duration = 1600) {
+    const [count, setCount] = useState(0);
+    const [started, setStarted] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+            { threshold: 0.5 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!started) return;
+        const numericEnd = parseInt(end.replace(/\D/g, ''), 10);
+        if (isNaN(numericEnd) || numericEnd === 0) { setCount(numericEnd); return; }
+        let frame;
+        const start = performance.now();
+        const step = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.round(eased * numericEnd));
+            if (progress < 1) frame = requestAnimationFrame(step);
+        };
+        frame = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(frame);
+    }, [started, end, duration]);
+
+    const suffix = end.replace(/[0-9]/g, '');
+    return { ref, display: started ? `${count}${suffix}` : '0' };
+}
+
+function AnimatedStat({ num, label }) {
+    const { ref, display } = useCountUp(num);
+    return (
+        <div className="plc-stat-item" ref={ref}>
+            <span className="plc-stat-num">{display}</span>
+            <span className="plc-stat-label">{label}</span>
+        </div>
+    );
+}
 
 /* Icons: 32px outlined, no colored backgrounds per DESIGN.md §8.1 */
 const FEATURES = [
@@ -68,7 +117,7 @@ const FEATURES = [
         ),
         name: "Status Distribusi",
         desc: "Cek secara real-time apakah MBG sudah dikirim dan tiba di sekolah hari ini.",
-        badge: "Segera",
+        badge: null,
     },
     {
         key: "profil",
@@ -200,6 +249,23 @@ export default function PublicLandingContent({ onNavigate }) {
         );
     }
 
+    // ── VIEW SWITCH: MonitoringStatusDistribusi ──
+    if (view === "distribusi") {
+        return (
+            <div className="lkp-root">
+                <button className="lkp-back-btn" onClick={() => setView("landing")}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" strokeWidth="2"
+                        strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7" />
+                    </svg>
+                    Kembali
+                </button>
+                <MonitoringStatusDistribusi />
+            </div>
+        );
+    }
+
     return (
         <div className="plc-root">
             {/* ── HERO — solid navy, no gradients per DESIGN.md §4.5 ── */}
@@ -210,9 +276,7 @@ export default function PublicLandingContent({ onNavigate }) {
                     </span>
 
                     <h1 className="plc-hero-title">
-                        Pantau Distribusi
-                        <br />
-                        Makan Bergizi Gratis
+                        Pantau. Pastikan.<br />Transparan.
                     </h1>
 
                     <p className="plc-hero-sub">
@@ -286,15 +350,10 @@ export default function PublicLandingContent({ onNavigate }) {
                         )}
                     </div>
 
-                    {/* Stats */}
+                    {/* Stats — animated count-up */}
                     <div className="plc-stats">
                         {STATS.map((s) => (
-                            <div key={s.label} className="plc-stat-item">
-                                <span className="plc-stat-num">{s.num}</span>
-                                <span className="plc-stat-label">
-                                    {s.label}
-                                </span>
-                            </div>
+                            <AnimatedStat key={s.label} num={s.num} label={s.label} />
                         ))}
                     </div>
                 </div>
@@ -312,6 +371,13 @@ export default function PublicLandingContent({ onNavigate }) {
                         strokeLinejoin="round"
                     >
                         <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </div>
+
+                {/* Wave divider: smooth curve transition to features */}
+                <div className="plc-wave-divider" aria-hidden="true">
+                    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,60 L0,20 Q360,0 720,20 Q1080,40 1440,20 L1440,60 Z" fill="var(--surface-1)" />
                     </svg>
                 </div>
             </section>
@@ -335,19 +401,25 @@ export default function PublicLandingContent({ onNavigate }) {
                         {FEATURES.map(({ key, icon, name, desc, badge }) => (
                             <div
                                 key={key}
-                                className={`plc-feature-card${key === "profil" ? " plc-feature-card--link" : ""}`}
+                                className={`plc-feature-card${key === "profil" || key === "distribusi" ? " plc-feature-card--link" : ""}`}
                                 onClick={
                                     key === "profil"
                                         ? () => setView("profil-dapur")
+                                        : key === "distribusi"
+                                        ? () => setView("distribusi")
                                         : undefined
                                 }
-                                role={key === "profil" ? "button" : undefined}
-                                tabIndex={key === "profil" ? 0 : undefined}
+                                role={key === "profil" || key === "distribusi" ? "button" : undefined}
+                                tabIndex={key === "profil" || key === "distribusi" ? 0 : undefined}
                                 onKeyDown={
                                     key === "profil"
                                         ? (e) =>
                                               e.key === "Enter" &&
                                               setView("profil-dapur")
+                                        : key === "distribusi"
+                                        ? (e) =>
+                                              e.key === "Enter" &&
+                                              setView("distribusi")
                                         : undefined
                                 }
                             >
@@ -364,31 +436,53 @@ export default function PublicLandingContent({ onNavigate }) {
                                         Lihat direktori →
                                     </span>
                                 )}
+                                {key === "distribusi" && (
+                                    <span className="plc-feature-cta">
+                                        Pantau status →
+                                    </span>
+                                )}
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ── FOOTER ────────────────────────────────────────────── */}
+            {/* ── FOOTER — per DESIGN.md §5.9 ───────────────────────── */}
             <footer className="plc-footer">
                 <div className="plc-footer-inner">
-                    <div className="plc-footer-left">
-                        <span className="plc-footer-brand">HaloMBG</span>
+                    {/* Row 1: CTA + Nav columns */}
+                    <div className="plc-footer-top">
                         <p className="plc-footer-tagline">
-                            Platform monitoring transparan untuk program Makan
-                            Bergizi Gratis Indonesia.
+                            Transparansi untuk masa depan gizi Indonesia
                         </p>
+                        <nav className="plc-footer-nav">
+                            <div className="plc-footer-nav-col">
+                                <span>Profil Dapur</span>
+                                <span>Menu Harian</span>
+                                <span>Status Distribusi</span>
+                                <span>Validasi Gizi AI</span>
+                            </div>
+                            <div className="plc-footer-nav-col">
+                                <span>Ulasan Siswa</span>
+                                <span>Monitoring</span>
+                                <span>Tentang MBG</span>
+                            </div>
+                        </nav>
                     </div>
-                    <div className="plc-footer-right">
-                        <div className="plc-footer-links">
-                            <span>Transparansi</span>
-                            <span>Akuntabilitas</span>
+
+                    {/* Row 2: Oversized brand wordmark */}
+                    <div className="plc-footer-brand-display" aria-hidden="true">
+                        HaloMBG
+                    </div>
+
+                    {/* Row 3: Bottom bar */}
+                    <div className="plc-footer-bottom">
+                        <p className="plc-footer-copy">© 2026 HaloMBG</p>
+                        <div className="plc-footer-legal">
+                            <span>Kebijakan Privasi</span>
+                            <span>Syarat Layanan</span>
                             <span>Open Data</span>
                         </div>
-                        <p className="plc-footer-copy">
-                            © 2026 HaloMBG. Dibuat untuk rakyat Indonesia.
-                        </p>
                     </div>
                 </div>
             </footer>

@@ -51,12 +51,19 @@ class DistributionController extends Controller
 
         $request->validate([
             'status' => 'required|in:belum_diantar,siap_diantar,sudah_diantar,batal',
+            'photo'  => 'nullable|string',
         ]);
 
-        $distribution->update([
+        $updateData = [
             'status'            => $request->status,
             'status_updated_at' => now(),
-        ]);
+        ];
+
+        if ($request->has('photo')) {
+            $updateData['photo'] = $request->photo;
+        }
+
+        $distribution->update($updateData);
 
         return response()->json($distribution->load('school:id,name,district'));
     }

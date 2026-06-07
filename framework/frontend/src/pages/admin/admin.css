@@ -59,8 +59,8 @@
   font-weight: 500;
 }
 
-.adm-badge.active   { background: #E8F5E9; color: var(--status-success); }
-.adm-badge.inactive { background: #FFEBEE; color: var(--status-error); }
+.adm-badge.active   { background: rgba(46, 125, 50, 0.08); color: var(--status-success); }
+.adm-badge.inactive { background: rgba(198, 40, 40, 0.08); color: var(--status-error); }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 
@@ -83,11 +83,11 @@
 
 .adm-btn:hover              { background: var(--surface-2); }
 .adm-btn.primary            { background: var(--color-primary); color: var(--text-inverse); border-color: var(--color-primary); }
-.adm-btn.primary:hover      { background: #0a2a5c; }
-.adm-btn.danger             { background: var(--status-error); color: #ffffff; border-color: var(--status-error); }
-.adm-btn.danger:hover       { background: #a81f1f; border-color: #a81f1f; }
+.adm-btn.primary:hover      { opacity: 0.88; }
+.adm-btn.danger             { background: var(--status-error); color: var(--text-inverse); border-color: var(--status-error); }
+.adm-btn.danger:hover       { opacity: 0.88; }
 .adm-btn.success            { color: var(--status-success); }
-.adm-btn.success:hover      { background: #E8F5E9; border-color: var(--status-success); }
+.adm-btn.success:hover      { background: rgba(46, 125, 50, 0.08); border-color: var(--status-success); }
 .adm-btn:disabled           { opacity: 0.5; cursor: not-allowed; }
 
 /* ── STATES ──────────────────────────────────────────────── */
@@ -231,7 +231,7 @@
 .adm-error-msg {
   font-size: 13px;
   color: var(--status-error);
-  background: #FFEBEE;
+  background: rgba(198, 40, 40, 0.08);
   border-left: 3px solid var(--status-error);
   border-radius: var(--radius-md);
   padding: var(--space-sm) 12px;

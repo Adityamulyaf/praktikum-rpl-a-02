@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { getSppgs, deleteSppg, activateSppg } from '../../api/admin';
 import SppgFormModal from './SppgFormModal';
 import SppgSchoolModal from './SppgSchoolModal';
@@ -10,18 +10,31 @@ export default function SppgTable() {
   const [modalOpen, setModalOpen]                 = useState(false);
   const [editTarget, setEditTarget]               = useState(null);
   const [schoolModalTarget, setSchoolModalTarget] = useState(null);
+  const [search, setSearch]                       = useState('');
+  const debounceRef = useRef(null);
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (q = search) => {
     setLoading(true);
     try {
-      const { data } = await getSppgs();
+      const params = {};
+      if (q) params.search = q;
+      const { data } = await getSppgs(params);
       setSppgs(data);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [search]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { load(); }, []);
+
+  const handleSearch = (e) => {
+    const q = e.target.value;
+    setSearch(q);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      load(q);
+    }, 350);
+  };
 
   const openAdd    = ()     => { setEditTarget(null); setModalOpen(true); };
   const openEdit   = (sppg) => { setEditTarget(sppg); setModalOpen(true); };
@@ -59,11 +72,21 @@ export default function SppgTable() {
         <button className="adm-btn primary" onClick={openAdd}>+ Tambah SPPG</button>
       </div>
 
+      <div className="adm-filters">
+        <input
+          className="adm-search"
+          type="text"
+          placeholder="Cari nama dapur, wilayah, atau penanggung jawab..."
+          value={search}
+          onChange={handleSearch}
+        />
+      </div>
+
       <div className="adm-table-wrap">
         {loading ? (
           <p className="adm-loading">Memuat data...</p>
         ) : sppgs.length === 0 ? (
-          <p className="adm-empty">Belum ada SPPG.</p>
+          <p className="adm-empty">Tidak ada SPPG ditemukan.</p>
         ) : (
           <table className="adm-table">
             <thead>

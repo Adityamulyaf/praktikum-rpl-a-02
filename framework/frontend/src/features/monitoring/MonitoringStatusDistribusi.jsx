@@ -15,8 +15,51 @@ const STATUS_COLOR = {
   batal: "#dc2626",
 };
 
+function PhotoViewerModal({ photoUrl, onClose }) {
+  return (
+    <div className="adm-overlay" onClick={onClose} style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.6)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1000,
+    }}>
+      <div className="adm-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', padding: 0, overflow: 'hidden', position: 'relative' }}>
+        <img src={photoUrl} alt="Bukti pengiriman" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <button 
+          onClick={onClose} 
+          style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            background: 'rgba(0,0,0,0.5)',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '50%',
+            width: '32px',
+            height: '32px',
+            cursor: 'pointer',
+            fontSize: '18px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          &times;
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function MonitoringStatusDistribusi() {
   const [records, setRecords] = useState([]);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [loading, setLoading] = useState(true);
 
@@ -121,6 +164,7 @@ export default function MonitoringStatusDistribusi() {
                     <th>Sekolah</th>
                     <th>Kecamatan</th>
                     <th>Status</th>
+                    <th>Foto Bukti</th>
                     <th>Diperbarui</th>
                   </tr>
                 </thead>
@@ -145,6 +189,38 @@ export default function MonitoringStatusDistribusi() {
                           {STATUS_LABELS[rec.status]}
                         </span>
                       </td>
+                      <td>
+                        {rec.photo ? (
+                          <button
+                            type="button"
+                            onClick={() => setSelectedPhoto(rec.photo)}
+                            style={{
+                              background: "none",
+                              border: "none",
+                              padding: 0,
+                              cursor: "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <img
+                              src={rec.photo}
+                              alt="Bukti"
+                              style={{
+                                width: "60px",
+                                height: "45px",
+                                objectFit: "cover",
+                                borderRadius: "4px",
+                                border: "1px solid #d1d5db",
+                              }}
+                            />
+                          </button>
+                        ) : (
+                          <span style={{ fontSize: "0.85rem", opacity: 0.5 }}>
+                            —
+                          </span>
+                        )}
+                      </td>
                       <td style={{ fontSize: "0.8rem", opacity: 0.7 }}>
                         {rec.status_updated_at
                           ? new Date(rec.status_updated_at).toLocaleTimeString(
@@ -160,6 +236,12 @@ export default function MonitoringStatusDistribusi() {
             </div>
           </div>
         ))
+      )}
+      {selectedPhoto && (
+        <PhotoViewerModal
+          photoUrl={selectedPhoto}
+          onClose={() => setSelectedPhoto(null)}
+        />
       )}
     </div>
   );

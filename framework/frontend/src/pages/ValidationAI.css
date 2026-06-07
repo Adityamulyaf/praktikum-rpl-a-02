@@ -99,14 +99,11 @@
 }
 
 .vai-document-icon-wrapper {
-  background: var(--color-accent);
-  padding: var(--space-md);
-  border-radius: 50%;
-  margin-bottom: var(--space-md);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: var(--space-md);
 }
 
 .vai-document-info {
@@ -222,7 +219,6 @@
   right: 0;
   height: 2px;
   background: var(--color-secondary);
-  box-shadow: 0 0 8px var(--color-secondary);
   animation: vai-scan 2s linear infinite;
   z-index: 15;
 }
@@ -355,12 +351,12 @@
 }
 
 .vai-badge-success {
-  background: #E8F5E9;
+  background: rgba(46, 125, 50, 0.08);
   color: var(--status-success);
 }
 
 .vai-badge-warning {
-  background: #FFF8E1;
+  background: rgba(232, 168, 23, 0.08);
   color: var(--status-warning);
 }
 
@@ -576,7 +572,7 @@
 }
 
 .vai-badge-error {
-  background: #FFEBEE;
+  background: rgba(198, 40, 40, 0.08);
   color: var(--status-error);
 }
 
