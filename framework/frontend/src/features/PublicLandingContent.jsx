@@ -145,9 +145,9 @@ const FEATURES = [
 ];
 
 const STATS = [
-    { num: "500+", label: "Sekolah Terdaftar" },
+    { num: "215rb+", label: "Sekolah Terdaftar" },
     { num: "34", label: "Provinsi" },
-    { num: "150+", label: "Dapur SPPG" },
+    { num: "500", label: "Dapur SPPG" },
 ];
 
 export default function PublicLandingContent({ onNavigate }) {
