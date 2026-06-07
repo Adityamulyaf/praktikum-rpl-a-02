@@ -29,4 +29,30 @@ class PublicController extends Controller
 
         return response()->json($schools);
     }
+
+    public function verifyNisn(Request $request)
+    {
+        $request->validate([
+            'nisn' => 'required|string|size:10',
+        ]);
+
+        $nisn = $request->get('nisn');
+
+        $student = \App\Models\DapodikStudent::with('school')->where('nisn', $nisn)->first();
+
+        if (!$student) {
+            return response()->json([
+                'message' => 'NISN tidak terdaftar dalam database penerima program MBG.'
+            ], 404);
+        }
+
+        return response()->json([
+            'nisn'        => $student->nisn,
+            'name'        => $student->name,
+            'school_id'   => $student->school_id,
+            'school_name' => $student->school->name,
+            'district'    => $student->school->district,
+            'province'    => $student->school->province,
+        ]);
+    }
 }

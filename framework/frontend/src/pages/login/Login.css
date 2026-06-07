@@ -433,3 +433,64 @@ select.lp-input {
   -webkit-appearance: none;
   appearance: none;
 }
+
+/* ── NISN VERIFICATION STYLES ──────────────────────────── */
+
+.lp-success {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--status-success, #2e7d32);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) 12px;
+  background: rgba(46, 125, 50, 0.08);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--status-success, #2e7d32);
+}
+
+.lp-info-box {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-secondary);
+  background: var(--surface-2, #f5f4f0);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--border-default);
+}
+
+.lp-info-box summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-primary);
+  outline: none;
+}
+
+.lp-info-box[open] summary {
+  margin-bottom: 8px;
+}
+
+.lp-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.lp-info-table th, .lp-info-table td {
+  text-align: left;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.lp-info-table th {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lp-info-table code {
+  font-family: monospace;
+  background: var(--surface-1);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
+}
+
