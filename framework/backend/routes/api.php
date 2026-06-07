@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Sppg\DistributionController;
 use App\Http\Controllers\Api\PublicDistributionController;
 use App\Http\Controllers\Api\Sppg\MenuController;
 use App\Http\Controllers\Api\Siswa\ReviewController;
+use App\Http\Controllers\Api\Guru\ReviewController as GuruReviewController;
 use App\Http\Controllers\Api\PublicReviewController;
 use App\Http\Controllers\Api\PublicSppgController;
 use Illuminate\Support\Facades\Route;
@@ -55,7 +56,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Guru only
     Route::middleware('role:guru')->prefix('guru')->group(function () {
-        // US-10: flag ulasan
+        Route::get('/reviews',                [GuruReviewController::class, 'index']);
+        Route::post('/reviews/{review}/flag', [GuruReviewController::class, 'flag']);
+        Route::get('/sppg-profile',           [ProfileController::class, 'show']);
+        Route::get('/sppg-profile/reviews',   [ProfileController::class, 'reviews']);
     });
 });
 
