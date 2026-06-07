@@ -216,6 +216,7 @@
   transition: border-color 150ms;
   outline: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .adm-textarea { resize: vertical; min-height: 80px; }
@@ -305,6 +306,7 @@
   outline: none;
   transition: border-color 150ms;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .adm-search:focus { border-color: var(--color-primary); }
@@ -346,4 +348,17 @@
 .adm-school-item-sub {
   font-size: 12px;
   color: var(--text-tertiary);
+}
+
+.adm-school-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: #FFF3E0;
+  color: #E65100;
+  border: 1px solid #FFE0B2;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 8px;
+  white-space: nowrap;
 }
