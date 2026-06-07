@@ -423,43 +423,39 @@ function MenuFormModal({ menu, onClose, onSaved }) {
       setValidationWarning(null);
       setValidationSuccess(false);
 
-      setTimeout(() => {
+      api.post('/sppg/menu/validate-nutrition', {
+        menu_name: form.menu_name,
+        components: form.components,
+        calories: Number(form.calories),
+        protein: Number(form.protein),
+        carbs: Number(form.carbs),
+        fat: Number(form.fat),
+        photo: capturedImage,
+      })
+      .then((res) => {
+        const { is_valid, warning_message } = res.data;
         setIsValidating(false);
         setValidationRun(true);
 
-        const caloriesInput = Number(form.calories);
-        const proteinInput = Number(form.protein);
-        const carbsInput = Number(form.carbs);
-        const fatInput = Number(form.fat);
-
-        let warning = null;
-
-        if (!detectedPreset || detectedPreset.status === 'Tidak Terdeteksi') {
-          warning = 'AI tidak mendeteksi adanya objek makanan dalam foto yang diunggah (gambar kosong/hitam).';
-        } else {
-          const preset = detectedPreset;
-
-          if (caloriesInput < preset.calories - 150 || caloriesInput > preset.calories + 150) {
-            warning = `Porsi yang terlihat di foto tampak ${caloriesInput < preset.calories ? 'terlalu sedikit' : 'kecil'} untuk klaim kalori sebesar ${caloriesInput} kkal (perkiraan visual AI: ~${preset.calories} kkal).`;
-          } else if (proteinInput < preset.protein - 8 || proteinInput > preset.protein + 8) {
-            warning = `Kandungan protein yang diinput (${proteinInput}g) tampak tidak sesuai dengan lauk hewani/nabati yang terlihat di foto (perkiraan visual AI: ~${preset.protein}g).`;
-          } else if (carbsInput < preset.carbs - 20 || carbsInput > preset.carbs + 20) {
-            warning = `Kandungan karbohidrat yang diinput (${carbsInput}g) tampak tidak sesuai dengan porsi nasi yang terlihat di foto (perkiraan visual AI: ~${preset.carbs}g).`;
-          } else if (fatInput < preset.fat - 8 || fatInput > preset.fat + 8) {
-            warning = `Kandungan lemak yang diinput (${fatInput}g) tampak tidak seimbang dengan komposisi yang terlihat di foto (perkiraan visual AI: ~${preset.fat}g).`;
-          }
-        }
-
-        if (warning) {
-          setValidationWarning(warning);
-          setForm(f => ({ ...f, is_ai_validated: false, ai_warning: warning }));
-          resolve({ success: false, warning });
+        if (warning_message) {
+          setValidationWarning(warning_message);
+          setForm(f => ({ ...f, is_ai_validated: false, ai_warning: warning_message }));
+          resolve({ success: false, warning: warning_message });
         } else {
           setValidationSuccess(true);
           setForm(f => ({ ...f, is_ai_validated: true, ai_warning: null }));
           resolve({ success: true, warning: null });
         }
-      }, 2000);
+      })
+      .catch((err) => {
+        setIsValidating(false);
+        setValidationRun(true);
+        console.error('AI validation error:', err);
+        // Fallback: anggap tidak ada peringatan jika API bermasalah/mati (sesuai spesifikasi SRS)
+        setValidationSuccess(true);
+        setForm(f => ({ ...f, is_ai_validated: false, ai_warning: null }));
+        resolve({ success: true, warning: null });
+      });
     });
   };
 

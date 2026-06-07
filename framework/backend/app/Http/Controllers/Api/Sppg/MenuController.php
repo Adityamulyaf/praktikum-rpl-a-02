@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Sppg;
 use App\Http\Controllers\Controller;
 use App\Models\DailyMenu;
 use Illuminate\Http\Request;
+use App\Services\GeminiValidationService;
 
 class MenuController extends Controller
 {
@@ -160,5 +161,30 @@ class MenuController extends Controller
         $menu->delete();
 
         return response()->json(['message' => 'Menu dihapus']);
+    }
+
+    public function validateNutrition(Request $request, GeminiValidationService $service)
+    {
+        $user = $request->user();
+        if (!in_array($user->role, ['admin', 'sppg'])) {
+            return response()->json(['message' => 'Tidak diizinkan'], 403);
+        }
+
+        $request->validate([
+            'menu_name'  => 'required|string|max:255',
+            'components' => 'nullable|string',
+            'calories'   => 'required|integer|min:0',
+            'protein'    => 'required|integer|min:0',
+            'carbs'      => 'required|integer|min:0',
+            'fat'      => 'required|integer|min:0',
+            'photo'      => 'nullable|string',
+        ]);
+
+        $result = $service->validateNutrition(
+            $request->only(['menu_name', 'components', 'calories', 'protein', 'carbs', 'fat']),
+            $request->input('photo')
+        );
+
+        return response()->json($result);
     }
 }

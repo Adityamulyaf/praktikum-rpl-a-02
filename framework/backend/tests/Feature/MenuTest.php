@@ -200,4 +200,39 @@ class MenuTest extends TestCase
                 'message' => 'Menu harian untuk tanggal ini sudah dibuat.'
             ]);
     }
+
+    public function test_sppg_can_validate_nutrition_claims_via_ai_endpoint(): void
+    {
+        $user = User::factory()->create(['role' => 'sppg']);
+        $profile = SppgProfile::create([
+            'user_id' => $user->ssid,
+            'kitchen_name' => 'Test Kitchen Validate',
+            'address' => 'Test Address',
+            'district' => 'Test District',
+            'province' => 'Test Province',
+            'contact_person_name' => 'Test Contact',
+            'contact_phone' => '081234567890',
+            'is_active' => true,
+        ]);
+
+        Sanctum::actingAs($user);
+
+        $payload = [
+            'menu_name'  => 'Nasi Putih, Fillet Ayam Panggang',
+            'components' => 'Nasi dan Ayam',
+            'calories'   => 1200,
+            'protein'    => 25,
+            'carbs'      => 82,
+            'fat'        => 14,
+            'photo'      => 'data:image/jpeg;base64,mockdataurl',
+        ];
+
+        $response = $this->postJson('/api/sppg/menu/validate-nutrition', $payload);
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'is_valid',
+            'warning_message',
+        ]);
+    }
 }

@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/profile',         [ProfileController::class, 'show']);
         Route::put('/profile',         [ProfileController::class, 'update']);
         Route::get('/profile/reviews', [ProfileController::class, 'reviews']);
+        Route::post('/menu/validate-nutrition', [MenuController::class, 'validateNutrition']);
         Route::apiResource('menu', MenuController::class)->except(['show']);
         Route::get('/distribution',                    [DistributionController::class, 'index']);
         Route::put('/distribution/{distribution}',     [DistributionController::class, 'update']);
