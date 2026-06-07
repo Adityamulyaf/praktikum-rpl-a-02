@@ -266,7 +266,14 @@ export default function PublicLandingContent({ onNavigate }) {
     };
 
     const handleScrollToSearch = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const rect = searchRef.current?.getBoundingClientRect();
+        if (rect) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = rect.top + scrollTop - 70; // 56px navbar + 14px margin/padding
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         searchRef.current?.querySelector('input')?.focus();
     };
 
