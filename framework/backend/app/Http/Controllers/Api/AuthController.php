@@ -33,6 +33,14 @@ class AuthController extends Controller
 
         $token = $user->createToken('authToken')->plainTextToken;
 
+        if ($user->role === 'siswa') {
+            $user->load('studentProfile.school.sppgProfiles');
+        } elseif ($user->role === 'guru') {
+            $user->load('teacherProfile.school.sppgProfiles');
+        } elseif ($user->role === 'sppg') {
+            $user->load('sppgProfile');
+        }
+
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'Bearer',
@@ -52,6 +60,14 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        return response()->json($request->user());
+        $user = $request->user();
+        if ($user->role === 'siswa') {
+            $user->load('studentProfile.school.sppgProfiles');
+        } elseif ($user->role === 'guru') {
+            $user->load('teacherProfile.school.sppgProfiles');
+        } elseif ($user->role === 'sppg') {
+            $user->load('sppgProfile');
+        }
+        return response()->json($user);
     }
 }

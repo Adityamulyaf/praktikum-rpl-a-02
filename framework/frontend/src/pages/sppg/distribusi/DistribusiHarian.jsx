@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import api from '../../../api/axios';
 import '../../admin/admin.css';
 import '../../ValidationAI.css';
+import { useAuth } from '../../../context/AuthContext';
 
 const STATUS_LABELS = {
   belum_diantar: 'Belum Diantar',
@@ -266,6 +267,9 @@ function PhotoProofModal({ record, onClose, onSaved }) {
 }
 
 export default function DistribusiHarian() {
+  const { role } = useAuth();
+  const canEdit = role === 'admin' || role === 'sppg';
+
   const [records,  setRecords]  = useState([]);
   const [date,     setDate]     = useState(new Date().toISOString().split('T')[0]);
   const [loading,  setLoading]  = useState(true);
@@ -342,7 +346,7 @@ export default function DistribusiHarian() {
                 <th>Status</th>
                 <th>Foto Bukti</th>
                 <th>Diperbarui</th>
-                <th>Ubah Status</th>
+                {canEdit && <th>Ubah Status</th>}
               </tr>
             </thead>
             <tbody>
@@ -364,7 +368,7 @@ export default function DistribusiHarian() {
                       >
                         <img src={rec.photo} alt="Bukti" style={{ width: '60px', height: '45px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #d1d5db' }} />
                       </button>
-                    ) : rec.status === 'sudah_diantar' ? (
+                    ) : rec.status === 'sudah_diantar' && canEdit ? (
                       <button 
                         type="button"
                         className="adm-btn"
@@ -382,19 +386,21 @@ export default function DistribusiHarian() {
                       ? new Date(rec.status_updated_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
                       : '—'}
                   </td>
-                  <td>
-                    <select
-                      className="adm-input"
-                      style={{ width: 'auto', padding: '4px 8px' }}
-                      value={rec.status}
-                      disabled={updating === rec.id}
-                      onChange={(e) => handleStatusChange(rec, e.target.value)}
-                    >
-                      {Object.entries(STATUS_LABELS).map(([val, label]) => (
-                        <option key={val} value={val}>{label}</option>
-                      ))}
-                    </select>
-                  </td>
+                  {canEdit && (
+                    <td>
+                      <select
+                        className="adm-input"
+                        style={{ width: 'auto', padding: '4px 8px' }}
+                        value={rec.status}
+                        disabled={updating === rec.id}
+                        onChange={(e) => handleStatusChange(rec, e.target.value)}
+                      >
+                        {Object.entries(STATUS_LABELS).map(([val, label]) => (
+                          <option key={val} value={val}>{label}</option>
+                        ))}
+                      </select>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

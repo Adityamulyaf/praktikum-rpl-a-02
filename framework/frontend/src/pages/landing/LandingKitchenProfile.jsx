@@ -93,10 +93,58 @@ function Pagination({ page, totalPages, onPageChange }) {
     );
 }
 
-function KitchenDetail({ id, onBack }) {
+function PhotoViewerModal({ photoUrl, onClose }) {
+    return (
+        <div className="adm-overlay" onClick={onClose} style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+        }}>
+            <div className="adm-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', padding: 0, overflow: 'hidden', position: 'relative' }}>
+                <img src={photoUrl} alt="Bukti pengiriman" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <button 
+                    onClick={onClose} 
+                    style={{
+                        position: 'absolute',
+                        top: '12px',
+                        right: '12px',
+                        background: 'rgba(0,0,0,0.5)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '32px',
+                        height: '32px',
+                        cursor: 'pointer',
+                        fontSize: '18px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >
+                    &times;
+                </button>
+            </div>
+        </div>
+    );
+}
+
+function KitchenDetail({ id, onBack, initialMode = "profil" }) {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [activeTab, setActiveTab] = useState(initialMode);
+
+    const [distRecords, setDistRecords] = useState([]);
+    const [distLoading, setDistLoading] = useState(false);
+    const [distDate, setDistDate] = useState(new Date().toISOString().split("T")[0]);
+    const [selectedPhoto, setSelectedPhoto] = useState(null);
 
     useEffect(() => {
         let cancelled = false;
@@ -113,6 +161,26 @@ function KitchenDetail({ id, onBack }) {
         })();
         return () => { cancelled = true; };
     }, [id]);
+
+    useEffect(() => {
+        if (activeTab !== "distribusi") return;
+        let cancelled = false;
+        (async () => {
+            try {
+                setDistLoading(true);
+                const { data } = await api.get("/public/distribution", { params: { date: distDate } });
+                if (!cancelled) {
+                    const filtered = data.filter((r) => r.sppg?.id === id);
+                    setDistRecords(filtered);
+                }
+            } catch {
+                if (!cancelled) setDistRecords([]);
+            } finally {
+                if (!cancelled) setDistLoading(false);
+            }
+        })();
+        return () => { cancelled = true; };
+    }, [distDate, activeTab, id]);
 
     if (loading) return <div className="kp-root"><StateMessage icon="⏳" message="Memuat profil dapur..." /></div>;
     if (error)   return <div className="kp-root"><StateMessage icon="⚠" message={error} isError /></div>;
@@ -164,119 +232,145 @@ function KitchenDetail({ id, onBack }) {
                 </div>
             </div>
 
-            <div className="kp-grid">
-                <div className="kp-card">
-                    <div className="kp-card-title">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        Lokasi
-                    </div>
-                    {[
-                        ["Alamat", profile.address || "—"],
-                        ["Kecamatan", profile.district],
-                        ["Provinsi", profile.province],
-                    ].map(([label, value]) => (
-                        <div key={label} className="kp-info-row">
-                            <span className="kp-info-label">{label}</span>
-                            <span className="kp-info-value">{value}</span>
-                        </div>
-                    ))}
-                </div>
+            {/* Tab Navigation */}
+            <div className="kp-tabs" style={{ marginBottom: '20px', borderBottom: '1px solid var(--border-default, #e5e3df)' }}>
+                <button
+                    className={`kp-tab ${activeTab === "profil" ? "kp-tab--active" : ""}`}
+                    onClick={() => setActiveTab("profil")}
+                >
+                    Profil Dapur
+                </button>
+                <button
+                    className={`kp-tab ${activeTab === "menu" ? "kp-tab--active" : ""}`}
+                    onClick={() => setActiveTab("menu")}
+                >
+                    Menu Harian
+                </button>
+                <button
+                    className={`kp-tab ${activeTab === "distribusi" ? "kp-tab--active" : ""}`}
+                    onClick={() => setActiveTab("distribusi")}
+                >
+                    Status Distribusi
+                </button>
+            </div>
 
-                <div className="kp-card">
-                    <div className="kp-card-title">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                        </svg>
-                        Kontak
-                    </div>
-                    <div className="kp-info-row">
-                        <span className="kp-info-label">Nama PIC</span>
-                        <span className="kp-info-value">{profile.contact_person_name || "—"}</span>
-                    </div>
-                    <div className="kp-info-row">
-                        <span className="kp-info-label">Telepon</span>
-                        {profile.contact_phone
-                            ? <a href={`tel:${profile.contact_phone}`} className="kp-info-link">{profile.contact_phone}</a>
-                            : <span className="kp-null">Belum diisi</span>}
-                    </div>
-                    <div className="kp-info-row">
-                        <span className="kp-info-label">Email</span>
-                        {profile.contact_email
-                            ? <a href={`mailto:${profile.contact_email}`} className="kp-info-link">{profile.contact_email}</a>
-                            : <span className="kp-null">Belum diisi</span>}
-                    </div>
-                </div>
-
-                <div className="kp-card">
-                    <div className="kp-card-title">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" />
-                            <path d="M3 9h18M9 21V9" />
-                        </svg>
-                        Kapasitas Produksi
-                    </div>
-                    {profile.production_capacity ? (
-                        <div style={{ padding: "0.5rem 0" }}>
-                            <div className="kp-capacity-big">
-                                {Number(profile.production_capacity).toLocaleString("id-ID")}
-                            </div>
-                            <div className="kp-capacity-unit">porsi / hari</div>
-                        </div>
-                    ) : (
-                        <div className="kp-null" style={{ padding: "0.5rem 0" }}>Belum diisi</div>
-                    )}
-                </div>
-
-                <div className="kp-card">
-                    <div className="kp-card-title">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <line x1="16" y1="13" x2="8" y2="13" />
-                            <line x1="16" y1="17" x2="8" y2="17" />
-                        </svg>
-                        Deskripsi
-                    </div>
-                    {profile.description
-                        ? <p className="kp-description">{profile.description}</p>
-                        : <div className="kp-null" style={{ padding: "0.5rem 0" }}>Belum ada deskripsi</div>}
-                </div>
-
-                <div className="kp-card kp-card--full">
-                    <div className="kp-card-title">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                        </svg>
-                        Sekolah yang dilayani
-                        <span className="kp-school-count">{schools.length} sekolah</span>
-                    </div>
-                    {schools.length === 0 ? (
-                        <div className="kp-empty">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" strokeWidth="1.5"
-                                style={{ margin: "0 auto 8px", display: "block", opacity: 0.4 }}>
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <path d="M9 3v18M3 9h18M3 15h18" />
+            {activeTab === "profil" && (
+                <div className="kp-grid">
+                    <div className="kp-card">
+                        <div className="kp-card-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
                             </svg>
-                            Belum ada sekolah yang ditugaskan
+                            Lokasi
                         </div>
-                    ) : (
-                        <div className="kp-schools-grid">
-                            {schools.map((school) => (
-                                <div key={school.id} className="kp-school-item">
-                                    <span className="kp-school-name">{school.name}</span>
-                                    <span className="kp-school-district">{school.district}</span>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                        {[
+                            ["Alamat", profile.address || "—"],
+                            ["Kecamatan", profile.district],
+                            ["Provinsi", profile.province],
+                        ].map(([label, value]) => (
+                            <div key={label} className="kp-info-row">
+                                <span className="kp-info-label">{label}</span>
+                                <span className="kp-info-value">{value}</span>
+                            </div>
+                        ))}
+                    </div>
 
-                <div className="kp-card kp-card--full" style={{ marginTop: '20px' }}>
+                    <div className="kp-card">
+                        <div className="kp-card-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg>
+                            Kontak
+                        </div>
+                        <div className="kp-info-row">
+                            <span className="kp-info-label">Nama PIC</span>
+                            <span className="kp-info-value">{profile.contact_person_name || "—"}</span>
+                        </div>
+                        <div className="kp-info-row">
+                            <span className="kp-info-label">Telepon</span>
+                            {profile.contact_phone
+                                ? <a href={`tel:${profile.contact_phone}`} className="kp-info-link">{profile.contact_phone}</a>
+                                : <span className="kp-null">Belum diisi</span>}
+                        </div>
+                        <div className="kp-info-row">
+                            <span className="kp-info-label">Email</span>
+                            {profile.contact_email
+                                ? <a href={`mailto:${profile.contact_email}`} className="kp-info-link">{profile.contact_email}</a>
+                                : <span className="kp-null">Belum diisi</span>}
+                        </div>
+                    </div>
+
+                    <div className="kp-card">
+                        <div className="kp-card-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <path d="M3 9h18M9 21V9" />
+                            </svg>
+                            Kapasitas Produksi
+                        </div>
+                        {profile.production_capacity ? (
+                            <div style={{ padding: "0.5rem 0" }}>
+                                <div className="kp-capacity-big">
+                                    {Number(profile.production_capacity).toLocaleString("id-ID")}
+                                </div>
+                                <div className="kp-capacity-unit">porsi / hari</div>
+                            </div>
+                        ) : (
+                            <div className="kp-null" style={{ padding: "0.5rem 0" }}>Belum diisi</div>
+                        )}
+                    </div>
+
+                    <div className="kp-card">
+                        <div className="kp-card-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                            Deskripsi
+                        </div>
+                        {profile.description
+                            ? <p className="kp-description">{profile.description}</p>
+                            : <div className="kp-null" style={{ padding: "0.5rem 0" }}>Belum ada deskripsi</div>}
+                    </div>
+
+                    <div className="kp-card kp-card--full">
+                        <div className="kp-card-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            Sekolah yang dilayani
+                            <span className="kp-school-count">{schools.length} sekolah</span>
+                        </div>
+                        {schools.length === 0 ? (
+                            <div className="kp-empty">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" strokeWidth="1.5"
+                                    style={{ margin: "0 auto 8px", display: "block", opacity: 0.4 }}>
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                    <path d="M9 3v18M3 9h18M3 15h18" />
+                                </svg>
+                                Belum ada sekolah yang ditugaskan
+                            </div>
+                        ) : (
+                            <div className="kp-schools-grid">
+                                {schools.map((school) => (
+                                    <div key={school.id} className="kp-school-item">
+                                        <span className="kp-school-name">{school.name}</span>
+                                        <span className="kp-school-district">{school.district}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {activeTab === "menu" && (
+                <div className="kp-card kp-card--full" style={{ marginTop: '0px' }}>
                     <div className="kp-card-title">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -382,13 +476,112 @@ function KitchenDetail({ id, onBack }) {
                         </div>
                     )}
                 </div>
-            </div>
+            )}
+
+            {activeTab === "distribusi" && (
+                <div className="kp-card kp-card--full" style={{ marginTop: '0px' }}>
+                    <div className="kp-card-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect x="1" y="3" width="15" height="13" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg>
+                            <span>Status Distribusi</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 600 }}>Tanggal:</span>
+                            <input
+                                type="date"
+                                value={distDate}
+                                onChange={(e) => setDistDate(e.target.value)}
+                                style={{
+                                    padding: '4px 8px',
+                                    borderRadius: '4px',
+                                    border: '1px solid var(--border-default, #e5e3df)',
+                                    fontSize: '12px',
+                                    background: 'var(--surface-1, #fff)',
+                                    color: 'var(--text-primary)'
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    {distLoading ? (
+                        <p style={{ padding: '2rem 0', textAlign: 'center', opacity: 0.6 }}>Memuat status distribusi...</p>
+                    ) : distRecords.length === 0 ? (
+                        <div style={{ padding: '2rem', textAlign: 'center', opacity: 0.5 }}>
+                            Belum ada data distribusi untuk tanggal <strong>{distDate}</strong>.
+                        </div>
+                    ) : (
+                        <div className="adm-table-wrap" style={{ marginTop: '12px', width: '100%' }}>
+                            <table className="adm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sekolah</th>
+                                        <th>Kecamatan</th>
+                                        <th>Status</th>
+                                        <th>Foto Bukti</th>
+                                        <th>Diperbarui</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {distRecords.map((rec) => (
+                                        <tr key={rec.id}>
+                                            <td>{rec.school?.name ?? '—'}</td>
+                                            <td>{rec.school?.district ?? '—'}</td>
+                                            <td>
+                                                <span className={`adm-badge ${
+                                                    rec.status === 'belum_diantar' ? 'inactive' :
+                                                    rec.status === 'sudah_diantar' ? 'active' :
+                                                    rec.status === 'batal' ? 'danger' : ''
+                                                }`}>
+                                                    {rec.status === 'belum_diantar' ? 'Belum Diantar' :
+                                                     rec.status === 'siap_diantar' ? 'Siap Diantar' :
+                                                     rec.status === 'sudah_diantar' ? 'Sudah Diantar' :
+                                                     rec.status === 'batal' ? 'Batal' : rec.status}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {rec.photo ? (
+                                                    <button 
+                                                        type="button" 
+                                                        onClick={() => setSelectedPhoto(rec.photo)}
+                                                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                                                    >
+                                                        <img src={rec.photo} alt="Bukti" style={{ width: '60px', height: '45px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #d1d5db' }} />
+                                                    </button>
+                                                ) : (
+                                                    <span style={{ fontSize: '0.85rem', opacity: 0.5 }}>—</span>
+                                                )}
+                                            </td>
+                                            <td style={{ whiteSpace: 'nowrap', fontSize: '0.8rem', opacity: 0.7 }}>
+                                                {rec.status_updated_at
+                                                    ? new Date(rec.status_updated_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+                                                    : '—'}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
+            )}
+
+            {selectedPhoto && (
+                <PhotoViewerModal
+                    photoUrl={selectedPhoto}
+                    onClose={() => setSelectedPhoto(null)}
+                />
+            )}
         </div>
     );
 }
 
 /* ── Main export ──────────────────────────────────────────────── */
-export default function LandingKitchenProfile({ onBack }) {
+export default function LandingKitchenProfile({ onBack, initialMode = "profil" }) {
     const [kitchens, setKitchens] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -417,7 +610,7 @@ export default function LandingKitchenProfile({ onBack }) {
     }, []);
 
     if (selectedId !== null) {
-        return <KitchenDetail id={selectedId} onBack={() => setSelectedId(null)} />;
+        return <KitchenDetail id={selectedId} onBack={() => setSelectedId(null)} initialMode={initialMode} />;
     }
 
     const filtered = kitchens.filter((k) => {

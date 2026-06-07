@@ -23,18 +23,18 @@ export default function App() {
         </Route>
 
         {/* SPPG */}
-        <Route element={<ProtectedRoute allowedRoles={['sppg']} />}>
+        <Route element={<ProtectedRoute allowedRoles={['admin', 'sppg']} />}>
           <Route path="/sppg" element={<SppgDashboard />} />
         </Route>
 
         {/* Siswa */}
         <Route element={<ProtectedRoute allowedRoles={['siswa']} />}>
-          <Route path="/siswa" element={<SiswaDashboard />} />
+          <Route path="/siswa" element={<SppgDashboard />} />
         </Route>
 
         {/* Guru */}
         <Route element={<ProtectedRoute allowedRoles={['guru']} />}>
-          <Route path="/guru" element={<GuruDashboard />} />
+          <Route path="/guru" element={<SppgDashboard />} />
         </Route>
 
         {/* Standalone Validation AI Route with Dashboard Shell wrapper for compatibility */}

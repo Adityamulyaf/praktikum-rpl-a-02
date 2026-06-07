@@ -41,6 +41,7 @@ class RegisterController extends Controller
         });
 
         $token = $user->createToken('authToken')->plainTextToken;
+        $user->load('studentProfile.school.sppgProfiles');
 
         return response()->json([
             'access_token' => $token,
@@ -79,6 +80,7 @@ class RegisterController extends Controller
         });
 
         $token = $user->createToken('authToken')->plainTextToken;
+        $user->load('teacherProfile.school.sppgProfiles');
 
         return response()->json([
             'access_token' => $token,

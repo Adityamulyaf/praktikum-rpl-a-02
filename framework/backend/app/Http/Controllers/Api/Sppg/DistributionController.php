@@ -15,7 +15,19 @@ class DistributionController extends Controller
      */
     public function index(Request $request)
     {
-        $sppg = $request->user()->sppgProfile;
+        $user = $request->user();
+        if ($user->role === 'siswa') {
+            $profile = $user->studentProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->first() : null;
+        } elseif ($user->role === 'guru') {
+            $profile = $user->teacherProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->first() : null;
+        } else {
+            $sppg = $user->sppgProfile;
+        }
+
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
         }
@@ -44,8 +56,15 @@ class DistributionController extends Controller
      */
     public function update(Request $request, DistributionStatus $distribution)
     {
-        $sppg = $request->user()->sppgProfile;
-        if (!$sppg || $distribution->sppg_id !== $sppg->id) {
+        $user = $request->user();
+        if ($user->role === 'admin') {
+            // Admin can edit any distribution
+        } elseif ($user->role === 'sppg') {
+            $sppg = $user->sppgProfile;
+            if (!$sppg || $distribution->sppg_id !== $sppg->id) {
+                return response()->json(['message' => 'Tidak diizinkan'], 403);
+            }
+        } else {
             return response()->json(['message' => 'Tidak diizinkan'], 403);
         }
 

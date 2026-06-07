@@ -3,6 +3,9 @@ import MenuHarian from "./menu/MenuHarian";
 import PublicLandingContent from "../../features/PublicLandingContent";
 import Kitchen from "./profile/Kitchen";
 import DistribusiHarian from "./distribusi/DistribusiHarian";
+import { useAuth } from "../../context/AuthContext";
+import KirimUlasan from "../siswa/ulasan/KirimUlasan";
+import RiwayatUlasan from "../siswa/ulasan/RiwayatUlasan";
 
 const IconScan = () => (
   <svg
@@ -104,19 +107,63 @@ const IconChart = () => (
     <line x1="6" y1="20" x2="6" y2="14" />
   </svg>
 );
-
-const MENU_GROUPS = [
-  {
-    label: null,
-    items: [
-      { key: "beranda", label: "Beranda", icon: <IconHome /> },
-      { key: "menu", label: "Menu Harian", icon: <IconMenu /> },
-      { key: "distribusi", label: "Distribusi", icon: <IconTruck /> },
-      { key: "profil", label: "Profil Dapur", icon: <IconBuilding /> },
-      { key: "evaluasi", label: "Evaluasi", icon: <IconChart /> },
-    ],
-  },
-];
+const IconStar = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+const IconClock = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+const IconMessages = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+  </svg>
+);
+const IconBell = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+  </svg>
+);
 
 function ComingSoon({ title, description }) {
   return (
@@ -144,8 +191,33 @@ function ComingSoon({ title, description }) {
 }
 
 export default function SppgDashboard() {
+  const { role } = useAuth();
+
+  const menuItems = [
+    { key: "beranda", label: "Beranda", icon: <IconHome /> },
+    { key: "menu", label: "Menu Harian", icon: <IconMenu /> },
+    { key: "distribusi", label: "Distribusi", icon: <IconTruck /> },
+    { key: "profil", label: "Profil Dapur", icon: <IconBuilding /> },
+  ];
+
+  if (role === "siswa") {
+    menuItems.push(
+      { key: "ulasan", label: "Kirim Ulasan", icon: <IconStar /> },
+      { key: "riwayat", label: "Riwayat Ulasan", icon: <IconClock /> }
+    );
+  } else if (role === "guru") {
+    menuItems.push(
+      { key: "ulasan_siswa", label: "Ulasan Siswa", icon: <IconMessages /> },
+      { key: "notif", label: "Notifikasi", icon: <IconBell /> }
+    );
+  } else {
+    menuItems.push({ key: "evaluasi", label: "Evaluasi", icon: <IconChart /> });
+  }
+
+  const menuGroups = [{ label: null, items: menuItems }];
+
   return (
-    <DashboardLayout menuGroups={MENU_GROUPS} pageClass="sppg-page">
+    <DashboardLayout menuGroups={menuGroups} pageClass="sppg-page">
       {(active, onNavigate) => {
         switch (active) {
           case "beranda":
@@ -156,6 +228,14 @@ export default function SppgDashboard() {
             return <DistribusiHarian />;
           case "profil":
             return <Kitchen />;
+          case "ulasan":
+            return <KirimUlasan />;
+          case "riwayat":
+            return <RiwayatUlasan />;
+          case "ulasan_siswa":
+            return <ComingSoon title="Ulasan Siswa" description="Pantau dan moderasi ulasan yang dikirim siswa di sekolah Anda." />;
+          case "notif":
+            return <ComingSoon title="Notifikasi" description="Pemberitahuan saat ada ulasan baru dari siswa yang perlu diperhatikan." />;
           case "evaluasi":
             return (
               <ComingSoon
