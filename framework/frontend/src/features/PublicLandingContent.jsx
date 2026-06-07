@@ -246,17 +246,28 @@ export default function PublicLandingContent({ onNavigate }) {
             : "SPPG belum tersedia";
     };
 
-    const handleSiswaFeatureClick = async (key) => {
+    const handleRoleFeatureClick = async (key) => {
         if (loadingSppg) return;
         setLoadingSppg(true);
         try {
-            const { data } = await api.get('/siswa/sppg-info');
-            if (data.served && data.id) {
-                setAssignedSppgId(data.id);
-                setKitchenProfileMode(key);
-                setView("profil-dapur");
-            } else {
-                alert(data.message || 'Sekolah Anda belum terhubung dengan dapur SPPG mana pun.');
+            if (role === "siswa") {
+                const { data } = await api.get('/siswa/sppg-info');
+                if (data.served && data.id) {
+                    setAssignedSppgId(data.id);
+                    setKitchenProfileMode(key);
+                    setView("profil-dapur");
+                } else {
+                    alert(data.message || 'Sekolah Anda belum terhubung dengan dapur SPPG mana pun.');
+                }
+            } else if (role === "guru") {
+                const { data } = await api.get('/guru/sppg-profile');
+                if (data && data.id) {
+                    setAssignedSppgId(data.id);
+                    setKitchenProfileMode(key);
+                    setView("profil-dapur");
+                } else {
+                    alert('Sekolah Anda belum terhubung dengan dapur SPPG mana pun.');
+                }
             }
         } catch (err) {
             alert(err.response?.data?.message || 'Gagal memuat informasi SPPG dapur.');
@@ -443,8 +454,8 @@ export default function PublicLandingContent({ onNavigate }) {
                                 onClick={() => {
                                     if (key === "search") {
                                         handleScrollToSearch();
-                                    } else if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
-                                        handleSiswaFeatureClick(key);
+                                    } else if ((role === "siswa" || role === "guru") && (key === "menu" || key === "distribusi" || key === "profil")) {
+                                        handleRoleFeatureClick(key);
                                     } else if (onNavigate && (role === "siswa" || role === "guru")) {
                                         if (key === "menu") onNavigate("menu");
                                         if (key === "distribusi") onNavigate("distribusi");
@@ -471,8 +482,8 @@ export default function PublicLandingContent({ onNavigate }) {
                                     if (e.key === "Enter") {
                                         if (key === "search") {
                                             handleScrollToSearch();
-                                        } else if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
-                                            handleSiswaFeatureClick(key);
+                                        } else if ((role === "siswa" || role === "guru") && (key === "menu" || key === "distribusi" || key === "profil")) {
+                                            handleRoleFeatureClick(key);
                                         } else if (onNavigate && (role === "siswa" || role === "guru")) {
                                             if (key === "menu") onNavigate("menu");
                                             if (key === "distribusi") onNavigate("distribusi");

@@ -6,6 +6,7 @@ import DistribusiHarian from "./distribusi/DistribusiHarian";
 import { useAuth } from "../../context/AuthContext";
 import KirimUlasan from "../siswa/ulasan/KirimUlasan";
 import RiwayatUlasan from "../siswa/ulasan/RiwayatUlasan";
+import GuruReviews from "../guru/GuruReviews";
 
 const IconScan = () => (
   <svg
@@ -207,7 +208,7 @@ export default function SppgDashboard() {
     );
   } else if (role === "guru") {
     menuItems.push(
-      { key: "ulasan_siswa", label: "Ulasan Siswa", icon: <IconMessages /> },
+      { key: "ulasan", label: "Ulasan Siswa", icon: <IconMessages /> },
       { key: "notif", label: "Notifikasi", icon: <IconBell /> }
     );
   } else {
@@ -229,11 +230,9 @@ export default function SppgDashboard() {
           case "profil":
             return <Kitchen />;
           case "ulasan":
-            return <KirimUlasan />;
+            return role === "siswa" ? <KirimUlasan /> : <GuruReviews />;
           case "riwayat":
             return <RiwayatUlasan />;
-          case "ulasan_siswa":
-            return <ComingSoon title="Ulasan Siswa" description="Pantau dan moderasi ulasan yang dikirim siswa di sekolah Anda." />;
           case "notif":
             return <ComingSoon title="Notifikasi" description="Pemberitahuan saat ada ulasan baru dari siswa yang perlu diperhatikan." />;
           case "evaluasi":

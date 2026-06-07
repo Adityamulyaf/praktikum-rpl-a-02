@@ -14,13 +14,19 @@ class ProfileController extends Controller
         if ($user->role === 'siswa') {
             $profile = $user->studentProfile;
             $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->with('schools')->first() : null;
+            $sppg = $school ? $school->sppgProfiles()->with(['schools', 'dailyMenus' => function ($q) {
+                $q->orderBy('served_at', 'desc');
+            }])->first() : null;
         } elseif ($user->role === 'guru') {
             $profile = $user->teacherProfile;
             $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->with('schools')->first() : null;
+            $sppg = $school ? $school->sppgProfiles()->with(['schools', 'dailyMenus' => function ($q) {
+                $q->orderBy('served_at', 'desc');
+            }])->first() : null;
         } else {
-            $sppg = $user->sppgProfile()->with('schools')->first();
+            $sppg = $user->sppgProfile()->with(['schools', 'dailyMenus' => function ($q) {
+                $q->orderBy('served_at', 'desc');
+            }])->first();
         }
 
         if (!$sppg) {
@@ -28,6 +34,7 @@ class ProfileController extends Controller
         }
 
         return response()->json([
+            'id'                  => $sppg->id,
             'kitchen_name'        => $sppg->kitchen_name,
             'is_active'           => $sppg->is_active,
             'address'             => $sppg->address,
@@ -39,6 +46,7 @@ class ProfileController extends Controller
             'production_capacity' => $sppg->production_capacity,
             'description'         => $sppg->description,
             'schools'             => $sppg->schools,
+            'daily_menus'         => $sppg->dailyMenus,
         ]);
     }
 
@@ -73,6 +81,7 @@ class ProfileController extends Controller
         ]));
 
         return response()->json([
+            'id'                  => $sppg->id,
             'kitchen_name'        => $sppg->kitchen_name,
             'is_active'           => $sppg->is_active,
             'address'             => $sppg->address,
