@@ -410,7 +410,7 @@ export default function PublicLandingContent({ onNavigate }) {
                 {/* Wave divider: smooth curve transition to features */}
                 <div className="plc-wave-divider" aria-hidden="true">
                     <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0,60 L0,20 Q360,0 720,20 Q1080,40 1440,20 L1440,60 Z" fill="var(--surface-1)" />
+                        <path d="M0,60 L0,20 Q360,0 720,20 Q1080,40 1440,20 L1440,60 Z" fill={onNavigate ? "var(--surface-2)" : "var(--surface-1)"} />
                     </svg>
                 </div>
             </section>
