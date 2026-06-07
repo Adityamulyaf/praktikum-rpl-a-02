@@ -13,7 +13,7 @@ return new class extends Migration
             $table->uuid('user_id')->unique();
             $table->foreign('user_id')->references('ssid')->on('users')->cascadeOnDelete();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
-            $table->string('nisn', 20)->nullable();
+            $table->string('nisn', 20)->unique()->nullable();
             $table->timestamps();
         });
     }

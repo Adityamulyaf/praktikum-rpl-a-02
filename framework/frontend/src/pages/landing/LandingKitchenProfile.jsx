@@ -182,8 +182,33 @@ function KitchenDetail({ id, onBack, initialMode = "profil" }) {
         return () => { cancelled = true; };
     }, [distDate, activeTab, id]);
 
-    if (loading) return <div className="kp-root"><StateMessage icon="⏳" message="Memuat profil dapur..." /></div>;
-    if (error)   return <div className="kp-root"><StateMessage icon="⚠" message={error} isError /></div>;
+    if (loading) return (
+        <div className="kp-root">
+            <StateMessage
+                icon={
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1.5s linear infinite', display: 'inline-block' }}>
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                    </svg>
+                }
+                message="Memuat profil dapur..."
+            />
+        </div>
+    );
+    if (error) return (
+        <div className="kp-root">
+            <StateMessage
+                icon={
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block' }}>
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                }
+                message={error}
+                isError
+            />
+        </div>
+    );
     if (!profile) return null;
 
     const schools = profile.schools ?? [];
@@ -644,6 +669,24 @@ export default function LandingKitchenProfile({ onBack, initialMode = "profil", 
                 </div>
             </div>
 
+            {selectedId === null && initialMode !== "profil" && (
+                <div className="lkp-info-banner">
+                    <div className="lkp-info-banner-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="16" x2="12" y2="12" />
+                            <line x1="12" y1="8" x2="12.01" y2="8" />
+                        </svg>
+                    </div>
+                    <div className="lkp-info-banner-content">
+                        <div className="lkp-info-banner-title">Pilih Dapur SPPG Terlebih Dahulu</div>
+                        <p className="lkp-info-banner-desc">
+                            Untuk melihat {initialMode === "menu" ? "menu harian" : "status distribusi"} makanan gratis, silakan pilih salah satu dapur SPPG di bawah ini terlebih dahulu.
+                        </p>
+                    </div>
+                </div>
+            )}
+
             <div className="lkp-search-wrap">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="2"
@@ -662,11 +705,37 @@ export default function LandingKitchenProfile({ onBack, initialMode = "profil", 
                 />
             </div>
 
-            {loading && <StateMessage icon="⏳" message="Memuat daftar dapur..." />}
-            {!loading && error && <StateMessage icon="⚠" message={error} isError />}
+            {loading && (
+                <StateMessage
+                    icon={
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1.5s linear infinite', display: 'inline-block' }}>
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                        </svg>
+                    }
+                    message="Memuat daftar dapur..."
+                />
+            )}
+            {!loading && error && (
+                <StateMessage
+                    icon={
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block' }}>
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                    }
+                    message={error}
+                    isError
+                />
+            )}
             {!loading && !error && filtered.length === 0 && (
                 <StateMessage
-                    icon="🔍"
+                    icon={
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block' }}>
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    }
                     message={search ? `Tidak ada dapur ditemukan untuk "${search}"` : "Belum ada dapur yang terdaftar."}
                 />
             )}

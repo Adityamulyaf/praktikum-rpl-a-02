@@ -100,7 +100,10 @@ export default function SiswaRegisterForm({ onSuccess, onBack }) {
               placeholder="Masukkan 10 digit NISN"
               maxLength={10}
               value={form.nisn} 
-              onChange={set('nisn')} 
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, '');
+                setForm((f) => ({ ...f, nisn: val }));
+              }}
               autoComplete="off" 
               required
               disabled={nisnChecking || loading}

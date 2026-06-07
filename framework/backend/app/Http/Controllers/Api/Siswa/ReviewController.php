@@ -28,7 +28,7 @@ class ReviewController extends Controller
     {
         $request->validate([
             'content'     => 'required|string|min:10|max:2000',
-            'review_date' => 'sometimes|date',
+            'review_date' => 'sometimes|date|before_or_equal:today',
             'photo'       => 'nullable|string',
         ]);
 
@@ -48,11 +48,25 @@ class ReviewController extends Controller
             ], 422);
         }
 
+        $reviewDate = Carbon::parse($request->get('review_date', Carbon::today()->toDateString()))->toDateString();
+
+        // Prevent duplicate reviews for the same date (excluding soft-deleted reviews)
+        $exists = Review::where('user_id', $request->user()->ssid)
+            ->where('review_date', $reviewDate)
+            ->where('flag_status', '!=', 'deleted')
+            ->exists();
+
+        if ($exists) {
+            return response()->json([
+                'message' => 'Anda sudah mengirimkan ulasan untuk tanggal ini.'
+            ], 422);
+        }
+
         $review = Review::create([
             'user_id'     => $request->user()->ssid,
             'school_id'   => $student->school_id,
             'sppg_id'     => $sppg?->id,
-            'review_date' => $request->get('review_date', Carbon::today()->toDateString()),
+            'review_date' => $reviewDate,
             'content'     => $request->content,
             'photo'       => $request->photo,
             'flag_status' => 'none',

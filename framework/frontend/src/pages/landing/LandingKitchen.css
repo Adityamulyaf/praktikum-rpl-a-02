@@ -237,3 +237,43 @@
     color: var(--text-tertiary);
     line-height: 36px;
 }
+
+/* ── Info Banner for Public Navigation ── */
+.lkp-info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 1rem;
+    background-color: var(--surface-2, #fbfbfa);
+    border: 1px solid var(--border-default, #e5e3df);
+    border-left: 4px solid #3b82f6;
+    border-radius: var(--radius-md, 6px);
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.lkp-info-banner-icon {
+    color: #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.lkp-info-banner-content {
+    flex: 1;
+}
+
+.lkp-info-banner-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: var(--text-primary);
+}
+
+.lkp-info-banner-desc {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin: 0;
+}

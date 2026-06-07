@@ -208,7 +208,11 @@ export default function Kitchen() {
     return (
       <div className="kp-root">
         <div className="kp-state">
-          <span className="kp-state-icon">⏳</span>
+          <span className="kp-state-icon" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1.5s linear infinite' }}>
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+          </span>
           <p>Memuat profil dapur...</p>
         </div>
       </div>
@@ -219,7 +223,13 @@ export default function Kitchen() {
     return (
       <div className="kp-root">
         <div className="kp-state kp-state--error">
-          <span className="kp-state-icon">⚠</span>
+          <span className="kp-state-icon" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </span>
           <p>{error}</p>
         </div>
       </div>
@@ -230,7 +240,12 @@ export default function Kitchen() {
     return (
       <div className="kp-root">
         <div className="kp-state">
-          <span className="kp-state-icon">🏗</span>
+          <span className="kp-state-icon" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </span>
           <h2>Profil Dapur Belum Tersedia</h2>
           <p>Data profil dapur anda sedang diproses oleh administrator.</p>
         </div>
