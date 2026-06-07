@@ -5,7 +5,7 @@ import KitchenEditModal from "./KitchenEditModal";
 import DistribusiHarian from "../distribusi/DistribusiHarian";
 import { useAuth } from "../../../context/AuthContext";
 
-function UlasanTab() {
+function UlasanTab({ apiPrefix }) {
   const [reviews, setReviews] = useState([]);
   const [meta, setMeta] = useState(null);
   const [page, setPage] = useState(1);
@@ -14,7 +14,7 @@ function UlasanTab() {
   const load = useCallback(async (pg = 1) => {
     setLoading(true);
     try {
-      const { data } = await api.get("/sppg/profile/reviews", {
+      const { data } = await api.get(`${apiPrefix}/reviews`, {
         params: { page: pg },
       });
       setReviews(data.data);
@@ -24,7 +24,7 @@ function UlasanTab() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [apiPrefix]);
 
   useEffect(() => {
     load(page);
@@ -178,6 +178,9 @@ export default function Kitchen() {
   const { role } = useAuth();
   const canEdit = role === "admin" || role === "sppg";
 
+  // Guru uses a different API prefix to access the SPPG profile
+  const apiPrefix = role === "guru" ? "/guru/sppg-profile" : "/sppg/profile";
+
   const [profile, setProfile] = useState(null);
   const [schools, setSchools] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -189,20 +192,24 @@ export default function Kitchen() {
     const fetchKitchenProfile = async () => {
       try {
         setLoading(true);
-        const resp = await api.get("/sppg/profile");
+        const resp = await api.get(apiPrefix);
         if (resp.data) {
           setProfile(resp.data);
           setSchools(resp.data.schools || []);
         }
       } catch (err) {
         console.error("Error fetching kitchen profile:", err);
-        setError("Gagal memuat profil dapur");
+        if (err.response?.status === 404) {
+          setError("Sekolah Anda belum terhubung dengan dapur SPPG mana pun.");
+        } else {
+          setError("Gagal memuat profil dapur");
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchKitchenProfile();
-  }, []);
+  }, [apiPrefix]);
 
   if (loading) {
     return (
@@ -241,7 +248,7 @@ export default function Kitchen() {
   const tabs = [
     { key: "profil", label: "Profil Dapur" },
     { key: "menu", label: "Menu Harian" },
-    { key: "distribusi", label: "Distribusi" },
+    ...(role !== "guru" ? [{ key: "distribusi", label: "Distribusi" }] : []),
     { key: "ulasan", label: "Ulasan" },
   ];
 
@@ -519,7 +526,7 @@ export default function Kitchen() {
 
       {activeTab === "ulasan" && (
         <div style={{ padding: "0 0 1rem" }}>
-          <UlasanTab />
+          <UlasanTab apiPrefix={apiPrefix} />
         </div>
       )}
 
@@ -530,12 +537,177 @@ export default function Kitchen() {
       )}
 
       {activeTab === "menu" && (
-        <div className="kp-coming-soon">
-          <p>Halaman ini sedang dalam pengembangan.</p>
+        <div className="kp-card kp-card--full" style={{ marginTop: "0px" }}>
+          <div className="kp-card-title">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M21 9H3M21 15H3M12 3v18" />
+            </svg>
+            Menu Harian Dapur
+            <span className="kp-school-count">
+              {(profile.daily_menus ?? []).length} menu tersedia
+            </span>
+          </div>
+          {(!profile.daily_menus || profile.daily_menus.length === 0) ? (
+            <div className="kp-empty" style={{ padding: "2rem", textAlign: "center" }}>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                style={{ margin: "0 auto 8px", display: "block", opacity: 0.4 }}
+              >
+                <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
+              </svg>
+              Belum ada menu harian yang diinput untuk dapur ini.
+            </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "12px", width: "100%" }}>
+              {profile.daily_menus.map((menu) => (
+                <div
+                  key={menu.id}
+                  style={{
+                    display: "flex",
+                    gap: "16px",
+                    border: "1px solid var(--border-default, #e5e3df)",
+                    borderRadius: "8px",
+                    padding: "16px",
+                    background: "var(--surface-2, #fbfbfa)",
+                    alignItems: "flex-start",
+                    textAlign: "left",
+                  }}
+                >
+                  {menu.photo ? (
+                    <img
+                      src={menu.photo}
+                      alt={menu.menu_name}
+                      style={{
+                        width: "120px",
+                        height: "90px",
+                        objectFit: "cover",
+                        borderRadius: "6px",
+                        background: "#1a1a18",
+                        flexShrink: 0,
+                      }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: "120px",
+                        height: "90px",
+                        borderRadius: "6px",
+                        background: "#e5e3df",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#8c8a85",
+                        fontSize: "11px",
+                        fontWeight: 500,
+                        flexShrink: 0,
+                      }}
+                    >
+                      Tanpa Foto
+                    </div>
+                  )}
+                  <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        gap: "8px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          color: "var(--text-secondary, #64748b)",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Disajikan pada: {menu.served_at}
+                      </span>
+                      {menu.is_ai_validated && (
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            padding: "2px 8px",
+                            height: "20px",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            borderRadius: "4px",
+                            fontWeight: "bold",
+                            whiteSpace: "nowrap",
+                            background: "#E8F5E9",
+                            color: "var(--status-success, #2e7d32)",
+                          }}
+                        >
+                          ✓ Tervalidasi AI
+                        </span>
+                      )}
+                    </div>
+                    <h4
+                      style={{
+                        margin: "4px 0",
+                        fontSize: "15px",
+                        fontWeight: 700,
+                        color: "var(--text-primary)",
+                      }}
+                    >
+                      {menu.menu_name}
+                    </h4>
+                    <p
+                      style={{
+                        margin: "0 0 10px 0",
+                        fontSize: "13px",
+                        color: "var(--text-secondary)",
+                        lineHeight: "18px",
+                      }}
+                    >
+                      {menu.components || "—"}
+                    </p>
+                    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                      {[
+                        { label: "Kalori", value: menu.calories, unit: "kkal" },
+                        { label: "Protein", value: menu.protein, unit: "g" },
+                        { label: "Karbo", value: menu.carbs, unit: "g" },
+                        { label: "Lemak", value: menu.fat, unit: "g" },
+                      ].map((macro) => (
+                        <span
+                          key={macro.label}
+                          style={{
+                            fontSize: "11px",
+                            padding: "4px 8px",
+                            background: "var(--surface-1, #ffffff)",
+                            border: "1px solid var(--border-default, #e5e3df)",
+                            borderRadius: "4px",
+                            color: "var(--text-primary)",
+                          }}
+                        >
+                          <strong>{macro.label}:</strong>{" "}
+                          {macro.value != null ? `${macro.value} ${macro.unit}` : "—"}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
-      {editOpen && (
+      {canEdit && editOpen && (
         <KitchenEditModal
           profile={profile}
           onClose={() => setEditOpen(false)}
