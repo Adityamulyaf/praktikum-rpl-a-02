@@ -77,6 +77,20 @@ export default function RiwayatUlasan() {
                 <p style={{ margin: 0, fontSize: '0.875rem', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>
                   {review.content}
                 </p>
+                {review.photo && (
+                  <div style={{ marginTop: '12px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border, #e5e7eb)', maxWidth: '200px' }}>
+                    <img 
+                      src={review.photo} 
+                      alt="Ulasan Makanan" 
+                      style={{ width: '100%', height: 'auto', display: 'block', cursor: 'pointer' }} 
+                      onClick={() => {
+                        const w = window.open();
+                        w.document.write(`<img src="${review.photo}" style="max-width: 100%; max-height: 100vh; display: block; margin: auto; padding: 20px; box-sizing: border-box;" />`);
+                        w.document.title = "Foto Ulasan Makanan";
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             );
           })}

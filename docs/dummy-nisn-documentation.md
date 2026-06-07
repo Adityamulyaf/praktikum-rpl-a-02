@@ -11,6 +11,15 @@ Setiap NISN terdiri dari **10 digit** dengan pola:
 
 ---
 
+## Hubungan Sekolah & Dapur SPPG
+
+Semua 5 sekolah dummy di bawah ini telah terhubung ke **1 Dapur SPPG Terdekat** (Dapur SPPG Test yang terasosiasi dengan email `sppg@halombg.com`). 
+Hal ini memudahkan pengujian secara menyeluruh:
+1. Ketika siswa dari salah satu sekolah ini mengirimkan ulasan (review) harian, ulasan tersebut akan langsung diarahkan ke Dapur SPPG Test tersebut.
+2. Ketika Dapur SPPG Test mengumumkan menu harian atau mengubah status distribusi makanan, data tersebut akan langsung terdistribusi ke kelima sekolah ini.
+
+---
+
 ## Daftar NISN Per Sekolah
 
 ### 1. SMP SATAP KAGI (ID: 1)

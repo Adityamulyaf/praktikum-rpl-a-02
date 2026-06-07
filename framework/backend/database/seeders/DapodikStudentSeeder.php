@@ -54,5 +54,22 @@ class DapodikStudentSeeder extends Seeder
 
         DapodikStudent::insert($records);
         $this->command->info('Berhasil men-seed ' . count($records) . ' siswa dummy ke dapodik_students.');
+
+        // Link the first 5 schools to the test SPPG (sppg@halombg.com)
+        $testSppgUser = \App\Models\User::where('email', 'sppg@halombg.com')->first();
+        if ($testSppgUser) {
+            $testSppgProfile = \App\Models\SppgProfile::where('user_id', $testSppgUser->ssid)->first();
+            if ($testSppgProfile) {
+                $sppgSchools = [];
+                foreach ($schools as $school) {
+                    $sppgSchools[] = [
+                        'sppg_id'   => $testSppgProfile->id,
+                        'school_id' => $school->id,
+                    ];
+                }
+                \Illuminate\Support\Facades\DB::table('sppg_schools')->insertOrIgnore($sppgSchools);
+                $this->command->info('Berhasil menghubungkan 5 sekolah dummy ke SPPG: ' . $testSppgProfile->kitchen_name);
+            }
+        }
     }
 }

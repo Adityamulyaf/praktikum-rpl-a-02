@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Siswa only
     Route::middleware('role:siswa')->prefix('siswa')->group(function () {
+        Route::get('/sppg-info',           [ReviewController::class, 'sppgInfo']);
         Route::get('/reviews',             [ReviewController::class, 'index']);
         Route::post('/reviews',            [ReviewController::class, 'store']);
         Route::delete('/reviews/{review}', [ReviewController::class, 'destroy']);
