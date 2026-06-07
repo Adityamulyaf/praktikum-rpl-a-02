@@ -10,7 +10,7 @@ class SchoolController extends Controller
 {
     public function index(Request $request)
     {
-        $query = School::query();
+        $query = School::query()->with('sppgProfiles:id,kitchen_name');
 
         if ($request->filled('search')) {
             $query->where('name', 'ilike', '%' . $request->search . '%');

@@ -34,12 +34,22 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
     });
   }, [province]);
 
-  const toggle = (id) =>
+  const toggle = (id) => {
+    const school = allSchools.find((s) => s.id === id);
+    if (school && school.sppg_profiles && school.sppg_profiles.length > 0) {
+      const otherSppg = school.sppg_profiles.find((p) => p.id !== sppg.id);
+      if (otherSppg) {
+        alert(`Sekolah "${school.name}" sudah terhubung dengan SPPG "${otherSppg.kitchen_name}".`);
+        return;
+      }
+    }
+
     setAssigned((prev) => {
       const next = new Set(prev);
       next.has(id) ? next.delete(id) : next.add(id);
       return next;
     });
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -102,17 +112,25 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
               {filtered.length === 0 && (
                 <p className="adm-empty">Sekolah tidak ditemukan.</p>
               )}
-              {filtered.map((school) => (
-                <label key={school.id} className="adm-school-item">
-                  <input
-                    type="checkbox"
-                    checked={assigned.has(school.id)}
-                    onChange={() => toggle(school.id)}
-                  />
-                  <span className="adm-school-item-label">{school.name}</span>
-                  <span className="adm-school-item-sub">{school.district}</span>
-                </label>
-              ))}
+              {filtered.map((school) => {
+                const otherSppg = school.sppg_profiles?.find((p) => p.id !== sppg.id);
+                return (
+                  <label key={school.id} className="adm-school-item">
+                    <input
+                      type="checkbox"
+                      checked={assigned.has(school.id)}
+                      onChange={() => toggle(school.id)}
+                    />
+                    <span className="adm-school-item-label">{school.name}</span>
+                    {otherSppg && (
+                      <span className="adm-school-badge">
+                        Terhubung: {otherSppg.kitchen_name}
+                      </span>
+                    )}
+                    <span className="adm-school-item-sub">{school.district}</span>
+                  </label>
+                );
+              })}
             </div>
           )}
         </div>
