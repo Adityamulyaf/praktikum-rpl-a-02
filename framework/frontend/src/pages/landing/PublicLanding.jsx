@@ -28,14 +28,14 @@ export default function PublicLanding() {
     }
   }, [token, role, navigate]);
 
-  // Scroll-based navbar: transparent → solid
+  // Scroll-based navbar: full-width → floating rounded
   useEffect(() => {
     const handleScroll = () => {
       if (!navRef.current) return;
       if (window.scrollY > 80) {
-        navRef.current.classList.add('pl-nav--solid');
+        navRef.current.classList.add('pl-nav--scrolled');
       } else {
-        navRef.current.classList.remove('pl-nav--solid');
+        navRef.current.classList.remove('pl-nav--scrolled');
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });

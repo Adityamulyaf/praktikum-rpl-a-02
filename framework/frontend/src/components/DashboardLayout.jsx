@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './DashboardLayout.css';
@@ -16,6 +16,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
   const [activeMenu, setActiveMenu] = useState(firstKey);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const topbarRef = useRef(null);
 
   useEffect(() => {
     if (!pageClass) return;
@@ -29,13 +30,28 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
     navigate('/');
   };
 
+  // Scroll-based topbar: full-width → floating rounded
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!topbarRef.current) return;
+      if (window.scrollY > 80) {
+        topbarRef.current.classList.add('dl-topbar--scrolled');
+      } else {
+        topbarRef.current.classList.remove('dl-topbar--scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const isHome = activeMenu === firstKey;
   const showSidebar = hasSidebar && !isHome;
 
   return (
     <div className="dl-root">
-      {/* Top bar — always visible */}
-      <header className="dl-topbar">
+      {/* Top bar — always visible, scroll-to-rounded */}
+      <header className="dl-topbar" ref={topbarRef}>
         {!isHome && !hasSidebar && (
           <button
             className="dl-back-btn"
