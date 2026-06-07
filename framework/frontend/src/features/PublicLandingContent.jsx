@@ -265,6 +265,11 @@ export default function PublicLandingContent({ onNavigate }) {
         }
     };
 
+    const handleScrollToSearch = () => {
+        searchRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        searchRef.current?.querySelector('input')?.focus();
+    };
+
     // ── VIEW SWITCH: LandingKitchenProfile ──
     if (view === "profil-dapur") {
         return (
@@ -434,9 +439,11 @@ export default function PublicLandingContent({ onNavigate }) {
                         {FEATURES.map(({ key, icon, name, desc, badge }) => (
                             <div
                                 key={key}
-                                className={`plc-feature-card${key === "profil" || key === "distribusi" || key === "menu" ? " plc-feature-card--link" : ""}`}
+                                className={`plc-feature-card${key === "profil" || key === "distribusi" || key === "menu" || key === "search" ? " plc-feature-card--link" : ""}`}
                                 onClick={() => {
-                                    if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
+                                    if (key === "search") {
+                                        handleScrollToSearch();
+                                    } else if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
                                         handleSiswaFeatureClick(key);
                                     } else if (onNavigate && (role === "siswa" || role === "guru")) {
                                         if (key === "menu") onNavigate("menu");
@@ -458,11 +465,13 @@ export default function PublicLandingContent({ onNavigate }) {
                                         }
                                     }
                                 }}
-                                role={key === "profil" || key === "distribusi" || key === "menu" ? "button" : undefined}
-                                tabIndex={key === "profil" || key === "distribusi" || key === "menu" ? 0 : undefined}
+                                role={key === "profil" || key === "distribusi" || key === "menu" || key === "search" ? "button" : undefined}
+                                tabIndex={key === "profil" || key === "distribusi" || key === "menu" || key === "search" ? 0 : undefined}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
-                                        if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
+                                        if (key === "search") {
+                                            handleScrollToSearch();
+                                        } else if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
                                             handleSiswaFeatureClick(key);
                                         } else if (onNavigate && (role === "siswa" || role === "guru")) {
                                             if (key === "menu") onNavigate("menu");
@@ -507,6 +516,11 @@ export default function PublicLandingContent({ onNavigate }) {
                                 {key === "distribusi" && (
                                     <span className="plc-feature-cta">
                                         Pantau status →
+                                    </span>
+                                )}
+                                {key === "search" && (
+                                    <span className="plc-feature-cta">
+                                        Cari sekarang →
                                     </span>
                                 )}
                             </div>
