@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // SPPG only
-    Route::middleware('role:admin,sppg,siswa,guru')->prefix('sppg')->group(function () {
+    Route::middleware('role:sppg')->prefix('sppg')->group(function () {
         Route::get('/profile',         [ProfileController::class, 'show']);
         Route::put('/profile',         [ProfileController::class, 'update']);
         Route::get('/profile/reviews', [ProfileController::class, 'reviews']);
@@ -60,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('public')->group(function () {
     Route::get('/schools',      [PublicController::class, 'schools']);
+    Route::get('/verify-nisn',  [PublicController::class, 'verifyNisn']);
     Route::get('/distribution', [PublicDistributionController::class, 'index']);
     Route::get('/reviews',      [PublicReviewController::class, 'index']);
     Route::get('/sppg',         [PublicSppgController::class, 'index']);
