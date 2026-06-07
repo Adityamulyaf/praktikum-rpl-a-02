@@ -60,7 +60,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('public')->group(function () {
     Route::get('/schools',      [PublicController::class, 'schools']);
-    Route::get('/verify-nisn',  [PublicController::class, 'verifyNisn']);
     Route::get('/distribution', [PublicDistributionController::class, 'index']);
     Route::get('/reviews',      [PublicReviewController::class, 'index']);
     Route::get('/sppg',         [PublicSppgController::class, 'index']);
