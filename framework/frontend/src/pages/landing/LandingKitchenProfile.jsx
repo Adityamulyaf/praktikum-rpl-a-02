@@ -581,11 +581,11 @@ function KitchenDetail({ id, onBack, initialMode = "profil" }) {
 }
 
 /* ── Main export ──────────────────────────────────────────────── */
-export default function LandingKitchenProfile({ onBack, initialMode = "profil" }) {
+export default function LandingKitchenProfile({ onBack, initialMode = "profil", initialKitchenId = null }) {
     const [kitchens, setKitchens] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedId, setSelectedId] = useState(null);
+    const [selectedId, setSelectedId] = useState(initialKitchenId);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
 

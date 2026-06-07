@@ -315,6 +315,7 @@ class NisnVerificationTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'served' => true,
+                'id' => $sppgProfile->id,
                 'kitchen_name' => 'SPPG Kagi Kitchen',
             ]);
     }

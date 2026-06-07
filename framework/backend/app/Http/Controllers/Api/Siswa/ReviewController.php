@@ -82,6 +82,7 @@ class ReviewController extends Controller
 
         return response()->json([
             'served' => true,
+            'id' => $sppg->id,
             'kitchen_name' => $sppg->kitchen_name,
             'address' => $sppg->address,
             'contact_person' => $sppg->contact_person_name,

@@ -722,3 +722,39 @@
         padding: 0 var(--space-md);
     }
 }
+
+/* Loading Overlay for SPPG Lookup */
+.plc-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.plc-loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--color-primary, #0f172a);
+    border-radius: 50%;
+    animation: plc-global-spin 0.6s linear infinite;
+    margin-bottom: var(--space-xs);
+}
+
+.plc-loading-text {
+    font-weight: 500;
+    color: var(--color-primary, #0f172a);
+}
+
+@keyframes plc-global-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

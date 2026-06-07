@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { searchPublicSchools } from '../api/auth';
+import api from '../api/axios';
 import PersonalStrip from '../components/PersonalStrip';
 import LandingKitchenProfile from '../pages/landing/LandingKitchenProfile';
 import MonitoringStatusDistribusi from './monitoring/MonitoringStatusDistribusi';
@@ -153,6 +154,8 @@ export default function PublicLandingContent({ onNavigate }) {
     const { role } = useAuth();
     const [view, setView] = useState("landing");
     const [kitchenProfileMode, setKitchenProfileMode] = useState("profil");
+    const [assignedSppgId, setAssignedSppgId] = useState(null);
+    const [loadingSppg, setLoadingSppg] = useState(false);
 
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
@@ -243,11 +246,31 @@ export default function PublicLandingContent({ onNavigate }) {
             : "SPPG belum tersedia";
     };
 
+    const handleSiswaFeatureClick = async (key) => {
+        if (loadingSppg) return;
+        setLoadingSppg(true);
+        try {
+            const { data } = await api.get('/siswa/sppg-info');
+            if (data.served && data.id) {
+                setAssignedSppgId(data.id);
+                setKitchenProfileMode(key);
+                setView("profil-dapur");
+            } else {
+                alert(data.message || 'Sekolah Anda belum terhubung dengan dapur SPPG mana pun.');
+            }
+        } catch (err) {
+            alert(err.response?.data?.message || 'Gagal memuat informasi SPPG dapur.');
+        } finally {
+            setLoadingSppg(false);
+        }
+    };
+
     // ── VIEW SWITCH: LandingKitchenProfile ──
     if (view === "profil-dapur") {
         return (
             <LandingKitchenProfile
                 initialMode={kitchenProfileMode}
+                initialKitchenId={assignedSppgId}
                 onBack={() => setView("landing")}
             />
         );
@@ -272,6 +295,12 @@ export default function PublicLandingContent({ onNavigate }) {
 
     return (
         <div className="plc-root">
+            {loadingSppg && (
+                <div className="plc-loading-overlay">
+                    <div className="plc-loading-spinner" />
+                    <span className="plc-loading-text">Memproses data dapur...</span>
+                </div>
+            )}
             {/* ── HERO — solid navy, no gradients per DESIGN.md §4.5 ── */}
             <section className="plc-hero">
                 <div className="plc-hero-inner">
@@ -407,19 +436,24 @@ export default function PublicLandingContent({ onNavigate }) {
                                 key={key}
                                 className={`plc-feature-card${key === "profil" || key === "distribusi" || key === "menu" ? " plc-feature-card--link" : ""}`}
                                 onClick={() => {
-                                    if (onNavigate && (role === "siswa" || role === "guru")) {
+                                    if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
+                                        handleSiswaFeatureClick(key);
+                                    } else if (onNavigate && (role === "siswa" || role === "guru")) {
                                         if (key === "menu") onNavigate("menu");
                                         if (key === "distribusi") onNavigate("distribusi");
                                         if (key === "profil") onNavigate("profil");
                                     } else {
                                         if (key === "menu") {
                                             setKitchenProfileMode("menu");
+                                            setAssignedSppgId(null);
                                             setView("profil-dapur");
                                         } else if (key === "distribusi") {
                                             setKitchenProfileMode("distribusi");
+                                            setAssignedSppgId(null);
                                             setView("profil-dapur");
                                         } else if (key === "profil") {
                                             setKitchenProfileMode("profil");
+                                            setAssignedSppgId(null);
                                             setView("profil-dapur");
                                         }
                                     }
@@ -428,19 +462,24 @@ export default function PublicLandingContent({ onNavigate }) {
                                 tabIndex={key === "profil" || key === "distribusi" || key === "menu" ? 0 : undefined}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
-                                        if (onNavigate && (role === "siswa" || role === "guru")) {
+                                        if (role === "siswa" && (key === "menu" || key === "distribusi" || key === "profil")) {
+                                            handleSiswaFeatureClick(key);
+                                        } else if (onNavigate && (role === "siswa" || role === "guru")) {
                                             if (key === "menu") onNavigate("menu");
                                             if (key === "distribusi") onNavigate("distribusi");
                                             if (key === "profil") onNavigate("profil");
                                         } else {
                                             if (key === "menu") {
                                                 setKitchenProfileMode("menu");
+                                                setAssignedSppgId(null);
                                                 setView("profil-dapur");
                                             } else if (key === "distribusi") {
                                                 setKitchenProfileMode("distribusi");
+                                                setAssignedSppgId(null);
                                                 setView("profil-dapur");
                                             } else if (key === "profil") {
                                                 setKitchenProfileMode("profil");
+                                                setAssignedSppgId(null);
                                                 setView("profil-dapur");
                                             }
                                         }
