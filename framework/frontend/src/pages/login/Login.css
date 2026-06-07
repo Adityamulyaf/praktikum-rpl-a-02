@@ -10,7 +10,9 @@
   box-sizing: border-box;
   font-family: var(--font-sans);
   font-size: 14px;
-  background: var(--color-primary);
+background:
+    linear-gradient(rgba(7, 30, 73, 0.62), rgba(7, 30, 73, 0.62)),
+    url('../../assets/mbg-ilustration.webp') center / cover no-repeat;
 }
 
 /* ── CENTER WRAPPER ───────────────────────────────────── */
