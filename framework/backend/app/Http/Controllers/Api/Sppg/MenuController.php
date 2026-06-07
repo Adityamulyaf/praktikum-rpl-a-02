@@ -10,7 +10,19 @@ class MenuController extends Controller
 {
     public function index(Request $request)
     {
-        $sppg = $request->user()->sppgProfile;
+        $user = $request->user();
+        if ($user->role === 'siswa') {
+            $profile = $user->studentProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->first() : null;
+        } elseif ($user->role === 'guru') {
+            $profile = $user->teacherProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->first() : null;
+        } else {
+            $sppg = $user->sppgProfile;
+        }
+
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
         }
@@ -24,9 +36,23 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-        $sppg = $request->user()->sppgProfile;
-        if (!$sppg) {
-            return response()->json(['message' => 'Profil tidak ditemukan'], 404);
+        $user = $request->user();
+        if (!in_array($user->role, ['admin', 'sppg'])) {
+            return response()->json(['message' => 'Tidak diizinkan'], 403);
+        }
+
+        $sppg = $user->sppgProfile;
+        if ($user->role === 'admin') {
+            $sppgId = $request->input('sppg_id');
+            if (!$sppgId) {
+                $firstSppg = \App\Models\SppgProfile::first();
+                $sppgId = $firstSppg ? $firstSppg->id : null;
+            }
+        } else {
+            if (!$sppg) {
+                return response()->json(['message' => 'Profil tidak ditemukan'], 404);
+            }
+            $sppgId = $sppg->id;
         }
 
         $request->validate([
@@ -43,7 +69,7 @@ class MenuController extends Controller
         ]);
 
         $menu = DailyMenu::create([
-            'sppg_id'         => $sppg->id,
+            'sppg_id'         => $sppgId,
             'served_at'       => $request->served_at,
             'menu_name'       => $request->menu_name,
             'components'      => $request->components,
@@ -61,8 +87,15 @@ class MenuController extends Controller
 
     public function update(Request $request, DailyMenu $menu)
     {
-        $sppg = $request->user()->sppgProfile;
-        if (!$sppg || $menu->sppg_id !== $sppg->id) {
+        $user = $request->user();
+        if ($user->role === 'admin') {
+            // Admin can edit any menu
+        } elseif ($user->role === 'sppg') {
+            $sppg = $user->sppgProfile;
+            if (!$sppg || $menu->sppg_id !== $sppg->id) {
+                return response()->json(['message' => 'Tidak diizinkan'], 403);
+            }
+        } else {
             return response()->json(['message' => 'Tidak diizinkan'], 403);
         }
 
@@ -89,8 +122,15 @@ class MenuController extends Controller
 
     public function destroy(Request $request, DailyMenu $menu)
     {
-        $sppg = $request->user()->sppgProfile;
-        if (!$sppg || $menu->sppg_id !== $sppg->id) {
+        $user = $request->user();
+        if ($user->role === 'admin') {
+            // Admin can delete any menu
+        } elseif ($user->role === 'sppg') {
+            $sppg = $user->sppgProfile;
+            if (!$sppg || $menu->sppg_id !== $sppg->id) {
+                return response()->json(['message' => 'Tidak diizinkan'], 403);
+            }
+        } else {
             return response()->json(['message' => 'Tidak diizinkan'], 403);
         }
 

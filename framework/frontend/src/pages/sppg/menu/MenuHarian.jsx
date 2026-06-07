@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import api from '../../../api/axios';
 import '../../admin/admin.css';
 import '../../ValidationAI.css';
+import { useAuth } from '../../../context/AuthContext';
 
 const SparklesIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -846,6 +847,9 @@ function MenuFormModal({ menu, onClose, onSaved }) {
 }
 
 export default function MenuHarian() {
+  const { role } = useAuth();
+  const canEdit = role === 'admin' || role === 'sppg';
+
   const [menus,       setMenus]       = useState([]);
   const [meta,        setMeta]        = useState(null);
   const [page,        setPage]        = useState(1);
@@ -889,14 +893,18 @@ export default function MenuHarian() {
     <div>
       <div className="adm-section-header">
         <h2>Menu Harian</h2>
-        <button className="adm-btn primary" onClick={openAdd}>+ Tambah Menu</button>
+        {canEdit && <button className="adm-btn primary" onClick={openAdd}>+ Tambah Menu</button>}
       </div>
 
       <div className="adm-table-wrap">
         {loading ? (
           <p className="adm-loading">Memuat data...</p>
         ) : menus.length === 0 ? (
-          <p className="adm-empty">Belum ada menu yang diinput. Klik "+ Tambah Menu" untuk memulai.</p>
+          <p className="adm-empty">
+            {canEdit 
+              ? 'Belum ada menu yang diinput. Klik "+ Tambah Menu" untuk memulai.'
+              : 'Belum ada menu yang diinput.'}
+          </p>
         ) : (
           <table className="adm-table">
             <thead>
@@ -910,7 +918,7 @@ export default function MenuHarian() {
                 <th>Karbo</th>
                 <th>Lemak</th>
                 <th>Status Validasi AI</th>
-                <th>Aksi</th>
+                {canEdit && <th>Aksi</th>}
               </tr>
             </thead>
             <tbody>
@@ -947,12 +955,14 @@ export default function MenuHarian() {
                       </span>
                     )}
                   </td>
-                  <td>
-                    <div className="adm-actions">
-                      <button className="adm-btn" onClick={() => openEdit(menu)}>Edit</button>
-                      <button className="adm-btn danger" onClick={() => handleDelete(menu)}>Hapus</button>
-                    </div>
-                  </td>
+                  {canEdit && (
+                    <td>
+                      <div className="adm-actions">
+                        <button className="adm-btn" onClick={() => openEdit(menu)}>Edit</button>
+                        <button className="adm-btn danger" onClick={() => handleDelete(menu)}>Hapus</button>
+                      </div>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

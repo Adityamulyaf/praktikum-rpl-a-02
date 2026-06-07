@@ -3,6 +3,7 @@ import { searchPublicSchools } from '../api/auth';
 import PersonalStrip from '../components/PersonalStrip';
 import LandingKitchenProfile from '../pages/landing/LandingKitchenProfile';
 import MonitoringStatusDistribusi from './monitoring/MonitoringStatusDistribusi';
+import { useAuth } from '../context/AuthContext';
 import '../pages/landing/PublicLanding.css';
 
 /* ── COUNT-UP ANIMATION HOOK ───────────────────────────────── */
@@ -94,7 +95,7 @@ const FEATURES = [
         ),
         name: "Menu Harian",
         desc: "Pantau menu makanan yang disajikan setiap hari beserta kandungan nutrisinya.",
-        badge: "Segera",
+        badge: null,
     },
     {
         key: "distribusi",
@@ -149,7 +150,9 @@ const STATS = [
 ];
 
 export default function PublicLandingContent({ onNavigate }) {
+    const { role } = useAuth();
     const [view, setView] = useState("landing");
+    const [kitchenProfileMode, setKitchenProfileMode] = useState("profil");
 
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
@@ -244,6 +247,7 @@ export default function PublicLandingContent({ onNavigate }) {
     if (view === "profil-dapur") {
         return (
             <LandingKitchenProfile
+                initialMode={kitchenProfileMode}
                 onBack={() => setView("landing")}
             />
         );
@@ -401,27 +405,47 @@ export default function PublicLandingContent({ onNavigate }) {
                         {FEATURES.map(({ key, icon, name, desc, badge }) => (
                             <div
                                 key={key}
-                                className={`plc-feature-card${key === "profil" || key === "distribusi" ? " plc-feature-card--link" : ""}`}
-                                onClick={
-                                    key === "profil"
-                                        ? () => setView("profil-dapur")
-                                        : key === "distribusi"
-                                        ? () => setView("distribusi")
-                                        : undefined
-                                }
-                                role={key === "profil" || key === "distribusi" ? "button" : undefined}
-                                tabIndex={key === "profil" || key === "distribusi" ? 0 : undefined}
-                                onKeyDown={
-                                    key === "profil"
-                                        ? (e) =>
-                                              e.key === "Enter" &&
-                                              setView("profil-dapur")
-                                        : key === "distribusi"
-                                        ? (e) =>
-                                              e.key === "Enter" &&
-                                              setView("distribusi")
-                                        : undefined
-                                }
+                                className={`plc-feature-card${key === "profil" || key === "distribusi" || key === "menu" ? " plc-feature-card--link" : ""}`}
+                                onClick={() => {
+                                    if (onNavigate && (role === "siswa" || role === "guru")) {
+                                        if (key === "menu") onNavigate("menu");
+                                        if (key === "distribusi") onNavigate("distribusi");
+                                        if (key === "profil") onNavigate("profil");
+                                    } else {
+                                        if (key === "menu") {
+                                            setKitchenProfileMode("menu");
+                                            setView("profil-dapur");
+                                        } else if (key === "distribusi") {
+                                            setKitchenProfileMode("distribusi");
+                                            setView("profil-dapur");
+                                        } else if (key === "profil") {
+                                            setKitchenProfileMode("profil");
+                                            setView("profil-dapur");
+                                        }
+                                    }
+                                }}
+                                role={key === "profil" || key === "distribusi" || key === "menu" ? "button" : undefined}
+                                tabIndex={key === "profil" || key === "distribusi" || key === "menu" ? 0 : undefined}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        if (onNavigate && (role === "siswa" || role === "guru")) {
+                                            if (key === "menu") onNavigate("menu");
+                                            if (key === "distribusi") onNavigate("distribusi");
+                                            if (key === "profil") onNavigate("profil");
+                                        } else {
+                                            if (key === "menu") {
+                                                setKitchenProfileMode("menu");
+                                                setView("profil-dapur");
+                                            } else if (key === "distribusi") {
+                                                setKitchenProfileMode("distribusi");
+                                                setView("profil-dapur");
+                                            } else if (key === "profil") {
+                                                setKitchenProfileMode("profil");
+                                                setView("profil-dapur");
+                                            }
+                                        }
+                                    }
+                                }}
                             >
                                 <div className="plc-feature-icon">{icon}</div>
                                 <h3 className="plc-feature-name">{name}</h3>
@@ -429,6 +453,11 @@ export default function PublicLandingContent({ onNavigate }) {
                                 {badge && (
                                     <span className="plc-feature-badge">
                                         {badge}
+                                    </span>
+                                )}
+                                {key === "menu" && (
+                                    <span className="plc-feature-cta">
+                                        Lihat menu harian →
                                     </span>
                                 )}
                                 {key === "profil" && (

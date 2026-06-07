@@ -10,10 +10,18 @@ class ProfileController extends Controller
 {
     public function show(Request $request)
     {
-        $sppg = $request->user()
-                    ->sppgProfile()
-                    ->with('schools')
-                    ->first();
+        $user = $request->user();
+        if ($user->role === 'siswa') {
+            $profile = $user->studentProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->with('schools')->first() : null;
+        } elseif ($user->role === 'guru') {
+            $profile = $user->teacherProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->with('schools')->first() : null;
+        } else {
+            $sppg = $user->sppgProfile()->with('schools')->first();
+        }
 
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
@@ -36,6 +44,10 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
+        if (!in_array($request->user()->role, ['admin', 'sppg'])) {
+            return response()->json(['message' => 'Tidak diizinkan'], 403);
+        }
+
         $sppg = $request->user()->sppgProfile;
 
         if (!$sppg) {
@@ -77,7 +89,19 @@ class ProfileController extends Controller
 
     public function reviews(Request $request)
     {
-        $sppg = $request->user()->sppgProfile;
+        $user = $request->user();
+        if ($user->role === 'siswa') {
+            $profile = $user->studentProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->first() : null;
+        } elseif ($user->role === 'guru') {
+            $profile = $user->teacherProfile;
+            $school = $profile ? $profile->school : null;
+            $sppg = $school ? $school->sppgProfiles()->first() : null;
+        } else {
+            $sppg = $user->sppgProfile;
+        }
+
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
         }
