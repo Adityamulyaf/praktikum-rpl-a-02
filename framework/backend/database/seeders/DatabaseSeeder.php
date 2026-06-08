@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(SchoolSeeder::class);
-        $this->call(DapodikStudentSeeder::class);
 
         // 1. Calculate the hash ONCE right here
         $hashedPassword = Hash::make('password');
@@ -33,7 +32,7 @@ class DatabaseSeeder extends Seeder
                 ['email' => $data['email']],
                 [
                     'name'      => $data['name'],
-                    'password'  => $hashedPassword, // <-- Reusing the pre-calculated hash
+                    'password'  => $hashedPassword,
                     'role'      => $data['role'],
                     'is_active' => true,
                 ]
@@ -49,14 +48,14 @@ class DatabaseSeeder extends Seeder
                     'ssid'       => Str::uuid()->toString(),
                     'email'      => 'sppg' . $i . '@halombg.com',
                     'name'       => 'SPPG User ' . $i,
-                    'password'   => $hashedPassword, // <-- Instant reuse! No heavy math here.
+                    'password'   => $hashedPassword,
                     'role'       => 'sppg',
                     'is_active'  => true,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
             }
-            
+
             // Insert in chunks to avoid query size limits
             foreach (array_chunk($usersToCreate, 100) as $chunk) {
                 User::insertOrIgnore($chunk);
@@ -67,6 +66,14 @@ class DatabaseSeeder extends Seeder
             User::factory(10)->create();
         }
 
+        // SppgProfile seeder harus setelah user dibuat
         $this->call(SppgProfile::class);
+
+        // Distribusikan sekolah ke semua SPPG (10 sekolah per SPPG)
+        $this->call(SppgSchoolSeeder::class);
+
+        // DapodikStudentSeeder harus setelah user sppg@halombg.com ada
+        // dan setelah SppgProfile agar bisa menemukan profil SPPG yang benar
+        $this->call(DapodikStudentSeeder::class);
     }
 }
