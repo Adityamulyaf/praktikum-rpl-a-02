@@ -335,52 +335,54 @@ export default function PublicLandingContent({ onNavigate }) {
 
                     {/* Search */}
                     <div className="plc-search-wrap" ref={searchRef}>
-                        <div className="plc-search-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-                            </svg>
-                        </div>
-                        <input
-                            className="plc-search-input"
-                            type="text"
-                            placeholder="Cari nama sekolah atau kabupaten..."
-                            value={query}
-                            onChange={handleInput}
-                            onFocus={handleSearchFocus}
-                            autoComplete="off"
-                        />
-                        {loading && <div className="plc-search-spinner" />}
-
-                        {searched && isDropdownOpen && (
-                            <div className="plc-search-results">
-                                {results.length === 0 ? (
-                                    <div className="plc-search-empty">
-                                        Tidak ada sekolah ditemukan untuk &ldquo;{query}&rdquo;
-                                    </div>
-                                ) : (
-                                    <>
-                                        <div className="plc-search-count">{results.length} sekolah ditemukan</div>
-                                        <div className="plc-search-list">
-                                            {results.map((s) => (
-                                                <button
-                                                    key={s.id}
-                                                    type="button"
-                                                    className="plc-school-item"
-                                                    onClick={() => handleSelectSchool(s)}
-                                                >
-                                                    <div className="plc-school-item-info">
-                                                        <div className="plc-school-name">{s.name}</div>
-                                                        <div className="plc-school-loc">{s.district} · {s.province}</div>
-                                                    </div>
-                                                    <span className="plc-school-badge">{getSppgNames(s)}</span>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
+                        <div className="plc-search-input-wrap">
+                            <div className="plc-search-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                                </svg>
                             </div>
-                        )}
+                            <input
+                                className="plc-search-input"
+                                type="text"
+                                placeholder="Cari nama sekolah atau kabupaten..."
+                                value={query}
+                                onChange={handleInput}
+                                onFocus={handleSearchFocus}
+                                autoComplete="off"
+                            />
+                            {loading && <div className="plc-search-spinner" />}
+
+                            {searched && isDropdownOpen && (
+                                <div className="plc-search-results">
+                                    {results.length === 0 ? (
+                                        <div className="plc-search-empty">
+                                            Tidak ada sekolah ditemukan untuk &ldquo;{query}&rdquo;
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="plc-search-count">{results.length} sekolah ditemukan</div>
+                                            <div className="plc-search-list">
+                                                {results.map((s) => (
+                                                    <button
+                                                        key={s.id}
+                                                        type="button"
+                                                        className="plc-school-item"
+                                                        onClick={() => handleSelectSchool(s)}
+                                                    >
+                                                        <div className="plc-school-item-info">
+                                                            <div className="plc-school-name">{s.name}</div>
+                                                            <div className="plc-school-loc">{s.district} · {s.province}</div>
+                                                        </div>
+                                                        <span className="plc-school-badge">{getSppgNames(s)}</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            )}
+                        </div>
 
                         {selectedSchool && (
                             <div className="plc-selected-school">

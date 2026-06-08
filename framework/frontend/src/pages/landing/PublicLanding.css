@@ -180,6 +180,11 @@
     margin: 0 auto var(--space-2xl);
 }
 
+.plc-search-input-wrap {
+    position: relative;
+    width: 100%;
+}
+
 .plc-search-icon {
     position: absolute;
     left: 12px;
@@ -188,6 +193,7 @@
     color: var(--text-tertiary);
     pointer-events: none;
     display: flex;
+    z-index: 1;
 }
 
 .plc-search-wrap:has(.plc-selected-school) {
