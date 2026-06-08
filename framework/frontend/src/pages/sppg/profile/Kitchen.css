@@ -229,29 +229,44 @@
 }
 
 .kp-schools-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 0;
+  margin-top: 4px;
 }
 
 .kp-school-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--surface-2);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
   gap: 12px;
+  transition: background 150ms;
 }
-.kp-school-item:last-child { border-bottom: none; }
+.kp-school-item:hover {
+  background: var(--surface-2);
+}
 
 .kp-school-name {
   font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .kp-school-district {
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 500;
   color: var(--text-tertiary);
+  background: var(--surface-3);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .kp-empty {

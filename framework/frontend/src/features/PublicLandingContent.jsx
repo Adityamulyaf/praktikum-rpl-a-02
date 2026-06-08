@@ -230,9 +230,18 @@ export default function PublicLandingContent({ onNavigate }) {
     };
 
     const handleSelectSchool = (school) => {
-        setSelectedSchool(school);
-        setQuery(school.name);
-        setIsDropdownOpen(false);
+        const sppgProfiles = school.sppg_profiles ?? [];
+        if (sppgProfiles.length > 0 && sppgProfiles[0].id) {
+            // Langsung masuk ke profil SPPG
+            setAssignedSppgId(sppgProfiles[0].id);
+            setKitchenProfileMode("profil");
+            setView("profil-dapur");
+        } else {
+            // SPPG belum tersedia — tampilkan card info
+            setSelectedSchool(school);
+            setQuery(school.name);
+            setIsDropdownOpen(false);
+        }
     };
 
     // ── LOGIC: getSppgNames (HEAD Branch Specific) ──
