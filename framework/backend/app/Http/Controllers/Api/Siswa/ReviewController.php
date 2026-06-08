@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use App\Models\SppgProfile;
+use App\Models\TeacherProfile;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -85,7 +87,7 @@ class ReviewController extends Controller
         if ($isCritical) {
             $review->update(['is_critical' => true]);
 
-            $followup = \App\Models\CriticalReviewFollowup::create([
+            \App\Models\CriticalReviewFollowup::create([
                 'review_id' => $review->id,
                 'sppg_id' => $review->sppg_id,
                 'followup_status' => 'belum_diproses',
@@ -94,47 +96,58 @@ class ReviewController extends Controller
 
             $sppgProfile = $review->sppg;
             if ($sppgProfile && $sppgProfile->user_id) {
-                // 1. In App notification
-                \App\Models\Notification::create([
-                    'recipient_id' => $sppgProfile->user_id,
-                    'type' => 'review_critical',
-                    'related_id' => $review->id,
-                    'message' => 'Ulasan kritis terdeteksi dari siswa untuk tanggal ' . $review->review_date,
-                    'channel' => 'in_app',
-                ]);
+                try {
+                    $notificationService = app(NotificationService::class);
+                    $waMessage = sprintf(
+                        "Peringatan: Ulasan kritis diterima untuk dapur Anda pada tanggal %s.\nUlasan: \"%s\"\nSegera lakukan tindak lanjut di dashboard.",
+                        $review->review_date,
+                        $review->content
+                    );
 
-                // 2. WhatsApp notification
-                $waMessage = sprintf(
-                    "[HaloMBG] Peringatan: Ulasan kritis diterima untuk dapur Anda pada tanggal %s.\nUlasan: \"%s\"\nSegera lakukan tindak lanjut di dashboard.",
-                    $review->review_date,
-                    $review->content
-                );
-
-                $waNotification = \App\Models\Notification::create([
-                    'recipient_id' => $sppgProfile->user_id,
-                    'type' => 'review_critical',
-                    'related_id' => $review->id,
-                    'message' => $waMessage,
-                    'channel' => 'whatsapp',
-                ]);
-
-                $phone = $sppgProfile->contact_phone ?: ($sppgProfile->user ? $sppgProfile->user->phone_number : null);
-                if ($phone) {
-                    $waNotification->update(['sent_at' => now()]);
-                    \App\Models\NotificationLog::create([
-                        'notification_id' => $waNotification->id,
-                        'status' => 'sent',
-                        'attempted_at' => now(),
-                    ]);
-                } else {
-                    \App\Models\NotificationLog::create([
-                        'notification_id' => $waNotification->id,
-                        'status' => 'failed',
-                        'failure_reason' => 'Nomor WhatsApp penerima tidak tersedia',
-                        'attempted_at' => now(),
+                    $notificationService->notify(
+                        $sppgProfile->user_id,
+                        'review_critical',
+                        'Ulasan Kritis Terdeteksi',
+                        $waMessage,
+                        [
+                            'review_id' => $review->id,
+                            'sppg_id'   => $review->sppg_id,
+                        ],
+                        true
+                    );
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('Failed to send critical review notification to SPPG', [
+                        'error' => $e->getMessage(),
                     ]);
                 }
             }
+        }
+
+        // BL-11: Notify Guru when a new review is created
+        try {
+            $notificationService = app(NotificationService::class);
+            $guruUserIds = TeacherProfile::where('school_id', $student->school_id)
+                ->pluck('user_id')
+                ->toArray();
+
+            foreach ($guruUserIds as $guruId) {
+                $notificationService->notify(
+                    $guruId,
+                    'new_review',
+                    'Ulasan Baru dari Siswa',
+                    "Siswa {$request->user()->name} mengirimkan ulasan baru pada tanggal {$reviewDate}.",
+                    [
+                        'review_id' => $review->id,
+                        'school_id' => $student->school_id,
+                        'sppg_id'   => $sppg?->id,
+                        'date'      => $reviewDate,
+                    ]
+                );
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send review notification to guru', [
+                'error' => $e->getMessage(),
+            ]);
         }
 
         return response()->json($review->load('school:id,name,district'), 201);

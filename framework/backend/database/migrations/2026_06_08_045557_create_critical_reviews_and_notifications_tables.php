@@ -15,26 +15,7 @@ return new class extends Migration
             $table->boolean('is_critical')->default(false)->after('photo');
         });
 
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('recipient_id');
-            $table->foreign('recipient_id')->references('ssid')->on('users')->onDelete('cascade');
-            $table->string('type'); // e.g., review_critical
-            $table->unsignedBigInteger('related_id')->nullable();
-            $table->text('message');
-            $table->enum('channel', ['whatsapp', 'in_app']);
-            $table->boolean('is_read')->default(false);
-            $table->timestamp('sent_at')->nullable();
-            $table->timestamps();
-        });
 
-        Schema::create('notification_logs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('notification_id')->constrained('notifications')->onDelete('cascade');
-            $table->enum('status', ['sent', 'failed']);
-            $table->text('failure_reason')->nullable();
-            $table->timestamp('attempted_at')->useCurrent();
-        });
 
         Schema::create('critical_review_followups', function (Blueprint $table) {
             $table->id();
@@ -66,8 +47,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('followup_histories');
         Schema::dropIfExists('critical_review_followups');
-        Schema::dropIfExists('notification_logs');
-        Schema::dropIfExists('notifications');
         Schema::table('reviews', function (Blueprint $table) {
             $table->dropColumn('is_critical');
         });

@@ -29,7 +29,7 @@ export default function NotifikasiList({ onNavigate }) {
     setLoading(true);
     setError("");
     try {
-      const { data } = await api.get("/sppg/notifications", {
+      const { data } = await api.get("/notifications", {
         params: { page: pg },
       });
       setNotifications(data.data || []);
@@ -48,9 +48,9 @@ export default function NotifikasiList({ onNavigate }) {
   const handleMarkAsRead = async (id) => {
     setActioningId(id);
     try {
-      await api.put(`/sppg/notifications/${id}/read`);
+      await api.put(`/notifications/${id}/read`);
       setNotifications((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, is_read: true } : n))
+        prev.map((n) => (n.id === id ? { ...n, read: true } : n))
       );
     } catch (err) {
       alert(err.response?.data?.message || "Gagal menandai notifikasi dibaca.");
@@ -60,13 +60,13 @@ export default function NotifikasiList({ onNavigate }) {
   };
 
   const handleMarkAllRead = async () => {
-    const unread = notifications.filter(n => !n.is_read);
+    const unread = notifications.filter(n => !n.read);
     if (unread.length === 0) return;
     
     setLoading(true);
     try {
-      await Promise.all(unread.map(n => api.put(`/sppg/notifications/${n.id}/read`)));
-      setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
+      await api.post("/notifications/mark-all-read");
+      setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
     } catch (err) {
       alert("Gagal menandai semua notifikasi.");
     } finally {
@@ -82,7 +82,7 @@ export default function NotifikasiList({ onNavigate }) {
     );
   }
 
-  const unreadCount = notifications.filter((n) => !n.is_read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", padding: "1.5rem 0" }}>
@@ -139,14 +139,14 @@ export default function NotifikasiList({ onNavigate }) {
                   border: "1px solid var(--border-default)",
                   borderRadius: "6px",
                   padding: "16px 20px",
-                  background: notification.is_read
+                  background: notification.read
                     ? "var(--surface-1)"
                     : "rgba(7, 30, 73, 0.04)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   gap: "16px",
-                  borderLeft: notification.is_read
+                  borderLeft: notification.read
                     ? "1px solid var(--border-default)"
                     : "4px solid var(--color-primary)",
                 }}
@@ -170,7 +170,7 @@ export default function NotifikasiList({ onNavigate }) {
                     </span>
                   </div>
                   <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-primary)", lineHeight: 1.5 }}>
-                    {notification.message}
+                    {notification.body}
                   </p>
                 </div>
                 <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
@@ -182,7 +182,7 @@ export default function NotifikasiList({ onNavigate }) {
                   >
                     Tindak Lanjut
                   </button>
-                  {!notification.is_read && (
+                  {!notification.read && (
                     <button
                       type="button"
                       className="adm-btn success"

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import api from '../api/axios';
+import { getUnreadCount } from '../api/notification';
 import './DashboardLayout.css';
+
 
 /**
  * Shared dashboard shell untuk semua role.
@@ -21,22 +22,21 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
-    if (role !== 'sppg') return;
+    if (!role || role === 'siswa') return;
     
     let isMounted = true;
-    const fetchUnreadCount = async () => {
+    const fetchCount = async () => {
       try {
-        const { data } = await api.get('/sppg/notifications');
+        const { data } = await getUnreadCount();
         if (!isMounted) return;
-        const unread = (data.data || []).filter(n => !n.is_read).length;
-        setUnreadCount(unread);
+        setUnreadCount(data.unread_count || 0);
       } catch (err) {
         // Ignore
       }
     };
 
-    fetchUnreadCount();
-    const interval = setInterval(fetchUnreadCount, 15000);
+    fetchCount();
+    const interval = setInterval(fetchCount, 15000);
 
     return () => {
       isMounted = false;
@@ -89,7 +89,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
         )}
         <span className="dl-topbar-brand">HaloMBG</span>
         <div className="dl-topbar-right">
-          {(role === 'sppg' || role === 'guru') && (
+          {role && role !== 'siswa' && (
             <button
               className={`dl-topbar-notif-btn${activeMenu === 'notif' ? ' dl-topbar-notif-btn--active' : ''}`}
               onClick={() => setActiveMenu('notif')}
@@ -116,6 +116,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
           <button className="dl-topbar-logout" onClick={handleLogout}>Keluar</button>
         </div>
       </header>
+
 
       {/* Sidebar layout (admin) — hanya saat hasSidebar && !isHome */}
       {showSidebar ? (

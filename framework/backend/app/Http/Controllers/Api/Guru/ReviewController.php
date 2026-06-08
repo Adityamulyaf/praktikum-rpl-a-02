@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Guru;
 
 use App\Http\Controllers\Controller;
 use App\Models\Review;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -62,6 +63,28 @@ class ReviewController extends Controller
             'flag_status' => $status,
             'flag_reason' => $status === 'flagged' ? $reason : null,
         ]);
+
+        // BL-11: Notify Siswa when their review is moderated
+        if ($status === 'flagged') {
+            try {
+                $notificationService = app(NotificationService::class);
+                $notificationService->notify(
+                    $review->user_id,
+                    'review_moderated',
+                    'Ulasan Anda Dimoderasi',
+                    "Ulasan Anda pada tanggal {$review->review_date->format('Y-m-d')} telah ditandai oleh guru. Alasan: " . ($reason ?? 'Tidak disebutkan'),
+                    [
+                        'review_id'   => $review->id,
+                        'flag_status' => $status,
+                        'flag_reason' => $reason,
+                    ]
+                );
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to send moderation notification to siswa', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
 
         return response()->json([
             'message' => $status === 'flagged' ? 'Ulasan berhasil ditandai.' : 'Tanda ulasan berhasil dihapus.',
