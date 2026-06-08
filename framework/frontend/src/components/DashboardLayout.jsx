@@ -22,7 +22,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
-    if (!role || role === 'siswa') return;
+    if (!role) return;
     
     let isMounted = true;
     const fetchCount = async () => {
@@ -89,7 +89,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
         )}
         <span className="dl-topbar-brand">HaloMBG</span>
         <div className="dl-topbar-right">
-          {role && role !== 'siswa' && (
+          {role && (
             <button
               className={`dl-topbar-notif-btn${activeMenu === 'notif' ? ' dl-topbar-notif-btn--active' : ''}`}
               onClick={() => setActiveMenu('notif')}
@@ -101,13 +101,13 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
-                fill="none"
+                fill="currentColor"
                 stroke="currentColor"
-                strokeWidth="1.75"
+                strokeWidth="1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                <path d="M12 22a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22zm7-6v-6a7 7 0 0 0-14 0v6l-2 2h18l-2-2z" />
               </svg>
               {unreadCount > 0 && <span className="dl-topbar-notif-badge">{unreadCount}</span>}
             </button>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "../../../api/axios";
+import { useAuth } from "../../../context/AuthContext";
 import "../../admin/admin.css";
 
 const IconBellLarge = () => (
@@ -18,6 +19,7 @@ const IconBellLarge = () => (
 );
 
 export default function NotifikasiList({ onNavigate }) {
+  const { role } = useAuth();
   const [notifications, setNotifications] = useState([]);
   const [meta, setMeta] = useState(null);
   const [page, setPage] = useState(1);
@@ -174,14 +176,30 @@ export default function NotifikasiList({ onNavigate }) {
                   </p>
                 </div>
                 <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
-                  <button
-                    type="button"
-                    className="adm-btn primary"
-                    onClick={() => onNavigate?.("tindak_lanjut")}
-                    style={{ fontSize: "0.75rem", height: "30px", padding: "0 10px" }}
-                  >
-                    Tindak Lanjut
-                  </button>
+                  {(() => {
+                    let btnText = "Tindak Lanjut";
+                    let target = "tindak_lanjut";
+                    if (role === "admin") {
+                      btnText = "Lihat SPPG";
+                      target = "sppg";
+                    } else if (role === "guru") {
+                      btnText = "Ulasan Siswa";
+                      target = "ulasan";
+                    } else if (role === "siswa") {
+                      btnText = "Riwayat Ulasan";
+                      target = "riwayat";
+                    }
+                    return (
+                      <button
+                        type="button"
+                        className="adm-btn primary"
+                        onClick={() => onNavigate?.(target)}
+                        style={{ fontSize: "0.75rem", height: "30px", padding: "0 10px" }}
+                      >
+                        {btnText}
+                      </button>
+                    );
+                  })()}
                   {!notification.read && (
                     <button
                       type="button"

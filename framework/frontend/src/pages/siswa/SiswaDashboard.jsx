@@ -2,6 +2,7 @@ import DashboardLayout from "../../components/DashboardLayout";
 import PublicLandingContent from "../../features/PublicLandingContent";
 import KirimUlasan from "./ulasan/KirimUlasan";
 import RiwayatUlasan from "./ulasan/RiwayatUlasan";
+import NotifikasiList from "../sppg/notifikasi/NotifikasiList";
 
 /* ── Icons ─────────────────────────────────────────────── */
 const IconHome = () => (
@@ -96,6 +97,8 @@ export default function SiswaDashboard() {
             return <KirimUlasan />;
           case "riwayat":
             return <RiwayatUlasan />;
+          case "notif":
+            return <NotifikasiList onNavigate={onNavigate} />;
           default:
             return null;
         }
