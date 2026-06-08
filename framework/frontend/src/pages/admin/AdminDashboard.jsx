@@ -2,6 +2,7 @@ import DashboardLayout from "../../components/DashboardLayout";
 import PublicLandingContent from "../../features/PublicLandingContent";
 import SppgTable from "./SppgTable";
 import SchoolTable from "./SchoolTable";
+import NotifikasiList from "../sppg/notifikasi/NotifikasiList";
 
 /* ── Icons ─────────────────────────────────────────────────── */
 const IconHome = () => (
@@ -50,11 +51,27 @@ const IconSchool = () => (
   </svg>
 );
 
+const IconBell = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+  </svg>
+);
+
 const MENU_GROUPS = [
   {
     label: null,
     items: [
       { key: "beranda", label: "Beranda", icon: <IconHome /> },
+      { key: "notif", label: "Notifikasi", icon: <IconBell /> },
       { key: "sppg", label: "SPPG", icon: <IconSppg /> },
       { key: "sekolah", label: "Sekolah", icon: <IconSchool /> },
     ],
@@ -72,6 +89,8 @@ export default function AdminDashboard() {
             return <SppgTable />;
           case "sekolah":
             return <SchoolTable />;
+          case "notif":
+            return <NotifikasiList onNavigate={onNavigate} />;
           default:
             return null;
         }

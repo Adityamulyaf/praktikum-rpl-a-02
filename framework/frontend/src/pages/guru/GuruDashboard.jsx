@@ -2,6 +2,7 @@ import DashboardLayout from '../../components/DashboardLayout';
 import PublicLandingContent from '../../features/PublicLandingContent';
 import GuruReviews from './GuruReviews';
 import Kitchen from '../sppg/profile/Kitchen';
+import NotifikasiList from '../sppg/notifikasi/NotifikasiList';
 
 /* ── Icons ─────────────────────────────────────────────── */
 const IconHome     = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
@@ -45,7 +46,7 @@ export default function GuruDashboard() {
           case 'beranda':      return <PublicLandingContent onNavigate={onNavigate} />;
           case 'ulasan':       return <GuruReviews />;
           case 'profil_dapur': return <Kitchen />;
-          case 'notif':        return <ComingSoon title="Notifikasi" description="Pemberitahuan saat ada ulasan baru dari siswa yang perlu diperhatikan." />;
+          case 'notif':        return <NotifikasiList onNavigate={onNavigate} />;
           default:             return null;
         }
       }}

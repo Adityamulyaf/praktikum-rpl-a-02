@@ -109,17 +109,16 @@ class CriticalReviewTest extends TestCase
             'followup_status' => 'belum_diproses',
         ]);
 
-        // Should have created 2 notifications (in_app & whatsapp)
-        $this->assertEquals(2, Notification::where('related_id', $reviewId)->count());
-        $this->assertEquals(1, Notification::where('related_id', $reviewId)->where('channel', 'in_app')->count());
-        $waNotif = Notification::where('related_id', $reviewId)->where('channel', 'whatsapp')->first();
-        $this->assertNotNull($waNotif);
+        // Should have created 1 notification in the unified schema
+        $this->assertEquals(1, Notification::where('type', 'review_critical')->count());
+        $notification = Notification::where('type', 'review_critical')->first();
+        $this->assertEquals($this->sppgProfile->user_id, $notification->user_id);
+        $this->assertEquals('Ulasan Kritis Terdeteksi', $notification->title);
+        $this->assertFalse($notification->read);
+        $this->assertEquals($reviewId, $notification->data['review_id']);
 
-        // Should have logged the WhatsApp attempt
-        $this->assertDatabaseHas('notification_logs', [
-            'notification_id' => $waNotif->id,
-            'status' => 'sent',
-        ]);
+        // Since sppgUser phone number is set, but WhatsApp is disabled in testing, whatsapp_sent should be false
+        $this->assertFalse($notification->whatsapp_sent);
     }
 
     public function test_sppg_can_list_and_update_followups()
@@ -177,26 +176,26 @@ class CriticalReviewTest extends TestCase
     {
         // 1. Create a notification
         $notification = Notification::create([
-            'recipient_id' => $this->sppgUser->ssid,
+            'user_id' => $this->sppgUser->ssid,
             'type' => 'review_critical',
-            'message' => 'Ulasan kritis terdeteksi!',
-            'channel' => 'in_app',
-            'is_read' => false,
+            'title' => 'Ulasan Kritis Terdeteksi',
+            'body' => 'Ulasan kritis terdeteksi!',
+            'read' => false,
         ]);
 
         // 2. Fetch notifications
-        $response = $this->actingAs($this->sppgUser)->getJson('/api/sppg/notifications');
+        $response = $this->actingAs($this->sppgUser)->getJson('/api/notifications');
         $response->assertStatus(200);
         $this->assertCount(1, $response->json('data'));
 
         // 3. Mark notification as read
-        $response = $this->actingAs($this->sppgUser)->putJson("/api/sppg/notifications/{$notification->id}/read");
+        $response = $this->actingAs($this->sppgUser)->putJson("/api/notifications/{$notification->id}/read");
         $response->assertStatus(200);
-        $this->assertTrue($response->json('notification.is_read'));
+        $this->assertTrue($response->json('read'));
 
         $this->assertDatabaseHas('notifications', [
             'id' => $notification->id,
-            'is_read' => true,
+            'read' => true,
         ]);
     }
 }
