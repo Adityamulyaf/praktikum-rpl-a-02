@@ -324,13 +324,25 @@
 }
 
 .plc-school-item {
-    padding: 12px var(--space-md);
+    /* Reset browser button defaults */
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
     border-bottom: 1px solid var(--border-default);
+    border-radius: 0;
+    text-align: left;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    /* Layout */
+    width: 100%;
+    padding: 10px var(--space-md);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: var(--space-md);
+    align-items: flex-start;
+    gap: var(--space-sm);
     transition: background 150ms;
+    box-sizing: border-box;
 }
 
 .plc-school-item:last-child {
@@ -341,17 +353,30 @@
     background: var(--surface-2);
 }
 
+.plc-school-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
 .plc-school-name {
     font-size: 14px;
     font-weight: 500;
     color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .plc-school-loc {
     font-size: 12px;
     color: var(--text-secondary);
     line-height: 16px;
-    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Badge: 4px radius, NOT pill-shaped per §5.6 */
@@ -360,10 +385,15 @@
     font-weight: 500;
     color: var(--text-tertiary);
     background: var(--surface-3);
-    padding: 2px 8px;
+    padding: 3px 8px;
     border-radius: var(--radius-sm);
     white-space: nowrap;
     flex-shrink: 0;
+    align-self: center;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 16px;
 }
 
 .plc-search-empty {

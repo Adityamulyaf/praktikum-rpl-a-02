@@ -369,7 +369,7 @@ export default function PublicLandingContent({ onNavigate }) {
                                                     className="plc-school-item"
                                                     onClick={() => handleSelectSchool(s)}
                                                 >
-                                                    <div>
+                                                    <div className="plc-school-item-info">
                                                         <div className="plc-school-name">{s.name}</div>
                                                         <div className="plc-school-loc">{s.district} · {s.province}</div>
                                                     </div>
