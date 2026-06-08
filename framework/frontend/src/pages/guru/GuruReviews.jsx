@@ -2,6 +2,21 @@ import { useState, useEffect, useCallback } from "react";
 import api from "../../api/axios";
 import "../../pages/admin/admin.css";
 
+const IconMessageLarge = () => (
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="var(--text-tertiary)"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+  </svg>
+);
+
 function PhotoViewerModal({ photoUrl, onClose }) {
   return (
     <div
@@ -128,13 +143,15 @@ export default function GuruReviews() {
             padding: "3rem 2rem",
             textAlign: "center",
             border: "1px solid var(--border-default)",
-            borderRadius: "12px",
-            background: "var(--surface)",
+            borderRadius: "6px",
+            background: "var(--surface-2)",
           }}
         >
-          <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>💬</div>
-          <h3 style={{ margin: "0 0 8px", fontWeight: 600 }}>Belum Ada Ulasan</h3>
-          <p style={{ opacity: 0.6, fontSize: "0.875rem", margin: 0 }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "12px" }}>
+            <IconMessageLarge />
+          </div>
+          <h3 style={{ margin: "0 0 8px", fontWeight: 600, color: "var(--text-primary)" }}>Belum Ada Ulasan</h3>
+          <p style={{ color: "var(--text-secondary)", fontSize: "0.875rem", margin: 0 }}>
             Belum ada ulasan yang dikirimkan oleh siswa dari sekolah Anda untuk dapur ini.
           </p>
         </div>
@@ -144,11 +161,10 @@ export default function GuruReviews() {
             <div
               key={review.id}
               style={{
-                border: "1px solid var(--border-default, #e5e7eb)",
-                borderRadius: "12px",
+                border: "1px solid var(--border-default)",
+                borderRadius: "6px",
                 padding: "16px 20px",
-                background: "var(--surface, #fff)",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+                background: "var(--surface-1)",
                 display: "flex",
                 flexDirection: "column",
                 gap: "12px",
@@ -170,11 +186,12 @@ export default function GuruReviews() {
                   <span
                     style={{
                       marginLeft: "8px",
-                      fontSize: "0.75rem",
-                      background: "var(--surface-2, #f3f4f6)",
+                      fontSize: "11px",
+                      background: "var(--surface-2)",
                       padding: "2px 8px",
-                      borderRadius: "6px",
+                      borderRadius: "4px",
                       color: "var(--text-secondary)",
+                      fontWeight: 500,
                     }}
                   >
                     {review.school?.name ?? "—"}
@@ -187,12 +204,12 @@ export default function GuruReviews() {
                   {review.flag_status === "flagged" && (
                     <span
                       style={{
-                        fontSize: "0.75rem",
-                        color: "#d97706",
-                        background: "#fef3c7",
+                        fontSize: "11px",
+                        color: "#C62828",
+                        background: "#FFEBEE",
                         padding: "2px 8px",
-                        borderRadius: "6px",
-                        fontWeight: 600,
+                        borderRadius: "4px",
+                        fontWeight: 500,
                       }}
                     >
                       ⚑ Ditandai

@@ -105,9 +105,9 @@
 * **Given** waktu sistem menunjukkan pukul 11.00 WIB, **When** ada sekolah yang status distribusinya masih "Belum Diantar", **Then** sistem secara otomatis mengirimkan notifikasi peringatan melalui WhatsApp kepada Admin pusat dan Guru di sekolah tersebut, disertai informasi nama sekolah dan nama dapur yang bersangkutan.
 * **Given** notifikasi keterlambatan telah terkirim, **When** Admin atau Guru membuka dashboard, **Then** daftar sekolah yang terlambat distribusinya ditampilkan secara khusus sebagai bahan tindak lanjut dan evaluasi.
 
-### US-15 — Notifikasi Peringatan Ulasan Negatif/Kritis
-**Sebagai** Pihak SPPG, **saya ingin** menerima notifikasi instan jika ada siswa yang memberikan ulasan dengan sentimen sangat negatif (misalnya indikasi makanan tidak layak), serta dapat memperbarui status tindak lanjut atas ulasan tersebut, **agar** saya dapat segera melakukan investigasi dan perbaikan kualitas pada hari yang sama.
+### US-15 — Notifikasi Peringatan Ulasan Kritis
+**Sebagai** Pihak SPPG, **saya ingin** menerima notifikasi instan jika ada siswa yang memberikan ulasan yang mengandung kata kunci kritis (misalnya indikasi makanan tidak layak seperti "basi", "bau", "busuk"), serta dapat memperbarui status tindak lanjut atas ulasan tersebut, **agar** saya dapat segera melakukan investigasi dan perbaikan kualitas pada hari yang sama.
 
 **Acceptance Criteria:**
-* **Given** seorang siswa mengirimkan ulasan, **When** sistem analisis AI mendeteksi sentimen negatif yang ekstrem atau kata kunci kritis (misalnya: "basi", "bau"), **Then** sistem mengirimkan notifikasi real-time ke dashboard SPPG dan ulasan tersebut muncul di daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
+* **Given** seorang siswa mengirimkan ulasan, **When** sistem mendeteksi kata kunci kritis pada konten ulasan (misalnya: "basi", "bau", "busuk", "tidak layak", "kotor"), **Then** sistem mengirimkan notifikasi real-time ke dashboard SPPG dan ulasan tersebut muncul di daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
 * **Given** SPPG menerima notifikasi ulasan kritis dan membuka detail ulasan tersebut, **When** SPPG memperbarui status tindak lanjut menjadi **Dalam Proses Tindak Lanjut** atau **Selesai** disertai catatan penanganan, **Then** sistem menyimpan perubahan status beserta catatan tersebut, dan status terbaru ditampilkan di panel tindak lanjut SPPG sebagai dokumentasi investigasi.

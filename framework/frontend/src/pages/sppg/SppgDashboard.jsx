@@ -7,6 +7,8 @@ import { useAuth } from "../../context/AuthContext";
 import KirimUlasan from "../siswa/ulasan/KirimUlasan";
 import RiwayatUlasan from "../siswa/ulasan/RiwayatUlasan";
 import GuruReviews from "../guru/GuruReviews";
+import TindakLanjut from "./tindak-lanjut/TindakLanjut";
+import NotifikasiList from "./notifikasi/NotifikasiList";
 
 const IconScan = () => (
   <svg
@@ -212,7 +214,11 @@ export default function SppgDashboard() {
       { key: "notif", label: "Notifikasi", icon: <IconBell /> }
     );
   } else {
-    menuItems.push({ key: "evaluasi", label: "Evaluasi", icon: <IconChart /> });
+    menuItems.push(
+      { key: "tindak_lanjut", label: "Tindak Lanjut", icon: <IconMessages /> },
+      { key: "notif", label: "Notifikasi", icon: <IconBell /> },
+      { key: "evaluasi", label: "Evaluasi", icon: <IconChart /> }
+    );
   }
 
   const menuGroups = [{ label: null, items: menuItems }];
@@ -233,8 +239,10 @@ export default function SppgDashboard() {
             return role === "siswa" ? <KirimUlasan /> : <GuruReviews />;
           case "riwayat":
             return <RiwayatUlasan />;
+          case "tindak_lanjut":
+            return <TindakLanjut />;
           case "notif":
-            return <ComingSoon title="Notifikasi" description="Pemberitahuan saat ada ulasan baru dari siswa yang perlu diperhatikan." />;
+            return <NotifikasiList onNavigate={onNavigate} />;
           case "evaluasi":
             return (
               <ComingSoon

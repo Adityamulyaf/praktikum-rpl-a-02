@@ -74,6 +74,55 @@ class ReviewController extends Controller
             'flag_status' => 'none',
         ]);
 
+        $keywords = ['basi', 'bau', 'busuk', 'tidak layak', 'kotor'];
+        $contentLower = strtolower($review->content);
+        $isCritical = false;
+        foreach ($keywords as $kw) {
+            if (str_contains($contentLower, $kw)) {
+                $isCritical = true;
+                break;
+            }
+        }
+
+        if ($isCritical) {
+            $review->update(['is_critical' => true]);
+
+            \App\Models\CriticalReviewFollowup::create([
+                'review_id' => $review->id,
+                'sppg_id' => $review->sppg_id,
+                'followup_status' => 'belum_diproses',
+                'handling_note' => null,
+            ]);
+
+            $sppgProfile = $review->sppg;
+            if ($sppgProfile && $sppgProfile->user_id) {
+                try {
+                    $notificationService = app(NotificationService::class);
+                    $waMessage = sprintf(
+                        "Peringatan: Ulasan kritis diterima untuk dapur Anda pada tanggal %s.\nUlasan: \"%s\"\nSegera lakukan tindak lanjut di dashboard.",
+                        $review->review_date,
+                        $review->content
+                    );
+
+                    $notificationService->notify(
+                        $sppgProfile->user_id,
+                        'review_critical',
+                        'Ulasan Kritis Terdeteksi',
+                        $waMessage,
+                        [
+                            'review_id' => $review->id,
+                            'sppg_id'   => $review->sppg_id,
+                        ],
+                        true
+                    );
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('Failed to send critical review notification to SPPG', [
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+        }
+
         // BL-11: Notify Guru when a new review is created
         try {
             $notificationService = app(NotificationService::class);

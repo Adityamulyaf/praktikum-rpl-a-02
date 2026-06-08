@@ -15,7 +15,7 @@
 | [BL-09](#bl-09--ulasan-dan-foto-dari-siswa) | Ulasan dan Foto dari Siswa | 🟠 Should-have | M | BL-01, BL-04 |
 | [BL-10](#bl-10--moderasi-post-publish-ulasan-oleh-guru) | Moderasi Post-Publish Ulasan oleh Guru | 🟡 Could-have | S | BL-09 |
 | [BL-11](#bl-11--sistem-notifikasi) | Sistem Notifikasi | 🟡 Could-have | S | BL-09 |
-| [BL-12](#bl-12--notifikasi-ulasan-kritis-dan-tindak-lanjut-sppg) | Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG | 🟡 Could-have | M | BL-09 |
+| [BL-12](#bl-12--notifikasi-ulasan-kritis-dan-tindak-lanjut-sppg) | Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG | 🟡 Could-have | S | BL-09 |
 | [BL-13](#bl-13--ringkasan-evaluasi-dapur-berbasis-ai-publik) | Ringkasan Evaluasi Dapur Berbasis AI (Publik) | 🟡 Could-have | M | BL-09, BL-10 |
 | [BL-14](#bl-14--dashboard-evaluasi-internal-sppg) | Dashboard Evaluasi Internal SPPG  | 🟡 Could-have | S | BL-13 |
 
@@ -237,14 +237,14 @@ Mekanisme notifikasi untuk mendukung alur komunikasi antar role. Diperlukan agar
 | | |
 |---|---|
 | **Story terkait** | US-15 |
-| **Estimasi** | M (Medium) |
+| **Estimasi** | S (Small) |
 | **Dependensi** | BL-09 |
 
-Sistem mengirimkan notifikasi real-time ke SPPG ketika AI mendeteksi ulasan siswa dengan sentimen sangat negatif atau kata kunci kritis (contoh: "basi", "bau"). SPPG kemudian dapat memperbarui status tindak lanjut atas ulasan tersebut agar investigasi terdokumentasi.
+Sistem mengirimkan notifikasi real-time ke SPPG ketika ulasan siswa mengandung kata kunci kritis yang telah didefinisikan (contoh: "basi", "bau", "busuk", "tidak layak", "kotor"). SPPG kemudian dapat memperbarui status tindak lanjut atas ulasan tersebut agar investigasi terdokumentasi.
 
 **Kriteria Selesai:**
 
-- Notifikasi real-time terkirim ke dashboard SPPG saat AI mendeteksi ulasan kritis.
+- Notifikasi real-time terkirim ke dashboard SPPG saat sistem mendeteksi kata kunci kritis pada ulasan yang masuk.
 - Ulasan kritis masuk ke daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
 - SPPG dapat memperbarui status tindak lanjut: **Belum Diproses** - **Dalam Proses Tindak Lanjut** - **Selesai**.
 - Setiap perubahan status dapat disertai catatan penanganan dari SPPG.

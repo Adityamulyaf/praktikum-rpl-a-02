@@ -21,6 +21,11 @@ class Notification extends Model
         return $this->belongsTo(User::class, 'user_id', 'ssid');
     }
 
+    public function recipient()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'ssid');
+    }
+
     /** Mark a notification as read */
     public function markAsRead(): void
     {

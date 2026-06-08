@@ -60,6 +60,48 @@
   text-overflow: ellipsis;
 }
 
+.dl-topbar-notif-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 150ms, color 150ms;
+}
+
+.dl-topbar-notif-btn:hover {
+  background: var(--surface-2);
+  color: var(--color-primary);
+}
+
+.dl-topbar-notif-btn--active {
+  color: var(--color-primary);
+  background: var(--surface-2);
+}
+
+.dl-topbar-notif-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: var(--status-error);
+  color: var(--text-inverse);
+  font-size: 9px;
+  font-weight: 700;
+  min-width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  box-sizing: border-box;
+}
+
 /* Secondary button style per DESIGN.md §5.1 */
 .dl-topbar-logout {
   background: transparent;
