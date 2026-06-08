@@ -1,2 +1,6 @@
 node_modules
-compose.yaml
+
+# Environment - jangan di-commit, berisi credentials
+.env
+.env.*
+!.env.example
