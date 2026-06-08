@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\Sppg\ProfileController;
 use App\Http\Controllers\Api\Sppg\DistributionController;
 use App\Http\Controllers\Api\PublicDistributionController;
 use App\Http\Controllers\Api\Sppg\MenuController;
+use App\Http\Controllers\Api\Sppg\FollowupController;
+use App\Http\Controllers\Api\Sppg\NotificationController;
 use App\Http\Controllers\Api\Siswa\ReviewController;
 use App\Http\Controllers\Api\Guru\ReviewController as GuruReviewController;
 use App\Http\Controllers\Api\PublicReviewController;
@@ -35,15 +37,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('sppg/{sppg}/schools/detach', [SppgSchoolController::class, 'detach']);
     });
 
+    Route::get('/sppg/profile', [ProfileController::class, 'show'])->middleware('role:sppg,admin,siswa,guru');
+    Route::put('/sppg/profile', [ProfileController::class, 'update'])->middleware('role:sppg,admin');
+
     // SPPG only
     Route::middleware('role:sppg')->prefix('sppg')->group(function () {
-        Route::get('/profile',         [ProfileController::class, 'show']);
-        Route::put('/profile',         [ProfileController::class, 'update']);
         Route::get('/profile/reviews', [ProfileController::class, 'reviews']);
         Route::post('/menu/validate-nutrition', [MenuController::class, 'validateNutrition']);
         Route::apiResource('menu', MenuController::class)->except(['show']);
         Route::get('/distribution',                    [DistributionController::class, 'index']);
         Route::put('/distribution/{distribution}',     [DistributionController::class, 'update']);
+        Route::get('/followups',                       [FollowupController::class, 'index']);
+        Route::get('/followups/{followup}',            [FollowupController::class, 'show']);
+        Route::put('/followups/{followup}',            [FollowupController::class, 'update']);
+        Route::get('/notifications',                   [NotificationController::class, 'index']);
+        Route::put('/notifications/{notification}/read', [NotificationController::class, 'read']);
     });
 
     // Siswa only

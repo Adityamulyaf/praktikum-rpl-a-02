@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../api/axios';
 import './DashboardLayout.css';
 
 /**
@@ -14,9 +15,34 @@ import './DashboardLayout.css';
 export default function DashboardLayout({ menuGroups, children, pageClass, hasSidebar = false }) {
   const firstKey = menuGroups?.[0]?.items?.[0]?.key ?? '';
   const [activeMenu, setActiveMenu] = useState(firstKey);
-  const { user, logout } = useAuth();
+  const { user, role, logout } = useAuth();
   const navigate = useNavigate();
   const topbarRef = useRef(null);
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (role !== 'sppg') return;
+    
+    let isMounted = true;
+    const fetchUnreadCount = async () => {
+      try {
+        const { data } = await api.get('/sppg/notifications');
+        if (!isMounted) return;
+        const unread = (data.data || []).filter(n => !n.is_read).length;
+        setUnreadCount(unread);
+      } catch (err) {
+        // Ignore
+      }
+    };
+
+    fetchUnreadCount();
+    const interval = setInterval(fetchUnreadCount, 15000);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [role]);
 
   useEffect(() => {
     if (!pageClass) return;
@@ -63,6 +89,29 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
         )}
         <span className="dl-topbar-brand">HaloMBG</span>
         <div className="dl-topbar-right">
+          {(role === 'sppg' || role === 'guru') && (
+            <button
+              className={`dl-topbar-notif-btn${activeMenu === 'notif' ? ' dl-topbar-notif-btn--active' : ''}`}
+              onClick={() => setActiveMenu('notif')}
+              title="Notifikasi"
+              aria-label="Notifikasi"
+              style={{ marginRight: '8px' }}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+              </svg>
+              {unreadCount > 0 && <span className="dl-topbar-notif-badge">{unreadCount}</span>}
+            </button>
+          )}
           <span className="dl-topbar-username">{user?.name}</span>
           <button className="dl-topbar-logout" onClick={handleLogout}>Keluar</button>
         </div>

@@ -24,9 +24,15 @@ class ProfileController extends Controller
                 $q->orderBy('served_at', 'desc');
             }])->first() : null;
         } else {
-            $sppg = $user->sppgProfile()->with(['schools', 'dailyMenus' => function ($q) {
-                $q->orderBy('served_at', 'desc');
-            }])->first();
+            if ($user->role === 'admin' && $request->has('sppg_id')) {
+                $sppg = \App\Models\SppgProfile::with(['schools', 'dailyMenus' => function ($q) {
+                    $q->orderBy('served_at', 'desc');
+                }])->find($request->sppg_id);
+            } else {
+                $sppg = $user->sppgProfile()->with(['schools', 'dailyMenus' => function ($q) {
+                    $q->orderBy('served_at', 'desc');
+                }])->first();
+            }
         }
 
         if (!$sppg) {
@@ -56,7 +62,11 @@ class ProfileController extends Controller
             return response()->json(['message' => 'Tidak diizinkan'], 403);
         }
 
-        $sppg = $request->user()->sppgProfile;
+        if ($request->user()->role === 'admin' && $request->has('sppg_id')) {
+            $sppg = \App\Models\SppgProfile::find($request->sppg_id);
+        } else {
+            $sppg = $request->user()->sppgProfile;
+        }
 
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);

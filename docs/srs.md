@@ -69,7 +69,7 @@ HaloMBG adalah platform web yang memungkinkan:
 | **SPPG** | Satuan Pelayanan Pemenuhan Gizi, unit dapur resmi yang memproduksi dan mendistribusikan makanan MBG |
 | **FR** | Functional Requirement (kebutuhan fungsional sistem) |
 | **NFR** | Non-Functional Requirement (kebutuhan non-fungsional sistem) |
-| **AI** | Artificial Intelligence, sistem kecerdasan buatan untuk validasi nutrisi dan analisis sentimen |
+| **AI** | Artificial Intelligence, sistem kecerdasan buatan untuk validasi nutrisi |
 | **Dashboard** | Halaman utama yang menampilkan ringkasan data dalam bentuk grafik atau tabel |
 | **Badge** | Label visual pada menu yang telah lolos validasi AI |
 | **WhatsApp** | Aplikasi pesan instan yang digunakan sebagai kanal notifikasi dalam sistem ini |
@@ -89,7 +89,7 @@ HaloMBG merupakan sistem web baru yang berdiri sendiri (*standalone*), tidak men
 | Backend | Laravel (PHP) |
 | Frontend | ReactJS |
 | Database | PostgreSQL |
-| AI Integration | Layanan AI eksternal (validasi nutrisi & analisis sentimen) |
+| AI Integration | Layanan AI eksternal (validasi nutrisi) |
  
 ### 2.2 Fungsi Produk
  
@@ -100,7 +100,7 @@ HaloMBG merupakan sistem web baru yang berdiri sendiri (*standalone*), tidak men
 | **Validasi Nutrisi Berbasis AI** | Analisis otomatis ketidakwajaran visual antara foto makanan dengan klaim nutrisi yang diinput SPPG |
 | **Tracking Status Distribusi** | Pembaruan dan tampilan real-time status pengiriman makanan ke setiap sekolah |
 | **Ulasan Komunitas** | Fasilitas bagi siswa untuk mengirim ulasan harian dengan foto, beserta mekanisme moderasi oleh guru |
-| **Evaluasi Berbasis AI** | Ringkasan sentimen ulasan harian per dapur untuk konsumsi publik dan internal SPPG |
+| **Evaluasi Berbasis AI** | Ringkasan sentimen ulasan harian per dapur untuk konsumsi publik dan internal SPPG (BL-13/BL-14) |
 | **Manajemen Master Data** | Panel admin untuk mendaftarkan SPPG dan memetakan sekolah |
 | **Notifikasi Keterlambatan** | Peringatan otomatis kepada Admin dan Guru jika distribusi belum diperbarui hingga pukul 11.00 WIB |
 | **Tindak Lanjut Ulasan Kritis** | Panel SPPG untuk mencatat dan memperbarui status penanganan ulasan negatif ekstrem |
@@ -354,7 +354,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
 | **Prioritas** | 🟡 Medium |
 | **Referensi** | US-15 |
  
-**Deskripsi:** Sistem mengirimkan notifikasi real-time ke dashboard SPPG apabila AI mendeteksi ulasan siswa dengan sentimen sangat negatif atau kata kunci kritis (contoh: *"basi"*, *"bau"*). Ulasan tersebut masuk ke daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
+**Deskripsi:** Sistem mengirimkan notifikasi real-time ke dashboard SPPG apabila ulasan siswa mengandung kata kunci kritis yang telah didefinisikan (contoh: *"basi"*, *"bau"*, *"busuk"*, *"tidak layak"*, *"kotor"*). Ulasan tersebut masuk ke daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
 
 ---
 
@@ -488,7 +488,7 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
  
 ### 5.2 Dependensi Eksternal
  
-- **Layanan AI eksternal** (untuk validasi nutrisi dan analisis sentimen) harus diidentifikasi sebelum implementasi fitur terkait.
+- **Layanan AI eksternal** (untuk validasi nutrisi) harus diidentifikasi sebelum implementasi fitur terkait.
 - **Infrastruktur hosting** (VPS/cloud) dengan dukungan HTTPS dan kapasitas penyimpanan file memadai harus tersedia sebelum deployment.
 - **Layanan WhatsApp Business API** (atau alternatif seperti Fonnte/WA Gateway) harus disetup dan diuji sebelum fitur notifikasi dapat diimplementasikan.
 - **Database sekolah dan wilayah** kabupaten/kota yang akurat dan komprehensif diperlukan sebelum fitur pencarian dapat diuji sepenuhnya.
@@ -496,7 +496,7 @@ Tidak boleh ada horizontal scroll dan semua elemen interaktif dapat diklik.
 ### 5.3 Keterbatasan Teknis
  
 - Validasi nutrisi AI bersifat **indikatif berbasis visual**, bukan pengganti penilaian ahli gizi. Badge "Tervalidasi AI" tidak menjamin keakuratan absolut kandungan gizi, hanya menandakan tidak ada ketidakwajaran visual yang terdeteksi.
-- Analisis sentimen ulasan bersifat otomatis dan dapat menghasilkan klasifikasi tidak akurat pada **teks ambigu, sarkasme, atau bahasa daerah**.
+- Deteksi ulasan kritis menggunakan **pencocokan kata kunci** yang telah didefinisikan, sehingga ulasan yang menggunakan sinonim, ejaan tidak baku, atau bahasa daerah mungkin tidak terdeteksi secara otomatis.
 - Fitur foto bukti distribusi memerlukan koneksi yang cukup untuk upload. Pada koneksi lambat, ukuran maksimum foto 5 MB mungkin menyebabkan waktu upload yang lama.
 
 ### 5.4 Di Luar Ruang Lingkup (Out of Scope)

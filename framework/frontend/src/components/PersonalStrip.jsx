@@ -7,9 +7,10 @@ const ROLE_ACTIONS = {
     { key: 'sppg', label: 'Ke Dashboard Admin' },
   ],
   sppg: [
-    { key: 'menu',       label: 'Input Menu' },
-    { key: 'distribusi', label: 'Konfirmasi Distribusi' },
-    { key: 'profil',     label: 'Profil Dapur' },
+    { key: 'menu',          label: 'Input Menu' },
+    { key: 'distribusi',    label: 'Konfirmasi Distribusi' },
+    { key: 'profil',        label: 'Profil Dapur' },
+    { key: 'tindak_lanjut', label: 'Tindak Lanjut' },
   ],
   siswa: [
     { key: 'ulasan',  label: 'Kirim Ulasan' },
@@ -17,7 +18,6 @@ const ROLE_ACTIONS = {
   ],
   guru: [
     { key: 'ulasan', label: 'Ulasan Siswa' },
-    { key: 'notif',  label: 'Notifikasi' },
   ],
 };
 

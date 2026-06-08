@@ -72,6 +72,71 @@ class ReviewController extends Controller
             'flag_status' => 'none',
         ]);
 
+        $keywords = ['basi', 'bau', 'busuk', 'tidak layak', 'kotor'];
+        $contentLower = strtolower($review->content);
+        $isCritical = false;
+        foreach ($keywords as $kw) {
+            if (str_contains($contentLower, $kw)) {
+                $isCritical = true;
+                break;
+            }
+        }
+
+        if ($isCritical) {
+            $review->update(['is_critical' => true]);
+
+            $followup = \App\Models\CriticalReviewFollowup::create([
+                'review_id' => $review->id,
+                'sppg_id' => $review->sppg_id,
+                'followup_status' => 'belum_diproses',
+                'handling_note' => null,
+            ]);
+
+            $sppgProfile = $review->sppg;
+            if ($sppgProfile && $sppgProfile->user_id) {
+                // 1. In App notification
+                \App\Models\Notification::create([
+                    'recipient_id' => $sppgProfile->user_id,
+                    'type' => 'review_critical',
+                    'related_id' => $review->id,
+                    'message' => 'Ulasan kritis terdeteksi dari siswa untuk tanggal ' . $review->review_date,
+                    'channel' => 'in_app',
+                ]);
+
+                // 2. WhatsApp notification
+                $waMessage = sprintf(
+                    "[HaloMBG] Peringatan: Ulasan kritis diterima untuk dapur Anda pada tanggal %s.\nUlasan: \"%s\"\nSegera lakukan tindak lanjut di dashboard.",
+                    $review->review_date,
+                    $review->content
+                );
+
+                $waNotification = \App\Models\Notification::create([
+                    'recipient_id' => $sppgProfile->user_id,
+                    'type' => 'review_critical',
+                    'related_id' => $review->id,
+                    'message' => $waMessage,
+                    'channel' => 'whatsapp',
+                ]);
+
+                $phone = $sppgProfile->contact_phone ?: ($sppgProfile->user ? $sppgProfile->user->phone_number : null);
+                if ($phone) {
+                    $waNotification->update(['sent_at' => now()]);
+                    \App\Models\NotificationLog::create([
+                        'notification_id' => $waNotification->id,
+                        'status' => 'sent',
+                        'attempted_at' => now(),
+                    ]);
+                } else {
+                    \App\Models\NotificationLog::create([
+                        'notification_id' => $waNotification->id,
+                        'status' => 'failed',
+                        'failure_reason' => 'Nomor WhatsApp penerima tidak tersedia',
+                        'attempted_at' => now(),
+                    ]);
+                }
+            }
+        }
+
         return response()->json($review->load('school:id,name,district'), 201);
     }
 
