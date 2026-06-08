@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Siswa\ReviewController;
 use App\Http\Controllers\Api\Guru\ReviewController as GuruReviewController;
 use App\Http\Controllers\Api\PublicReviewController;
 use App\Http\Controllers\Api\PublicSppgController;
+use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -25,6 +26,12 @@ Route::post('/register/guru',  [RegisterController::class, 'registerGuru']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+
+    // Notifications (available to all authenticated users)
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notifications/unread-count', [NotificationController::class, 'unreadCount']);
+    Route::put('/notifications/{notification}/read', [NotificationController::class, 'markAsRead']);
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllRead']);
 
    Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::apiResource('sppg', SppgController::class);

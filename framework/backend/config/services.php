@@ -39,4 +39,14 @@ return [
         'key' => env('GEMINI_API_KEY'),
     ],
 
+    'whatsapp' => [
+        'provider' => env('WHATSAPP_PROVIDER', 'fonnte'),
+        'fonnte_api_url' => env('WHATSAPP_FONNTE_API_URL', 'https://api.fonnte.com/send'),
+        'fonnte_token' => env('WHATSAPP_FONNTE_TOKEN'),
+        'twilio_sid' => env('WHATSAPP_TWILIO_SID'),
+        'twilio_token' => env('WHATSAPP_TWILIO_TOKEN'),
+        'twilio_from' => env('WHATSAPP_TWILIO_FROM'),
+        'enabled' => env('WHATSAPP_ENABLED', false),
+    ],
+
 ];

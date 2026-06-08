@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use App\Models\SppgProfile;
+use App\Models\TeacherProfile;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -71,6 +73,33 @@ class ReviewController extends Controller
             'photo'       => $request->photo,
             'flag_status' => 'none',
         ]);
+
+        // BL-11: Notify Guru when a new review is created
+        try {
+            $notificationService = app(NotificationService::class);
+            $guruUserIds = TeacherProfile::where('school_id', $student->school_id)
+                ->pluck('user_id')
+                ->toArray();
+
+            foreach ($guruUserIds as $guruId) {
+                $notificationService->notify(
+                    $guruId,
+                    'new_review',
+                    'Ulasan Baru dari Siswa',
+                    "Siswa {$request->user()->name} mengirimkan ulasan baru pada tanggal {$reviewDate}.",
+                    [
+                        'review_id' => $review->id,
+                        'school_id' => $student->school_id,
+                        'sppg_id'   => $sppg?->id,
+                        'date'      => $reviewDate,
+                    ]
+                );
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Failed to send review notification to guru', [
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         return response()->json($review->load('school:id,name,district'), 201);
     }
