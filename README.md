@@ -13,9 +13,9 @@ Aplikasi Monitoring Program Makan Bergizi Gratis (MBG) untuk memantau distribusi
 
 ## Status Fitur Aplikasi
 
-Berikut adalah pembagian status fitur aplikasi HaloMBG berdasarkan dokumen kebutuhan perangkat lunak (SRS) dan backlog pengembangan:
+Berikut adalah pembagian status fitur aplikasi HaloMBG berdasarkan dokumen kebutuhan perangkat lunak (SRS) dan backlog pengembangan.
 
-### 1. Fitur yang Sudah Ada
+### Fitur yang Sudah Diimplementasikan
 
 * BL-01: Sistem Autentikasi dan Manajemen Role
   Sistem login dan pembedaan akses untuk empat role: Admin, Dapur (SPPG), Siswa, dan Guru.
@@ -31,15 +31,12 @@ Berikut adalah pembagian status fitur aplikasi HaloMBG berdasarkan dokumen kebut
   Halaman khusus Admin untuk mendaftarkan dapur baru, menambahkan data sekolah, serta memetakan hubungan distribusi antara sekolah dengan dapur terkait.
 * BL-07: Status Distribusi Harian
   Pencatatan status pengiriman makanan harian oleh dapur (Memasak, Pengiriman, Terkirim, Diterima) ke masing-masing sekolah yang dilayani.
+* BL-08: Notifikasi Keterlambatan Distribusi
+  Sistem pemantauan otomatis yang mengirimkan peringatan WhatsApp kepada Admin dan Guru jika status pengiriman makanan dari dapur belum diperbarui menjadi Terkirim hingga pukul 11.00 WIB.
 * BL-09: Ulasan dan Foto dari Siswa
   Siswa yang terdaftar dapat mengirimkan ulasan, rating bintang, ulasan teks, dan mengunggah foto makanan nyata yang mereka terima pada hari tersebut.
 * BL-10: Moderasi Post-Publish Ulasan oleh Guru
   Guru dapat melakukan moderasi terhadap ulasan siswa dari sekolahnya sendiri dengan memberikan tanda (flag) jika terdapat ulasan yang tidak pantas.
-
-### 2. Fitur yang Belum Ada (Backlog Rencana)
-
-* BL-08: Notifikasi Keterlambatan Distribusi
-  Sistem pemantauan otomatis yang mengirimkan peringatan WhatsApp kepada Admin dan Guru jika status pengiriman makanan dari dapur belum diperbarui menjadi Terkirim hingga pukul 11.00 WIB.
 * BL-11: Sistem Notifikasi In-App dan WhatsApp
   Sistem pengiriman notifikasi real-time di dalam aplikasi atau melalui pesan WhatsApp untuk memberi tahu Guru jika ada ulasan baru dari siswa, dan memberi tahu Siswa jika ulasannya dimoderasi.
 * BL-12: Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG
