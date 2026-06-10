@@ -14,3 +14,10 @@ Schedule::command('distribution:check-late')
     ->dailyAt('11:00')
     ->withoutOverlapping()
     ->onOneServer();
+
+// BL-13: Generate daily sentiment summary daily at 21:00 WIB (14:00 UTC)
+Schedule::command('sppg:generate-sentiment')
+    ->timezone('Asia/Jakarta')
+    ->dailyAt('21:00')
+    ->withoutOverlapping()
+    ->onOneServer();

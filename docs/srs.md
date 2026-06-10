@@ -100,7 +100,7 @@ HaloMBG merupakan sistem web baru yang berdiri sendiri (*standalone*), tidak men
 | **Validasi Nutrisi Berbasis AI** | Analisis otomatis ketidakwajaran visual antara foto makanan dengan klaim nutrisi yang diinput SPPG |
 | **Tracking Status Distribusi** | Pembaruan dan tampilan real-time status pengiriman makanan ke setiap sekolah |
 | **Ulasan Komunitas** | Fasilitas bagi siswa untuk mengirim ulasan harian dengan foto, beserta mekanisme moderasi oleh guru |
-| **Evaluasi Berbasis AI** | Ringkasan sentimen ulasan harian per dapur untuk konsumsi publik dan internal SPPG (BL-13/BL-14) |
+| **Evaluasi Berbasis AI** | Ringkasan sentimen ulasan harian per dapur untuk konsumsi publik (BL-13) |
 | **Manajemen Master Data** | Panel admin untuk mendaftarkan SPPG dan memetakan sekolah |
 | **Notifikasi Keterlambatan** | Peringatan otomatis kepada Admin dan Guru jika distribusi belum diperbarui hingga pukul 11.00 WIB |
 | **Tindak Lanjut Ulasan Kritis** | Panel SPPG untuk mencatat dan memperbarui status penanganan ulasan negatif ekstrem |
@@ -262,7 +262,7 @@ Menu yang tersimpan ditampilkan otomatis di halaman monitoring menu publik pada 
 | Atribut | Detail |
 |---|---|
 | **Prioritas** | 🔴 High |
-| **Referensi** | US-13 |
+| **Referensi** | US-12 |
  
 **Deskripsi:** Sistem menyediakan panel administrasi bagi Admin untuk:
 - Mendaftarkan akun SPPG baru dan menginput data dapur.
@@ -304,7 +304,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
 | Atribut | Detail |
 |---|---|
 | **Prioritas** | 🟡 Medium |
-| **Referensi** | US-14 |
+| **Referensi** | US-13 |
 
 **Deskripsi:** Sistem secara otomatis memicu pemeriksaan status distribusi pada pukul **11.00 WIB** setiap hari. Apabila status distribusi suatu sekolah masih `Belum Diantar`, sistem mengirimkan notifikasi WhatsApp kepada Admin pusat dan Guru di sekolah terkait, disertai nama sekolah dan nama dapur yang bersangkutan. Daftar sekolah terlambat juga ditampilkan di dashboard Admin dan Guru sebagai bahan tindak lanjut. Kegagalan pengiriman notifikasi (misalnya nomor tidak valid) dicatat dalam log sistem.
 
@@ -352,7 +352,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
 | Atribut | Detail |
 |---|---|
 | **Prioritas** | 🟡 Medium |
-| **Referensi** | US-15 |
+| **Referensi** | US-14 |
  
 **Deskripsi:** Sistem mengirimkan notifikasi real-time ke dashboard SPPG apabila ulasan siswa mengandung kata kunci kritis yang telah didefinisikan (contoh: *"basi"*, *"bau"*, *"busuk"*, *"tidak layak"*, *"kotor"*). Ulasan tersebut masuk ke daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
 
@@ -363,7 +363,7 @@ Setelah data SPPG disimpan, sistem memberikan akses login kepada SPPG terkait. S
 | Atribut | Detail |
 |---|---|
 | **Prioritas** | 🟡 Medium |
-| **Referensi** | US-15 |
+| **Referensi** | US-14 |
 
 **Deskripsi:** Sistem menyediakan panel tindak lanjut bagi SPPG untuk memperbarui status penanganan ulasan kritis. Status yang tersedia:
 - **Belum Diproses** — status awal saat notifikasi masuk.

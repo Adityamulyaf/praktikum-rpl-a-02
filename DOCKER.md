@@ -259,13 +259,15 @@ docker compose down -v
 docker compose up --build -d
 ```
 
-### API / Login Mengembalikan Error 404 atau `Request failed with status code 404`
+### API / Login Mengembalikan Error 404, `Connection Refused`, atau "Autentikasi Gagal" (Proxy Error)
 
 **Gejala:**
-Aplikasi web berjalan, tetapi setiap kali memanggil API (misalnya saat login atau menyimpan menu harian), sistem mengembalikan error `404 Not Found` atau `Request failed with status code 404`.
+Aplikasi web berjalan, tetapi saat mencoba login atau memanggil API, sistem mengembalikan error `404 Not Found`, `Request failed with status code 404`, atau error `Autentikasi gagal` padahal kredensial seeder yang dimasukkan sudah benar. Di log container frontend (`docker compose logs frontend`), terlihat pesan seperti:
+`[vite] http proxy error: /api/login Error: connect ECONNREFUSED 172.18.0.x:80`
 
 **Penyebab:**
-Ini adalah kendala sinkronisasi volume (*bind-mount sync*) Docker yang sering terjadi di WSL2. Folder konfigurasi `./nginx/conf.d` terdeteksi kosong di dalam kontainer `nginx_server`, sehingga Nginx kembali menggunakan konfigurasi bawaan yang tidak memiliki aturan *reverse proxy* untuk `/api`.
+1. **Sinkronisasi Volume Nginx Kosong:** Kendala sinkronisasi volume (*bind-mount sync*) Docker di WSL2 membuat folder `./nginx/conf.d` kosong di dalam kontainer `nginx_server`. Akibatnya, Nginx tidak membaca file `default.conf` (tidak berjalan di port 80).
+2. **Resolusi IP Container Nginx Kadaluarsa:** Saat container di-down/up, Docker memberikan IP internal baru ke container Nginx. Namun, Vite Dev Server di container `frontend` men-cache IP lama dari kontainer `webserver`, mengakibatkan koneksi proxy ditolak (`ECONNREFUSED`).
 
 **Solusi:**
 1. Hentikan dan jalankan kembali kontainer Docker agar pemetaan volume diperbarui:
@@ -278,7 +280,11 @@ Ini adalah kendala sinkronisasi volume (*bind-mount sync*) Docker yang sering te
    docker exec nginx_server ls -la /etc/nginx/conf.d
    ```
    *(Harus menampilkan file `default.conf`)*
-3. Muat ulang (*refresh*) halaman browser Anda (`F5` atau `Ctrl+F5`) agar browser memuat ulang JavaScript dan membuat koneksi baru.
+3. **Mulai Ulang Container Frontend (Penting):** Jalankan perintah berikut agar Vite Dev Server melakukan pencarian/resolusi ulang alamat IP kontainer Nginx yang baru:
+   ```bash
+   docker compose restart frontend
+   ```
+4. Muat ulang (*refresh*) halaman browser Anda (`F5` atau `Ctrl+F5`) agar browser memuat ulang JavaScript dan membuat koneksi baru.
 
 **Catatan Tambahan:**
 Jika Nginx sudah dikonfigurasi dengan benar tetapi error 404 pada `/api` masih terjadi di browser, pastikan volume mount untuk file `vite.config.js` di dalam file `compose.yaml` ditulis dengan benar (`/app/vite.config.js`, bukan `/app/vite.config.jss`). Kesalahan ketik (*typo*) tersebut menyebabkan kontainer Vite menggunakan konfigurasi bawaan tanpa *proxy* `/api`, sehingga semua panggilan API langsung diarahkan ke Vite dev server dan menghasilkan error 404.

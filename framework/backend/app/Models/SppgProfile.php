@@ -33,4 +33,9 @@ class SppgProfile extends Model
     {
         return $this->hasMany(DailyMenu::class, 'sppg_id');
     }
+
+    public function sentimentSummaries()
+    {
+        return $this->hasMany(AiSentimentSummary::class, 'sppg_id');
+    }
 }

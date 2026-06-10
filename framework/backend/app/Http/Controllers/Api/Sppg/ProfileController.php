@@ -14,24 +14,48 @@ class ProfileController extends Controller
         if ($user->role === 'siswa') {
             $profile = $user->studentProfile;
             $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->with(['schools', 'dailyMenus' => function ($q) {
-                $q->orderBy('served_at', 'desc');
-            }])->first() : null;
+            $sppg = $school ? $school->sppgProfiles()->with([
+                'schools',
+                'dailyMenus' => function ($q) {
+                    $q->orderBy('served_at', 'desc');
+                },
+                'sentimentSummaries' => function ($q) {
+                    $q->orderBy('summary_date', 'desc');
+                }
+            ])->first() : null;
         } elseif ($user->role === 'guru') {
             $profile = $user->teacherProfile;
             $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->with(['schools', 'dailyMenus' => function ($q) {
-                $q->orderBy('served_at', 'desc');
-            }])->first() : null;
+            $sppg = $school ? $school->sppgProfiles()->with([
+                'schools',
+                'dailyMenus' => function ($q) {
+                    $q->orderBy('served_at', 'desc');
+                },
+                'sentimentSummaries' => function ($q) {
+                    $q->orderBy('summary_date', 'desc');
+                }
+            ])->first() : null;
         } else {
             if ($user->role === 'admin' && $request->has('sppg_id')) {
-                $sppg = \App\Models\SppgProfile::with(['schools', 'dailyMenus' => function ($q) {
-                    $q->orderBy('served_at', 'desc');
-                }])->find($request->sppg_id);
+                $sppg = \App\Models\SppgProfile::with([
+                    'schools',
+                    'dailyMenus' => function ($q) {
+                        $q->orderBy('served_at', 'desc');
+                    },
+                    'sentimentSummaries' => function ($q) {
+                        $q->orderBy('summary_date', 'desc');
+                    }
+                ])->find($request->sppg_id);
             } else {
-                $sppg = $user->sppgProfile()->with(['schools', 'dailyMenus' => function ($q) {
-                    $q->orderBy('served_at', 'desc');
-                }])->first();
+                $sppg = $user->sppgProfile()->with([
+                    'schools',
+                    'dailyMenus' => function ($q) {
+                        $q->orderBy('served_at', 'desc');
+                    },
+                    'sentimentSummaries' => function ($q) {
+                        $q->orderBy('summary_date', 'desc');
+                    }
+                ])->first();
             }
         }
 
@@ -53,6 +77,7 @@ class ProfileController extends Controller
             'description'         => $sppg->description,
             'schools'             => $sppg->schools,
             'daily_menus'         => $sppg->dailyMenus,
+            'sentiment_summaries' => $sppg->sentimentSummaries,
         ]);
     }
 
