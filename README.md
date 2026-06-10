@@ -46,8 +46,6 @@ Berikut adalah pembagian status fitur aplikasi HaloMBG berdasarkan dokumen kebut
   Sistem otomatis untuk menyaring ulasan siswa dengan kata kunci negatif ekstrem (seperti basi atau bau) dan memasukkannya ke daftar penanganan dapur dengan status: Belum Diproses, Dalam Proses Tindak Lanjut, dan Selesai.
 * BL-13: Ringkasan Evaluasi Dapur Berbasis AI (Publik)
   Sistem AI untuk merangkum sentimen ulasan harian siswa menjadi statistik (positif, netral, negatif) yang ditampilkan pada profil dapur publik.
-* BL-14: Dashboard Evaluasi Internal SPPG
-  Halaman grafik analisis sentimen ulasan yang lebih terperinci dan rekapitulasi mingguan khusus untuk konsumsi internal pihak dapur dalam mengevaluasi layanan.
 
 ## Teknologi Utama
 * Backend: Laravel (PHP) dengan Laravel Sanctum untuk sistem otentikasi berbasis token API.

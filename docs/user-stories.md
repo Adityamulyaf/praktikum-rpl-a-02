@@ -86,28 +86,22 @@
 **Acceptance Criteria:**
 * **Given** saya berada di halaman profil suatu dapur MBG, **When** saya membuka tab "Evaluasi", **Then** sistem menampilkan ringkasan analisis ulasan harian (positif/netral/negatif) beserta poin-poin utama yang sering disebut penerima, yang dihasilkan oleh sistem analisis AI.
 
-### US-12 — Melihat Ringkasan Evaluasi Dapur sebagai Bahan Evaluasi Internal (SPPG)
-**Sebagai** Pihak SPPG, **saya ingin** melihat ringkasan evaluasi sentimen ulasan penerima MBG di dapur saya secara lebih terperinci, **agar** saya dapat mengidentifikasi masalah spesifik per sekolah dan memperbaiki kualitas layanan dapur dari waktu ke waktu.
-
-**Acceptance Criteria:**
-* **Given** saya telah login sebagai SPPG dan membuka dashboard dapur saya, **When** saya membuka tab "Evaluasi", **Then** sistem menampilkan ringkasan sentimen (positif/netral/negatif) yang dilengkapi dengan breakdown per sekolah dan rekap historis per minggu sebagai bahan evaluasi internal dapur.
-
-### US-13 — Pengelolaan Master Data SPPG & Sekolah
+### US-12 — Pengelolaan Master Data SPPG & Sekolah
 **Sebagai** Administrator, **saya ingin** dapat mendaftarkan akun SPPG baru dan memetakan sekolah-sekolah yang mereka layani, **agar** struktur operasional dan distribusi dalam sistem terbentuk dengan benar sebelum program dimulai.
 
 **Acceptance Criteria:**
 * **Given** saya telah login sebagai Admin, **When** saya menginput data dapur (SPPG) baru dan memilih daftar sekolah dari database, **Then** sistem menyimpan relasi tersebut dan memberikan akses login kepada pihak SPPG terkait.
 
-### US-14 — Notifikasi Keterlambatan Distribusi
+### US-13 — Notifikasi Keterlambatan Distribusi
 **Sebagai** Administrator atau Guru, **saya ingin** menerima peringatan otomatis jika suatu SPPG belum memperbarui status distribusi hingga batas waktu yang ditentukan (pukul 11.00 WIB), **agar** saya dapat segera melakukan pengecekan langsung ke pihak dapur dan memastikan penerima manfaat tidak terdampak.
 
 **Acceptance Criteria:**
 * **Given** waktu sistem menunjukkan pukul 11.00 WIB, **When** ada sekolah yang status distribusinya masih "Belum Diantar", **Then** sistem secara otomatis mengirimkan notifikasi peringatan melalui WhatsApp kepada Admin pusat dan Guru di sekolah tersebut, disertai informasi nama sekolah dan nama dapur yang bersangkutan.
 * **Given** notifikasi keterlambatan telah terkirim, **When** Admin atau Guru membuka dashboard, **Then** daftar sekolah yang terlambat distribusinya ditampilkan secara khusus sebagai bahan tindak lanjut dan evaluasi.
 
-### US-15 — Notifikasi Peringatan Ulasan Kritis
+### US-14 — Notifikasi Peringatan Ulasan Kritis
 **Sebagai** Pihak SPPG, **saya ingin** menerima notifikasi instan jika ada siswa yang memberikan ulasan yang mengandung kata kunci kritis (misalnya indikasi makanan tidak layak seperti "basi", "bau", "busuk"), serta dapat memperbarui status tindak lanjut atas ulasan tersebut, **agar** saya dapat segera melakukan investigasi dan perbaikan kualitas pada hari yang sama.
 
 **Acceptance Criteria:**
 * **Given** seorang siswa mengirimkan ulasan, **When** sistem mendeteksi kata kunci kritis pada konten ulasan (misalnya: "basi", "bau", "busuk", "tidak layak", "kotor"), **Then** sistem mengirimkan notifikasi real-time ke dashboard SPPG dan ulasan tersebut muncul di daftar "Ulasan Perlu Tindak Lanjut" dengan status awal **Belum Diproses**.
-* **Given** SPPG menerima notifikasi ulasan kritis dan membuka detail ulasan tersebut, **When** SPPG memperbarui status tindak lanjut menjadi **Dalam Proses Tindak Lanjut** atau **Selesai** disertai catatan penanganan, **Then** sistem menyimpan perubahan status beserta catatan tersebut, dan status terbaru ditampilkan di panel tindak lanjut SPPG sebagai dokumentasi investigasi.
+* **Given** SPPG menerima notifikasi ulasan kritis dan membuka detail ulasan tersebut, **When** SPPG memperbarui status tindak lanjut menjadi **Dalam Proses Tindak Lanjut** or **Selesai** disertai catatan penanganan, **Then** sistem menyimpan perubahan status beserta catatan tersebut, dan status terbaru ditampilkan di panel tindak lanjut SPPG sebagai dokumentasi investigasi.

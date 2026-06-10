@@ -17,7 +17,6 @@
 | [BL-11](#bl-11--sistem-notifikasi) | Sistem Notifikasi | 🟡 Could-have | S | BL-09 |
 | [BL-12](#bl-12--notifikasi-ulasan-kritis-dan-tindak-lanjut-sppg) | Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG | 🟡 Could-have | S | BL-09 |
 | [BL-13](#bl-13--ringkasan-evaluasi-dapur-berbasis-ai-publik) | Ringkasan Evaluasi Dapur Berbasis AI (Publik) | 🟡 Could-have | M | BL-09, BL-10 |
-| [BL-14](#bl-14--dashboard-evaluasi-internal-sppg) | Dashboard Evaluasi Internal SPPG  | 🟡 Could-have | S | BL-13 |
 
 
 ---
@@ -121,7 +120,7 @@ Saat SPPG menginput menu, mereka wajib mengunggah foto makanan beserta klaim nut
 
 | | |
 |---|---|
-| **Story terkait** | US-13 |
+| **Story terkait** | US-12 |
 | **Estimasi** | M (Medium) |
 | **Dependensi** | BL-01 |
 
@@ -161,7 +160,7 @@ SPPG memperbarui status distribusi ke setiap sekolah (siap diantar / sudah diant
 
 | | |
 |---|---|
-| **Story terkait** | US-14 |
+| **Story terkait** | US-13 |
 | **Estimasi** | S (Small) |
 | **Dependensi** | BL-07 |
 
@@ -236,7 +235,7 @@ Mekanisme notifikasi untuk mendukung alur komunikasi antar role. Diperlukan agar
 
 | | |
 |---|---|
-| **Story terkait** | US-15 |
+| **Story terkait** | US-14 |
 | **Estimasi** | S (Small) |
 | **Dependensi** | BL-09 |
 
@@ -267,24 +266,5 @@ Sistem menghasilkan ringkasan analisis sentimen harian per dapur (positif/netral
 - Ringkasan evaluasi diperbarui setidaknya satu kali per hari setelah batas waktu pengiriman ulasan.
 - Menampilkan distribusi sentimen dan poin-poin utama yang sering disebut.
 - Data evaluasi bisa dilihat per hari dan secara historis di halaman profil publik dapur.
-
----
-
-### BL-14 — Dashboard Evaluasi Internal SPPG
-
-| | |
-|---|---|
-| **Story terkait** | US-12 |
-| **Estimasi** | S (Small) |
-| **Dependensi** | BL-13 |
-
-Tampilan evaluasi khusus untuk SPPG di dalam dashboard internal, dengan detail yang lebih terperinci dibanding ringkasan publik. SPPG memerlukan breakdown per sekolah dan rekap historis mingguan sebagai bahan evaluasi dan perbaikan layanan.
-
-**Kriteria Selesai:**
-
-- Dashboard SPPG menampilkan ringkasan sentimen (positif/netral/negatif) per hari.
-- Tersedia breakdown sentimen per sekolah yang dilayani dapur tersebut.
-- Rekap historis tersedia per minggu sebagai bahan evaluasi internal.
-- Tampilan ini hanya dapat diakses oleh SPPG yang login, tidak tampil di halaman publik.
 
 ---
