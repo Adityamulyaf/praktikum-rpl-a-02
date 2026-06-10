@@ -11,6 +11,6 @@ Artisan::command('inspire', function () {
 // BL-08: Check late distributions daily at 11:00 WIB (04:00 UTC)
 Schedule::command('distribution:check-late')
     ->timezone('Asia/Jakarta')
-    ->dailyAt('12:45')
+    ->dailyAt('11:00')
     ->withoutOverlapping()
     ->onOneServer();
