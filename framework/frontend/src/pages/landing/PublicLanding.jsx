@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import PublicLandingContent from '../../features/PublicLandingContent';
+import Logo from '../../components/Logo';
 import './PublicLanding.css';
 
 const ROLE_PATHS = {
@@ -47,7 +48,10 @@ export default function PublicLanding() {
     <div className="pl-root">
       {/* Nav — transparent over hero, solid on scroll */}
       <nav className="pl-nav" ref={navRef}>
-        <span className="pl-nav-brand">HaloMBG</span>
+        <span className="pl-nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Logo size={28} />
+          <span>HaloMBG</span>
+        </span>
         <div className="pl-nav-actions">
           <a className="pl-nav-register" onClick={() => navigate('/login', { state: { view: 'register-select' } })}>
             Daftar

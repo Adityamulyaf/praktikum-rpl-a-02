@@ -7,6 +7,7 @@ import RegisterSelectForm from './RegisterSelectForm';
 import SiswaRegisterForm from './SiswaRegisterForm';
 import GuruRegisterForm from './GuruRegisterForm';
 import ForgotPasswordForm from './ForgotPasswordForm';
+import Logo from '../../components/Logo';
 import './Login.css';
 
 const ROLE_PATHS = {
@@ -52,7 +53,10 @@ export default function Login() {
   return (
     <div className="login-root">
       <div className="lp-center">
-        <div className="lp-brand">HaloMBG</div>
+        <div className="lp-brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Logo size={32} />
+          <span>HaloMBG</span>
+        </div>
         <div className="lp-card">
           <div className="lp-card-body">
             {view === 'login' && (

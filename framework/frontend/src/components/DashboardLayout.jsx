@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getUnreadCount } from '../api/notification';
+import Logo from './Logo';
 import './DashboardLayout.css';
 
 
@@ -87,7 +88,10 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
             ← Beranda
           </button>
         )}
-        <span className="dl-topbar-brand">HaloMBG</span>
+        <span className="dl-topbar-brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Logo size={28} />
+          <span>HaloMBG</span>
+        </span>
         <div className="dl-topbar-right">
           {role && (
             <button
