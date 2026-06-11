@@ -8,10 +8,67 @@ use Illuminate\Support\Facades\DB;
 class SppgSchoolSeeder extends Seeder
 {
     /**
+     * Known district name mismatches between SPPG CSV and school CSV.
+     * Maps both variants to a common canonical name for matching.
+     */
+    private const DISTRICT_ALIASES = [
+        // Jakarta: SPPG uses "KOTA ADM. JAKARTA X", school uses "Kota Jakarta X"
+        // After base normalization strips "KOTA ", SPPG becomes "ADM. JAKARTA X"
+        'ADM. JAKARTA SELATAN'       => 'JAKARTA SELATAN',
+        'ADM. JAKARTA BARAT'         => 'JAKARTA BARAT',
+        'ADM. JAKARTA TIMUR'         => 'JAKARTA TIMUR',
+        'ADM. JAKARTA UTARA'         => 'JAKARTA UTARA',
+        'ADM. JAKARTA PUSAT'         => 'JAKARTA PUSAT',
+        'KOTA ADM. JAKARTA SELATAN'  => 'JAKARTA SELATAN',
+        'KOTA ADM. JAKARTA BARAT'    => 'JAKARTA BARAT',
+        'KOTA ADM. JAKARTA TIMUR'    => 'JAKARTA TIMUR',
+        'KOTA ADM. JAKARTA UTARA'    => 'JAKARTA UTARA',
+        'KOTA ADM. JAKARTA PUSAT'    => 'JAKARTA PUSAT',
+        'JAKARTA SELATAN'            => 'JAKARTA SELATAN',
+        'JAKARTA BARAT'              => 'JAKARTA BARAT',
+        'JAKARTA TIMUR'              => 'JAKARTA TIMUR',
+        'JAKARTA UTARA'              => 'JAKARTA UTARA',
+        'JAKARTA PUSAT'              => 'JAKARTA PUSAT',
+        // Space vs no-space inconsistencies
+        'GUNUNGKIDUL'                => 'GUNUNGKIDUL',
+        'GUNUNG KIDUL'               => 'GUNUNGKIDUL',
+        'JAYAWIJAYA'                 => 'JAYAWIJAYA',
+        'JAYA WIJAYA'                => 'JAYAWIJAYA',
+        'KUBU RAYA'                  => 'KUBURAYA',
+        'KUBURAYA'                   => 'KUBURAYA',
+        'TOLI TOLI'                  => 'TOLITOLI',
+        'TOLITOLI'                   => 'TOLITOLI',
+        'PANGKAL PINANG'             => 'PANGKALPINANG',
+        'PANGKALPINANG'              => 'PANGKALPINANG',
+        // Old vs new name
+        'TOBA'                       => 'TOBA',
+        'TOBA SAMOSIR'               => 'TOBA',
+        // Typo in school CSV
+        'NAGEKEO'                    => 'NAGEKEO',
+        'NAGAKEO'                    => 'NAGEKEO',
+    ];
+
+    /**
+     * Build the SQL expression that normalizes a district value
+     * through the alias map, falling back to strip-prefix + uppercase.
+     */
+    private function buildNormExpr(string $tableAlias): string
+    {
+        // Start with the base normalization: strip Kab./Kota prefix, upper, trim
+        $base = "UPPER(TRIM(REGEXP_REPLACE(TRIM({$tableAlias}.district), '^(Kab\\.|Kota\\.|Kabupaten |Kota )\\s*', '', 'i')))";
+
+        // Wrap in a CASE expression to handle known aliases
+        $cases = [];
+        foreach (self::DISTRICT_ALIASES as $from => $to) {
+            $cases[] = "WHEN {$base} = '{$from}' THEN '{$to}'";
+        }
+
+        return "CASE " . implode(' ', $cases) . " ELSE {$base} END";
+    }
+
+    /**
      * Distribusikan sekolah ke SPPG berdasarkan kesamaan Kab./Kota.
      * Setiap SPPG mendapat 6–8 sekolah secara acak dari daerah yang sama.
-     *
-     * Menggunakan raw SQL + window function agar efisien di memori.
      */
     public function run(): void
     {
@@ -30,12 +87,12 @@ class SppgSchoolSeeder extends Seeder
             return;
         }
 
+        // Build normalized expressions with alias handling
+        $normSppg   = $this->buildNormExpr('sp');
+        $normSchool = $this->buildNormExpr('s');
+
         $this->command->info("Mencocokkan {$sppgCount} SPPG dengan {$schoolCount} sekolah berdasarkan Kab./Kota...");
         $this->command->info("Setiap SPPG akan mendapat 6–8 sekolah secara acak dari daerahnya.");
-
-        // Normalisasi Kab./Kota: hapus prefix "Kab.", "Kota.", "Kabupaten", "Kota " lalu UPPER & TRIM
-        $normSppg   = "UPPER(TRIM(REGEXP_REPLACE(TRIM(sp.district), '^(Kab\\.|Kota\\.|Kabupaten |Kota )\\s*', '', 'i')))";
-        $normSchool = "UPPER(TRIM(REGEXP_REPLACE(TRIM(s.district),  '^(Kab\\.|Kota\\.|Kabupaten |Kota )\\s*', '', 'i')))";
 
         // CTE sppg_limits: buat limit acak 6–8 per SPPG (dievaluasi sekali per baris SPPG)
         // CTE ranked: JOIN sekolah di daerah yang sama, beri nomor urut acak per SPPG
