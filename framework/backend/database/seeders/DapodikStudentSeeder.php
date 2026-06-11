@@ -14,8 +14,8 @@ class DapodikStudentSeeder extends Seeder
         // Truncate first
         DB::table('dapodik_students')->truncate();
 
-        // Get first 5 schools
-        $schools = School::orderBy('id')->take(5)->get();
+        // Get 5 schools from Kebumen (to match SPPG Kebumen Buayan Rangkah)
+        $schools = School::where('district', 'like', '%Kebumen%')->orderBy('id')->take(5)->get();
 
         if ($schools->isEmpty()) {
             $this->command->error('Tidak ada sekolah terdaftar di database untuk men-seed dapodik_students.');

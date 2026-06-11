@@ -79,7 +79,16 @@ class DatabaseSeeder extends Seeder
 
         // ── SEEDING DATA TAMBAHAN UNTUK TESTING EVALUASI AI (BL-13) ──
 
-        $firstSchool = School::orderBy('id')->first();
+        // Ambil sekolah pertama yang terhubung dengan SPPG test ini (sekolah Kebumen) agar test siswa/guru sinkron
+        $testSppgUser = User::where('email', 'sppg@halombg.com')->first();
+        $testSppgProfile = $testSppgUser ? \App\Models\SppgProfile::where('user_id', $testSppgUser->ssid)->first() : null;
+        $firstSchool = null;
+        if ($testSppgProfile) {
+            $firstSchool = $testSppgProfile->schools()->first();
+        }
+        if (!$firstSchool) {
+            $firstSchool = School::orderBy('id')->first();
+        }
         
         // 1. Lengkapi profile siswa@halombg.com
         $siswaUser = User::where('email', 'siswa@halombg.com')->first();
@@ -182,6 +191,25 @@ class DatabaseSeeder extends Seeder
                             'is_ai_validated' => true,
                         ]
                     );
+
+                    // Buat Status Distribusi untuk semua sekolah SPPG ini
+                    $schoolIds = \Illuminate\Support\Facades\DB::table('sppg_schools')
+                        ->where('sppg_id', $testSppgProfile->id)
+                        ->pluck('school_id');
+
+                    foreach ($schoolIds as $schoolId) {
+                        \App\Models\DistributionStatus::updateOrCreate(
+                            [
+                                'sppg_id'        => $testSppgProfile->id,
+                                'school_id'      => $schoolId,
+                                'distributed_at' => $menuDate,
+                            ],
+                            [
+                                'status'            => 'sudah_diantar',
+                                'status_updated_at' => now(),
+                            ]
+                        );
+                    }
 
                     // Buat Ulasan Siswa
                     foreach ($reviewTemplates as $rTemp) {
