@@ -1,5 +1,5 @@
 /* ============================================================
-   PUBLIC LANDING — aligned with DESIGN.md v1.0
+   PUBLIC LANDING — aligned with DESIGN.md v1.0 & pitch.com aesthetic
    Prefix: plc-  (content, shared between full page & embedded)
           pl-   (full page nav only)
    ============================================================ */
@@ -11,37 +11,45 @@
     font-family: var(--font-sans);
 }
 
-/* Navbar: white always, full-width → floating rounded on scroll */
+/* Navbar: transparent over hero, floating glassmorphic on scroll */
 .pl-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 56px;
+    height: 64px;
     padding: 0 var(--space-2xl);
-    background: var(--surface-1, #FFFFFF);
-    border: 1px solid var(--border-default);
-    border-top: none;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
     border-radius: 0;
-    transition: top 300ms, left 300ms, right 300ms, border-radius 300ms, box-shadow 300ms;
+    transition: all var(--duration-normal) var(--ease-smooth);
 }
 
 .pl-nav.pl-nav--scrolled {
-    top: 10px;
-    left: 16px;
-    right: 16px;
-    border-radius: 14px;
+    top: 12px;
+    left: 24px;
+    right: 24px;
+    height: 56px;
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.85);
     border: 1px solid var(--border-default);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-glass);
 }
 
 .pl-nav-brand {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
+    color: var(--text-inverse);
+    transition: color var(--duration-normal) var(--ease-smooth);
+}
+
+.pl-nav.pl-nav--scrolled .pl-nav-brand {
     color: var(--color-primary);
 }
 
@@ -55,45 +63,68 @@
 .pl-nav-register {
     display: inline-flex;
     align-items: center;
-    height: 36px;
+    height: 38px;
     padding: 0 var(--space-md);
     background: transparent;
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    color: var(--text-inverse);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-md);
     font-family: var(--font-sans);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    transition: background 150ms, color 150ms;
+    transition: all var(--duration-fast) var(--ease-smooth);
 }
 
 .pl-nav-register:hover {
+    background: var(--text-inverse);
+    color: var(--color-primary);
+    border-color: var(--text-inverse);
+}
+
+.pl-nav.pl-nav--scrolled .pl-nav-register {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.pl-nav.pl-nav--scrolled .pl-nav-register:hover {
     background: var(--color-primary);
     color: var(--text-inverse);
+    border-color: var(--color-primary);
 }
 
 /* Primary button */
 .pl-nav-login {
     display: inline-flex;
     align-items: center;
-    height: 36px;
+    height: 38px;
     padding: 0 var(--space-md);
-    background: var(--color-primary);
-    color: var(--text-inverse);
+    background: var(--color-secondary);
+    color: var(--color-primary);
     border: 1px solid transparent;
     border-radius: var(--radius-md);
     font-family: var(--font-sans);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    transition: opacity 150ms;
+    transition: all var(--duration-fast) var(--ease-smooth);
 }
 
 .pl-nav-login:hover {
-    opacity: 0.88;
+    background: var(--color-accent);
+    transform: translateY(-1px);
+}
+
+.pl-nav.pl-nav--scrolled .pl-nav-login {
+    background: var(--color-primary);
+    color: var(--text-inverse);
+}
+
+.pl-nav.pl-nav--scrolled .pl-nav-login:hover {
+    background: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 /* ── CONTENT ROOT ─────────────────────────────────────────── */
@@ -103,27 +134,26 @@
 }
 
 /* ── HERO ─────────────────────────────────────────────────── */
-/* Solid navy only — no gradients per DESIGN.md §4.5, §9.2 */
 .plc-hero {
     background: var(--color-primary);
     padding: var(--space-2xl) var(--space-2xl) 0;
     text-align: center;
-    /* In dashboard: topbar is sticky (56px in-flow), so subtract it */
     min-height: calc(100svh - 56px);
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
 }
 
 /* On public landing: fixed navbar overlaps hero, so full viewport + offset */
 .pl-root .plc-hero {
     min-height: 100svh;
-    padding-top: calc(56px + var(--space-2xl));
+    padding-top: calc(64px + var(--space-2xl));
 }
 
 /* Content fills available space, biased toward upper-center */
 .plc-hero-inner {
-    max-width: 640px;
+    max-width: 680px;
     margin: 0 auto;
     width: 100%;
     flex: 1;
@@ -131,45 +161,229 @@
     flex-direction: column;
     justify-content: center;
     padding-bottom: 14vh;
+    position: relative;
+    z-index: 2;
+    pointer-events: none; /* Let mouse moves reach background cards */
 }
 
-/* Scroll hint at bottom of hero — makes the full-height feel intentional */
+/* Restore click/typing control on interactive hero elements */
+.plc-hero-overline,
+.plc-hero-title,
+.plc-hero-sub,
+.plc-search-wrap,
+.plc-stats,
+.plc-hero-scroll {
+    pointer-events: auto;
+}
+
+/* Parallax floating cards container */
+.plc-hero-bg-cards {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Blockchain lines behind cards */
+.plc-hero-blockchain-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Individual floating card */
+.plc-bg-card {
+    position: absolute;
+    width: 220px;
+    height: 150px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(255, 255, 255, 0.05) inset;
+    transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s ease, border-color 0.5s ease, opacity 0.5s ease;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.plc-bg-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35; /* darker baseline */
+    filter: brightness(0.35) contrast(1.15) blur(3px); /* dark and blurry */
+    transition: transform 0.8s var(--ease-smooth), opacity 0.5s ease, filter 0.5s ease;
+}
+
+.plc-bg-card:hover {
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(255, 255, 255, 0.15) inset;
+    border-color: var(--color-secondary);
+    z-index: 10;
+}
+
+.plc-bg-card:hover img {
+    transform: scale(1.08);
+    opacity: 0.9;
+    filter: brightness(0.8) contrast(1.1) blur(0px); /* clears up on hover */
+}
+
+/* Hero Background Glow */
+.plc-hero-glow {
+    position: absolute;
+    top: var(--glow-y, 50%);
+    left: var(--glow-x, 50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(146, 208, 93, 0.15) 0%, rgba(181, 224, 234, 0.06) 50%, transparent 100%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    transition: top var(--duration-slow) var(--ease-smooth), left var(--duration-slow) var(--ease-smooth);
+    filter: blur(50px);
+}
+
+/* Background Card Placement and Animation Triggers - dispersed wider */
+.plc-bg-card-1 {
+    top: 8%;
+    left: 3%;
+    transform: translate(var(--mx), var(--my)) rotate(-7deg) scale(0.85);
+    animation: plc-float-1 8s ease-in-out infinite alternate;
+}
+
+.plc-bg-card-2 {
+    bottom: 15%;
+    left: 2%;
+    transform: translate(var(--mx), var(--my)) rotate(5deg) scale(0.95);
+    animation: plc-float-2 10s ease-in-out infinite alternate;
+}
+
+.plc-bg-card-3 {
+    top: 10%;
+    right: 3%;
+    transform: translate(var(--mx), var(--my)) rotate(7deg) scale(0.9);
+    animation: plc-float-3 9s ease-in-out infinite alternate;
+}
+
+.plc-bg-card-4 {
+    bottom: 12%;
+    right: 2%;
+    transform: translate(var(--mx), var(--my)) rotate(-5deg) scale(1.0);
+    animation: plc-float-4 11s ease-in-out infinite alternate;
+}
+
+.plc-bg-card-5 {
+    top: 40%;
+    left: -2%;
+    transform: translate(var(--mx), var(--my)) rotate(-9deg) scale(0.75);
+    animation: plc-float-5 9s ease-in-out infinite alternate;
+}
+
+.plc-bg-card-6 {
+    top: 44%;
+    right: -2%;
+    transform: translate(var(--mx), var(--my)) rotate(9deg) scale(0.8);
+    animation: plc-float-6 10s ease-in-out infinite alternate;
+}
+
+/* Floating Animations combining rotation + drift */
+@keyframes plc-float-1 {
+    0% { transform: translate(var(--mx), var(--my)) rotate(-7deg) scale(0.85) translateY(0); }
+    100% { transform: translate(var(--mx), var(--my)) rotate(-5deg) scale(0.85) translateY(-14px); }
+}
+
+@keyframes plc-float-2 {
+    0% { transform: translate(var(--mx), var(--my)) rotate(5deg) scale(0.95) translateY(0); }
+    100% { transform: translate(var(--mx), var(--my)) rotate(7deg) scale(0.95) translateY(-18px); }
+}
+
+@keyframes plc-float-3 {
+    0% { transform: translate(var(--mx), var(--my)) rotate(7deg) scale(0.9) translateY(0); }
+    100% { transform: translate(var(--mx), var(--my)) rotate(4deg) scale(0.9) translateY(-12px); }
+}
+
+@keyframes plc-float-4 {
+    0% { transform: translate(var(--mx), var(--my)) rotate(-5deg) scale(1.0) translateY(0); }
+    100% { transform: translate(var(--mx), var(--my)) rotate(-8deg) scale(1.0) translateY(-22px); }
+}
+
+@keyframes plc-float-5 {
+    0% { transform: translate(var(--mx), var(--my)) rotate(-9deg) scale(0.75) translateY(0); }
+    100% { transform: translate(var(--mx), var(--my)) rotate(-11deg) scale(0.75) translateY(-12px); }
+}
+
+@keyframes plc-float-6 {
+    0% { transform: translate(var(--mx), var(--my)) rotate(9deg) scale(0.8) translateY(0); }
+    100% { transform: translate(var(--mx), var(--my)) rotate(7deg) scale(0.8) translateY(-16px); }
+}
+
+/* Hide background cards & glow on small devices (tablet and below) */
+@media (max-width: 900px) {
+    .plc-hero-bg-cards,
+    .plc-hero-glow {
+        display: none;
+    }
+}
+
+/* Scroll hint at bottom of hero */
 .plc-hero-scroll {
     display: flex;
     justify-content: center;
     color: rgba(255, 255, 255, 0.35);
     flex-shrink: 0;
-    padding-bottom: var(--space-sm);
+    padding-bottom: var(--space-md);
+    z-index: 2;
+    animation: plc-bounce 2s infinite;
 }
 
-/* Overline — white at 50% opacity, NOT colored per §4.4 */
+@keyframes plc-bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+/* Overline — white at 50% opacity */
 .plc-hero-overline {
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
     display: block;
     margin-bottom: var(--space-md);
 }
 
-/* Display — 48px hero landing, bolder for impact */
+/* Display — 56px hero landing, gradient fill for pitch-like styling */
 .plc-hero-title {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 800;
-    color: var(--text-inverse);
-    line-height: 56px;
-    letter-spacing: -1px;
+    line-height: 1.1;
+    letter-spacing: -2px;
     margin: 0 0 var(--space-md);
+    background: linear-gradient(135deg, #ffffff 40%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .plc-hero-sub {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.65);
-    line-height: 26px;
+    line-height: 28px;
     margin: 0 auto var(--space-xl);
-    max-width: 480px;
+    max-width: 520px;
 }
 
 /* ── HERO SEARCH ──────────────────────────────────────────── */
@@ -178,6 +392,7 @@
     max-width: 520px;
     width: 100%;
     margin: 0 auto var(--space-2xl);
+    z-index: 10;
 }
 
 .plc-search-input-wrap {
@@ -187,113 +402,117 @@
 
 .plc-search-icon {
     position: absolute;
-    left: 12px;
+    left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-tertiary);
+    color: rgba(255, 255, 255, 0.4);
     pointer-events: none;
     display: flex;
     z-index: 1;
 }
 
 .plc-search-wrap:has(.plc-selected-school) {
-  min-height: 142px;
+    min-height: 142px;
 }
 
 .plc-search-list {
-  max-height: min(320px, calc(100svh - 430px));
-  overflow-y: auto;
-  overscroll-behavior: contain;
+    max-height: min(320px, calc(100svh - 430px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .plc-selected-school {
-  margin-top: var(--space-sm);
-  padding: var(--space-md);
-  background: var(--surface-1);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: none;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-md);
-  text-align: left;
+    margin-top: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-glass);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+    text-align: left;
 }
 
 .plc-selected-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 
 .plc-selected-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-inverse);
 }
 
 .plc-selected-meta {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 16px;
-  margin-top: 2px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 16px;
+    margin-top: 2px;
 }
 
 .plc-selected-sppg {
-  min-width: 140px;
-  font-size: 12px;
-  color: var(--text-secondary);
+    min-width: 140px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .plc-selected-sppg span,
 .plc-selected-sppg strong {
-  display: block;
+    display: block;
 }
 
 .plc-selected-sppg strong {
-  color: var(--text-primary);
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 2px;
+    color: var(--color-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
 }
 
-/* Input: white bg, 6px radius per §5.5, §5.1 */
 .plc-search-input {
     width: 100%;
-    height: 44px;
-    padding: 0 44px;
-    background: var(--surface-1);
-    border: 1px solid transparent;
-    border-radius: var(--radius-md);
+    height: 52px;
+    padding: 0 48px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-2xl); /* pill-like */
     font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--text-primary);
+    font-size: 15px;
+    color: var(--text-inverse);
     box-sizing: border-box;
-    transition: border-color 150ms;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all var(--duration-normal) var(--ease-smooth);
 }
 
 .plc-search-input::placeholder {
-    color: var(--text-tertiary);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .plc-search-input:focus {
-    outline: 2px solid rgba(7, 30, 73, 0.15);
-    outline-offset: 1px;
-    border-color: var(--color-primary);
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(146, 208, 93, 0.15);
 }
 
 .plc-search-spinner {
     position: absolute;
-    right: 12px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--border-default);
-    border-top-color: var(--color-primary);
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--color-secondary);
     border-radius: 50%;
     animation: plc-spin 0.6s linear infinite;
 }
@@ -306,48 +525,48 @@
 
 .plc-search-results {
     position: absolute;
-    top: calc(100% + var(--space-xs));
+    top: calc(100% + var(--space-sm));
     left: 0;
     right: 0;
-    background: var(--surface-1);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-lg);
+    background: rgba(7, 30, 73, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     z-index: 10;
     text-align: left;
-    box-shadow: none;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .plc-search-count {
     font-size: 11px;
     font-weight: 600;
-    color: var(--text-tertiary);
+    color: var(--color-accent);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     padding: var(--space-sm) var(--space-md);
-    border-bottom: 1px solid var(--border-default);
-    background: var(--surface-2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .plc-school-item {
-    /* Reset browser button defaults */
     appearance: none;
     -webkit-appearance: none;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--border-default);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 0;
     text-align: left;
     font-family: var(--font-sans);
     cursor: pointer;
-    /* Layout */
     width: 100%;
-    padding: 10px var(--space-md);
+    padding: 12px var(--space-md);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: var(--space-sm);
-    transition: background 150ms;
+    transition: background var(--duration-fast) var(--ease-smooth);
     box-sizing: border-box;
 }
 
@@ -356,7 +575,7 @@
 }
 
 .plc-school-item:hover {
-    background: var(--surface-2);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .plc-school-item-info {
@@ -369,8 +588,8 @@
 
 .plc-school-name {
     font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
+    font-weight: 600;
+    color: var(--text-inverse);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -378,20 +597,19 @@
 
 .plc-school-loc {
     font-size: 12px;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.5);
     line-height: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Badge: 4px radius, NOT pill-shaped per §5.6 */
 .plc-school-badge {
     font-size: 11px;
-    font-weight: 500;
-    color: var(--text-tertiary);
-    background: var(--surface-3);
-    padding: 3px 8px;
+    font-weight: 600;
+    color: var(--color-secondary);
+    background: rgba(146, 208, 93, 0.1);
+    padding: 4px 10px;
     border-radius: var(--radius-sm);
     white-space: nowrap;
     flex-shrink: 0;
@@ -399,13 +617,13 @@
     max-width: 140px;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 16px;
+    line-height: 14px;
 }
 
 .plc-search-empty {
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-xl) var(--space-md);
     font-size: 14px;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.5);
     text-align: center;
 }
 
@@ -415,24 +633,24 @@
     align-items: flex-start;
     justify-content: center;
     gap: var(--space-2xl);
+    z-index: 2;
 }
 
 .plc-stat-item {
     text-align: center;
 }
 
-/* h1 equivalent size — animated count-up */
 .plc-stat-num {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
     color: var(--text-inverse);
-    line-height: 36px;
+    line-height: 40px;
     display: block;
     font-variant-numeric: tabular-nums;
 }
 
 .plc-stat-label {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.5);
     line-height: 16px;
@@ -440,145 +658,415 @@
     margin-top: var(--space-xs);
 }
 
-/* ── HERO → FEATURES WAVE DIVIDER ────────────────────────── */
-.plc-wave-divider {
+/* ── HERO → FEATURES GRADIENT TRANSITION ─────────────────── */
+.plc-hero::after {
+    content: '';
     position: absolute;
-    bottom: -1px;
+    bottom: 0;
     left: 0;
     right: 0;
-    line-height: 0;
-    overflow: hidden;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent, var(--surface-1));
+    z-index: 3;
+    pointer-events: none;
 }
 
-.plc-wave-divider svg {
-    display: block;
-    width: 100%;
-    height: 60px;
+.plc-wave-divider {
+    display: none; /* replaced by smooth CSS gradient */
 }
 
 /* ── FEATURES SECTION ─────────────────────────────────────── */
 .plc-features {
     background: var(--surface-1);
-    padding: var(--space-3xl) var(--space-2xl);
+    padding: var(--space-4xl) var(--space-2xl);
+    position: relative;
 }
 
 .plc-features-inner {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-/* Overline label per §3.2 */
 .plc-section-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-tertiary);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
     display: block;
     margin-bottom: var(--space-sm);
 }
 
-/* h1 size per type scale */
 .plc-features-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 800;
     color: var(--text-primary);
-    line-height: 32px;
-    margin: 0 0 var(--space-sm);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 0 0 var(--space-md);
+    max-width: 600px;
 }
 
 .plc-features-sub {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--text-secondary);
-    line-height: 22px;
-    margin: 0 0 var(--space-xl);
-    max-width: 480px;
+    line-height: 26px;
+    margin: 0 0 var(--space-3xl);
+    max-width: 540px;
 }
 
 .plc-features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-md);
+    gap: var(--space-lg);
+    width: 100%;
 }
 
-/* Cards on surface-1 use surface-2 fill per §5.2 */
-/* Border added because adjacent cards in a grid need separation */
 .plc-feature-card {
     background: var(--surface-2);
-    border-radius: var(--radius-lg);
-    padding: 20px;
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
     border: 1px solid var(--border-default);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
-}
-
-/* Icons: 32px outlined, text-primary, NO colored circles per §8.1 */
-.plc-feature-icon {
-    color: var(--text-primary);
-    display: flex;
-    margin-bottom: var(--space-xs);
-}
-
-/* h3 per type scale */
-.plc-feature-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
-    line-height: 24px;
-    margin: 0;
-}
-
-/* body-sm per type scale */
-.plc-feature-desc {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--text-secondary);
-    line-height: 20px;
-    margin: 0;
-    flex: 1;
+    gap: var(--space-md);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: all var(--duration-normal) var(--ease-smooth);
 }
 
 /* Clickable card variant — hover lift effect */
 .plc-feature-card--link {
     cursor: pointer;
-    transition: transform 200ms, border-color 200ms;
 }
+
 .plc-feature-card--link:hover {
-    border-color: var(--border-strong, #d1d5db);
-    transform: translateY(-3px);
+    border-color: var(--color-accent);
+    background: var(--surface-1);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-8px);
+}
+
+.plc-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.plc-feature-card:hover::before {
+    opacity: 1;
+}
+
+.plc-feature-icon {
+    color: var(--color-primary);
+    display: flex;
+    margin-bottom: var(--space-xs);
+    transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.plc-feature-card:hover .plc-feature-icon {
+    transform: scale(1.1) rotate(2deg);
+    color: var(--color-secondary);
+}
+
+.plc-feature-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 24px;
+    margin: 0;
+}
+
+.plc-feature-desc {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 22px;
+    margin: 0;
+    flex: 1;
 }
 
 .plc-feature-cta {
     font-size: 13px;
-    font-weight: 500;
-    color: var(--text-primary);
+    font-weight: 600;
+    color: var(--color-primary);
     margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color var(--duration-fast) var(--ease-smooth);
 }
 
-/* Badge: 4px radius, surface-3 neutral per §5.6 */
+.plc-feature-card:hover .plc-feature-cta {
+    color: var(--color-secondary);
+}
+
 .plc-feature-badge {
     display: inline-block;
     font-size: 11px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background: var(--surface-3);
-    padding: 2px 8px;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-accent);
+    padding: 3px 10px;
     border-radius: var(--radius-sm);
     align-self: flex-start;
     margin-top: auto;
 }
 
+/* ── WORKFLOW SECTION ── */
+.plc-workflow {
+    background: var(--surface-2);
+    padding: var(--space-4xl) var(--space-2xl);
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+    position: relative;
+    overflow: hidden;
+}
+
+.plc-workflow-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plc-workflow-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 0 0 var(--space-md);
+    max-width: 600px;
+}
+
+.plc-workflow-sub {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 26px;
+    margin-bottom: var(--space-4xl);
+    max-width: 540px;
+}
+
+.plc-workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    position: relative;
+    width: 100%;
+}
+
+.plc-workflow-line {
+    position: absolute;
+    top: 60px;
+    left: 80px;
+    right: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.plc-workflow-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xl);
+    padding: 32px 24px;
+    position: relative;
+    z-index: 2;
+    box-shadow: var(--shadow-card);
+    transition: all var(--duration-normal) var(--ease-smooth);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.plc-workflow-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-6px);
+}
+
+.plc-workflow-num {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-primary);
+    background: var(--color-accent);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+    margin-bottom: var(--space-xs);
+}
+
+.plc-workflow-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background: rgba(146, 208, 93, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    border: 1px solid rgba(146, 208, 93, 0.2);
+    transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.plc-workflow-card:hover .plc-workflow-icon-box {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-secondary);
+}
+
+.plc-workflow-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-xs);
+}
+
+.plc-workflow-card-desc {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 20px;
+    margin: 0;
+}
+
+/* ── FAQ SECTION ── */
+.plc-faq {
+    background: var(--surface-1);
+    padding: var(--space-4xl) var(--space-2xl);
+}
+
+.plc-faq-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.plc-faq-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 0 0 var(--space-4xl);
+}
+
+.plc-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: left;
+}
+
+.plc-faq-item {
+    border: 1px solid var(--border-default);
+    background: var(--surface-2);
+    border-radius: var(--radius-xl);
+    padding: 24px var(--space-lg);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.plc-faq-item:hover {
+    border-color: var(--color-accent);
+    background: var(--surface-1);
+    box-shadow: var(--shadow-card);
+}
+
+.plc-faq-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.plc-faq-item--open {
+    border-color: var(--color-primary);
+    background: var(--surface-1);
+    box-shadow: var(--shadow-card);
+}
+
+.plc-faq-item--open::before {
+    opacity: 1;
+}
+
+.plc-faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.plc-faq-toggle {
+    font-size: 24px;
+    color: var(--color-primary);
+    line-height: 1;
+    font-family: inherit;
+    font-weight: 300;
+    transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+.plc-faq-item--open .plc-faq-toggle {
+    color: var(--color-secondary);
+}
+
+.plc-faq-answer {
+    overflow: hidden;
+}
+
+.plc-faq-answer p {
+    margin: var(--space-md) 0 0 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 24px;
+}
+
 /* ── FOOTER — per DESIGN.md §5.9 ─────────────────────────── */
 .plc-footer {
-    background: var(--color-primary);
-    padding: var(--space-3xl) var(--space-2xl) 0;
+    background-color: var(--color-primary);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(146, 208, 93, 0.12) 0%, transparent 60%),
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 100% 100%, 48px 48px, 48px 48px;
+    background-position: center top;
+    padding: var(--space-5xl) var(--space-2xl) 0;
     color: var(--text-inverse);
+    position: relative;
+    overflow: hidden;
 }
 
 .plc-footer-inner {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -588,60 +1076,89 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: var(--space-2xl);
-    padding-bottom: var(--space-2xl);
+    padding-bottom: var(--space-3xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.plc-footer-tagline-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 380px;
+    flex-shrink: 0;
+    text-align: left;
 }
 
 .plc-footer-tagline {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-inverse);
     line-height: 40px;
-    letter-spacing: -0.3px;
+    letter-spacing: -1px;
     margin: 0;
-    max-width: 280px;
-    flex-shrink: 0;
+}
+
+.plc-footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-inverse);
 }
 
 .plc-footer-nav {
     display: flex;
-    gap: var(--space-2xl);
+    gap: var(--space-3xl);
 }
 
 .plc-footer-nav-col {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-md);
+    text-align: left;
+}
+
+.plc-footer-nav-col h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 var(--space-xs);
 }
 
 .plc-footer-nav-col a,
 .plc-footer-nav-col span {
     font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    transition: color 150ms;
+    transition: color var(--duration-fast) var(--ease-smooth);
     cursor: pointer;
-    line-height: 24px;
+    line-height: 20px;
 }
 
 .plc-footer-nav-col a:hover,
 .plc-footer-nav-col span:hover {
-    color: #ffffff;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    color: var(--color-secondary);
 }
 
 /* Row 2: Oversized brand display */
 .plc-footer-brand-display {
-    font-size: 120px;
-    font-weight: 800;
-    color: var(--text-inverse);
-    letter-spacing: -2px;
+    font-size: clamp(60px, 14vw, 160px);
+    font-weight: 900;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -4px;
     line-height: 1;
     padding: var(--space-xl) 0;
     user-select: none;
     overflow: hidden;
     white-space: nowrap;
+    text-align: center;
 }
 
 /* Row 3: Bottom bar */
@@ -649,29 +1166,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-md) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .plc-footer-copy {
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.45);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
     margin: 0;
 }
 
 .plc-footer-legal {
     display: flex;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
 }
 
 .plc-footer-legal a,
 .plc-footer-legal span {
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.45);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
-    transition: color 150ms;
+    transition: color var(--duration-fast) var(--ease-smooth);
     cursor: pointer;
 }
 
@@ -685,9 +1202,11 @@
     .plc-features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .plc-footer-brand-display {
-        font-size: 80px;
+    .plc-workflow-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .plc-workflow-line {
+        display: none;
     }
 }
 
@@ -697,38 +1216,38 @@
     }
 
     .pl-root .plc-hero {
-        padding-top: calc(56px + var(--space-lg));
+        padding-top: calc(64px + var(--space-lg));
     }
 
     .plc-hero-title {
-        font-size: 32px;
-        line-height: 40px;
-        letter-spacing: -0.5px;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -1px;
     }
 
     .plc-stats {
         gap: var(--space-xl);
     }
 
-    .plc-wave-divider svg {
-        height: 32px;
-    }
-
     .plc-features {
-        padding: var(--space-2xl) var(--space-md);
+        padding: var(--space-3xl) var(--space-md);
     }
 
     .plc-features-title {
-        font-size: 20px;
-        line-height: 28px;
+        font-size: 28px;
+        line-height: 36px;
     }
 
     .plc-features-grid {
         grid-template-columns: 1fr;
     }
 
+    .plc-workflow-steps {
+        grid-template-columns: 1fr;
+    }
+
     .plc-footer {
-        padding: var(--space-2xl) var(--space-md) 0;
+        padding: var(--space-3xl) var(--space-md) 0;
     }
 
     .plc-footer-top {
@@ -797,5 +1316,5 @@
 /* Offset for fixed public navbar on landing profile/detail pages */
 .pl-root .lkp-root,
 .pl-root .kp-root {
-    padding-top: calc(56px + 2rem);
+    padding-top: calc(64px + 2rem);
 }

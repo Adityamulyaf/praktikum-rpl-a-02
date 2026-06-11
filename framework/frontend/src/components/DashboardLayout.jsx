@@ -5,6 +5,9 @@ import { getUnreadCount } from '../api/notification';
 import Logo from './Logo';
 import './DashboardLayout.css';
 
+// Import Framer Motion for unified page transition animations
+import { motion, AnimatePresence } from 'framer-motion';
+
 
 /**
  * Shared dashboard shell untuk semua role.
@@ -147,13 +150,35 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
           </aside>
 
           <main className="dl-content">
-            {children(activeMenu, setActiveMenu)}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeMenu}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.22, ease: 'easeInOut' }}
+                style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}
+              >
+                {children(activeMenu, setActiveMenu)}
+              </motion.div>
+            </AnimatePresence>
           </main>
         </div>
       ) : (
         /* Non-sidebar layout — back button di topbar, atau isHome full-width */
         <main className={`dl-content${isHome ? ' dl-content-home' : ''}`}>
-          {children(activeMenu, setActiveMenu)}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeMenu}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.22, ease: 'easeInOut' }}
+              style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}
+            >
+              {children(activeMenu, setActiveMenu)}
+            </motion.div>
+          </AnimatePresence>
         </main>
       )}
     </div>

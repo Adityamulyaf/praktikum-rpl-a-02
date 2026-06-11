@@ -8,14 +8,14 @@
   padding-top: 56px;
 }
 
-/* ── TOP BAR — white bg, full-width → floating rounded on scroll */
+/* ── TOP BAR — glassmorphic, full-width → floating rounded on scroll */
 .dl-topbar {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  height: 56px;
-  padding: 0 var(--space-md);
-  background: var(--surface-1, #FFFFFF);
+  height: 60px;
+  padding: 0 var(--space-xl);
+  background: rgba(255, 255, 255, 0.8);
   border: 1px solid var(--border-default);
   border-top: none;
   position: fixed;
@@ -25,16 +25,22 @@
   z-index: 50;
   flex-shrink: 0;
   border-radius: 0;
-  transition: top 300ms, left 300ms, right 300ms, border-radius 300ms, box-shadow 300ms;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--duration-normal) var(--ease-smooth);
 }
 
-.dl-topbar--scrolled {
-  top: 10px;
-  left: 16px;
-  right: 16px;
-  border-radius: 14px;
+.dl-topbar.dl-topbar--scrolled {
+  top: 12px;
+  left: 24px;
+  right: 24px;
+  height: 56px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--border-default);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-glass);
 }
 
 .dl-topbar-brand {
@@ -155,9 +161,9 @@
 .dl-sidebar {
   width: 240px;
   flex-shrink: 0;
-  background: var(--color-primary);
-  border-right: none;
-  padding: var(--space-md) 0;
+  background: linear-gradient(to bottom, var(--color-primary) 0%, #030c1d 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--space-lg) 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -184,32 +190,34 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  width: 100%;
-  padding: 8px var(--space-md);
-  background: none;
+  width: calc(100% - var(--space-lg));
+  margin: 0 var(--space-md);
+  padding: 10px var(--space-md);
+  background: transparent;
   border: none;
-  border-radius: 0;
-  border-left: 3px solid transparent;
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  transition: background 150ms, color 150ms;
+  color: rgba(255, 255, 255, 0.65);
+  transition: all var(--duration-fast) var(--ease-smooth);
   text-align: left;
   white-space: nowrap;
 }
 
 .dl-nav-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
+  transform: translateX(2px);
 }
 
 .dl-nav-item--active {
-  background: none;
-  color: #ffffff;
+  background: rgba(146, 208, 93, 0.15) !important;
+  color: var(--color-secondary) !important;
   font-weight: 600;
-  border-left-color: var(--color-secondary);
+  border-left: none;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
 }
 
 /* ── CONTENT ──────────────────────────────────────────────── */
@@ -219,6 +227,20 @@
   background: var(--surface-2);
   min-width: 0;
   overflow-y: auto;
+  position: relative;
+}
+
+.dl-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
 /* Home mode: no padding, landingpage fills full width */
@@ -226,6 +248,10 @@
   padding: 0;
   background: var(--surface-1);
   overflow-y: visible;
+}
+
+.dl-content.dl-content-home::before {
+  display: none;
 }
 
 /* ── PLACEHOLDER CARD ─────────────────────────────────────── */
