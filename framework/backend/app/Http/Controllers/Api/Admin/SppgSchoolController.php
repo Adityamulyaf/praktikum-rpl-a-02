@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use App\Models\SppgProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,23 @@ class SppgSchoolController extends Controller
             'school_ids'   => 'required|array',
             'school_ids.*' => 'integer|exists:schools,id',
         ]);
+
+        // Validate all schools are in the same kabupaten/kota as the SPPG
+        $outOfDistrict = School::whereIn('id', $request->school_ids)
+            ->where(function ($q) use ($sppg) {
+                $q->where('district', 'not ilike', $sppg->district)
+                  ->where('district', 'not ilike', 'Kab. ' . $sppg->district)
+                  ->where('district', 'not ilike', 'Kota ' . $sppg->district)
+                  ->where('district', 'not ilike', 'Kab. ' . $sppg->district . '%')
+                  ->where('district', 'not ilike', 'Kota ' . $sppg->district . '%');
+            })
+            ->pluck('name');
+
+        if ($outOfDistrict->isNotEmpty()) {
+            return response()->json([
+                'message' => "Sekolah berikut berada di luar wilayah SPPG ({$sppg->district}): {$outOfDistrict->implode(', ')}."
+            ], 422);
+        }
 
         // Check if any of these schools are already connected to another SPPG
         $alreadyConnected = DB::table('sppg_schools')
@@ -47,6 +65,22 @@ class SppgSchoolController extends Controller
         $request->validate([
             'school_id' => 'required|integer|exists:schools,id',
         ]);
+
+        // Validate school is in the same kabupaten/kota as the SPPG
+        $school = School::find($request->school_id);
+        if ($school) {
+            $d = $sppg->district;
+            $match = strcasecmp($school->district, $d) === 0
+                || strcasecmp($school->district, 'Kab. ' . $d) === 0
+                || strcasecmp($school->district, 'Kota ' . $d) === 0
+                || stripos($school->district, 'Kab. ' . $d) === 0
+                || stripos($school->district, 'Kota ' . $d) === 0;
+            if (!$match) {
+                return response()->json([
+                    'message' => "Sekolah '{$school->name}' berada di luar wilayah SPPG ({$sppg->district})."
+                ], 422);
+            }
+        }
 
         // Check if this school is already connected to another SPPG
         $alreadyConnected = DB::table('sppg_schools')

@@ -1,38 +1,36 @@
 import { useState, useEffect } from 'react';
-import { getSchools, getSchoolProvinces, syncSppgSchools } from '../../api/admin';
+import { getSchools, syncSppgSchools } from '../../api/admin';
 import './admin.css';
 
 export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
   const [allSchools, setAllSchools] = useState([]);
   const [assigned, setAssigned]     = useState(new Set());
-  const [provinces, setProvinces]   = useState([]);
-  const [province, setProvince]     = useState('');
   const [search, setSearch]         = useState('');
   const [loading, setLoading]       = useState(false);
   const [saving, setSaving]         = useState(false);
   const [error, setError]           = useState('');
 
-  // load provinces + pre-set assigned schools on mount
-  useEffect(() => {
-    getSchoolProvinces().then(({ data }) => setProvinces(data));
-    setAssigned(new Set((sppg.schools ?? []).map((s) => s.id)));
-  }, [sppg]);
+  const sppgProvince = sppg.province ?? '';
+  const sppgDistrict = sppg.district ?? '';
 
-  // load schools when province changes
+  // load schools filtered by SPPG's kabupaten/kota on mount
   useEffect(() => {
-    if (!province) {
-      setAllSchools([]);
+    setAssigned(new Set((sppg.schools ?? []).map((s) => s.id)));
+
+    if (!sppgDistrict) {
+      setError('SPPG tidak memiliki data wilayah/kabupaten.');
       return;
     }
+
     setLoading(true);
-    getSchools({ province, per_page: 9999 }).then(({ data }) => {
+    getSchools({ province: sppgProvince, district: sppgDistrict, per_page: 9999 }).then(({ data }) => {
       setAllSchools(Array.isArray(data) ? data : data.data ?? []);
       setLoading(false);
     }).catch(() => {
       setError('Gagal memuat daftar sekolah.');
       setLoading(false);
     });
-  }, [province]);
+  }, [sppg, sppgProvince, sppgDistrict]);
 
   const toggle = (id) => {
     const school = allSchools.find((s) => s.id === id);
@@ -79,33 +77,24 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
         <div className="adm-modal-body">
           {error && <p className="adm-error-msg">{error}</p>}
 
-          {/* Province selector */}
-          <select
-            className="adm-search"
-            value={province}
-            onChange={(e) => { setProvince(e.target.value); setSearch(''); }}
-            style={{ marginBottom: '8px' }}
-          >
-            <option value="">-- Pilih Provinsi --</option>
-            {provinces.map((p) => (
-              <option key={p} value={p}>{p}</option>
-            ))}
-          </select>
+          {/* Wilayah info (read-only, based on SPPG kabupaten) */}
+          <div style={{ marginBottom: '8px', padding: '8px 12px', background: '#f0f4ff', borderRadius: '6px', fontSize: '0.9rem', color: '#334155' }}>
+            <strong>Wilayah:</strong> {sppgDistrict}, {sppgProvince}
+            <span style={{ marginLeft: '8px', fontSize: '0.8rem', color: '#64748b' }}>
+              (Hanya menampilkan sekolah di kabupaten/kota yang sama)
+            </span>
+          </div>
 
           {/* Search within province */}
-          {province && (
-            <input
-              className="adm-search"
-              placeholder="Cari nama sekolah atau kecamatan..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          )}
+          <input
+            className="adm-search"
+            placeholder="Cari nama sekolah atau kecamatan..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
           {/* School list */}
-          {!province ? (
-            <p className="adm-empty">Pilih provinsi untuk melihat daftar sekolah.</p>
-          ) : loading ? (
+          {loading ? (
             <p className="adm-loading">Memuat data...</p>
           ) : (
             <div className="adm-school-list">

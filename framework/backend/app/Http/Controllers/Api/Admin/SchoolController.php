@@ -18,6 +18,18 @@ class SchoolController extends Controller
         if ($request->filled('province')) {
             $query->where('province', $request->province);
         }
+        if ($request->filled('district')) {
+            // Normalize: SPPG stores "KEBUMEN", schools store "Kab. Kebumen"
+            // Match case-insensitively, ignoring "Kab."/"Kota" prefix
+            $d = trim($request->district);
+            $query->where(function ($q) use ($d) {
+                $q->where('district', 'ilike', $d)
+                  ->orWhere('district', 'ilike', 'Kab. ' . $d)
+                  ->orWhere('district', 'ilike', 'Kota ' . $d)
+                  ->orWhere('district', 'ilike', 'Kab. ' . $d . '%')
+                  ->orWhere('district', 'ilike', 'Kota ' . $d . '%');
+            });
+        }
 
         return response()->json(
             $query->orderBy('province')->orderBy('district')->orderBy('name')
