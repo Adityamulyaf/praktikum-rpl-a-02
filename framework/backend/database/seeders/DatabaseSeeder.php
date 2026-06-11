@@ -79,7 +79,19 @@ class DatabaseSeeder extends Seeder
 
         // ── SEEDING DATA TAMBAHAN UNTUK TESTING EVALUASI AI (BL-13) ──
 
-        $firstSchool = School::orderBy('id')->first();
+        $testSppgUser = User::where('email', 'sppg@halombg.com')->first();
+        $testSppgProfile = null;
+        $firstSchool = null;
+        if ($testSppgUser) {
+            $testSppgProfile = \App\Models\SppgProfile::where('user_id', $testSppgUser->ssid)->first();
+            if ($testSppgProfile) {
+                $district = strtolower(trim(preg_replace('/^(Kab\.|Kota|kab\.|kota)\s*/', '', $testSppgProfile->district)));
+                $firstSchool = School::whereRaw("LOWER(district) LIKE ?", ["%{$district}%"])->orderBy('id')->first();
+            }
+        }
+        if (!$firstSchool) {
+            $firstSchool = School::orderBy('id')->first();
+        }
         
         // 1. Lengkapi profile siswa@halombg.com
         $siswaUser = User::where('email', 'siswa@halombg.com')->first();
@@ -106,10 +118,8 @@ class DatabaseSeeder extends Seeder
         }
 
         // 3. Masukkan Menu dan Ulasan Siswa untuk Dapur sppg@halombg.com
-        $testSppgUser = User::where('email', 'sppg@halombg.com')->first();
-        if ($testSppgUser) {
-            $testSppgProfile = \App\Models\SppgProfile::where('user_id', $testSppgUser->ssid)->first();
-            if ($testSppgProfile && $firstSchool) {
+        if ($testSppgUser && $testSppgProfile) {
+            if ($firstSchool) {
                 // Pastikan sekolah pertama terhubung dengan SPPG test ini
                 \Illuminate\Support\Facades\DB::table('sppg_schools')->insertOrIgnore([
                     'sppg_id'   => $testSppgProfile->id,

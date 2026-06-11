@@ -91,6 +91,11 @@ class SppgSchoolSeeder extends Seeder
         $normSppg   = $this->buildNormExpr('sp');
         $normSchool = $this->buildNormExpr('s');
 
+        // Create temporary functional index to optimize the seeding query
+        $this->command->info("Membuat indeks fungsional sementara untuk mempercepat pencocokan...");
+        $schoolExpr = "UPPER(TRIM(REGEXP_REPLACE(TRIM(district), '^(Kab\\\\.|Kota\\\\.|Kabupaten |Kota )\\\\s*', '', 'i')))";
+        DB::statement("CREATE INDEX IF NOT EXISTS temp_schools_norm_dist_idx ON schools (($schoolExpr))");
+
         $this->command->info("Mencocokkan {$sppgCount} SPPG dengan {$schoolCount} sekolah berdasarkan Kab./Kota...");
         $this->command->info("Setiap SPPG akan mendapat 6–8 sekolah secara acak dari daerahnya.");
 
@@ -102,18 +107,25 @@ class SppgSchoolSeeder extends Seeder
                 SELECT id, (FLOOR(6 + RANDOM() * 3))::int AS lim
                 FROM sppg_profiles
             ),
+            norm_sppg AS (
+                SELECT id, district, {$normSppg} AS norm_dist
+                FROM sppg_profiles sp
+                WHERE district IS NOT NULL AND TRIM(district) <> ''
+            ),
+            norm_schools AS (
+                SELECT id, district, {$normSchool} AS norm_dist
+                FROM schools s
+                WHERE district IS NOT NULL AND TRIM(district) <> ''
+            ),
             ranked AS (
                 SELECT
                     sp.id          AS sppg_id,
                     s.id           AS school_id,
                     sl.lim,
                     ROW_NUMBER() OVER (PARTITION BY sp.id ORDER BY RANDOM()) AS rn
-                FROM sppg_profiles sp
+                FROM norm_sppg sp
                 JOIN sppg_limits sl ON sl.id = sp.id
-                JOIN schools s
-                  ON {$normSppg} = {$normSchool}
-                 AND sp.district IS NOT NULL AND TRIM(sp.district) <> ''
-                 AND s.district  IS NOT NULL AND TRIM(s.district)  <> ''
+                JOIN norm_schools s ON sp.norm_dist = s.norm_dist
             )
             INSERT INTO sppg_schools (sppg_id, school_id)
             SELECT sppg_id, school_id
@@ -123,6 +135,9 @@ class SppgSchoolSeeder extends Seeder
         ";
 
         DB::statement($sql);
+
+        // Drop temporary functional index
+        DB::statement("DROP INDEX IF EXISTS temp_schools_norm_dist_idx");
 
         $totalLinked   = DB::table('sppg_schools')->count();
         $matchedSppg   = DB::table('sppg_schools')->distinct()->count('sppg_id');

@@ -14,8 +14,23 @@ class DapodikStudentSeeder extends Seeder
         // Truncate first
         DB::table('dapodik_students')->truncate();
 
-        // Get first 5 schools
-        $schools = School::orderBy('id')->take(5)->get();
+        // Get first 5 schools in the same district as the test SPPG
+        $testSppgUser = \App\Models\User::where('email', 'sppg@halombg.com')->first();
+        $schools = collect();
+        if ($testSppgUser) {
+            $testSppgProfile = \App\Models\SppgProfile::where('user_id', $testSppgUser->ssid)->first();
+            if ($testSppgProfile) {
+                $district = strtolower(trim(preg_replace('/^(Kab\.|Kota|kab\.|kota)\s*/', '', $testSppgProfile->district)));
+                $schools = School::whereRaw("LOWER(district) LIKE ?", ["%{$district}%"])
+                    ->orderBy('id')
+                    ->take(5)
+                    ->get();
+            }
+        }
+
+        if ($schools->isEmpty()) {
+            $schools = School::orderBy('id')->take(5)->get();
+        }
 
         if ($schools->isEmpty()) {
             $this->command->error('Tidak ada sekolah terdaftar di database untuk men-seed dapodik_students.');
