@@ -3,16 +3,64 @@
 .login-root {
   position: fixed;
   inset: 0;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: var(--space-xl) var(--space-md);
   box-sizing: border-box;
   font-family: var(--font-sans);
   font-size: 14px;
-background:
-    linear-gradient(rgba(7, 30, 73, 0.62), rgba(7, 30, 73, 0.62)),
-    url('../../assets/mbg-ilustration.webp') center / cover no-repeat;
+  background: var(--color-primary);
+  z-index: 99;
+}
+
+@keyframes login-bg-pulse {
+  0% {
+    filter: brightness(0.42) contrast(1.05) blur(5px);
+    transform: scale(1.03);
+  }
+  50% {
+    filter: brightness(0.48) contrast(1.05) blur(9px);
+    transform: scale(1.07);
+  }
+  100% {
+    filter: brightness(0.42) contrast(1.05) blur(5px);
+    transform: scale(1.03);
+  }
+}
+
+.login-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/mbg-ilustration.webp') center / cover no-repeat;
+  z-index: 0;
+  pointer-events: none;
+  animation: login-bg-pulse 16s ease-in-out infinite;
+}
+
+.login-glow {
+  position: absolute;
+  top: var(--glow-y, 50%);
+  left: var(--glow-x, 50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(146, 208, 93, 0.12) 0%, rgba(181, 224, 234, 0.04) 50%, transparent 100%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+  transition: top var(--duration-slow) var(--ease-smooth), left var(--duration-slow) var(--ease-smooth);
+  filter: blur(40px);
+}
+
+.login-blockchain-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ── CENTER WRAPPER ───────────────────────────────────── */
@@ -23,6 +71,8 @@ background:
   display: flex;
   flex-direction: column;
   margin: auto;
+  position: relative;
+  z-index: 2;
 }
 
 /* ── BRAND ────────────────────────────────────────────── */
@@ -39,10 +89,14 @@ background:
 
 .lp-card {
   width: 100%;
-  background: var(--surface-1);
-  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   margin-bottom: var(--space-sm);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .lp-card-body {
@@ -125,18 +179,18 @@ background:
 .lp-input {
   display: block;
   width: 100%;
-  height: 40px;
-  padding: 8px 12px;
+  height: 42px;
+  padding: 10px 14px;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 400;
   color: var(--text-primary);
-  background: var(--surface-1);
+  background: var(--surface-2);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   outline: none;
   box-sizing: border-box;
-  transition: border-color 150ms;
+  transition: all var(--duration-normal) var(--ease-smooth);
   -webkit-appearance: none;
   appearance: none;
 }
@@ -147,8 +201,9 @@ background:
 
 .lp-input:focus {
   border-color: var(--color-primary);
-  outline: 2px solid rgba(7, 30, 73, 0.15);
-  outline-offset: 1px;
+  background: var(--surface-1);
+  box-shadow: 0 0 0 3px rgba(7, 30, 73, 0.1);
+  outline: none;
 }
 
 .lp-input.with-eye { padding-right: 40px; }
@@ -192,23 +247,27 @@ background:
   justify-content: center;
   gap: var(--space-sm);
   width: 100%;
-  height: 40px;
+  height: 44px;
   padding: 0 20px;
   background: var(--color-primary);
   color: var(--text-inverse);
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: opacity 150ms;
+  transition: all var(--duration-normal) var(--ease-smooth);
   margin-top: var(--space-sm);
   box-sizing: border-box;
 }
 
-.lp-btn:hover:not(:disabled) { opacity: 0.88; }
-.lp-btn:active:not(:disabled) { opacity: 0.8; }
+.lp-btn:hover:not(:disabled) {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+.lp-btn:active:not(:disabled) { transform: translateY(0); }
 .lp-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .lp-spinner {
@@ -248,7 +307,7 @@ background:
   justify-content: center;
   gap: var(--space-sm);
   width: 100%;
-  height: 40px;
+  height: 44px;
   background: var(--surface-1);
   color: var(--text-primary);
   border: 1px solid var(--border-default);
@@ -258,12 +317,13 @@ background:
   font-weight: 500;
   cursor: pointer;
   box-sizing: border-box;
-  transition: background 150ms, border-color 150ms;
+  transition: all var(--duration-fast) var(--ease-smooth);
 }
 
 .lp-google-btn:hover {
   background: var(--surface-2);
   border-color: var(--border-strong);
+  transform: translateY(-1px);
 }
 
 /* ── SWITCH LINK ──────────────────────────────────────── */
@@ -410,13 +470,24 @@ background:
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: opacity 150ms;
+  transition: all var(--duration-normal) var(--ease-smooth);
   font-family: var(--font-sans);
   text-align: center;
 }
 
 .rg-role-card:hover {
-  opacity: 0.88;
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.rg-role-card:hover .rg-role-label {
+  color: var(--color-primary);
+}
+
+.rg-role-card:hover .rg-role-desc {
+  color: rgba(7, 30, 73, 0.7);
 }
 
 .rg-role-icon  { font-size: 28px; line-height: 1; }
