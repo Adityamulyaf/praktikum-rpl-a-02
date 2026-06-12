@@ -13,18 +13,18 @@ Untuk mendemonstrasikan alur registrasi mandiri, Anda akan mendaftarkan akun bar
 | Role | Langkah Registrasi | Data Input |
 | :--- | :--- | :--- |
 | **Siswa** | Klik **Daftar** > Pilih **Siswa** | **NISN**: `0080000102`<br>**Nama**: (Otomatis: *Budi Santoso*) <br>**Email**: `budi.baru@example.com`<br>**Password**: `password` |
-| **Guru** | Klik **Daftar** > Pilih **Guru** | **Nama**: `Guru Baru Demo`<br>**Email**: `guru.baru@example.com`<br>**Sekolah**: Cari dan pilih `SMP SATAP KAGI`<br>**NIP**: `198710102010121002`<br>**Password**: `password` |
+| **Guru** | Klik **Daftar** > Pilih **Guru** | **Nama**: `Guru Baru Demo`<br>**Email**: `guru.baru@example.com`<br>**Sekolah**: Cari dan pilih `SD NEGERI 1 BOCOR`<br>**NIP**: `198710102010121002`<br>**Password**: `password` |
 
 ### 2. Akun Bawaan Sistem (Pre-seeded)
 
 | Role | Email | Password | Keterangan |
 | :--- | :--- | :--- | :--- |
-| **SPPG** | `sppg@halombg.com` | `password` | Akun operator dapur `SPPG Kebumen Buayan Rangkah` (melayani SMP SATAP KAGI) |
+| **SPPG** | `sppg@halombg.com` | `password` | Akun operator dapur `SPPG Kebumen Buayan Rangkah` (melayani SD NEGERI 1 BOCOR) |
 | **Admin** | `admin@halombg.com` | `password` | Akun administrator nasional untuk moderasi ulasan |
 
 > [!IMPORTANT]
 > **Dapur Utama Pilihan:** `SPPG Kebumen Buayan Rangkah`  
-> **Sekolah Pilihan:** `SMP SATAP KAGI` (Kab. Tolikara, Prov. Papua)  
+> **Sekolah Pilihan:** `SD NEGERI 1 BOCOR` (Kab. Kebumen, Prov. Jawa Tengah)  
 > *Kedua entitas ini telah memiliki data historis 3 hari terakhir (menu, ulasan siswa, dan hasil analisis sentimen AI) yang siap didemokan.*
 
 ---
@@ -40,8 +40,8 @@ Jalankan demo dengan alur cerita berkesinambungan dari registrasi, publik, siswa
    - Tunjukkan visual beranda baru dengan logo **HaloMBG** (gambar maskot anak laki-laki bulat transparan).
    - Scroll ke bawah untuk menunjukkan statistik nasional (Sekolah, Provinsi, Dapur SPPG).
 2. **Pencarian Sekolah**
-   - Di kolom pencarian hero, ketik `"Kagi"` atau `"Tolikara"`.
-   - Pilih **SMP SATAP KAGI**.
+   - Di kolom pencarian hero, ketik `"Bocor"` atau `"Kebumen"`.
+   - Pilih **SD NEGERI 1 BOCOR**.
    - Halaman akan memuat profil dapur **SPPG Kebumen Buayan Rangkah** yang melayani sekolah tersebut.
 3. **Eksplorasi Profil Publik Dapur**
    - **Tab Menu Harian**: Tunjukkan foto makanan riil, komponen menu, serta informasi kalori, karbohidrat, protein, dan lemak.
@@ -56,7 +56,7 @@ Jalankan demo dengan alur cerita berkesinambungan dari registrasi, publik, siswa
 
 1. **Registrasi Akun Siswa Baru**
    - Di halaman utama, klik **Daftar** lalu pilih **Siswa**.
-   - Masukkan NISN `0080000102` lalu klik **Cari**. Tunjukkan bahwa sistem berhasil memverifikasi nama siswa (**Budi Santoso**) dari **SMP SATAP KAGI** secara real-time dari database Dapodik.
+   - Masukkan NISN `0080000102` lalu klik **Cari**. Tunjukkan bahwa sistem berhasil memverifikasi nama siswa (**Budi Santoso**) dari **SD NEGERI 1 BOCOR** secara real-time dari database Dapodik.
    - Lengkapi pendaftaran dengan email `budi.baru@example.com` dan kata sandi `password`. Klik **Daftar**.
 2. **Dashboard Gizi Siswa**
    - Setelah pendaftaran sukses, Anda akan otomatis masuk ke dashboard siswa.
@@ -79,7 +79,7 @@ Jalankan demo dengan alur cerita berkesinambungan dari registrasi, publik, siswa
    - Lengkapi formulir pendaftaran:
      - **Nama**: `Guru Baru Demo`
      - **Email**: `guru.baru@example.com`
-     - **Sekolah**: Ketik `"Kagi"` dan pilih `SMP SATAP KAGI` dari pilihan otomatis.
+     - **Sekolah**: Ketik `"Bocor"` dan pilih `SD NEGERI 1 BOCOR` dari pilihan otomatis.
      - **NIP**: `198710102010121002`
      - **Password**: `password`
    - Klik **Daftar**.

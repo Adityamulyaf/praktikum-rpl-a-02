@@ -138,27 +138,27 @@ export default function SiswaRegisterForm({ onSuccess, onBack }) {
               </thead>
               <tbody>
                 <tr>
-                  <td>SMP SATAP KAGI</td>
+                  <td>SD NEGERI 1 BOCOR</td>
                   <td><code>0080000101</code></td>
                   <td>Ahmad Pratama</td>
                 </tr>
                 <tr>
-                  <td>SD YPPGI WURINERI</td>
+                  <td>SD NEGERI 2 LUNDONG</td>
                   <td><code>0080000202</code></td>
                   <td>Budi Santoso</td>
                 </tr>
                 <tr>
-                  <td>SMAN BOKONDINI</td>
+                  <td>SD NEGERI 1 KARANGREJO</td>
                   <td><code>0080000315</code></td>
                   <td>Oki Saputra</td>
                 </tr>
                 <tr>
-                  <td>SD INPRES KUARI</td>
+                  <td>SD NEGERI 4 JATIJAJAR</td>
                   <td><code>0080000424</code></td>
                   <td>Zainal Lubis</td>
                 </tr>
                 <tr>
-                  <td>SMAS YPPGI KARUBAGA</td>
+                  <td>SMP PGRI 1 PURING</td>
                   <td><code>0080000529</code></td>
                   <td>Farhan Tampubolon</td>
                 </tr>

@@ -22,7 +22,7 @@ Hal ini memudahkan pengujian secara menyeluruh:
 
 ## Daftar NISN Per Sekolah
 
-### 1. SMP SATAP KAGI (ID: 1)
+### 1. SD NEGERI 1 BOCOR (Indeks: 1)
 *   **Rentang NISN:** `0080000101` s.d. `0080000130`
 *   **Contoh Siswa:**
     *   `0080000101` - Ahmad Pratama
@@ -30,7 +30,7 @@ Hal ini memudahkan pengujian secara menyeluruh:
     *   `0080000103` - Siti Rahmawati
     *   ... (lihat seeder untuk daftar lengkap)
 
-### 2. SD YPPGI WURINERI (ID: 2)
+### 2. SD NEGERI 2 LUNDONG (Indeks: 2)
 *   **Rentang NISN:** `0080000201` s.d. `0080000230`
 *   **Contoh Siswa:**
     *   `0080000201` - Ahmad Pratama
@@ -38,7 +38,7 @@ Hal ini memudahkan pengujian secara menyeluruh:
     *   `0080000220` - Utami Astuti
     *   ...
 
-### 3. SMAN BOKONDINI (ID: 3)
+### 3. SD NEGERI 1 KARANGREJO (Indeks: 3)
 *   **Rentang NISN:** `0080000301` s.d. `0080000330`
 *   **Contoh Siswa:**
     *   `0080000315` - Oki Saputra
@@ -46,7 +46,7 @@ Hal ini memudahkan pengujian secara menyeluruh:
     *   `0080000330` - Gita Wijaya
     *   ...
 
-### 4. SD INPRES KUARI (ID: 4)
+### 4. SD NEGERI 4 JATIJAJAR (Indeks: 4)
 *   **Rentang NISN:** `0080000401` s.d. `0080000430`
 *   **Contoh Siswa:**
     *   `0080000405` - Eko Wibowo
@@ -54,7 +54,7 @@ Hal ini memudahkan pengujian secara menyeluruh:
     *   `0080000424` - Zainal Lubis
     *   ...
 
-### 5. SMAS YPPGI KARUBAGA (ID: 5)
+### 5. SMP PGRI 1 PURING (Indeks: 5)
 *   **Rentang NISN:** `0080000501` s.d. `0080000530`
 *   **Contoh Siswa:**
     *   `0080000507` - Guntur Kusuma
