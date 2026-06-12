@@ -125,13 +125,21 @@ class DatabaseSeeder extends Seeder
                     'school_id' => $firstSchool->id,
                 ]);
 
-                // Ambil gambar menu dari aset frontend dan ubah ke base64
-                $photoPath = base_path('../frontend/src/assets/menu-mbg.png');
-                $photoBase64 = null;
-                if (file_exists($photoPath)) {
-                    $photoData = file_get_contents($photoPath);
-                    $photoBase64 = 'data:image/png;base64,' . base64_encode($photoData);
-                }
+                 // Ambil gambar menu dari aset frontend dan ubah ke base64
+                 $photoPath = database_path('seeders/data/mbg2.jpg');
+                 $photoBase64 = null;
+                 if (file_exists($photoPath)) {
+                     $photoData = file_get_contents($photoPath);
+                     $photoBase64 = 'data:image/jpeg;base64,' . base64_encode($photoData);
+                 }
+ 
+                 // Ambil gambar status distribusi dari aset frontend dan ubah ke base64
+                 $distPath = database_path('seeders/data/distribusi-mbg.png');
+                 $distBase64 = null;
+                 if (file_exists($distPath)) {
+                     $distData = file_get_contents($distPath);
+                     $distBase64 = 'data:image/png;base64,' . base64_encode($distData);
+                 }
 
                 // Seed menu dan ulasan untuk 3 hari terakhir (Hari ini, Kemarin, dan 2 Hari Lalu)
                 $dates = [
@@ -207,6 +215,7 @@ class DatabaseSeeder extends Seeder
                             [
                                 'status'            => 'sudah_diantar',
                                 'status_updated_at' => now(),
+                                'photo'             => $distBase64,
                             ]
                         );
                     }
