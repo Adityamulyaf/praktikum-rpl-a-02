@@ -137,16 +137,16 @@ export default function SiswaRegisterForm({ onSuccess, onBack }) {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>SD NEGERI 1 BOCOR</td>
-                  <td><code>0080000101</code></td>
-                  <td>Ahmad Pratama</td>
-                </tr>
-                <tr>
-                  <td>SD NEGERI 2 LUNDONG</td>
-                  <td><code>0080000202</code></td>
-                  <td>Budi Santoso</td>
-                </tr>
+                 <tr>
+                   <td>SD NEGERI 1 BOCOR</td>
+                   <td><code>0080000102</code></td>
+                   <td>Budi Santoso</td>
+                 </tr>
+                 <tr>
+                   <td>SD NEGERI 2 LUNDONG</td>
+                   <td><code>0080000203</code></td>
+                   <td>Siti Rahmawati</td>
+                 </tr>
                 <tr>
                   <td>SD NEGERI 1 KARANGREJO</td>
                   <td><code>0080000315</code></td>

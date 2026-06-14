@@ -148,13 +148,13 @@ class DatabaseSeeder extends Seeder
                     now('Asia/Jakarta')->subDays(2)->toDateString(),
                 ];
 
-                $reviewTemplates = [
-                    [
-                        'name' => 'Budi Santoso',
-                        'email' => 'budi@example.com',
-                        'nisn' => '0080000102',
-                        'content' => 'Nasi kuningnya wangi sekali dan ayamnya sangat renyah. Enak banget!',
-                    ],
+                 $reviewTemplates = [
+                     [
+                         'name' => 'Guntur Kusuma',
+                         'email' => 'guntur@example.com',
+                         'nisn' => '0080000107',
+                         'content' => 'Nasi kuningnya wangi sekali dan ayamnya sangat renyah. Enak banget!',
+                     ],
                     [
                         'name' => 'Siti Rahmawati',
                         'email' => 'siti@example.com',

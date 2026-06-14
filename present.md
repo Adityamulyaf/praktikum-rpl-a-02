@@ -25,7 +25,7 @@ Untuk mendemonstrasikan alur registrasi mandiri, Anda akan mendaftarkan akun bar
 > [!IMPORTANT]
 > **Dapur Utama Pilihan:** `SPPG Kebumen Buayan Rangkah`  
 > **Sekolah Pilihan:** `SD NEGERI 1 BOCOR` (Kab. Kebumen, Prov. Jawa Tengah)  
-> *Kedua entitas ini telah memiliki data historis 3 hari terakhir (menu, ulasan siswa, dan hasil analisis sentimen AI) yang siap didemokan.*
+> *Kedua entitas ini telah memiliki data historis 3 hari terakhir (menu harian dengan foto makanan `mbg2.jpg`, status distribusi dengan bukti foto `distribusi-mbg.png`, ulasan siswa, dan hasil analisis sentimen AI) yang siap didemokan.*
 
 ---
 
@@ -44,8 +44,8 @@ Jalankan demo dengan alur cerita berkesinambungan dari registrasi, publik, siswa
    - Pilih **SD NEGERI 1 BOCOR**.
    - Halaman akan memuat profil dapur **SPPG Kebumen Buayan Rangkah** yang melayani sekolah tersebut.
 3. **Eksplorasi Profil Publik Dapur**
-   - **Tab Menu Harian**: Tunjukkan foto makanan riil, komponen menu, serta informasi kalori, karbohidrat, protein, dan lemak.
-   - **Tab Status Distribusi**: Tunjukkan rekam jejak pengiriman harian lengkap dengan foto bukti serah terima makanan.
+   - **Tab Menu Harian**: Tunjukkan foto makanan riil (`mbg2.jpg`), komponen menu, serta informasi kalori, karbohidrat, protein, dan lemak.
+   - **Tab Status Distribusi**: Tunjukkan rekam jejak pengiriman harian lengkap dengan foto bukti serah terima makanan (`distribusi-mbg.png`).
    - **Tab Ulasan**: Tunjukkan umpan balik langsung berupa rating bintang dan ulasan tekstual dari siswa sekolah.
    - **Tab Evaluasi AI**: Tunjukkan grafik distribusi sentimen (Positif, Netral, Negatif) serta rangkuman poin-poin penting ulasan yang diekstrak oleh kecerdasan buatan (AI).
 
@@ -138,7 +138,7 @@ cd framework
 docker compose up -d
 
 # Apabila database kosong, jalankan migrasi & seeder pengujian
-docker compose exec laravel_api php artisan migrate:fresh --seed
+docker compose exec backend php artisan migrate:fresh --seed
 ```
 
 ---
