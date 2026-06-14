@@ -11,53 +11,22 @@ class ProfileController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
-        if ($user->role === 'siswa') {
-            $profile = $user->studentProfile;
-            $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->with([
-                'schools',
-                'dailyMenus' => function ($q) {
-                    $q->orderBy('served_at', 'desc');
-                },
-                'sentimentSummaries' => function ($q) {
-                    $q->orderBy('summary_date', 'desc');
-                }
-            ])->first() : null;
-        } elseif ($user->role === 'guru') {
-            $profile = $user->teacherProfile;
-            $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->with([
-                'schools',
-                'dailyMenus' => function ($q) {
-                    $q->orderBy('served_at', 'desc');
-                },
-                'sentimentSummaries' => function ($q) {
-                    $q->orderBy('summary_date', 'desc');
-                }
-            ])->first() : null;
+
+        if ($user->role === 'admin' && $request->has('sppg_id')) {
+            $query = \App\Models\SppgProfile::where('id', $request->sppg_id);
         } else {
-            if ($user->role === 'admin' && $request->has('sppg_id')) {
-                $sppg = \App\Models\SppgProfile::with([
-                    'schools',
-                    'dailyMenus' => function ($q) {
-                        $q->orderBy('served_at', 'desc');
-                    },
-                    'sentimentSummaries' => function ($q) {
-                        $q->orderBy('summary_date', 'desc');
-                    }
-                ])->find($request->sppg_id);
-            } else {
-                $sppg = $user->sppgProfile()->with([
-                    'schools',
-                    'dailyMenus' => function ($q) {
-                        $q->orderBy('served_at', 'desc');
-                    },
-                    'sentimentSummaries' => function ($q) {
-                        $q->orderBy('summary_date', 'desc');
-                    }
-                ])->first();
-            }
+            $query = $user->sppgQuery();
         }
+
+        $sppg = $query ? $query->with([
+            'schools',
+            'dailyMenus' => function ($q) {
+                $q->orderBy('served_at', 'desc');
+            },
+            'sentimentSummaries' => function ($q) {
+                $q->orderBy('summary_date', 'desc');
+            }
+        ])->first() : null;
 
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
@@ -133,18 +102,7 @@ class ProfileController extends Controller
 
     public function reviews(Request $request)
     {
-        $user = $request->user();
-        if ($user->role === 'siswa') {
-            $profile = $user->studentProfile;
-            $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->first() : null;
-        } elseif ($user->role === 'guru') {
-            $profile = $user->teacherProfile;
-            $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->first() : null;
-        } else {
-            $sppg = $user->sppgProfile;
-        }
+        $sppg = $request->user()->sppg();
 
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);

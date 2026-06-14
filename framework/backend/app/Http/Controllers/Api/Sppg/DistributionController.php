@@ -15,18 +15,7 @@ class DistributionController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-        if ($user->role === 'siswa') {
-            $profile = $user->studentProfile;
-            $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->first() : null;
-        } elseif ($user->role === 'guru') {
-            $profile = $user->teacherProfile;
-            $school = $profile ? $profile->school : null;
-            $sppg = $school ? $school->sppgProfiles()->first() : null;
-        } else {
-            $sppg = $user->sppgProfile;
-        }
+        $sppg = $request->user()->sppg();
 
         if (!$sppg) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
