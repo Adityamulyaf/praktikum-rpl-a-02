@@ -40,9 +40,7 @@ class ReviewController extends Controller
         }
 
         // Resolve which SPPG kitchen serves this student's school
-        $sppg = SppgProfile::whereHas('schools', function ($q) use ($student) {
-            $q->where('schools.id', $student->school_id);
-        })->first();
+        $sppg = $request->user()->sppg();
 
         if (!$sppg) {
             return response()->json([
@@ -161,9 +159,7 @@ class ReviewController extends Controller
             return response()->json(['message' => 'Profil siswa tidak ditemukan'], 404);
         }
 
-        $sppg = SppgProfile::whereHas('schools', function ($q) use ($student) {
-            $q->where('schools.id', $student->school_id);
-        })->first();
+        $sppg = $request->user()->sppg();
 
         if (!$sppg) {
             return response()->json([

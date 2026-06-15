@@ -68,4 +68,41 @@ class User extends Authenticatable
     {
         return $this->hasOne(TeacherProfile::class, 'user_id', 'ssid');
     }
+
+    /**
+     * Get the query builder for the user's associated SPPG profile.
+     */
+    public function sppgQuery()
+    {
+        if ($this->isSppg()) {
+            return SppgProfile::where('user_id', $this->ssid);
+        }
+
+        if ($this->isSiswa()) {
+            $schoolId = $this->studentProfile?->school_id;
+            if (!$schoolId) return null;
+            return SppgProfile::whereHas('schools', function ($q) use ($schoolId) {
+                $q->where('schools.id', $schoolId);
+            });
+        }
+
+        if ($this->isGuru()) {
+            $schoolId = $this->teacherProfile?->school_id;
+            if (!$schoolId) return null;
+            return SppgProfile::whereHas('schools', function ($q) use ($schoolId) {
+                $q->where('schools.id', $schoolId);
+            });
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the associated SPPG profile instance.
+     */
+    public function sppg()
+    {
+        $query = $this->sppgQuery();
+        return $query ? $query->first() : null;
+    }
 }
