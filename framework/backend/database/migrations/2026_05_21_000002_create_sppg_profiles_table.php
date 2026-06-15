@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('kitchen_name');
             $table->text('address');
             $table->string('district');
+            $table->string('city');
             $table->string('province');
             $table->string('contact_person_name');
             $table->string('contact_phone');

@@ -38,6 +38,7 @@ class ProfileController extends Controller
             'is_active'           => $sppg->is_active,
             'address'             => $sppg->address,
             'district'            => $sppg->district,
+            'city'                => $sppg->city,
             'province'            => $sppg->province,
             'contact_person_name' => $sppg->contact_person_name,
             'contact_phone'       => $sppg->contact_phone,
@@ -70,6 +71,7 @@ class ProfileController extends Controller
             'kitchen_name'        => 'sometimes|string|max:255',
             'address'             => 'sometimes|string',
             'district'            => 'sometimes|string|max:100',
+            'city'                => 'sometimes|string|max:100',
             'province'            => 'sometimes|string|max:100',
             'contact_person_name' => 'sometimes|string|max:255',
             'contact_phone'       => 'sometimes|string|max:20',
@@ -79,7 +81,7 @@ class ProfileController extends Controller
         ]);
 
         $sppg->update($request->only([
-            'kitchen_name', 'address', 'district', 'province',
+            'kitchen_name', 'address', 'district', 'city', 'province',
             'contact_person_name', 'contact_phone', 'contact_email',
             'description', 'production_capacity',
         ]));
@@ -90,6 +92,7 @@ class ProfileController extends Controller
             'is_active'           => $sppg->is_active,
             'address'             => $sppg->address,
             'district'            => $sppg->district,
+            'city'                => $sppg->city,
             'province'            => $sppg->province,
             'contact_person_name' => $sppg->contact_person_name,
             'contact_phone'       => $sppg->contact_phone,

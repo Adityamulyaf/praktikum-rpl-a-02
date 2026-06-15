@@ -49,13 +49,14 @@ class SppgSchoolSeeder extends Seeder
     ];
 
     /**
-     * Build the SQL expression that normalizes a district value
+     * Build the SQL expression that normalizes a city/district value
      * through the alias map, falling back to strip-prefix + uppercase.
+     * $column is the fully-qualified column reference, e.g. "sp.city" or "s.district".
      */
-    private function buildNormExpr(string $tableAlias): string
+    private function buildNormExpr(string $column): string
     {
         // Start with the base normalization: strip Kab./Kota prefix, upper, trim
-        $base = "UPPER(TRIM(REGEXP_REPLACE(TRIM({$tableAlias}.district), '^(Kab\\.|Kota\\.|Kabupaten |Kota )\\s*', '', 'i')))";
+        $base = "UPPER(TRIM(REGEXP_REPLACE(TRIM({$column}), '^(Kab\\.|Kota\\.|Kabupaten |Kota )\\s*', '', 'i')))";
 
         // Wrap in a CASE expression to handle known aliases
         $cases = [];
@@ -88,8 +89,9 @@ class SppgSchoolSeeder extends Seeder
         }
 
         // Build normalized expressions with alias handling
-        $normSppg   = $this->buildNormExpr('sp');
-        $normSchool = $this->buildNormExpr('s');
+        // SPPG uses `city` column for kab/kota; schools use `district`
+        $normSppg   = $this->buildNormExpr('sp.city');
+        $normSchool = $this->buildNormExpr('s.district');
 
         $this->command->info("Mencocokkan {$sppgCount} SPPG dengan {$schoolCount} sekolah berdasarkan Kab./Kota...");
         $this->command->info("Setiap SPPG akan mendapat 6–8 sekolah secara acak dari daerahnya.");
@@ -112,7 +114,7 @@ class SppgSchoolSeeder extends Seeder
                 JOIN sppg_limits sl ON sl.id = sp.id
                 JOIN schools s
                   ON {$normSppg} = {$normSchool}
-                 AND sp.district IS NOT NULL AND TRIM(sp.district) <> ''
+                 AND sp.city     IS NOT NULL AND TRIM(sp.city)     <> ''
                  AND s.district  IS NOT NULL AND TRIM(s.district)  <> ''
             )
             INSERT INTO sppg_schools (sppg_id, school_id)

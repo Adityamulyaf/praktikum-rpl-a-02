@@ -45,7 +45,7 @@ function KitchenCard({ kitchen, onClick }) {
             <div className="lkp-card-body">
                 <h3 className="lkp-card-name">{kitchen.kitchen_name}</h3>
                 <div className="lkp-card-meta">
-                    <span>{kitchen.district}, {kitchen.province}</span>
+                    <span>{kitchen.district}, {kitchen.city}, {kitchen.province}</span>
                     {kitchen.production_capacity && (
                         <span>
                             {Number(kitchen.production_capacity).toLocaleString("id-ID")} porsi/hari
@@ -400,7 +400,7 @@ function KitchenDetail({ id, onBack, initialMode = "profil" }) {
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                                 <circle cx="12" cy="10" r="3" />
                             </svg>
-                            {profile.district}, {profile.province}
+                            {profile.district}, {profile.city}, {profile.province}
                         </span>
                         {profile.contact_phone && (
                             <span className="kp-meta-item">
@@ -461,6 +461,7 @@ function KitchenDetail({ id, onBack, initialMode = "profil" }) {
                         {[
                             ["Alamat", profile.address || "—"],
                             ["Kecamatan", profile.district],
+                            ["Kota/Kabupaten", profile.city],
                             ["Provinsi", profile.province],
                         ].map(([label, value]) => (
                             <div key={label} className="kp-info-row">

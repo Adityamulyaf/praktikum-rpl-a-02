@@ -10,7 +10,7 @@ class PublicSppgController extends Controller
     public function index()
     {
         $sppgs = SppgProfile::where('is_active', true)
-            ->select('id', 'kitchen_name', 'district', 'province',
+            ->select('id', 'kitchen_name', 'district', 'city', 'province',
                      'contact_phone', 'production_capacity', 'description')
             ->withCount('schools')
             ->orderBy('kitchen_name')
@@ -39,6 +39,7 @@ class PublicSppgController extends Controller
             'is_active'           => $sppg->is_active,
             'address'             => $sppg->address,
             'district'            => $sppg->district,
+            'city'                => $sppg->city,
             'province'            => $sppg->province,
             'contact_person_name' => $sppg->contact_person_name,
             'contact_phone'       => $sppg->contact_phone,

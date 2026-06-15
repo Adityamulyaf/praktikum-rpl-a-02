@@ -103,7 +103,7 @@ export default function SppgTable() {
               {sppgs.map((sppg) => (
                 <tr key={sppg.id}>
                   <td>{sppg.kitchen_name}</td>
-                  <td>{sppg.district}, {sppg.province}</td>
+                  <td>{sppg.district}, {sppg.city}, {sppg.province}</td>
                   <td>{sppg.contact_person_name}</td>
                   <td>{sppg.schools?.length ?? 0} sekolah</td>
                   <td>

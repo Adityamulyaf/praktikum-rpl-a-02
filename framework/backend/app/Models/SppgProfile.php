@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
-    'user_id', 'kitchen_name', 'address', 'district', 'province',
+    'user_id', 'kitchen_name', 'address', 'district', 'city', 'province',
     'contact_person_name', 'contact_phone', 'contact_email',
     'description', 'production_capacity', 'is_active',
 ])]

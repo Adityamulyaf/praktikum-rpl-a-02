@@ -21,17 +21,18 @@ class SppgSchoolController extends Controller
         // Validate all schools are in the same kabupaten/kota as the SPPG
         $outOfDistrict = School::whereIn('id', $request->school_ids)
             ->where(function ($q) use ($sppg) {
-                $q->where('district', 'not ilike', $sppg->district)
-                  ->where('district', 'not ilike', 'Kab. ' . $sppg->district)
-                  ->where('district', 'not ilike', 'Kota ' . $sppg->district)
-                  ->where('district', 'not ilike', 'Kab. ' . $sppg->district . '%')
-                  ->where('district', 'not ilike', 'Kota ' . $sppg->district . '%');
+                $city = $sppg->city;
+                $q->where('district', 'not ilike', $city)
+                  ->where('district', 'not ilike', 'Kab. ' . $city)
+                  ->where('district', 'not ilike', 'Kota ' . $city)
+                  ->where('district', 'not ilike', 'Kab. ' . $city . '%')
+                  ->where('district', 'not ilike', 'Kota ' . $city . '%');
             })
             ->pluck('name');
-
+        
         if ($outOfDistrict->isNotEmpty()) {
             return response()->json([
-                'message' => "Sekolah berikut berada di luar wilayah SPPG ({$sppg->district}): {$outOfDistrict->implode(', ')}."
+                'message' => "Sekolah berikut berada di luar wilayah SPPG ({$sppg->city}): {$outOfDistrict->implode(', ')}."
             ], 422);
         }
 
@@ -69,15 +70,15 @@ class SppgSchoolController extends Controller
         // Validate school is in the same kabupaten/kota as the SPPG
         $school = School::find($request->school_id);
         if ($school) {
-            $d = $sppg->district;
-            $match = strcasecmp($school->district, $d) === 0
-                || strcasecmp($school->district, 'Kab. ' . $d) === 0
-                || strcasecmp($school->district, 'Kota ' . $d) === 0
-                || stripos($school->district, 'Kab. ' . $d) === 0
-                || stripos($school->district, 'Kota ' . $d) === 0;
+            $city = $sppg->city;
+            $match = strcasecmp($school->district, $city) === 0
+                || strcasecmp($school->district, 'Kab. ' . $city) === 0
+                || strcasecmp($school->district, 'Kota ' . $city) === 0
+                || stripos($school->district, 'Kab. ' . $city) === 0
+                || stripos($school->district, 'Kota ' . $city) === 0;
             if (!$match) {
                 return response()->json([
-                    'message' => "Sekolah '{$school->name}' berada di luar wilayah SPPG ({$sppg->district})."
+                    'message' => "Sekolah '{$school->name}' berada di luar wilayah SPPG ({$sppg->city})."
                 ], 422);
             }
         }
