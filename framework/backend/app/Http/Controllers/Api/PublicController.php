@@ -55,4 +55,30 @@ class PublicController extends Controller
             'province'    => $student->school->province,
         ]);
     }
+
+    public function verifyNip(Request $request)
+    {
+        $request->validate([
+            'nip' => 'required|string|size:18',
+        ]);
+
+        $nip = $request->get('nip');
+
+        $teacher = \App\Models\DapodikTeacher::with('school')->where('nip', $nip)->first();
+
+        if (!$teacher) {
+            return response()->json([
+                'message' => 'NIP tidak terdaftar dalam database guru.'
+            ], 404);
+        }
+
+        return response()->json([
+            'nip'         => $teacher->nip,
+            'name'        => $teacher->name,
+            'school_id'   => $teacher->school_id,
+            'school_name' => $teacher->school->name,
+            'district'    => $teacher->school->district,
+            'province'    => $teacher->school->province,
+        ]);
+    }
 }

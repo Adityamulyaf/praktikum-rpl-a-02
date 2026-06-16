@@ -25,6 +25,7 @@ export default function Login() {
   const location = useLocation();
   const { login, token, role } = useAuth();
   const [view, setView] = useState(location.state?.view ?? 'login');
+  const [googleData, setGoogleData] = useState(null);
   const [glowPos, setGlowPos] = useState({ x: '50%', y: '50%' });
 
   useEffect(() => {
@@ -32,6 +33,52 @@ export default function Login() {
     root.classList.add('login-page');
     return () => root.classList.remove('login-page');
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tokenParam = params.get('token');
+    const roleParam = params.get('role');
+    const errorParam = params.get('error');
+
+    const googleRegister = params.get('google_register');
+    const googleEmail = params.get('email');
+    const googleName = params.get('name');
+    const googleId = params.get('google_id');
+
+    if (tokenParam && roleParam) {
+      // Direct Google Login
+      localStorage.setItem('access_token', tokenParam);
+      api.get('/me')
+        .then(response => {
+          login({ access_token: tokenParam, role: roleParam, user: response.data });
+        })
+        .catch(err => {
+          console.error('Failed to retrieve user profile:', err);
+          localStorage.removeItem('access_token');
+        });
+      navigate('/login', { replace: true });
+    } else if (googleRegister === '1' && googleEmail && googleId) {
+      // Google Registration Flow initiated from Callback redirect
+      setGoogleData({
+        email: googleEmail,
+        name: googleName || '',
+        googleId: googleId,
+        nisn: params.get('nisn') || '',
+        schoolId: params.get('school_id') || '',
+        nip: params.get('nip') || '',
+      });
+      const targetRole = params.get('role');
+      if (targetRole === 'siswa' || targetRole === 'guru') {
+        setView(`register-${targetRole}`);
+      } else {
+        setView('register-select');
+      }
+      navigate('/login', { replace: true });
+    } else if (errorParam) {
+      alert(decodeURIComponent(errorParam));
+      navigate('/login', { replace: true });
+    }
+  }, [location.search, navigate, login]);
 
   useEffect(() => {
     if (token && role) {
@@ -116,17 +163,22 @@ export default function Login() {
                 {view === 'register-select' && (
                   <RegisterSelectForm
                     onSelect={(role) => setView(`register-${role}`)}
-                    onBack={() => setView('login')}
+                    onBack={() => {
+                      setGoogleData(null);
+                      setView('login');
+                    }}
                   />
                 )}
                 {view === 'register-siswa' && (
                   <SiswaRegisterForm
+                    googleData={googleData}
                     onSuccess={handleRegistered}
                     onBack={() => setView('register-select')}
                   />
                 )}
                 {view === 'register-guru' && (
                   <GuruRegisterForm
+                    googleData={googleData}
                     onSuccess={handleRegistered}
                     onBack={() => setView('register-select')}
                   />

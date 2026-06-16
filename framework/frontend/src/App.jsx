@@ -3,6 +3,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
 import PublicLanding from './pages/landing/PublicLanding';
 import Login from './pages/login/Login';
+import ResetPassword from './pages/login/ResetPassword';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SppgDashboard from './pages/sppg/SppgDashboard';
 import SiswaDashboard from './pages/siswa/SiswaDashboard';
@@ -16,6 +17,7 @@ export default function App() {
         {/* Public */}
         <Route path="/" element={<PublicLanding />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Admin */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

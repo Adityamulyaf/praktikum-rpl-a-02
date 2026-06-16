@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register/siswa', [RegisterController::class, 'registerSiswa']);
 Route::post('/register/guru',  [RegisterController::class, 'registerGuru']);
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -78,6 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('public')->group(function () {
     Route::get('/schools',      [PublicController::class, 'schools']);
     Route::get('/verify-nisn',  [PublicController::class, 'verifyNisn']);
+    Route::get('/verify-nip',   [PublicController::class, 'verifyNip']);
     Route::get('/distribution', [PublicDistributionController::class, 'index']);
     Route::get('/reviews',      [PublicReviewController::class, 'index']);
     Route::get('/sppg',         [PublicSppgController::class, 'index']);

@@ -14,12 +14,22 @@ class RegisterController extends Controller
 {
     public function registerSiswa(Request $request)
     {
-        $request->validate([
+        $isGoogle = $request->has('google_id') && !empty($request->google_id);
+
+        $rules = [
             'email'     => 'required|email|unique:users,email',
-            'password'  => ['required', 'confirmed', Password::min(8)],
             'school_id' => 'required|exists:schools,id',
             'nisn'      => 'required|string|size:10',
-        ]);
+            'google_id' => 'nullable|string',
+        ];
+
+        if ($isGoogle) {
+            $rules['password'] = ['nullable', 'confirmed', Password::min(8)];
+        } else {
+            $rules['password'] = ['required', 'confirmed', Password::min(8)];
+        }
+
+        $request->validate($rules);
 
         // Verify NISN against Dapodik reference database
         $dapodikStudent = \App\Models\DapodikStudent::where('nisn', $request->nisn)->first();
@@ -49,6 +59,7 @@ class RegisterController extends Controller
                 'password'  => $request->password,
                 'role'      => 'siswa',
                 'is_active' => true,
+                'google_id' => $request->google_id,
             ]);
 
             StudentProfile::create([
@@ -72,27 +83,58 @@ class RegisterController extends Controller
 
     public function registerGuru(Request $request)
     {
-        $request->validate([
-            'name'      => 'required|string|max:255',
-            'email'     => 'required|email|unique:users,email',
-            'password'  => ['required', 'confirmed', Password::min(8)],
-            'school_id' => 'required|exists:schools,id',
-            'nip'       => 'nullable|string|max:30',
-        ]);
+        $isGoogle = $request->has('google_id') && !empty($request->google_id);
 
-        $user = DB::transaction(function () use ($request) {
+        $rules = [
+            'email'     => 'required|email|unique:users,email',
+            'school_id' => 'required|exists:schools,id',
+            'nip'       => 'required|string|size:18',
+            'google_id' => 'nullable|string',
+        ];
+
+        if ($isGoogle) {
+            $rules['password'] = ['nullable', 'confirmed', Password::min(8)];
+        } else {
+            $rules['password'] = ['required', 'confirmed', Password::min(8)];
+        }
+
+        $request->validate($rules);
+
+        // Verify NIP against Dapodik reference database
+        $dapodikTeacher = \App\Models\DapodikTeacher::where('nip', $request->nip)->first();
+        if (!$dapodikTeacher) {
+            return response()->json([
+                'message' => 'NIP tidak terdaftar dalam database guru.'
+            ], 422);
+        }
+
+        if ($dapodikTeacher->school_id != $request->school_id) {
+            return response()->json([
+                'message' => 'Asal sekolah tidak cocok dengan data terdaftar NIP.'
+            ], 422);
+        }
+
+        // Check if already registered
+        if (TeacherProfile::where('nip', $request->nip)->exists()) {
+            return response()->json([
+                'message' => 'NIP ini sudah terdaftar. Silakan hubungi admin sekolah jika terjadi kesalahan.'
+            ], 422);
+        }
+
+        $user = DB::transaction(function () use ($request, $dapodikTeacher) {
             $user = User::create([
-                'name'      => $request->name,
+                'name'      => $dapodikTeacher->name, // Use official name
                 'email'     => $request->email,
                 'password'  => $request->password,
                 'role'      => 'guru',
                 'is_active' => true,
+                'google_id' => $request->google_id,
             ]);
 
             TeacherProfile::create([
                 'user_id'   => $user->ssid,
-                'school_id' => $request->school_id,
-                'nip'       => $request->nip,
+                'school_id' => $dapodikTeacher->school_id,
+                'nip'       => $dapodikTeacher->nip,
             ]);
 
             return $user;

@@ -3,10 +3,10 @@
 .login-root {
   position: fixed;
   inset: 0;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: var(--space-xl) var(--space-md);
   box-sizing: border-box;
   font-family: var(--font-sans);
@@ -31,7 +31,7 @@
 }
 
 .login-bg-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: url('../../assets/mbg-ilustration.webp') center / cover no-repeat;
   z-index: 0;
@@ -40,7 +40,7 @@
 }
 
 .login-glow {
-  position: absolute;
+  position: fixed;
   top: var(--glow-y, 50%);
   left: var(--glow-x, 50%);
   width: 500px;
@@ -55,7 +55,7 @@
 }
 
 .login-blockchain-lines {
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;

@@ -76,6 +76,7 @@ class DatabaseSeeder extends Seeder
         // DapodikStudentSeeder harus setelah user sppg@halombg.com ada
         // dan setelah SppgProfile agar bisa menemukan profil SPPG yang benar
         $this->call(DapodikStudentSeeder::class);
+        $this->call(DapodikTeacherSeeder::class);
 
         // ── SEEDING DATA TAMBAHAN UNTUK TESTING EVALUASI AI (BL-13) ──
 
