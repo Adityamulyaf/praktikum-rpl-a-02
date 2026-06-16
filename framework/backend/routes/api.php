@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllRead']);
 
    Route::middleware('role:admin')->prefix('admin')->group(function () {
+        Route::get('dashboard/stats', [\App\Http\Controllers\Api\Admin\DashboardController::class, 'stats']);
         Route::apiResource('sppg', SppgController::class);
         Route::get('schools/provinces', [SchoolController::class, 'provinces']);
         Route::apiResource('schools', SchoolController::class);
