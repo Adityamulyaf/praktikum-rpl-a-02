@@ -24,6 +24,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
   const navigate = useNavigate();
   const topbarRef = useRef(null);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!role) return;
@@ -82,6 +83,19 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
     <div className="dl-root">
       {/* Top bar — always visible, scroll-to-rounded */}
       <header className="dl-topbar" ref={topbarRef}>
+        {showSidebar && (
+          <button
+            className="dl-menu-toggle"
+            aria-label="Menu"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        )}
         {!isHome && !hasSidebar && (
           <button
             className="dl-back-btn"
@@ -128,7 +142,13 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
       {/* Sidebar layout (admin) — hanya saat hasSidebar && !isHome */}
       {showSidebar ? (
         <div className="dl-body">
-          <aside className="dl-sidebar">
+          {isSidebarOpen && (
+            <div 
+              className="dl-sidebar-backdrop" 
+              onClick={() => setIsSidebarOpen(false)} 
+            />
+          )}
+          <aside className={`dl-sidebar ${isSidebarOpen ? 'dl-sidebar--open' : ''}`}>
             {menuGroups.map((group, gi) => (
               <div key={gi} className="dl-nav-group">
                 {group.label && (
@@ -139,7 +159,10 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
                     key={key}
                     type="button"
                     className={`dl-nav-item${activeMenu === key ? ' dl-nav-item--active' : ''}`}
-                    onClick={() => setActiveMenu(key)}
+                    onClick={() => {
+                      setActiveMenu(key);
+                      setIsSidebarOpen(false);
+                    }}
                   >
                     {icon}
                     <span>{label}</span>

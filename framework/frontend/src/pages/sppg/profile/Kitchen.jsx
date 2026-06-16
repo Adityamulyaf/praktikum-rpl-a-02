@@ -757,45 +757,17 @@ export default function Kitchen() {
               {profile.daily_menus.map((menu) => (
                 <div
                   key={menu.id}
-                  style={{
-                    display: "flex",
-                    gap: "16px",
-                    border: "1px solid var(--border-default, #e5e3df)",
-                    borderRadius: "8px",
-                    padding: "16px",
-                    background: "var(--surface-2, #fbfbfa)",
-                    alignItems: "flex-start",
-                    textAlign: "left",
-                  }}
+                  className="kp-menu-item"
                 >
                   {menu.photo ? (
                     <img
                       src={menu.photo}
                       alt={menu.menu_name}
-                      style={{
-                        width: "120px",
-                        height: "90px",
-                        objectFit: "cover",
-                        borderRadius: "6px",
-                        background: "#1a1a18",
-                        flexShrink: 0,
-                      }}
+                      className="kp-menu-item-photo"
                     />
                   ) : (
                     <div
-                      style={{
-                        width: "120px",
-                        height: "90px",
-                        borderRadius: "6px",
-                        background: "#e5e3df",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#8c8a85",
-                        fontSize: "11px",
-                        fontWeight: 500,
-                        flexShrink: 0,
-                      }}
+                      className="kp-menu-item-no-photo"
                     >
                       Tanpa Foto
                     </div>

@@ -711,3 +711,64 @@
   }
 }
 
+/* ── SIDEBAR DRAWER RESPONSIVE STYLING ── */
+
+.dl-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast);
+}
+
+.dl-menu-toggle:hover {
+  background: var(--surface-2);
+}
+
+@media (max-width: 768px) {
+  .dl-menu-toggle {
+    display: inline-flex;
+  }
+
+  .dl-sidebar {
+    position: fixed;
+    top: 60px; /* aligns with .dl-topbar height */
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform var(--duration-normal) var(--ease-smooth);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .dl-topbar.dl-topbar--scrolled + .dl-body .dl-sidebar {
+    top: 80px; /* adjusts offset when topbar has scrolled margins */
+  }
+
+  .dl-sidebar.dl-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .dl-sidebar-backdrop {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 99;
+    animation: dl-fade-in var(--duration-fast) ease;
+  }
+
+  .dl-content {
+    padding: var(--space-md);
+  }
+}
+

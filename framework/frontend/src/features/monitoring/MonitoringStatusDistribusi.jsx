@@ -132,28 +132,14 @@ export default function MonitoringStatusDistribusi() {
       ) : (
         Object.values(grouped).map(({ sppg, records: recs }) => (
           <div key={sppg?.id} style={{ marginBottom: "24px" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "8px",
-              }}
-            >
+            <div className="mon-sppg-header">
               <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 700 }}>
                 {sppg?.kitchen_name ?? "Dapur Tidak Diketahui"}
-                <span
-                  style={{
-                    fontWeight: 400,
-                    opacity: 0.6,
-                    marginLeft: "8px",
-                    fontSize: "0.85rem",
-                  }}
-                >
+                <span className="mon-sppg-loc">
                   {sppg?.district}, {sppg?.city}, {sppg?.province}
                 </span>
               </h3>
-              <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>
+              <span className="mon-sppg-summary">
                 {summary(recs)}
               </span>
             </div>
