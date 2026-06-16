@@ -150,7 +150,7 @@ export default function MonitoringStatusDistribusi() {
                     fontSize: "0.85rem",
                   }}
                 >
-                  {sppg?.district}, {sppg?.province}
+                  {sppg?.district}, {sppg?.city}, {sppg?.province}
                 </span>
               </h3>
               <span style={{ fontSize: "0.8rem", opacity: 0.7 }}>

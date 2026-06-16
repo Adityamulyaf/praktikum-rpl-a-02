@@ -11,26 +11,26 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
   const [error, setError]           = useState('');
 
   const sppgProvince = sppg.province ?? '';
-  const sppgDistrict = sppg.district ?? '';
+  const sppgCity     = sppg.city ?? '';
 
   // load schools filtered by SPPG's kabupaten/kota on mount
   useEffect(() => {
     setAssigned(new Set((sppg.schools ?? []).map((s) => s.id)));
 
-    if (!sppgDistrict) {
+    if (!sppgCity) {
       setError('SPPG tidak memiliki data wilayah/kabupaten.');
       return;
     }
 
     setLoading(true);
-    getSchools({ province: sppgProvince, district: sppgDistrict, per_page: 9999 }).then(({ data }) => {
+    getSchools({ province: sppgProvince, district: sppgCity, per_page: 9999 }).then(({ data }) => {
       setAllSchools(Array.isArray(data) ? data : data.data ?? []);
       setLoading(false);
     }).catch(() => {
       setError('Gagal memuat daftar sekolah.');
       setLoading(false);
     });
-  }, [sppg, sppgProvince, sppgDistrict]);
+  }, [sppg, sppgProvince, sppgCity]);
 
   const toggle = (id) => {
     const school = allSchools.find((s) => s.id === id);
@@ -79,7 +79,7 @@ export default function SppgSchoolModal({ sppg, onClose, onSaved }) {
 
           {/* Wilayah info (read-only, based on SPPG kabupaten) */}
           <div style={{ marginBottom: '8px', padding: '8px 12px', background: '#f0f4ff', borderRadius: '6px', fontSize: '0.9rem', color: '#334155' }}>
-            <strong>Wilayah:</strong> {sppgDistrict}, {sppgProvince}
+            <strong>Wilayah:</strong> {sppgCity}, {sppgProvince}
             <span style={{ marginLeft: '8px', fontSize: '0.8rem', color: '#64748b' }}>
               (Hanya menampilkan sekolah di kabupaten/kota yang sama)
             </span>

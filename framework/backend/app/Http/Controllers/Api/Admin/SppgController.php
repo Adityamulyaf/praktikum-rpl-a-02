@@ -43,6 +43,7 @@ class SppgController extends Controller
             'kitchen_name'         => 'required|string|max:255',
             'address'              => 'required|string',
             'district'             => 'required|string|max:100',
+            'city'                 => 'required|string|max:100',
             'province'             => 'required|string|max:100',
             'contact_person_name'  => 'required|string|max:255',
             'contact_phone'        => 'required|string|max:20',
@@ -66,6 +67,7 @@ class SppgController extends Controller
                 'kitchen_name'         => $request->kitchen_name,
                 'address'              => $request->address,
                 'district'             => $request->district,
+                'city'                 => $request->city,
                 'province'             => $request->province,
                 'contact_person_name'  => $request->contact_person_name,
                 'contact_phone'        => $request->contact_phone,
@@ -91,6 +93,7 @@ class SppgController extends Controller
             'kitchen_name'         => 'sometimes|string|max:255',
             'address'              => 'sometimes|string',
             'district'             => 'sometimes|string|max:100',
+            'city'                 => 'sometimes|string|max:100',
             'province'             => 'sometimes|string|max:100',
             'contact_person_name'  => 'sometimes|string|max:255',
             'contact_phone'        => 'sometimes|string|max:20',
@@ -101,7 +104,7 @@ class SppgController extends Controller
         ]);
 
         $sppg->update($request->only([
-            'kitchen_name', 'address', 'district', 'province',
+            'kitchen_name', 'address', 'district', 'city', 'province',
             'contact_person_name', 'contact_phone', 'contact_email',
             'description', 'production_capacity', 'is_active',
         ]));

@@ -448,7 +448,7 @@ export default function Kitchen() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              {profile.district}, {profile.province}
+              {profile.district}, {profile.city}, {profile.province}
             </span>
             <span className="kp-meta-item">
               <svg
@@ -522,6 +522,10 @@ export default function Kitchen() {
             <div className="kp-info-row">
               <span className="kp-info-label">Kecamatan</span>
               <span className="kp-info-value">{profile.district}</span>
+            </div>
+            <div className="kp-info-row">
+              <span className="kp-info-label">Kota/Kabupaten</span>
+              <span className="kp-info-value">{profile.city}</span>
             </div>
             <div className="kp-info-row">
               <span className="kp-info-label">Provinsi</span>

@@ -4,7 +4,7 @@ import './admin.css';
 
 const INITIAL = {
   name: '', email: '', password: '', phone_number: '',
-  kitchen_name: '', address: '', district: '', province: '',
+  kitchen_name: '', address: '', district: '', city: '', province: '',
   contact_person_name: '', contact_phone: '', contact_email: '',
   description: '', production_capacity: '',
 };
@@ -22,6 +22,7 @@ export default function SppgFormModal({ sppg, onClose, onSaved }) {
         kitchen_name:        sppg.kitchen_name        ?? '',
         address:             sppg.address             ?? '',
         district:            sppg.district            ?? '',
+        city:                sppg.city                ?? '',
         province:            sppg.province            ?? '',
         contact_person_name: sppg.contact_person_name ?? '',
         contact_phone:       sppg.contact_phone       ?? '',
@@ -44,6 +45,7 @@ export default function SppgFormModal({ sppg, onClose, onSaved }) {
           kitchen_name:        form.kitchen_name,
           address:             form.address,
           district:            form.district,
+          city:                form.city,
           province:            form.province,
           contact_person_name: form.contact_person_name,
           contact_phone:       form.contact_phone,
@@ -114,6 +116,10 @@ export default function SppgFormModal({ sppg, onClose, onSaved }) {
                 <label className="adm-label" htmlFor="spf-district">Kecamatan</label>
                 <input id="spf-district" className="adm-input" value={form.district} onChange={set('district')} required />
               </div>
+              <div className="adm-field">
+                <label className="adm-label" htmlFor="spf-city">Kota/Kabupaten</label>
+                <input id="spf-city" className="adm-input" value={form.city} onChange={set('city')} required /> 
+              </div> 
               <div className="adm-field">
                 <label className="adm-label" htmlFor="spf-province">Provinsi</label>
                 <input id="spf-province" className="adm-input" value={form.province} onChange={set('province')} required />

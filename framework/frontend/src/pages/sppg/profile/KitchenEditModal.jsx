@@ -7,6 +7,7 @@ export default function KitchenEditModal({ profile, onClose, onSaved }) {
     kitchen_name:        profile.kitchen_name        ?? '',
     address:             profile.address             ?? '',
     district:            profile.district            ?? '',
+    city:                profile.city                ?? '',
     province:            profile.province            ?? '',
     contact_person_name: profile.contact_person_name ?? '',
     contact_phone:       profile.contact_phone       ?? '',
@@ -62,6 +63,10 @@ export default function KitchenEditModal({ profile, onClose, onSaved }) {
               <div className="adm-field">
                 <label className="adm-label" htmlFor="ke-district">Kecamatan</label>
                 <input id="ke-district" className="adm-input" value={form.district} onChange={set('district')} required />
+              </div>
+              <div className="adm-field">
+                <label className="adm-label" htmlFor="ke-city">Kota/Kabupaten</label>
+                <input id="ke-city" className="adm-input" value={form.city} onChange={set('city')} required />
               </div>
               <div className="adm-field">
                 <label className="adm-label" htmlFor="ke-province">Provinsi</label>
