@@ -14,6 +14,17 @@ class SppgProfile extends Model
 {
     protected $table = 'sppg_profiles';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->city)) {
+                $model->city = 'Kebumen';
+            }
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'ssid');

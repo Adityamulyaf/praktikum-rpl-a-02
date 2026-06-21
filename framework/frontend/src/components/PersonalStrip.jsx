@@ -4,7 +4,7 @@ import './PersonalStrip.css';
 /* Map role → daftar aksi. key harus cocok dengan menu key di masing-masing dashboard. */
 const ROLE_ACTIONS = {
   admin: [
-    { key: 'sppg', label: 'Ke Dashboard Admin' },
+    { key: 'stats', label: 'Ke Dashboard Admin' },
   ],
   sppg: [
     { key: 'menu',          label: 'Input Menu' },
