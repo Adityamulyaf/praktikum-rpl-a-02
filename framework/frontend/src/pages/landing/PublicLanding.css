@@ -1130,7 +1130,8 @@
 }
 
 .plc-footer-nav-col a,
-.plc-footer-nav-col span {
+.plc-footer-nav-col span,
+.plc-footer-nav-col button {
     font-size: 14px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.6);
@@ -1138,10 +1139,16 @@
     transition: color var(--duration-fast) var(--ease-smooth);
     cursor: pointer;
     line-height: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    font-family: inherit;
 }
 
 .plc-footer-nav-col a:hover,
-.plc-footer-nav-col span:hover {
+.plc-footer-nav-col span:hover,
+.plc-footer-nav-col button:hover {
     color: var(--color-secondary);
 }
 
@@ -1184,17 +1191,23 @@
 }
 
 .plc-footer-legal a,
-.plc-footer-legal span {
+.plc-footer-legal span,
+.plc-footer-legal button {
     font-size: 12.5px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     transition: color var(--duration-fast) var(--ease-smooth);
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
 }
 
 .plc-footer-legal a:hover,
-.plc-footer-legal span:hover {
+.plc-footer-legal span:hover,
+.plc-footer-legal button:hover {
     color: rgba(255, 255, 255, 0.7);
 }
 

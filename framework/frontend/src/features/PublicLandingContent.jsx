@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { searchPublicSchools } from '../api/auth';
 import api from '../api/axios';
 import PersonalStrip from '../components/PersonalStrip';
@@ -195,7 +196,8 @@ const STATS = [
 ];
 
 export default function PublicLandingContent({ onNavigate }) {
-    const { role } = useAuth();
+    const { role, token } = useAuth();
+    const navigate = useNavigate();
     const [view, setView] = useState("landing");
     const [kitchenProfileMode, setKitchenProfileMode] = useState("profil");
     const [assignedSppgId, setAssignedSppgId] = useState(null);
@@ -374,6 +376,56 @@ export default function PublicLandingContent({ onNavigate }) {
     const handleScrollToSearch = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         searchRef.current?.querySelector('input')?.focus();
+    };
+
+    const handleFooterNav = (key) => {
+        switch (key) {
+            case 'profil':
+                if (role === 'siswa' || role === 'guru') {
+                    handleRoleFeatureClick('profil');
+                } else {
+                    setKitchenProfileMode('profil');
+                    setAssignedSppgId(null);
+                    setView('profil-dapur');
+                }
+                break;
+            case 'menu':
+                if (role === 'siswa' || role === 'guru') {
+                    handleRoleFeatureClick('menu');
+                } else {
+                    setKitchenProfileMode('menu');
+                    setAssignedSppgId(null);
+                    setView('profil-dapur');
+                }
+                break;
+            case 'distribusi':
+                setView('distribusi');
+                break;
+            case 'validasi-ai':
+                if (token) {
+                    navigate('/validasi-ai');
+                } else {
+                    navigate('/login');
+                }
+                break;
+            case 'ulasan':
+                if (!token) {
+                    navigate('/login');
+                } else if (onNavigate) {
+                    onNavigate('ulasan');
+                } else {
+                    navigate('/login');
+                }
+                break;
+            case 'monitoring':
+                setView('distribusi');
+                break;
+            case 'tentang':
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                break;
+            default:
+                break;
+        }
     };
 
     // ── VIEW SWITCH: LandingKitchenProfile ──
@@ -893,16 +945,16 @@ export default function PublicLandingContent({ onNavigate }) {
                         <nav className="plc-footer-nav">
                             <div className="plc-footer-nav-col">
                                 <h4>Platform</h4>
-                                <span>Profil Dapur</span>
-                                <span>Menu Harian</span>
-                                <span>Status Distribusi</span>
-                                <span>Validasi Gizi AI</span>
+                                <button onClick={() => handleFooterNav('profil')}>Profil Dapur</button>
+                                <button onClick={() => handleFooterNav('menu')}>Menu Harian</button>
+                                <button onClick={() => handleFooterNav('distribusi')}>Status Distribusi</button>
+                                <button onClick={() => handleFooterNav('validasi-ai')}>Validasi Gizi AI</button>
                             </div>
                             <div className="plc-footer-nav-col">
                                 <h4>Program</h4>
-                                <span>Ulasan Siswa</span>
-                                <span>Monitoring</span>
-                                <span>Tentang MBG</span>
+                                <button onClick={() => handleFooterNav('ulasan')}>Ulasan Siswa</button>
+                                <button onClick={() => handleFooterNav('monitoring')}>Monitoring</button>
+                                <button onClick={() => handleFooterNav('tentang')}>Tentang MBG</button>
                             </div>
                         </nav>
                     </div>
@@ -916,9 +968,9 @@ export default function PublicLandingContent({ onNavigate }) {
                     <div className="plc-footer-bottom">
                         <p className="plc-footer-copy">© 2026 HaloMBG. Semua Hak Dilindungi.</p>
                         <div className="plc-footer-legal">
-                            <span>Kebijakan Privasi</span>
-                            <span>Syarat Layanan</span>
-                            <span>Open Data</span>
+                            <button onClick={() => handleFooterNav('kebijakan')}>Kebijakan Privasi</button>
+                            <button onClick={() => handleFooterNav('syarat')}>Syarat Layanan</button>
+                            <button onClick={() => handleFooterNav('open-data')}>Open Data</button>
                         </div>
                     </div>
                 </div>
