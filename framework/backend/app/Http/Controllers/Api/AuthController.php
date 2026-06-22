@@ -9,48 +9,31 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthController extends Controller
 {
     public function redirectToGoogle(Request $request)
     {
-        if ($request->has('role')) {
-            session(['google_register_role' => $request->query('role')]);
-        } else {
-            session()->forget('google_register_role');
-        }
+        $params = [];
+        if ($request->has('role')) $params['role'] = $request->query('role');
+        if ($request->has('nisn')) $params['nisn'] = $request->query('nisn');
+        if ($request->has('school_id')) $params['school_id'] = $request->query('school_id');
+        if ($request->has('nip')) $params['nip'] = $request->query('nip');
+        if ($request->has('name')) $params['name'] = $request->query('name');
 
-        if ($request->has('nisn')) {
-            session(['google_register_nisn' => $request->query('nisn')]);
-        } else {
-            session()->forget('google_register_nisn');
-        }
+        $state = Crypt::encryptString(json_encode($params));
 
-        if ($request->has('school_id')) {
-            session(['google_register_school_id' => $request->query('school_id')]);
-        } else {
-            session()->forget('google_register_school_id');
-        }
-
-        if ($request->has('nip')) {
-            session(['google_register_nip' => $request->query('nip')]);
-        } else {
-            session()->forget('google_register_nip');
-        }
-
-        if ($request->has('name')) {
-            session(['google_register_name' => $request->query('name')]);
-        } else {
-            session()->forget('google_register_name');
-        }
-
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->stateless()
+            ->with(['state' => $state])
+            ->redirect();
     }
 
-    public function handleGoogleCallback()
+    public function handleGoogleCallback(Request $request)
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')->stateless()->user();
         } catch (\Exception $e) {
             return redirect(env('FRONTEND_URL', 'http://localhost:5173') . '/login?error=' . urlencode('Otentikasi Google gagal.'));
         }
@@ -81,20 +64,26 @@ class AuthController extends Controller
             return redirect(env('FRONTEND_URL', 'http://localhost:5173') . '/login?token=' . $token . '&role=' . $user->role);
         }
 
-        // User does not exist, check if target register details were saved in session
-        $role = session('google_register_role');
-        $nisn = session('google_register_nisn');
-        $schoolId = session('google_register_school_id');
-        $nip = session('google_register_nip');
-        $name = session('google_register_name') ?: $googleUser->name;
+        // User does not exist, decrypt target register details from state parameter
+        $role = null;
+        $nisn = null;
+        $schoolId = null;
+        $nip = null;
+        $name = $googleUser->name;
 
-        session()->forget([
-            'google_register_role',
-            'google_register_nisn',
-            'google_register_school_id',
-            'google_register_nip',
-            'google_register_name'
-        ]);
+        $stateString = $request->query('state');
+        if ($stateString) {
+            try {
+                $params = json_decode(Crypt::decryptString($stateString), true);
+                $role = $params['role'] ?? null;
+                $nisn = $params['nisn'] ?? null;
+                $schoolId = $params['school_id'] ?? null;
+                $nip = $params['nip'] ?? null;
+                $name = $params['name'] ?? $googleUser->name;
+            } catch (\Exception $e) {
+                // Ignore decryption errors or fallback
+            }
+        }
 
         $redirectParams = [
             'google_register' => 1,

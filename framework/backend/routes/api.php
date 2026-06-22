@@ -24,6 +24,7 @@ Route::post('/register/siswa', [RegisterController::class, 'registerSiswa']);
 Route::post('/register/guru',  [RegisterController::class, 'registerGuru']);
 Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
