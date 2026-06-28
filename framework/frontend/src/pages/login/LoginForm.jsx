@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PasswordInput from './PasswordInput';
 
-const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') ?? 'http://localhost';
+const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost/api';
 
 export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
   const [email, setEmail]               = useState('');

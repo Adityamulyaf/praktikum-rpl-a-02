@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PasswordInput from './PasswordInput';
 import { registerSiswa, verifyNisn } from '../../api/auth';
 
-const API_BASE = import.meta.env.VITE_API_URL?.replace('/api', '') ?? 'http://localhost';
+const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost/api';
 
 export default function SiswaRegisterForm({ onSuccess, onBack, googleData }) {
   const [form, setForm]             = useState({
