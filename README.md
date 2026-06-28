@@ -6,39 +6,59 @@ HaloMBG hadir sebagai solusi monitoring berbasis web yang mengintegrasikan trans
 
 ---
 
-## Identitas Tim
+## Tim Pengembang (CEO MBG)
 
-| Nama Lengkap | NIM | Email |
-|---|---|---|
-| Firizqi Aditya Mulya | L0124016 | adityamulyaf@gmail.com |
-| Yashif Victoriawan | L0124124 | yashif.vkt@gmail.com |
-| Fairuz Shiba Alkhirza | L0124014 | fairuzziba@gmail.com |
-| Nurman Aqil Wicaksono | L0124139 | nurmanaqil.25@gmail.com |
+| Nama Lengkap | NIM | Peran (Minggu 1-3) | Peran (Minggu 3-6) | Peran (Minggu 6-9) | Peran (Minggu 9-12) |
+|---|---|---|---|---|---|
+| Firizqi Aditya Mulya | L0124016 | Project Manager | QA/Docs | Developer 2 | Developer 1 |
+| Fairuz Shiba Alkhirza | L0124014 | Developer 1 | Project Manager | QA/Docs | Developer 2 |
+| Yashif Victoriawan | L0124124 | Developer 2 | Developer 1 | Project Manager | QA/Docs |
+| Nurman Aqil Wicaksono | L0124139 | QA/Docs | Developer 2 | Developer 1 | Project Manager |
 
 ---
 
-## Status Pengembangan & Backlog
+## Fitur Utama Aplikasi
 
-Seluruh fitur dalam product backlog telah selesai diimplementasikan. Berikut adalah status pengembangan fitur aplikasi HaloMBG berdasarkan dokumen kebutuhan perangkat lunak (SRS) dan backlog pengembangan:
+HaloMBG dilengkapi dengan berbagai fitur fungsional untuk mendukung pengawasan akuntabel program makan gratis:
 
-### Status MVP: 100% Selesai (6 dari 6 Fitur Must-have)
-### Status Keseluruhan: 100% Selesai (13 dari 13 Fitur Terimplementasi)
+1. **Sistem Autentikasi Multi-Role & Google SSO (BL-01):** Otentikasi terpisah untuk Admin, Operator Dapur (SPPG), Guru, dan Siswa. Pendaftaran Guru tervalidasi menggunakan nomor induk NIP Dapodik, pendaftaran Siswa menggunakan NISN Dapodik, serta integrasi Google OAuth (Socialite) untuk kemudahan masuk.
+2. **Profil Dapur SPPG & Pemetaan Sekolah (BL-02):** Halaman profil publik dapur SPPG yang menampilkan kapasitas produksi, lokasi, data kontak, serta daftar sekolah terlayani di wilayah kecamatan bersangkutan.
+3. **Pencarian Sekolah & Dapur (BL-03):** Fitur pencarian sekolah dan dapur SPPG terdekat berbasis nama sekolah atau nama kecamatan secara dinamis.
+4. **Form Input Menu & Kandungan Gizi (BL-04):** Antarmuka bagi operator dapur untuk memasukkan menu makanan harian lengkap dengan komponen bahan makanan dan takaran gizi makro (Energi/Kalori, Protein, Karbohidrat, Lemak).
+5. **Validasi Gizi Berbasis AI Vision (BL-05):** Integrasi backend dengan model `gemini-flash-lite-latest` untuk memverifikasi secara visual foto makanan nyata yang diambil langsung melalui WebRTC kamera (frontend) dengan klaim kandungan gizi yang diinput oleh operator SPPG.
+6. **Master Data & Admin Panel (BL-06):** Dashboard administrator untuk mengelola data master sekolah, profil dapur SPPG baru, serta memetakan batas wilayah operasional distribusi.
+7. **Pelacakan Status Distribusi Harian (BL-07):** Monitoring waktu pengiriman makanan dari dapur ke sekolah secara real-time, lengkap dengan kewajiban unggah foto bukti serah terima di sekolah tujuan.
+8. **Notifikasi WhatsApp Keterlambatan Pengiriman (BL-08):** Peringatan otomatis melalui integrasi WhatsApp Gateway ke pihak sekolah dan admin jika waktu pengantaran makanan melewati batas toleransi keterlambatan (pukul 12.00 siang).
+9. **Sistem Ulasan & Rating Siswa (BL-09):** Wadah umpan balik langsung bagi siswa untuk memberikan rating (bintang 1-5), ulasan teks, serta foto bukti porsi makan siang yang diterima.
+10. **Moderasi Ulasan oleh Guru (BL-10):** Halaman filter/moderasi bagi Guru sekolah terkait untuk memastikan ulasan siswa yang ditampilkan di portal publik bebas dari unsur spam/tidak sopan.
+11. **Push Notifications & Alert Lonceng (BL-11):** Sistem notifikasi in-app untuk mengabarkan status pembaharuan menu, status pengantaran, dan alert ulasan kepada Guru/Admin.
+12. **WhatsApp Alert untuk Ulasan Kritis (BL-12):** Notifikasi WhatsApp instan ke ponsel pengelola dapur (SPPG) jika sistem mendeteksi siswa memberikan rating buruk atau menulis kata kunci keluhan kritis (basi, busuk, berulat, beracun).
+13. **Analisis Sentimen & Rangkuman Evaluasi AI (BL-13):** Halaman evaluasi dapur publik yang menyajikan grafik kepuasan visual dan rangkuman evaluasi ulasan harian siswa secara otomatis oleh AI Gemini.
 
-| ID Backlog | Nama Fitur | Kategori / Prioritas | Status |
-| :--- | :--- | :--- | :--- |
-| **BL-01** | Sistem Autentikasi dan Manajemen Role | Must-have (MVP) | Selesai |
-| **BL-02** | Profil Dapur MBG (SPPG) dan Daftar Sekolah | Must-have (MVP) | Selesai |
-| **BL-03** | Pencarian SPPG melalui Wilayah dan Nama Sekolah | Must-have (MVP) | Selesai |
-| **BL-04** | Input Menu Harian oleh SPPG | Must-have (MVP) | Selesai |
-| **BL-05** | Validasi Nutrisi Berbasis AI (Foto + Teks) | Must-have (MVP) | Selesai |
-| **BL-06** | Panel Admin: Master Data SPPG & Sekolah | Must-have (MVP) | Selesai |
-| **BL-07** | Status Distribusi Harian dan Bukti Foto | Should-have | Selesai |
-| **BL-08** | Notifikasi Keterlambatan Distribusi | Should-have | Selesai |
-| **BL-09** | Ulasan dan Foto dari Siswa | Should-have | Selesai |
-| **BL-10** | Moderasi Post-Publish Ulasan oleh Guru | Could-have | Selesai |
-| **BL-11** | Sistem Notifikasi (In-App dan WhatsApp) | Could-have | Selesai |
-| **BL-12** | Notifikasi Ulasan Kritis dan Tindak Lanjut SPPG | Could-have | Selesai |
-| **BL-13** | Ringkasan Evaluasi Dapur Berbasis AI (Publik) | Could-have | Selesai |
+---
+
+## Arsitektur & Tech Stack
+
+Aplikasi HaloMBG dibangun menggunakan arsitektur *fully decoupled* (sisi client dan server terpisah utuh) dengan susunan teknologi berikut:
+
+* **Frontend (Client-Side):**
+  * **ReactJS (v18)** sebagai pustaka antarmuka berbasis komponen.
+  * **Vite** sebagai build tool dan server pengembangan.
+  * **Tailwind CSS** untuk implementasi *Design System* (`DESIGN.md`) yang responsif dan konsisten.
+  * **Framer Motion** untuk memperhalus transisi halaman dan mikro-animasi antarmuka.
+  * **Axios** sebagai HTTP client untuk komunikasi API.
+  * **WebRTC API** untuk akses kamera dan konversi jepretan foto secara lokal.
+* **Backend (Server-Side):**
+  * **Laravel 13 (PHP 8.3)** sebagai core framework API.
+  * **Laravel Sanctum** untuk otentikasi API berbasis token SPA yang aman.
+  * **Laravel Socialite** untuk integrasi Google SSO OAuth2.
+  * **Dedoc Scramble** untuk pembuatan dokumentasi API Swagger/OpenAPI otomatis dan interaktif.
+* **Database & Storage:**
+  * **PostgreSQL 15** sebagai database relasional utama.
+  * **Docker Volumes** untuk penyimpanan file persisten database dan aset media.
+* **AI & API Eksternal:**
+  * **Google Gemini API** (Model `gemini-flash-lite-latest`) untuk analisis AI Vision (foto makanan) dan analisis sentimen teks (ulasan siswa).
+  * **Fonnte API Gateway** untuk pengiriman notifikasi otomatis langsung ke nomor WhatsApp pengelola dapur (SPPG).
 
 ---
 
@@ -52,16 +72,37 @@ Sebelum memulai, pastikan perangkat Anda telah terpasang:
 2. **WSL 2** (Windows Subsystem for Linux) jika Anda menggunakan sistem operasi Windows.
 
 ### Langkah-Langkah Menjalankan Aplikasi
+
 1. Buka terminal (atau WSL terminal jika di Windows) dan masuk ke direktori `framework` proyek ini:
    ```bash
    cd framework
    ```
 2. Buat file konfigurasi lingkungan `.env` dengan menyalin contoh yang ada:
-   ```bash
-   cp .env.example .env
+   * **Untuk folder root `framework/`:**
+     ```bash
+     cp .env.example .env
+     ```
+   * **Untuk folder backend `framework/backend/`:**
+     ```bash
+     cp backend/.env.example backend/.env
+     ```
+   * **Untuk folder frontend `framework/frontend/`:**
+     ```bash
+     cp frontend/.env.example frontend/.env
+     ```
+
+3. **Konfigurasi API Keys (Penting):**
+   Buka file `framework/backend/.env` yang baru dibuat dan isi variabel berikut jika ingin menguji fitur AI dan WhatsApp:
+   ```env
+   # API Key Google Gemini
+   GEMINI_API_KEY=your_gemini_api_key_here
+
+   # Token WhatsApp Fonnte
+   WHATSAPP_ENABLED=true
+   WHATSAPP_FONNTE_TOKEN=your_fonnte_token_here
    ```
-   *Catatan: Secara default, kredensial database diatur dengan nama database `laravel`, user `sail`, dan password `password` (Anda dapat menyesuaikan isi file `.env` jika diperlukan).*
-3. Jalankan container Docker:
+
+4. Jalankan container Docker:
    - Untuk **pertama kali** atau jika ada perubahan file konfigurasi:
      ```bash
      docker compose up --build -d
@@ -70,14 +111,15 @@ Sebelum memulai, pastikan perangkat Anda telah terpasang:
      ```bash
      docker compose up -d
      ```
-4. Lakukan instalasi database dan data seeders awal (opsional jika database masih kosong):
+5. Lakukan instalasi database dan data seeders awal (opsional jika database masih kosong):
    ```bash
    docker compose exec backend php artisan migrate:fresh --seed
    ```
-5. Akses layanan aplikasi melalui web browser:
+6. Akses layanan aplikasi melalui web browser:
    - **Frontend (ReactJS + Vite):** [http://localhost:5173](http://localhost:5173)
    - **Backend API (Laravel):** [http://localhost:80](http://localhost:80)
-   - **Database PostgreSQL:** `localhost:5433` (kredensial sesuai file `.env`)
+   - **API Documentation (Dedoc Scramble):** [http://localhost:80/docs/api](http://localhost:80/docs/api)
+   - **Database PostgreSQL:** `localhost:5433` (kredensial sesuai file `framework/.env`)
 
 ### Akun Uji Coba Demo
 Gunakan akun bawaan sistem berikut untuk mencoba alur aplikasi:
@@ -86,15 +128,6 @@ Gunakan akun bawaan sistem berikut untuk mencoba alur aplikasi:
 * **Siswa & Guru:** Anda dapat mendaftarkan akun baru secara langsung di halaman registrasi.
   - Pendaftaran Siswa memerlukan NISN valid simulasi Dapodik (contoh: `0080000102` untuk siswa bernama Budi Santoso di SD Negeri 1 Bocor).
   - Pendaftaran Guru memerlukan NIP (contoh: `198710102010121002`) dan menghubungkannya dengan SD Negeri 1 Bocor.
-
----
-
-## Teknologi Utama
-
-* **Backend:** Laravel (PHP) dengan Laravel Sanctum untuk sistem otentikasi berbasis token API.
-* **Frontend:** React dengan Vite, Tailwind CSS untuk antarmuka visual, dan sistem WebRTC untuk integrasi kamera.
-* **Basis Data:** PostgreSQL.
-* **Integrasi AI:** Google Gemini API untuk analisis visual porsi dan validasi nutrisi makanan serta ringkasan evaluasi sentimen.
 
 ---
 
