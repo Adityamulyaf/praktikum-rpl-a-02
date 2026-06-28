@@ -379,52 +379,28 @@ export default function PublicLandingContent({ onNavigate }) {
     };
 
     const handleFooterNav = (key) => {
-        switch (key) {
-            case 'profil':
-                if (role === 'siswa' || role === 'guru') {
-                    handleRoleFeatureClick('profil');
-                } else {
-                    setKitchenProfileMode('profil');
-                    setAssignedSppgId(null);
-                    setView('profil-dapur');
-                }
-                break;
-            case 'menu':
-                if (role === 'siswa' || role === 'guru') {
-                    handleRoleFeatureClick('menu');
-                } else {
-                    setKitchenProfileMode('menu');
-                    setAssignedSppgId(null);
-                    setView('profil-dapur');
-                }
-                break;
-            case 'distribusi':
-                setView('distribusi');
-                break;
-            case 'validasi-ai':
-                if (token) {
-                    navigate('/validasi-ai');
-                } else {
-                    navigate('/login');
-                }
-                break;
-            case 'ulasan':
-                if (!token) {
-                    navigate('/login');
-                } else if (onNavigate) {
-                    onNavigate('ulasan');
-                } else {
-                    navigate('/login');
-                }
-                break;
-            case 'monitoring':
-                setView('distribusi');
-                break;
-            case 'tentang':
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                break;
-            default:
-                break;
+        if (key === "search") {
+            handleScrollToSearch();
+        } else if ((role === "siswa" || role === "guru") && (key === "menu" || key === "distribusi" || key === "profil")) {
+            handleRoleFeatureClick(key);
+        } else if (onNavigate && (role === "siswa" || role === "guru")) {
+            if (key === "menu") onNavigate("menu");
+            if (key === "distribusi") onNavigate("distribusi");
+            if (key === "profil") onNavigate("profil");
+        } else {
+            if (key === "menu") {
+                setKitchenProfileMode("menu");
+                setAssignedSppgId(null);
+                setView("profil-dapur");
+            } else if (key === "distribusi") {
+                setKitchenProfileMode("distribusi");
+                setAssignedSppgId(null);
+                setView("profil-dapur");
+            } else if (key === "profil") {
+                setKitchenProfileMode("profil");
+                setAssignedSppgId(null);
+                setView("profil-dapur");
+            }
         }
     };
 
@@ -944,17 +920,11 @@ export default function PublicLandingContent({ onNavigate }) {
                         </div>
                         <nav className="plc-footer-nav">
                             <div className="plc-footer-nav-col">
-                                <h4>Platform</h4>
-                                <button onClick={() => handleFooterNav('profil')}>Profil Dapur</button>
+                                <h4>Fitur Platform</h4>
+                                <button onClick={() => handleFooterNav('search')}>Cari SPPG & Sekolah</button>
                                 <button onClick={() => handleFooterNav('menu')}>Menu Harian</button>
                                 <button onClick={() => handleFooterNav('distribusi')}>Status Distribusi</button>
-                                <button onClick={() => handleFooterNav('validasi-ai')}>Validasi Gizi AI</button>
-                            </div>
-                            <div className="plc-footer-nav-col">
-                                <h4>Program</h4>
-                                <button onClick={() => handleFooterNav('ulasan')}>Ulasan Siswa</button>
-                                <button onClick={() => handleFooterNav('monitoring')}>Monitoring</button>
-                                <button onClick={() => handleFooterNav('tentang')}>Tentang MBG</button>
+                                <button onClick={() => handleFooterNav('profil')}>Profil Dapur</button>
                             </div>
                         </nav>
                     </div>
