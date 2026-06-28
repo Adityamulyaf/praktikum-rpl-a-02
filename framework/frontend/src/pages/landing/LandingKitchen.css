@@ -1,7 +1,9 @@
 .lkp-root {
-    max-width: 960px;
-    margin: 0 auto;
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
     padding: 2rem 1.5rem;
+    box-sizing: border-box !important;
 }
 
 /* ── Header ─────────────────────────────────────────────────── */
