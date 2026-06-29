@@ -3,7 +3,7 @@ import PasswordInput from './PasswordInput';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost/api';
 
-export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
+export default function LoginForm({ onSubmit, onForgot, onSwitch, onBack }) {
   const [email, setEmail]               = useState('');
   const [password, setPassword]         = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -89,6 +89,12 @@ export default function LoginForm({ onSubmit, onForgot, onSwitch }) {
         Belum punya akun?{' '}
         <button type="button" className="lp-switch-btn" onClick={onSwitch}>Daftar</button>
       </p>
+
+      {onBack && (
+        <button type="button" className="lp-back-btn" onClick={onBack} style={{ marginTop: '16px' }}>
+          ← Kembali ke Beranda
+        </button>
+      )}
     </>
   );
 }

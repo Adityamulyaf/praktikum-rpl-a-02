@@ -102,7 +102,7 @@ export default function SiswaRegisterForm({ onSuccess, onBack, googleData }) {
           <label className="lp-label" htmlFor="sv-nisn">
             NISN (Nomor Induk Siswa Nasional)
           </label>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             <input 
               id="sv-nisn" 
               className="lp-input" 
@@ -121,7 +121,7 @@ export default function SiswaRegisterForm({ onSuccess, onBack, googleData }) {
             <button 
               type="button" 
               className="lp-btn" 
-              style={{ width: 'auto', whiteSpace: 'nowrap', padding: '0 16px' }}
+              style={{ width: 'auto', whiteSpace: 'nowrap', padding: '0 16px', marginTop: 0, height: '42px' }}
               onClick={() => handleVerifyNisn(form.nisn)}
               disabled={form.nisn.length !== 10 || nisnChecking || loading}
             >
