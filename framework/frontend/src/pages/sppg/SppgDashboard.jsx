@@ -236,7 +236,7 @@ export default function SppgDashboard() {
           case "profil":
             return <Kitchen />;
           case "ulasan":
-            return role === "siswa" ? <KirimUlasan /> : <GuruReviews />;
+            return role === "siswa" ? <KirimUlasan onNavigate={onNavigate} /> : <GuruReviews />;
           case "riwayat":
             return <RiwayatUlasan />;
           case "tindak_lanjut":

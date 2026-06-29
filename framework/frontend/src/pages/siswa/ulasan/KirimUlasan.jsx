@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../../../api/axios';
 import '../../admin/admin.css';
 
-export default function KirimUlasan() {
+export default function KirimUlasan({ onNavigate }) {
   const [content,   setContent]   = useState('');
   const [date,      setDate]      = useState(new Date().toISOString().split('T')[0]);
   const [photo,     setPhoto]     = useState('');
@@ -101,8 +101,8 @@ export default function KirimUlasan() {
           </div>
           <h2 style={{ margin: '0 0 8px', fontWeight: 700 }}>Ulasan Terkirim!</h2>
           <p style={{ opacity: 0.7, marginBottom: '20px' }}>Ulasanmu sudah tampil di halaman publik.</p>
-          <button className="adm-btn primary" onClick={() => setSuccess(false)}>
-            Kirim Ulasan Lagi
+          <button className="adm-btn" onClick={() => onNavigate ? onNavigate("beranda") : null} style={{ background: 'var(--surface-2, #f5f4f0)', color: 'var(--text-primary)', border: '1px solid var(--border-default)', padding: '0 16px', height: '40px', display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer', borderRadius: 'var(--radius-md)' }}>
+            Kembali
           </button>
         </div>
       </div>
