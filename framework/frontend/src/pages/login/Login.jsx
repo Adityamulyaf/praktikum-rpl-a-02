@@ -158,6 +158,7 @@ export default function Login() {
                     onSubmit={handleLogin}
                     onForgot={() => setView('forgot')}
                     onSwitch={() => setView('register-select')}
+                    onBack={() => navigate('/')}
                   />
                 )}
                 {view === 'register-select' && (
@@ -167,6 +168,7 @@ export default function Login() {
                       setGoogleData(null);
                       setView('login');
                     }}
+                    onBackToLanding={() => navigate('/')}
                   />
                 )}
                 {view === 'register-siswa' && (

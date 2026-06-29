@@ -102,7 +102,7 @@ export default function GuruRegisterForm({ onSuccess, onBack, googleData }) {
           <label className="lp-label" htmlFor="gr-nip">
             NIP (Nomor Induk Pegawai)
           </label>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             <input 
               id="gr-nip" 
               className="lp-input" 
@@ -121,7 +121,7 @@ export default function GuruRegisterForm({ onSuccess, onBack, googleData }) {
             <button 
               type="button" 
               className="lp-btn" 
-              style={{ width: 'auto', whiteSpace: 'nowrap', padding: '0 16px' }}
+              style={{ width: 'auto', whiteSpace: 'nowrap', padding: '0 16px', marginTop: 0, height: '42px' }}
               onClick={() => handleVerifyNip(form.nip)}
               disabled={form.nip.length !== 18 || nipChecking || loading}
             >

@@ -1,4 +1,4 @@
-export default function RegisterSelectForm({ onSelect, onBack }) {
+export default function RegisterSelectForm({ onSelect, onBack, onBackToLanding }) {
   return (
     <>
       <div className="lp-header">
@@ -21,6 +21,12 @@ export default function RegisterSelectForm({ onSelect, onBack }) {
         Sudah punya akun?{' '}
         <button type="button" className="lp-switch-btn" onClick={onBack}>Masuk</button>
       </p>
+
+      {onBackToLanding && (
+        <button type="button" className="lp-back-btn" onClick={onBackToLanding} style={{ marginTop: '16px' }}>
+          ← Kembali ke Beranda
+        </button>
+      )}
     </>
   );
 }
