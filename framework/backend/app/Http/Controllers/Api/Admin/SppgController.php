@@ -109,6 +109,10 @@ class SppgController extends Controller
             'description', 'production_capacity', 'is_active',
         ]));
 
+        if ($request->has('contact_phone') && $sppg->user) {
+            $sppg->user->update(['phone_number' => $request->contact_phone]);
+        }
+
         if ($request->has('is_active')) {
             $sppg->user->update(['is_active' => $request->boolean('is_active')]);
         }

@@ -86,6 +86,10 @@ class ProfileController extends Controller
             'description', 'production_capacity',
         ]));
 
+        if ($request->has('contact_phone') && $sppg->user) {
+            $sppg->user->update(['phone_number' => $request->contact_phone]);
+        }
+
         return response()->json([
             'id'                  => $sppg->id,
             'kitchen_name'        => $sppg->kitchen_name,
