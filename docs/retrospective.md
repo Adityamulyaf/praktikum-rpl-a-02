@@ -16,3 +16,12 @@ Hal-hal positif yang berhasil dilakukan tim dan perlu dipertahankan.
 * **Dokumentasi berjalan beriringan dengan development.** Selain kode, tim konsisten memperbarui README.md, user-manual.md, test-cases.md, dan api.md di setiap sprint.
 * **Rolling peran membuat semua anggota merasakan setiap tanggung jawab.** Setiap anggota bergiliran menjadi Project Manager, Developer, dan QA/Docs setiap 3 minggu sehingga beban kerja tersebar rata.
 * **Notifikasi WhatsApp dan deteksi ulasan kritis berhasil terintegrasi end-to-end**, termasuk perbaikan bug sinkronisasi notifikasi antar role yang ditemukan saat testing.
+
+## What Didn't Go Well ⚠️
+Hambatan dan masalah yang muncul selama pengerjaan proyek.
+
+* *Beberapa bug ditemukan cukup larut*, seperti masalah sinkronisasi notifikasi antar role dan bug tampilan (white blur berlebihan, scroll yang dimulai di tengah halaman), yang menunjukkan testing manual di beberapa fitur baru dilakukan setelah merge, bukan sebelum.
+* *Beberapa fitur Could-have (BL-10, BL-11, BL-12, BL-13) sempat tertunda* karena dependensinya terhadap fitur ulasan siswa (BL-09) yang juga masih berkembang, sehingga sebagian pekerjaan menumpuk di sprint-sprint akhir.
+* *Resolusi konflik merge cukup sering terjadi*, terutama pada branch dev saat beberapa fitur besar (notifikasi kritis, AI validation) dikerjakan paralel oleh anggota berbeda dalam rentang waktu yang berdekatan.
+* *Refactor struktural* (misalnya pemindahan logika resolusi profil SPPG ke model User) dilakukan agak terlambat di tengah-tengah proyek, alih-alih direncanakan sejak desain awal.
+* *Komunikasi async via WhatsApp Group kadang terlambat direspons* di luar jam aktif yang disepakati (08.00–22.00), terutama saat anggota memiliki kesibukan akademik lain di luar praktikum.
