@@ -76,6 +76,16 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const contentRef = useRef(null);
+
+  // Reset scroll position of window and content pane on menu change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }, [activeMenu]);
+
   const isHome = activeMenu === firstKey;
   const showSidebar = hasSidebar && !isHome;
 
@@ -172,7 +182,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
             ))}
           </aside>
 
-          <main className="dl-content">
+          <main className="dl-content" ref={contentRef}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeMenu}
@@ -189,7 +199,7 @@ export default function DashboardLayout({ menuGroups, children, pageClass, hasSi
         </div>
       ) : (
         /* Non-sidebar layout — back button di topbar, atau isHome full-width */
-        <main className={`dl-content${isHome ? ' dl-content-home' : ''}`}>
+        <main className={`dl-content${isHome ? ' dl-content-home' : ''}`} ref={contentRef}>
           <AnimatePresence mode="wait">
             <motion.div
               key={activeMenu}
