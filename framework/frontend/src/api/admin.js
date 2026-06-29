@@ -14,3 +14,7 @@ export const deleteSchool     = (id)     => api.delete(`/admin/schools/${id}`);
 
 export const syncSppgSchools = (sppgId, schoolIds) =>
   api.put(`/admin/sppg/${sppgId}/schools/sync`, { school_ids: schoolIds });
+
+export const getFlaggedReviews = (params) => api.get('/admin/reviews', { params });
+export const resolveReview = (id, action) => api.put(`/admin/reviews/${id}/resolve`, { action });
+

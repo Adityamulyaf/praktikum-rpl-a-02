@@ -4,6 +4,7 @@ import AdminStatsView from "./AdminStatsView";
 import SppgTable from "./SppgTable";
 import SchoolTable from "./SchoolTable";
 import NotifikasiList from "../sppg/notifikasi/NotifikasiList";
+import AdminReviewModeration from "./AdminReviewModeration";
 
 /* ── Icons ─────────────────────────────────────────────────── */
 const IconHome = () => (
@@ -84,6 +85,22 @@ const IconStats = () => (
   </svg>
 );
 
+const IconFlag = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+    <line x1="4" y1="22" x2="4" y2="15" />
+  </svg>
+);
+
 const MENU_GROUPS = [
   {
     label: null,
@@ -93,6 +110,7 @@ const MENU_GROUPS = [
       { key: "notif", label: "Notifikasi", icon: <IconBell /> },
       { key: "sppg", label: "SPPG", icon: <IconSppg /> },
       { key: "sekolah", label: "Sekolah", icon: <IconSchool /> },
+      { key: "moderasi", label: "Moderasi Ulasan", icon: <IconFlag /> },
     ],
   },
 ];
@@ -112,6 +130,8 @@ export default function AdminDashboard() {
             return <SchoolTable />;
           case "notif":
             return <NotifikasiList onNavigate={onNavigate} />;
+          case "moderasi":
+            return <AdminReviewModeration />;
           default:
             return null;
         }

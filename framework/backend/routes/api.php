@@ -47,6 +47,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('sppg/{sppg}/schools/sync', [SppgSchoolController::class, 'sync']);
         Route::post('sppg/{sppg}/schools/attach', [SppgSchoolController::class, 'attach']);
         Route::delete('sppg/{sppg}/schools/detach', [SppgSchoolController::class, 'detach']);
+        
+        // Review Moderation
+        Route::get('reviews', [\App\Http\Controllers\Api\Admin\ReviewController::class, 'index']);
+        Route::put('reviews/{review}/resolve', [\App\Http\Controllers\Api\Admin\ReviewController::class, 'resolve']);
     });
 
     Route::get('/sppg/profile', [ProfileController::class, 'show'])->middleware('role:sppg,admin,siswa,guru');

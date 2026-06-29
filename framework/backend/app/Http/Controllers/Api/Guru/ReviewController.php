@@ -84,6 +84,26 @@ class ReviewController extends Controller
                     'error' => $e->getMessage(),
                 ]);
             }
+
+            try {
+                $review->load('school');
+                $notificationService = app(NotificationService::class);
+                $notificationService->notifyRole(
+                    'admin',
+                    'review_flagged',
+                    'Ulasan Ditandai oleh Guru',
+                    "Ulasan siswa dari {$review->school->name} ditandai oleh guru {$request->user()->name}. Alasan: " . ($reason ?? 'Tidak disebutkan'),
+                    [
+                        'review_id'   => $review->id,
+                        'flag_status' => $status,
+                        'flag_reason' => $reason,
+                    ]
+                );
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Failed to send flagged review notification to admin', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
 
         return response()->json([

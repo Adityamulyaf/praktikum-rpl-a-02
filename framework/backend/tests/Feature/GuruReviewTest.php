@@ -102,6 +102,15 @@ class GuruReviewTest extends TestCase
 
     public function test_teacher_can_flag_student_review()
     {
+        // Create an active admin user to receive the role notification
+        $admin = User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password123'),
+            'role' => 'admin',
+            'is_active' => true,
+        ]);
+
         $response = $this->actingAs($this->teacherUser)->postJson("/api/guru/reviews/{$this->review->id}/flag", [
             'flag_status' => 'flagged',
             'flag_reason' => 'Ulasan tidak pantas',
@@ -115,6 +124,18 @@ class GuruReviewTest extends TestCase
             'id' => $this->review->id,
             'flag_status' => 'flagged',
             'flag_reason' => 'Ulasan tidak pantas',
+        ]);
+
+        // Verify notification to student
+        $this->assertDatabaseHas('notifications', [
+            'user_id' => $this->studentUser->ssid,
+            'type' => 'review_moderated',
+        ]);
+
+        // Verify notification to admin
+        $this->assertDatabaseHas('notifications', [
+            'user_id' => $admin->ssid,
+            'type' => 'review_flagged',
         ]);
     }
 
