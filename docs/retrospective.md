@@ -25,3 +25,15 @@ Hambatan dan masalah yang muncul selama pengerjaan proyek.
 * *Resolusi konflik merge cukup sering terjadi*, terutama pada branch dev saat beberapa fitur besar (notifikasi kritis, AI validation) dikerjakan paralel oleh anggota berbeda dalam rentang waktu yang berdekatan.
 * *Refactor struktural* (misalnya pemindahan logika resolusi profil SPPG ke model User) dilakukan agak terlambat di tengah-tengah proyek, alih-alih direncanakan sejak desain awal.
 * *Komunikasi async via WhatsApp Group kadang terlambat direspons* di luar jam aktif yang disepakati (08.00–22.00), terutama saat anggota memiliki kesibukan akademik lain di luar praktikum.
+
+## Shout-outs 🌟
+Apresiasi tulus untuk anggota tim yang berkontribusi luar biasa.
+
+* **Firizqi Aditya Mulya** — kontribusi commit terbanyak dan menjadi tulang punggung pada fitur-fitur kompleks seperti integrasi AI, WhatsApp API, dan perbaikan bug lintas role. Inisiatifnya menjaga README.md selalu mutakhir sangat membantu tim.
+* **Fairuz Shiba Alkhirza** — konsisten mengerjakan fitur-fitur notifikasi dan distribusi yang krusial bagi alur utama aplikasi, serta aktif dalam penulisan user manual untuk audiens awam.
+* **Yashif Victoriawan** — kontribusi solid pada perbaikan UI/UX dan stabilitas fitur, membantu menjaga kualitas tampilan aplikasi tetap rapi di tengah padatnya fitur baru yang masuk.
+* **Nurman Aqil Wicaksono** — peran QA/Docs yang konsisten dalam menyusun test case dan memastikan Definition of Done terpenuhi sebelum fitur dianggap selesai, menjaga kualitas rilis tetap terjaga.
+
+Secara keseluruhan, tim CEO MBG berhasil membawa HaloMBG dari sekadar dokumen SRS dan backlog menjadi platform yang fungsional dengan 13 backlog item terimplementasi, lengkap dengan integrasi AI, notifikasi WhatsApp, dan dokumentasi yang menyertainya. Pelajaran dari retrospektif ini akan menjadi bekal untuk pengembangan lanjutan maupun proyek-proyek berikutnya.
+
+> Dokumen ini disusun bersama oleh seluruh anggota Tim CEO MBG sebagai bagian dari proses Sprint Review & Retrospective sesuai Team Contract Bagian 4.1.
