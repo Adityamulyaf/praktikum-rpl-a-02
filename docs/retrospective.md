@@ -26,6 +26,16 @@ Hambatan dan masalah yang muncul selama pengerjaan proyek.
 * *Refactor struktural* (misalnya pemindahan logika resolusi profil SPPG ke model User) dilakukan agak terlambat di tengah-tengah proyek, alih-alih direncanakan sejak desain awal.
 * *Komunikasi async via WhatsApp Group kadang terlambat direspons* di luar jam aktif yang disepakati (08.00–22.00), terutama saat anggota memiliki kesibukan akademik lain di luar praktikum.
 
+
+## What Can We Improve 💡
+Ide konkret untuk perbaikan di proyek atau kerja tim berikutnya.
+
+* **Tambahkan code review checklist dan testing minimal sebelum merge ke dev**, bukan hanya mengandalkan satu reviewer, agar bug UI dan sinkronisasi bisa tertangkap lebih awal.
+* **Rencanakan struktur data dan refactor besar di awal sprint**, bukan menyisipkannya di tengah pengerjaan fitur lain, untuk mengurangi risiko regresi pada fitur yang sudah stabil.
+* **Pecah fitur dengan dependensi panjang** (seperti BL-09 → BL-10 → BL-12 → BL-13) menjadi sub-task yang lebih granular di awal sprint planning.
+* **Gunakan branch staging lebih aktif untuk uji integrasi sebelum ke main**, terutama untuk fitur yang melibatkan integrasi pihak ketiga (WhatsApp Gateway, Google OAuth, AI Vision) yang rawan gagal di environment berbeda.
+* **Tetapkan jadwal review berkala untuk dokumentasi teknis** (API docs, data dictionary) agar selalu sinkron dengan perubahan kode, tidak hanya diperbarui saat akan submit.
+
 ## Shout-outs 🌟
 Apresiasi tulus untuk anggota tim yang berkontribusi luar biasa.
 
