@@ -37,6 +37,62 @@
 
 \pagebreak
 
+# DAFTAR ISI
+
+*   **HALAMAN JUDUL**
+*   **PEMBAGIAN PENULISAN LAPORAN**
+*   **BAB I: PENDAHULUAN**
+    *   1.1 Latar Belakang dan Rumusan Masalah
+    *   1.2 Tujuan Proyek
+    *   1.3 Ruang Lingkup Proyek
+    *   1.4 Definisi dan Akronim
+*   **BAB II: ANALISIS KEBUTUHAN SISTEM**
+    *   2.1 Deskripsi Umum Sistem
+    *   2.2 Kebutuhan Fungsional (Functional Requirements)
+    *   2.3 Kebutuhan Non-Fungsional (Non-Functional Requirements)
+    *   2.4 Ringkasan Product Backlog Kerja Kelompok
+*   **BAB III: PERANCANGAN SISTEM**
+    *   3.1 Arsitektur Aplikasi dan Tech Stack
+    *   3.2 Pemodelan Fungsionalitas Sistem (Diagram UML)
+    *   3.3 Desain Database & Ringkasan Kamus Data
+    *   3.4 Desain Antarmuka (Figma Wireframe)
+*   **BAB IV: IMPLEMENTASI SISTEM**
+    *   4.1 Setup Deployment (Docker Compose)
+    *   4.2 Screenshot Antarmuka Aplikasi
+    *   4.3 Panduan Penggunaan Singkat (User Manual)
+*   **BAB V: PENGUJIAN SISTEM (TESTING)**
+    *   5.1 Rencana dan Hasil Pengujian (UAT)
+    *   5.2 Skenario Demo Pengujian
+*   **BAB VI: MANAJEMEN TIM, KONTRAK TIM, DAN RETROSPEKTIF**
+    *   6.1 Identitas dan Pembagian Peran Tim (Team Contract)
+    *   6.2 Evaluasi & Retrospektif Kerja Kelompok
+*   **BAB VII: PENUTUP**
+    *   7.1 Kesimpulan
+    *   7.2 Saran dan Pengembangan Masa Depan
+*   **LAMPIRAN**
+    *   Lampiran A: Log Kepatuhan Penggunaan AI (AI Usage Log)
+    *   Lampiran B: Spesifikasi & Dokumentasi API Backend
+
+---
+
+\pagebreak
+
+# PEMBAGIAN PENULISAN LAPORAN
+
+Untuk memastikan kontribusi yang adil, pengerjaan draf laporan Word dibagi secara berurutan (linear) dari awal dokumen hingga akhir di antara 4 anggota tim sebagai berikut:
+
+| Nama Anggota Tim | NIM | Bagian / Bab Laporan yang Ditulis | Cakupan Detail Dokumen |
+|---|---|---|---|
+| **Firizqi Aditya Mulya** | L0124016 | • **Halaman Awal** s.d. **BAB II (Poin 2.2)** | Cover, Daftar Isi, Pembagian Penulisan, BAB I (1.1 s.d 1.4), dan BAB II (2.1 Deskripsi Umum & 2.2 Kebutuhan Fungsional) |
+| **Fairuz Shiba Alkhirza** | L0124014 | • **BAB II (Poin 2.3)** s.d. **BAB III (Poin 3.2)** | BAB II (2.3 Kebutuhan Non-Fungsional & 2.4 Ringkasan Backlog), BAB III (3.1 Arsitektur & Tech Stack & 3.2 Pemodelan UML) |
+| **Yashif Victoriawan** | L0124124 | • **BAB III (Poin 3.3)** s.d. **BAB IV (Poin 4.3)** | BAB III (3.3 Desain Database/Kamus Data & 3.4 Wireframe Figma), BAB IV (4.1 Docker Setup, 4.2 Screenshots, & 4.3 User Manual) |
+| **Nurman Aqil Wicaksono** | L0124139 | • **BAB V** s.d. **LAMPIRAN** | BAB V (5.1 Hasil UAT & 5.2 Skenario Demo), BAB VI (6.1 Kontrak Tim & 6.2 Retrospektif), BAB VII (Penutup), Lampiran A (Log AI) & Lampiran B (API) |
+
+---
+
+\pagebreak
+
+
 
 # BAB I: PENDAHULUAN
 
