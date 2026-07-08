@@ -1,0 +1,2 @@
+# Treat docx files as binary to prevent Git from modifying line endings and corrupting them
+*.docx binary
